@@ -1,0 +1,59 @@
+{
+  "label": "capacity-ramp-128-window1",
+  "sampled_unix": 1789217545.4907207,
+  "window_start_unix": 1789217243.1900434,
+  "window_end_unix": 1789217543.1901824,
+  "window_seconds": 300.0001389980316,
+  "control_at_sampling": {
+    "aggregate_agent_target": 128,
+    "main_workers": 96,
+    "hermes_workers": 32,
+    "epoch": "four-frameworks-128",
+    "effective_unix": 1789217123.1900434,
+    "gateway_name": "hil-api-gateway-capacity-ramp-20260912",
+    "gateway_max_inflight": 128,
+    "gateway_capacity_ceiling": 128,
+    "reason": "96-agent checkpoint passed the recorded throughput/resource/error conditions"
+  },
+  "closed_total": 1849,
+  "planned": 5760,
+  "recent_closed": 102,
+  "recent_valid": 98,
+  "recent_failed": 4,
+  "valid_per_hour": 1175.9994551279685,
+  "closed_per_hour": 1223.9994328882938,
+  "failed_attempt_rate": 0.0392156862745098,
+  "failure_categories": {
+    "valid": 98,
+    "other_incomplete_framework_run": 1,
+    "upstream_transport_error": 3
+  },
+  "closed_attempt_request_states": {
+    "complete": 733,
+    "transport_error": 4
+  },
+  "closed_attempt_http_statuses": {
+    "200": 734,
+    "None": 3
+  },
+  "transport_error_rate": 0.005427408412483039,
+  "http_error_rate": 0.0,
+  "pending_requests_at_sampling": 49,
+  "oldest_pending_request_seconds": 81.35909223556519,
+  "host_available_memory_gib": 146.00769805908203,
+  "free_project_disk_gib": 124.67951965332031,
+  "host_load_1m": 14.390625,
+  "logical_cpus": 152,
+  "sampled_containers": 49,
+  "sampled_memory_gib": 7.520843505859375,
+  "sampled_cpu_cores": 2.407138729542375,
+  "resource_sample_errors": [
+    "cgroup_sample:container_churn"
+  ],
+  "agent_states_at_listing": {
+    "created": 71,
+    "running": 53,
+    "exited": 2
+  },
+  "caveat": "Operational observation, not a controlled concurrency experiment. Case mix and calendar serving load vary. Request error rates cover requests from attempts closed in the window; pending ages are sampled separately. Cgroup resources exclude host daemon/controller overhead and may miss container churn."
+}
