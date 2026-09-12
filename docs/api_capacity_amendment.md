@@ -8,7 +8,7 @@ The initial evaluation stages are 16 and 32 agents. Each agent retains its 1 CPU
 
 Before new launches, the capacity scheduler requires at least 64 GiB available host memory, 30 GiB free disk space, and one-minute host load below 75% of the logical CPU count. `STOP_NEW_RUNS` still pauses future launches. Reducing the target allows active attempts to finish; it does not kill them.
 
-The live target is an atomic JSON file at `reports/capacity-control.json`. For example, run this from the remote experiment directory to select 32 agents:
+The live target is an atomic JSON file at `reports/capacity-control.json`. This target covers the original three-framework pool. While the [Hermes extension](hermes_extension.md) has eight workers, keep this target at **24** so the aggregate limit remains 32. The following example selects 32 original-pool workers only when no Hermes workers are active:
 
 ```python
 import json

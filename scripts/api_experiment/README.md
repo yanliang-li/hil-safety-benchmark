@@ -2,6 +2,8 @@
 
 Run the actual Codex CLI, Claude Code CLI, and DeepSeek Harness headless CLI against a third-party API. The local code only configures and supervises these programs; each framework owns its agent loop. OpenCode was considered during preparation and is not part of this experiment.
 
+The later [Hermes extension](../../docs/hermes_extension.md) adds the fourth framework and brings the combined plan to 5,760 attempts. It keeps this original three-framework manifest and scoring code unchanged.
+
 ## Frozen primary experiment
 
 `experiments/api-multimodel-20260912/main-plan-v1.json` fixes 3 frameworks × 3 requested model IDs (`deepseek-v4-flash`, `glm-5.2`, `qwen3.7-max`) × 80 cases × 2 prompt conditions × 3 repetitions = **4,320 planned attempts**. All four replies stay paired within each of 20 base tasks. The case set matches the earlier pilot; it was used during defense development and is not an untouched test set.

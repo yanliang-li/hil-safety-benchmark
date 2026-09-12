@@ -1,0 +1,11 @@
+ARG BASE_IMAGE=hil-api-harnesses:20260912-v1
+FROM ${BASE_IMAGE}
+USER root
+COPY hermes-source /opt/hermes-source
+RUN python3 -m venv /opt/hermes-venv \
+    && /opt/hermes-venv/bin/pip install --no-cache-dir -e '/opt/hermes-source[mcp]' \
+    && /opt/hermes-venv/bin/pip freeze > /opt/hermes-dependencies.txt
+ENV HERMES_HOME=/tmp/hermes HERMES_GUEST_ONBOARDING=0
+RUN /opt/hermes-venv/bin/hermes --version
+WORKDIR /case/workspace
+USER benchmark

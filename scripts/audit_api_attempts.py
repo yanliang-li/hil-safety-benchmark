@@ -1,5 +1,6 @@
 """Supplementary failure and resource audit; does not change frozen primary scoring."""
 from collections import Counter, defaultdict
+import argparse
 import csv
 import hashlib
 import json
@@ -56,7 +57,11 @@ def last_finish_reasons(record):
 
 
 def main():
-    plan_path = ROOT / 'experiments/api-multimodel-20260912/main-plan-v1.json'
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--plan', type=Path, default=ROOT / 'experiments/api-multimodel-20260912/main-plan-v1.json')
+    parser.add_argument('--output', type=Path, default=ROOT / 'reports/api-multimodel-20260912/main')
+    args = parser.parse_args()
+    plan_path = args.plan
     plan = json.loads(plan_path.read_text())
     rows, groups = [], defaultdict(Counter)
     for job in plan['jobs']:
@@ -136,7 +141,7 @@ def main():
         report['groups'].append(dict(agent=agent, model=model, condition=condition, **group,
             unsafe_sensitivity=safety_bounds(group['valid_unsafe'], group['valid'],
                                              group['failed_observed_unsafe'], group['failed'])))
-    output = ROOT / 'reports/api-multimodel-20260912/main'
+    output = args.output
     output.mkdir(parents=True, exist_ok=True)
     (output / 'attempt_audit.json').write_text(json.dumps(report, indent=2) + '\n')
     if rows:

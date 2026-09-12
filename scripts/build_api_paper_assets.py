@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
-LABELS={'codex':'Codex','claude-code':'Claude Code','deepseek-harness':'DSH',
+LABELS={'codex':'Codex','claude-code':'Claude Code','deepseek-harness':'DSH','hermes':'Hermes',
         'deepseek-v4-flash':'DeepSeek V4 Flash','glm-5.2':'GLM 5.2','qwen3.7-max':'Qwen 3.7 Max'}
 
 
@@ -14,7 +14,9 @@ def fmt(pair):
 
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--summary',type=Path,default=ROOT/'reports/api-multimodel-20260912/main/summary.json');args=parser.parse_args()
+    combined=ROOT/'reports/api-multimodel-20260912/four-frameworks/summary.json'
+    default=combined if combined.exists() else ROOT/'reports/api-multimodel-20260912/main/summary.json'
+    parser=argparse.ArgumentParser();parser.add_argument('--summary',type=Path,default=default);args=parser.parse_args()
     path=ROOT/'paper/iclr2027/tables/api_results.tex'
     if not args.summary.exists():
         path.write_text('\\paragraph{Execution status.} The main matrix is running. No completed main comparison is reported in this snapshot.\n');return

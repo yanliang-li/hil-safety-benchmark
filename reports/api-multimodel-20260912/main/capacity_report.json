@@ -1,7 +1,7 @@
 {
-  "measured_unix": 1789210835.2099586,
+  "measured_unix": 1789211293.5125616,
   "planned_attempts": 4320,
-  "finished_attempts": 375,
+  "finished_attempts": 445,
   "active_attempts": 24,
   "caveat": "Short operational windows with different case/model mixes and startup/drain effects. Observed throughput is not a controlled speed benchmark or a safety result.",
   "stages": [
@@ -145,26 +145,34 @@
       "epoch": "capacity-24-plus-hermes-8",
       "agent_concurrency": 24,
       "start": 1789210792.0649924,
-      "end": 1789210835.2099586,
-      "elapsed_seconds": 43.14496612548828,
-      "closed_attempts": 5,
-      "valid_attempts": 5,
+      "end": 1789211293.5125616,
+      "elapsed_seconds": 501.4475691318512,
+      "closed_attempts": 75,
+      "valid_attempts": 75,
       "failed_attempts": 0,
-      "closed_per_hour": 417.1981488558021,
-      "valid_per_hour": 417.1981488558021,
-      "tail_180_seconds_closed_per_hour": 417.1981488558021,
-      "own_epoch_closed_attempts": 0,
-      "mean_run_seconds_by_agent": {},
-      "closed_count_by_agent": {},
-      "api_completed_requests": 11,
-      "api_pending_requests": 20,
+      "closed_per_hour": 538.4411384573008,
+      "valid_per_hour": 538.4411384573008,
+      "tail_180_seconds_closed_per_hour": 560.0,
+      "own_epoch_closed_attempts": 46,
+      "mean_run_seconds_by_agent": {
+        "claude-code": 98.41048435160988,
+        "deepseek-harness": 97.51807692315843,
+        "codex": 148.8398847050137
+      },
+      "closed_count_by_agent": {
+        "claude-code": 19,
+        "deepseek-harness": 18,
+        "codex": 9
+      },
+      "api_completed_requests": 575,
+      "api_pending_requests": 23,
       "api_states": {
-        "complete": 11
+        "complete": 575
       },
       "api_http_statuses": {
-        "200": 11
+        "200": 575
       },
-      "api_success_latency_median_seconds": 7.485742807388306
+      "api_success_latency_median_seconds": 7.589425325393677
     }
   ]
 }
