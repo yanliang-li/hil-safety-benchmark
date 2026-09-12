@@ -83,7 +83,8 @@ def publish(count,complete):
     changed=subprocess.run(['git','diff','--cached','--quiet'],cwd=PUBLIC).returncode
     if changed:
         run(['git','commit','--quiet','-m',f'{"Complete" if complete else "Update provisional"} API experiment: {count} finished attempts'],cwd=PUBLIC,timeout=30)
-        run(['git','push','origin','main'],cwd=PUBLIC,env=env,timeout=120)
+    # Retry a previously committed update even if its first push failed.
+    run(['git','push','origin','main'],cwd=PUBLIC,env=env,timeout=120)
     return run(['git','rev-parse','HEAD'],cwd=PUBLIC,timeout=10).stdout.strip()
 
 
@@ -110,6 +111,7 @@ def main():
                 env=dict(os.environ,PYTHONPATH=str(ROOT/'src'))
                 run([PYTHON,'scripts/api_experiment/analyze.py','--plan',str(PLAN),'--output','reports/api-multimodel-20260912/main',
                     '--bootstrap','10000' if complete else '1000'],cwd=ROOT,env=env,timeout=240)
+                run([PYTHON,'scripts/audit_api_attempts.py'],cwd=ROOT,env=env,timeout=240)
                 build_paper();copy_public()
                 if state['last_published_count']<0 or count-state['last_published_count']>=100 or complete:
                     state['published_commit']=publish(count,complete);state['last_published_count']=count

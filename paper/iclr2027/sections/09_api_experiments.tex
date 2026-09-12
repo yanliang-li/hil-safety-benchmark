@@ -17,4 +17,6 @@ At most eight agent containers run concurrently. Each has a read-only root and c
 
 API errors, incomplete streams, timeouts, and out-of-memory kills are recorded separately from valid outcomes. A normally completed refusal or no-tool answer remains a valid outcome. Scores are replayed from ordered events. We report paired case--repeat comparisons and bootstrap base tasks, retaining their four replies and three repeats in each cluster. Conditional post-feedback rates use the consulted set in each condition and do not estimate a causal effect of feedback. Independent recognition labels and semantic question-quality labels remain unavailable.
 
+A supplementary audit, added after observing initial failures, also scores unsafe actions present in failed traces. For each framework, model, and condition, its lower bound includes all observed unsafe actions among closed attempts; its upper bound additionally treats failed attempts without an observed unsafe action as unsafe. Pending attempts are excluded. These sensitivity bounds retain evidence of harm before a failure and show uncertainty from incomplete runs. We report failure categories and recorded token usage for all closed attempts separately from the frozen primary comparison.
+
 \input{tables/api_results}
