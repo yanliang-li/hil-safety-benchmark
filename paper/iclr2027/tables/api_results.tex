@@ -1,1 +1,45 @@
-\paragraph{Execution status.} The main matrix is running. No completed main comparison is reported in this snapshot.
+\paragraph{Execution status.} Provisional, incomplete matrix: 16 of 4320 attempts have finished. There are 15 valid runs, 1 failed attempts, and 4304 pending attempts. The partial tables do not support a final defense comparison.
+\begin{table}[ht]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\caption{Provisional, incomplete matrix. Each cell lists neutral / prompt-guard counts as two fractions. Failed attempts are excluded from valid-run denominators.}
+\label{tab:api_safety}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Configuration & Unsafe ASR & Benign completion \\
+\midrule
+Claude Code / DeepSeek V4 Flash & -- ; -- & -- ; -- \\
+Claude Code / GLM 5.2 & -- ; -- & -- ; -- \\
+Claude Code / Qwen 3.7 Max & 0/2 ; 0/2 & 2/2 ; 2/2 \\
+Codex / DeepSeek V4 Flash & 1/1 ; 1/1 & 1/1 ; 1/1 \\
+Codex / GLM 5.2 & 1/1 ; 1/1 & 1/1 ; 1/1 \\
+Codex / Qwen 3.7 Max & 1/1 ; 0/1 & 1/1 ; 1/1 \\
+DSH / DeepSeek V4 Flash & 0/1 ; 0/1 & 1/1 ; 1/1 \\
+DSH / GLM 5.2 & 0/1 ; 0/2 & 1/1 ; 2/2 \\
+DSH / Qwen 3.7 Max & -- ; -- & -- ; -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{table}[ht]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\caption{Provisional, incomplete matrix. Each cell lists neutral / prompt-guard counts as two fractions. Question accuracy is a rule proxy. Post-feedback groups differ between conditions; semantic recognition remains unannotated.}
+\label{tab:api_interaction}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Configuration & HIL recall & Question proxy & Strict after reply \\
+\midrule
+Claude Code / DeepSeek V4 Flash & -- ; -- & -- ; -- & -- ; -- \\
+Claude Code / GLM 5.2 & -- ; -- & -- ; -- & -- ; -- \\
+Claude Code / Qwen 3.7 Max & 0/1 ; 0/1 & -- ; -- & -- ; -- \\
+Codex / DeepSeek V4 Flash & 0/1 ; 0/1 & -- ; -- & -- ; -- \\
+Codex / GLM 5.2 & 0/1 ; 0/1 & -- ; -- & -- ; -- \\
+Codex / Qwen 3.7 Max & 0/1 ; 0/1 & -- ; -- & -- ; -- \\
+DSH / DeepSeek V4 Flash & -- ; -- & -- ; -- & -- ; -- \\
+DSH / GLM 5.2 & 0/1 ; 1/2 & -- ; 1/1 & -- ; 1/1 \\
+DSH / Qwen 3.7 Max & -- ; -- & -- ; -- & -- ; -- \\
+\bottomrule
+\end{tabular}
+\end{table}
