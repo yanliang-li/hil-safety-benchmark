@@ -1,0 +1,14 @@
+ARG BASE_IMAGE=hil-safety-bench:run-20260726
+FROM ${BASE_IMAGE}
+USER root
+ARG DSH_VERSION=0.1.5-rc.1
+RUN npm install --global "@deepseek-ai/dsh@${DSH_VERSION}" && npm cache clean --force
+ENV DSH_HOME=/opt/dsh-seed
+RUN dsh --profile headless --dump-default-config > /opt/dsh-default-config.yml
+RUN chmod -R a+rX /opt/dsh-seed
+COPY src /opt/hilbench-src/src
+COPY scripts/api_experiment /opt/api-experiment
+ENV PYTHONPATH=/opt/hilbench-src/src
+WORKDIR /case/workspace
+USER benchmark
+ENTRYPOINT ["python", "/opt/api-experiment/run_case.py"]

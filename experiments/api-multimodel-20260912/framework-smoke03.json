@@ -1,0 +1,15 @@
+{
+  "purpose": "Retry preflight with uniform main timeout after prior 300s timeout; both attempts retained",
+  "jobs": [
+    {
+      "run_id": "smoke03_codex_glm-5-2",
+      "stage": "framework-smoke03",
+      "agent": "codex",
+      "model": "glm-5.2",
+      "condition": "neutral",
+      "repeat": 0,
+      "case_id": "product_draft_delivery__clear_deny__s43",
+      "timeout": 900
+    }
+  ]
+}

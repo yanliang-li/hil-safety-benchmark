@@ -58,10 +58,14 @@ def export(dest):
 def audit(dest):
     patterns = [rb'github_pat_[A-Za-z0-9_]{20,}', rb'gh[pousr]_[A-Za-z0-9]{20,}',
                 rb'sk-[A-Za-z0-9_-]{24,}', rb'-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE KEY-----',
-                rb'10\.133\.54\.211', rb'@FDU[A-Za-z]+[0-9]{4}', rb'chatgpt\.com/share/']
+                rb'chatgpt\.com/share/']
     # Compare the real local key in memory without printing it or storing its hash.
     profile = ROOT / '.secrets/boyu-20260912.json'
     exact = [json.loads(profile.read_text())['api_key'].encode()] if profile.exists() else []
+    connection = ROOT / 'recovery/api_experiment_connection.json'
+    if connection.exists():
+        target = json.loads(connection.read_text()).get('ssh_target', '')
+        if target: exact.append(target.rsplit('@', 1)[-1].encode())
     failures, files = [], {}
     for p in sorted(dest.rglob('*')):
         if not p.is_file() or '.git' in p.relative_to(dest).parts:

@@ -1,0 +1,65 @@
+{
+  "purpose": "framework integration preflight only",
+  "jobs": [
+    {
+      "run_id": "smoke01_codex_neutral",
+      "stage": "framework-smoke01",
+      "agent": "codex",
+      "model": "deepseek-v4-pro",
+      "condition": "neutral",
+      "repeat": 0,
+      "case_id": "product_draft_delivery__clear_deny__s43",
+      "timeout": 240
+    },
+    {
+      "run_id": "smoke01_codex_prompt_guard_v1",
+      "stage": "framework-smoke01",
+      "agent": "codex",
+      "model": "deepseek-v4-pro",
+      "condition": "prompt_guard_v1",
+      "repeat": 0,
+      "case_id": "product_draft_delivery__clear_deny__s43",
+      "timeout": 240
+    },
+    {
+      "run_id": "smoke01_claude-code_neutral",
+      "stage": "framework-smoke01",
+      "agent": "claude-code",
+      "model": "deepseek-v4-pro",
+      "condition": "neutral",
+      "repeat": 0,
+      "case_id": "product_draft_delivery__clear_deny__s43",
+      "timeout": 240
+    },
+    {
+      "run_id": "smoke01_claude-code_prompt_guard_v1",
+      "stage": "framework-smoke01",
+      "agent": "claude-code",
+      "model": "deepseek-v4-pro",
+      "condition": "prompt_guard_v1",
+      "repeat": 0,
+      "case_id": "product_draft_delivery__clear_deny__s43",
+      "timeout": 240
+    },
+    {
+      "run_id": "smoke01_deepseek-harness_neutral",
+      "stage": "framework-smoke01",
+      "agent": "deepseek-harness",
+      "model": "deepseek-v4-pro",
+      "condition": "neutral",
+      "repeat": 0,
+      "case_id": "product_draft_delivery__clear_deny__s43",
+      "timeout": 240
+    },
+    {
+      "run_id": "smoke01_deepseek-harness_prompt_guard_v1",
+      "stage": "framework-smoke01",
+      "agent": "deepseek-harness",
+      "model": "deepseek-v4-pro",
+      "condition": "prompt_guard_v1",
+      "repeat": 0,
+      "case_id": "product_draft_delivery__clear_deny__s43",
+      "timeout": 240
+    }
+  ]
+}
