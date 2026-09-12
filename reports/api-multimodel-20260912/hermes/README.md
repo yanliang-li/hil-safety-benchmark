@@ -1,15 +1,15 @@
 # Hermes extension
 
-Status: **provisional_incomplete**. 500 valid runs, 9 failed attempts, 931 pending out of 1440 planned.
+Status: **provisional_incomplete**. 546 valid runs, 10 failed attempts, 884 pending out of 1440 planned.
 
 | Harness | Requested model | Condition | Valid n | Unsafe ASR | Benign completion | HIL recall | Strict after reply |
 |---|---|---|---:|---:|---:|---:|---:|
-| hermes | deepseek-v4-flash | neutral | 84 | 24/84 (28.6%) | 73/84 (86.9%) | 33/62 (53.2%) | 24/33 (72.7%) |
-| hermes | deepseek-v4-flash | prompt_guard_v1 | 81 | 12/81 (14.8%) | 71/81 (87.7%) | 30/61 (49.2%) | 23/31 (74.2%) |
-| hermes | glm-5.2 | neutral | 81 | 21/81 (25.9%) | 73/81 (90.1%) | 28/62 (45.2%) | 22/28 (78.6%) |
-| hermes | glm-5.2 | prompt_guard_v1 | 82 | 12/82 (14.6%) | 78/82 (95.1%) | 33/62 (53.2%) | 27/33 (81.8%) |
-| hermes | qwen3.7-max | neutral | 85 | 20/85 (23.5%) | 78/85 (91.8%) | 17/65 (26.2%) | 12/17 (70.6%) |
-| hermes | qwen3.7-max | prompt_guard_v1 | 87 | 11/87 (12.6%) | 81/87 (93.1%) | 26/66 (39.4%) | 20/26 (76.9%) |
+| hermes | deepseek-v4-flash | neutral | 96 | 30/96 (31.2%) | 84/96 (87.5%) | 37/70 (52.9%) | 26/37 (70.3%) |
+| hermes | deepseek-v4-flash | prompt_guard_v1 | 91 | 15/91 (16.5%) | 81/91 (89.0%) | 32/67 (47.8%) | 24/33 (72.7%) |
+| hermes | glm-5.2 | neutral | 86 | 21/86 (24.4%) | 78/86 (90.7%) | 31/65 (47.7%) | 25/31 (80.6%) |
+| hermes | glm-5.2 | prompt_guard_v1 | 88 | 12/88 (13.6%) | 84/88 (95.5%) | 36/66 (54.5%) | 30/36 (83.3%) |
+| hermes | qwen3.7-max | neutral | 92 | 22/92 (23.9%) | 83/92 (90.2%) | 18/71 (25.4%) | 13/18 (72.2%) |
+| hermes | qwen3.7-max | prompt_guard_v1 | 93 | 11/93 (11.8%) | 86/93 (92.5%) | 28/71 (39.4%) | 21/28 (75.0%) |
 
 ARIR and semantic question precision remain unavailable. Question precision is a rule-based proxy. API failures, timeouts, and OOM kills are excluded from valid-run safety rates and reported separately. Finished no-tool answers remain valid outcomes. The 20 task clusters were used during prompt development; this is not an untouched test set.
 
