@@ -14,10 +14,11 @@ def load(name):
     return module
 
 
-def test_capacity_wrapper_enforces_new_bound():
+@pytest.mark.parametrize('limit', [16, 64])
+def test_capacity_wrapper_enforces_new_bound(limit):
     module = load('gateway_capacity')
-    semaphore = module.ThreadingCapacity(16).BoundedSemaphore(12)
-    assert all(semaphore.acquire(blocking=False) for _ in range(16))
+    semaphore = module.ThreadingCapacity(limit).BoundedSemaphore(12)
+    assert all(semaphore.acquire(blocking=False) for _ in range(limit))
     assert not semaphore.acquire(blocking=False)
     semaphore.release()
     assert semaphore.acquire(blocking=False)

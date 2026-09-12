@@ -10,6 +10,49 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def is_experiment_container(name):
+    return bool(re.fullmatch(r'(?:main01_|hermes01_)[a-f0-9]{20}', name)) or name in {
+        'hil-api-gateway-capacity-20260912', 'hil-api-gateway-capacity64-20260912'}
+
+
+def resource_sample():
+    owned, containers, errors = [], [], []
+    try:
+        listing = subprocess.check_output(['docker', 'ps', '-a', '--format', '{{json .}}'], text=True, timeout=20)
+        owned = [item for line in listing.splitlines() if is_experiment_container((item := json.loads(line))['Names'])]
+    except (subprocess.SubprocessError, OSError, ValueError) as error:
+        return [], None, ['container_listing:' + type(error).__name__]
+    names = [item['Names'] for item in owned if item['State'] == 'running']
+    if not names:
+        return [], owned, []
+    try:
+        # Never query unrelated, possibly paused containers on the shared host.
+        sample = subprocess.run(['docker', 'stats', '--no-stream', '--format', '{{json .}}', *names],
+                                capture_output=True, text=True, timeout=30)
+        stats = sample.stdout
+        if sample.returncode:
+            errors.append('container_stats:nonzero_exit')
+    except (subprocess.SubprocessError, OSError) as error:
+        return [], owned, ['container_stats:' + type(error).__name__]
+    factors = {'B': 1, 'KiB': 1024, 'MiB': 1024**2, 'GiB': 1024**3}
+    for line in stats.splitlines():
+        try:
+            item = json.loads(line)
+            if not is_experiment_container(item['Name']):
+                continue
+            match = re.fullmatch(r'([0-9.]+)(B|KiB|MiB|GiB)', item['MemUsage'].split(' / ')[0])
+            if match is None:
+                raise ValueError('Unrecognized Docker memory unit')
+            value, unit = match.groups()
+            containers.append({'name': item['Name'], 'memory_bytes': float(value) * factors[unit],
+                               'cpu_cores': float(item['CPUPerc'].rstrip('%')) / 100})
+        except (ValueError, KeyError):
+            errors.append('container_stats:invalid_record')
+    if len(containers) != len(names):
+        errors.append('container_stats:incomplete_sample')
+    return containers, owned, errors
+
+
 def main():
     now = time.time()
     progress = {name: json.loads((ROOT / f'reports/{name}-plan-v1_progress.json').read_text()) for name in ['main', 'hermes']}
@@ -19,20 +62,8 @@ def main():
     seconds = now - start
     rows = [r for p in progress.values() for r in p['results']]
     recent = [r for r in rows if r['finished_unix'] >= start]
-    stats = subprocess.check_output(['docker', 'stats', '--no-stream', '--format', '{{json .}}'], text=True)
-    containers = []
-    factors = {'B': 1, 'KiB': 1024, 'MiB': 1024**2, 'GiB': 1024**3}
-    for line in stats.splitlines():
-        item = json.loads(line)
-        name = item['Name']
-        if not (re.fullmatch(r'(?:main01_|hermes01_)[a-f0-9]{20}', name) or name == 'hil-api-gateway-capacity-20260912'):
-            continue
-        match = re.fullmatch(r'([0-9.]+)(B|KiB|MiB|GiB)', item['MemUsage'].split(' / ')[0])
-        if match is None:
-            raise ValueError('Unrecognized Docker memory unit')
-        value, unit = match.groups()
-        containers.append({'name': name, 'memory_bytes': float(value) * factors[unit],
-                           'cpu_cores': float(item['CPUPerc'].rstrip('%')) / 100})
+    containers, owned, resource_errors = resource_sample()
+    resources_available = bool(containers) or not resource_errors
     memory = {line.split(':')[0]: int(line.split()[1]) * 1024 for line in Path('/proc/meminfo').read_text().splitlines()}
     requests = []
     for r in rows:
@@ -44,9 +75,16 @@ def main():
                 requests.append(request)
     report = {'sampled_unix': now, 'aggregate_agent_limit': capacity['aggregate_agent_target'],
               'capacity_epoch': capacity['epoch'],
-              'active_agent_containers': sum(c['name'].startswith(('main01_', 'hermes01_')) for c in containers),
-              'memory_bytes_including_relay': sum(c['memory_bytes'] for c in containers),
-              'cpu_cores_including_relay': sum(c['cpu_cores'] for c in containers),
+              'gateway_max_inflight': capacity.get('gateway_max_inflight', 40),
+              'new_launches_paused': (ROOT / 'STOP_NEW_RUNS').exists(),
+              'scheduled_active_attempts': sum(p.get('active_attempts', 0) for p in progress.values()),
+              'agent_states_at_listing': dict(Counter(item['State'] for item in owned if item['Names'].startswith(('main01_', 'hermes01_')))) if owned is not None else None,
+              'resource_sample_finished_unix': time.time(),
+              'resource_sample_partial': bool(resource_errors),
+              'resource_sample_errors': resource_errors,
+              'active_agent_containers': sum(c['name'].startswith(('main01_', 'hermes01_')) for c in containers) if resources_available else None,
+              'memory_bytes_including_relay': sum(c['memory_bytes'] for c in containers) if resources_available else None,
+              'cpu_cores_including_relay': sum(c['cpu_cores'] for c in containers) if resources_available else None,
               'host_available_memory_bytes': memory['MemAvailable'], 'host_total_memory_bytes': memory['MemTotal'],
               'host_load_1m': os.getloadavg()[0], 'logical_cpus': os.cpu_count(),
               'window_seconds': seconds, 'recent_closed_attempts': len(recent),
@@ -60,7 +98,7 @@ def main():
               'cohorts': {name: {'planned': p['planned'], 'closed': len(p['results']),
                                 'valid': sum(bool(r['completed']) for r in p['results']),
                                 'active': p.get('active_attempts')} for name, p in progress.items()},
-              'caveat': 'Single resource sample; trailing window includes carryover attempts and changing case/model mix. Request metrics cover closed attempts only, not active requests. This is not a controlled concurrency comparison.',
+              'caveat': 'Single resource sample; missing Docker samples are null, and partial resource sums cover observed containers only. Scheduled active attempts include startup and cleanup. The trailing window includes carryover attempts and changing case/model mix. Request metrics cover closed attempts only, not active requests. This is not a controlled concurrency comparison.',
               'scaling_status': 'The aggregate target and its effective time are recorded separately from the frozen case and scoring manifests. Larger targets require coordinated pool changes.'}
     output = ROOT / 'reports/api-multimodel-20260912/four-frameworks/capacity_report.json'
     output.parent.mkdir(parents=True, exist_ok=True)

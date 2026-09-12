@@ -1,5 +1,7 @@
 # API experiment capacity amendment
 
+Current execution is governed by the later [64-agent amendment](capacity64.md). This document retains the preceding capacity history.
+
 The original 4,320-attempt manifest freezes eight concurrent agents. The owner subsequently requested more parallel agents after inspecting available server memory. `capacity-amendment-v1.json` records this operational change separately; the original manifest and its source hashes remain intact.
 
 `scripts/schedule_api_capacity.py` uses the original, hash-verified `run_one` implementation. It resumes the same attempt IDs and preserves both successful and failed attempts. A registered attempt without a final status prevents restart until it is inspected. The original controller must be drained before replacement. The new scheduler acquires the same process lock, preventing two controllers from submitting the same jobs.

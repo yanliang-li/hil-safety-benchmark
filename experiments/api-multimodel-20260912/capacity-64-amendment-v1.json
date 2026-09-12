@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "recorded_unix": 1789213933.098347,
+  "authorization": "Owner explicitly requested64 concurrent agents after reviewing the40-agent failures, to finish the experiment sooner.",
+  "authorized_aggregate_targets": [
+    64
+  ],
+  "initial_cohort_shares": {
+    "main": 48,
+    "hermes": 16
+  },
+  "scheduling": "One shared64-worker pool retains FIFO job order in each frozen plan and allocates by48:16 active-worker shares while both queues have work. Slots are reused by the remaining queue as another queue exhausts. No new attempts or retries are added.",
+  "component_plan_sha256": {
+    "main": "06c86ec4a948089bff38c80745a8c3f4542ba422c53263f72639e73f2310acb2",
+    "hermes": "a381704bc69ed3c3c60ff1e18d6f8efc6734ae39c2c04c977f4013ccf65101e9"
+  },
+  "agent_image_ids": {
+    "main": "sha256:cef9c75343a0fd7f84e735ae4002a69b8d812d9becf3175bf029504852030c46",
+    "hermes": "sha256:52babc012640ef068d4867c6e3d598aeb25e22857aad58ebea470a7acf3a01cd"
+  },
+  "implementation_sha256": {
+    "scripts/schedule_four_frameworks.py": "240750b2f1e65515a257bac8512e8ab5b4ce745093cd6987ab8af6c0cd837a08",
+    "scripts/schedule_api_capacity.py": "4435f79f91e3eebe6bfd942e10cad23d914bcd0d943799d3f2d5d4e26ab3f121",
+    "scripts/gateway_capacity.py": "77300ca5a5cacd3ed60722f8d26d7847b84467321054ac163610889cad5014d5"
+  },
+  "gateway": {
+    "name": "hil-api-gateway-capacity64-20260912",
+    "max_inflight": 64,
+    "memory_mib": 2048,
+    "cpu_limit": 4,
+    "pids_limit": 512,
+    "frozen_handler_sha256": "6d86ad933562d1bfab79c5240327fc335e98a91e950df860e1224af5f7c59d28",
+    "passthrough_protocols_unchanged": true,
+    "real_credential_only_in_relay": true
+  },
+  "per_attempt_limits_unchanged": {
+    "memory_mib": 1536,
+    "cpu_limit": 1,
+    "timeout_seconds": 900,
+    "max_api_requests": 48
+  },
+  "resource_guards": {
+    "minimum_available_host_memory_gib": 64,
+    "minimum_free_disk_gib": 30,
+    "maximum_host_load_fraction": 0.75
+  },
+  "handoff": "Pause new launches, retain all existing attempts until completion, acquire both original scheduler locks, and resume only never-started IDs. Retain the old relay until its requests have closed.",
+  "automatic_capacity_downgrade": false,
+  "analysis_note": "Concurrency and relay resource limits change together after previous32/40-agent periods. This is an operational amendment with calendar and serving confounds; failed attempts remain in the full audit and there is no automatic claim of safety improvement or linear speedup."
+}
