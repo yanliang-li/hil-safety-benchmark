@@ -1,47 +1,50 @@
 {
-  "sampled_unix": 1789222801.7865806,
+  "sampled_unix": 1789223050.9466305,
   "aggregate_agent_limit": 96,
   "capacity_epoch": "four-frameworks-96",
   "gateway_max_inflight": 96,
   "new_launches_paused": false,
   "scheduled_active_attempts": 96,
   "agent_states_at_listing": {
-    "created": 49,
-    "running": 44
+    "created": 30,
+    "running": 64
   },
-  "resource_sample_finished_unix": 1789222804.5582786,
-  "resource_sample_partial": false,
-  "resource_sample_errors": [],
-  "active_agent_containers": 44,
-  "memory_bytes_including_relay": 7903371264,
-  "cpu_cores_including_relay": 1.8832516091686606,
-  "host_available_memory_bytes": 152053338112,
+  "resource_sample_finished_unix": 1789223053.558641,
+  "resource_sample_partial": true,
+  "resource_sample_errors": [
+    "cgroup_sample:container_churn"
+  ],
+  "active_agent_containers": 61,
+  "memory_bytes_including_relay": 10593165312,
+  "cpu_cores_including_relay": 1.5028713658629682,
+  "host_available_memory_bytes": 149376143360,
   "host_total_memory_bytes": 270041440256,
-  "host_load_1m": 20.513671875,
+  "host_load_1m": 17.2314453125,
   "logical_cpus": 152,
   "window_seconds": 600.0,
-  "recent_closed_attempts": 261,
-  "recent_valid_attempts": 253,
+  "recent_closed_attempts": 258,
+  "recent_valid_attempts": 250,
   "recent_failed_attempts": 8,
-  "closed_attempts_per_hour": 1566.0,
-  "valid_attempts_per_hour": 1518.0,
+  "closed_attempts_per_hour": 1548.0,
+  "valid_attempts_per_hour": 1500.0,
   "recent_oom_kills": 0,
   "http_status_counts_closed_attempt_requests": {
-    "200": 2203,
-    "None": 4
+    "200": 2050,
+    "None": 3,
+    "504": 1
   },
-  "transport_errors_closed_attempt_requests": 7,
+  "transport_errors_closed_attempt_requests": 5,
   "cohorts": {
     "main": {
       "planned": 4320,
-      "closed": 3315,
-      "valid": 3206,
+      "closed": 3392,
+      "valid": 3280,
       "active": 72
     },
     "hermes": {
       "planned": 1440,
-      "closed": 804,
-      "valid": 792,
+      "closed": 827,
+      "valid": 813,
       "active": 24
     }
   },
