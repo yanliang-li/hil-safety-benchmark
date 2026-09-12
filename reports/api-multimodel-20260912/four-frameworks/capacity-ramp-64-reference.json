@@ -1,0 +1,53 @@
+{
+  "label": "capacity-ramp-64-reference",
+  "sampled_unix": 1789216168.0418518,
+  "window_start_unix": 1789215007.485773,
+  "window_end_unix": 1789215607.485773,
+  "window_seconds": 600.0,
+  "control_at_sampling": {
+    "aggregate_agent_target": 64,
+    "main_workers": 48,
+    "hermes_workers": 16,
+    "epoch": "four-frameworks-64",
+    "effective_unix": 1789214027.3857286,
+    "gateway_name": "hil-api-gateway-capacity64-20260912",
+    "gateway_max_inflight": 64
+  },
+  "closed_total": 1549,
+  "planned": 5760,
+  "recent_closed": 220,
+  "recent_valid": 212,
+  "recent_failed": 8,
+  "valid_per_hour": 1272.0,
+  "closed_per_hour": 1320.0,
+  "failed_attempt_rate": 0.03636363636363636,
+  "failure_categories": {
+    "valid": 212,
+    "output_limit_termination": 7,
+    "upstream_transport_error": 1
+  },
+  "closed_attempt_request_states": {
+    "complete": 1864,
+    "transport_error": 4
+  },
+  "closed_attempt_http_statuses": {
+    "200": 1867,
+    "None": 1
+  },
+  "transport_error_rate": 0.0021413276231263384,
+  "http_error_rate": 0.0,
+  "pending_requests_at_sampling": 5,
+  "oldest_pending_request_seconds": 59.71342921257019,
+  "host_available_memory_gib": 152.57540893554688,
+  "free_project_disk_gib": 125.07835388183594,
+  "host_load_1m": 7.24462890625,
+  "logical_cpus": 152,
+  "sampled_containers": 7,
+  "sampled_memory_gib": 0.7907180786132812,
+  "sampled_cpu_cores": 0.02248230024212936,
+  "resource_sample_errors": [],
+  "agent_states_at_listing": {
+    "running": 5
+  },
+  "caveat": "Operational observation, not a controlled concurrency experiment. Case mix and calendar serving load vary. Request error rates cover requests from attempts closed in the window; pending ages are sampled separately. Cgroup resources exclude host daemon/controller overhead and may miss container churn."
+}

@@ -1,5 +1,7 @@
 # Fourth framework: Hermes Agent
 
+The owner has subsequently authorized a [staged 96/128-agent ramp](capacity_ramp.md). The earlier capacity procedure below remains part of the execution history.
+
 Current execution uses the [owner-requested 64-agent unified scheduler](capacity64.md). The 32/40-agent procedures below describe earlier phases.
 
 The owner requested the actual Claude Code, Codex, Hermes, and DeepSeek Harness frameworks. Hermes is the official [NousResearch Hermes Agent](https://github.com/NousResearch/hermes-agent), version **0.21.2**, commit `b7b35a84b7fbe1aa2e223a6ce726a2471300d0a4`. Its native `hermes --oneshot` command runs the agent loop. The adapter does not implement a replacement model loop.

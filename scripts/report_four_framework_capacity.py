@@ -12,13 +12,40 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def is_experiment_container(name):
     return bool(re.fullmatch(r'(?:main01_|hermes01_)[a-f0-9]{20}', name)) or name in {
-        'hil-api-gateway-capacity-20260912', 'hil-api-gateway-capacity64-20260912'}
+        'hil-api-gateway-capacity-20260912', 'hil-api-gateway-capacity64-20260912',
+        'hil-api-gateway-capacity-ramp-20260912'}
+
+
+def cgroup_resources(owned):
+    def read(item):
+        folder = Path('/sys/fs/cgroup/system.slice') / ('docker-' + item['ID'] + '.scope')
+        try:
+            stat = dict(line.split() for line in (folder / 'memory.stat').read_text().splitlines())
+            cpu = dict(line.split() for line in (folder / 'cpu.stat').read_text().splitlines())
+            return max(0, int((folder / 'memory.current').read_text()) - int(stat.get('inactive_file', 0))), int(cpu['usage_usec'])
+        except (OSError, KeyError, ValueError):
+            return None
+    started = time.monotonic()
+    before = {item['ID']: read(item) for item in owned if item['State'] == 'running' and 'ID' in item}
+    if not any(before.values()):
+        return []
+    time.sleep(1)
+    output = []
+    for item in owned:
+        first = before.get(item.get('ID'))
+        if first is None:
+            continue
+        last = read(item)
+        if last is not None:
+            output.append({'name': item['Names'], 'memory_bytes': last[0],
+                           'cpu_cores': max(0, last[1] - first[1]) / 1e6 / (time.monotonic() - started)})
+    return output
 
 
 def resource_sample():
     owned, containers, errors = [], [], []
     try:
-        listing = subprocess.check_output(['docker', 'ps', '-a', '--filter', 'name=main01_',
+        listing = subprocess.check_output(['docker', 'ps', '-a', '--no-trunc', '--filter', 'name=main01_',
                                            '--filter', 'name=hermes01_', '--filter', 'name=hil-api-gateway-capacity',
                                            '--format', '{{json .}}'], text=True, timeout=20)
         owned = [item for line in listing.splitlines() if is_experiment_container((item := json.loads(line))['Names'])]
@@ -27,6 +54,9 @@ def resource_sample():
     names = [item['Names'] for item in owned if item['State'] == 'running']
     if not names:
         return [], owned, []
+    direct = cgroup_resources(owned)
+    if direct:
+        return direct, owned, ['cgroup_sample:container_churn'] if len(direct) != len(names) else []
     try:
         # Never query unrelated, possibly paused containers on the shared host.
         sample = subprocess.run(['docker', 'stats', '--no-stream', '--format', '{{json .}}', *names],

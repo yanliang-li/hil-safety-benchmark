@@ -1,5 +1,7 @@
 # Owner-requested 64-agent execution
 
+The owner has subsequently authorized a [staged 96/128-agent ramp](capacity_ramp.md). The earlier capacity procedure below remains part of the execution history.
+
 The owner explicitly requested 64 concurrent agents after reviewing the earlier 40-agent connection failures. The [64-agent amendment](../experiments/api-multimodel-20260912/capacity-64-amendment-v1.json) records that instruction and the new scheduling and relay limits. The 4,320-attempt original plan and the 1,440-attempt Hermes extension remain unchanged.
 
 ## Scheduling and handoff

@@ -1,5 +1,7 @@
 # API experiment capacity amendment
 
+The owner has subsequently authorized a [staged 96/128-agent ramp](capacity_ramp.md). The earlier capacity procedure below remains part of the execution history.
+
 Current execution is governed by the later [64-agent amendment](capacity64.md). This document retains the preceding capacity history.
 
 The original 4,320-attempt manifest freezes eight concurrent agents. The owner subsequently requested more parallel agents after inspecting available server memory. `capacity-amendment-v1.json` records this operational change separately; the original manifest and its source hashes remain intact.

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "recorded_unix": 1789215944.5261436,
+  "authorization": "Owner accepted a 96-agent observation followed by128 if useful throughput improves and resources/errors remain stable. Preserve all previous attempts.",
+  "authorized_aggregate_targets": [
+    64,
+    96,
+    128
+  ],
+  "initial_target": 96,
+  "cohort_share_ratio": {
+    "main": 3,
+    "hermes": 1
+  },
+  "component_plan_sha256": {
+    "main": "06c86ec4a948089bff38c80745a8c3f4542ba422c53263f72639e73f2310acb2",
+    "hermes": "a381704bc69ed3c3c60ff1e18d6f8efc6734ae39c2c04c977f4013ccf65101e9"
+  },
+  "agent_image_ids": {
+    "main": "sha256:cef9c75343a0fd7f84e735ae4002a69b8d812d9becf3175bf029504852030c46",
+    "hermes": "sha256:52babc012640ef068d4867c6e3d598aeb25e22857aad58ebea470a7acf3a01cd"
+  },
+  "implementation_sha256": {
+    "scripts/schedule_four_frameworks_ramp.py": "e872f1fc4a9bb4d80fac7a38c0b16169acfa80555181d116570d6e370c35c5fc",
+    "scripts/gateway_capacity_ramp.py": "f73c3890c3a104070d018014da50c2ff40b9849a2d18880e376f57afc377ef37",
+    "scripts/schedule_api_capacity.py": "4435f79f91e3eebe6bfd942e10cad23d914bcd0d943799d3f2d5d4e26ab3f121"
+  },
+  "gateway": {
+    "name": "hil-api-gateway-capacity-ramp-20260912",
+    "maximum_inflight": 128,
+    "initial_inflight": 96,
+    "memory_mib": 4096,
+    "cpu_limit": 4,
+    "pids_limit": 1024,
+    "frozen_handler_sha256": "6d86ad933562d1bfab79c5240327fc335e98a91e950df860e1224af5f7c59d28",
+    "capacity_control": "/controller/four-framework-capacity-control.json",
+    "protocol_handler_unchanged": true
+  },
+  "per_attempt_limits_unchanged": {
+    "memory_mib": 1536,
+    "cpu_limit": 1,
+    "timeout_seconds": 900,
+    "max_api_requests": 48
+  },
+  "resource_guards": {
+    "minimum_available_host_memory_gib": 64,
+    "minimum_free_disk_gib": 30,
+    "maximum_host_load_fraction": 0.75
+  },
+  "checkpoint_rule": {
+    "warmup_seconds": 120,
+    "minimum_measurement_seconds": 300,
+    "minimum_closed_attempts": 80,
+    "minimum_valid_throughput_ratio_to_previous": 1.1,
+    "maximum_transport_request_error_rate": 0.01,
+    "maximum_http_request_error_rate": 0.01,
+    "maximum_failed_attempt_rate_increase": 0.05,
+    "minimum_available_host_memory_gib_for_promotion": 96,
+    "maximum_oom_kills": 0,
+    "if_marginal": "Hold the current target for another300 seconds; do not infer improvement from an incomplete startup window.",
+    "if_worse": "Return to the previous more productive target without cancelling active attempts.",
+    "after128": "Observe another full window before retaining128; use96 if errors or useful throughput regress."
+  },
+  "handoff": "Pause launches, finish registered attempts and relay requests, stop old controller, acquire both scheduler locks, then resume only never-started attempt IDs.",
+  "live_changes": "One128-worker pool and a shared adjustable admission semaphore read the same atomic control file. Raising a target does not restart agent sessions. Lowering a target lets existing agents and admitted requests finish before filling fewer slots. Per-attempt recorded targets describe launch settings; requests spanning a change can experience the next admission limit. Capacity history and checkpoint times retain this confound.",
+  "analysis_note": "Operational throughput checks do not establish a causal effect on safety or provider capacity. Immutable cases, framework images, per-attempt adapters, scoring, quotas and attempts remain unchanged. No retries are added."
+}

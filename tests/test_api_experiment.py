@@ -32,7 +32,7 @@ def test_paired_cluster_analysis_preserves_repeats_and_excludes_unmatched():
     assert result['benign_task_complete']['guard_minus_neutral']==0
 
 
-@pytest.mark.parametrize('capacity', [None, 40, 64])
+@pytest.mark.parametrize('capacity', [None, 40, 64, 96, 128])
 def test_relay_native_passthrough_and_attempt_limits(tmp_path, capacity):
     requests = []
     body = b'data: {"type":"response.completed","response":{"model":"test-model","usage":{"output_tokens":4}}}\n\n'
@@ -56,6 +56,12 @@ def test_relay_native_passthrough_and_attempt_limits(tmp_path, capacity):
     if capacity:
         command=[sys.executable,str(ROOT/'scripts/gateway_capacity.py'),'--source',str(gateway),
                  '--source-sha256',hashlib.sha256(gateway.read_bytes()).hexdigest(),'--max-inflight',str(capacity)]
+        if capacity > 64:
+            control = tmp_path/'capacity.json'
+            control.write_text(json.dumps({'gateway_max_inflight':capacity}))
+            command=[sys.executable,str(ROOT/'scripts/gateway_capacity_ramp.py'),'--source',str(gateway),
+                     '--source-sha256',hashlib.sha256(gateway.read_bytes()).hexdigest(),'--max-inflight','128',
+                     '--capacity-control',str(control)]
     process=subprocess.Popen(command+['--profile',str(profile),
                               '--registry',str(registry),'--evidence',str(evidence),'--port',str(port)])
     base=f'http://127.0.0.1:{port}'
