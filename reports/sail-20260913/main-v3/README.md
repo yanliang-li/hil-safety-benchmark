@@ -1,44 +1,44 @@
 # SAIL HIL comparison
 
-Status: **provisional_incomplete**. 4478/6720 attempts closed; 3981 valid, 497 failed.
+Status: **provisional_incomplete**. 4730/6720 attempts closed; 4201 valid, 529 failed.
 
 | Framework | Actor model | Condition | Valid n | Unsafe ASR | Benign completion | System HIL recall | PostSuccess | Agent / controller questions |
 |---|---|---|---:|---:|---:|---:|---:|---:|
-| claude-code | deepseek-v4-flash | prompt_guard_v1 | 146 | 27/146 (18.5%) | 128/146 (87.7%) | 67/111 (60.4%) | 54/68 (79.4%) | 68 / 0 |
-| claude-code | deepseek-v4-flash | sail_v3 | 139 | 1/139 (0.7%) | 109/139 (78.4%) | 74/106 (69.8%) | 55/83 (66.3%) | 91 / 47 |
+| claude-code | deepseek-v4-flash | prompt_guard_v1 | 158 | 30/158 (19.0%) | 139/158 (88.0%) | 74/120 (61.7%) | 57/75 (76.0%) | 76 / 0 |
+| claude-code | deepseek-v4-flash | sail_v3 | 150 | 1/150 (0.7%) | 117/150 (78.0%) | 82/114 (71.9%) | 61/92 (66.3%) | 102 / 51 |
 | claude-code | deepseek-v4-flash | sail_v3_no_human | 79 | 0/79 (0.0%) | 64/79 (81.0%) | 0/59 (0.0%) | N/A | 0 / 0 |
-| claude-code | glm-5.2 | prompt_guard_v1 | 153 | 17/153 (11.1%) | 140/153 (91.5%) | 69/115 (60.0%) | 57/71 (80.3%) | 75 / 0 |
-| claude-code | glm-5.2 | sail_v3 | 142 | 5/142 (3.5%) | 120/142 (84.5%) | 73/104 (70.2%) | 58/82 (70.7%) | 78 / 44 |
+| claude-code | glm-5.2 | prompt_guard_v1 | 158 | 17/158 (10.8%) | 144/158 (91.1%) | 73/119 (61.3%) | 60/75 (80.0%) | 79 / 0 |
+| claude-code | glm-5.2 | sail_v3 | 147 | 5/147 (3.4%) | 123/147 (83.7%) | 76/108 (70.4%) | 59/85 (69.4%) | 83 / 46 |
 | claude-code | glm-5.2 | sail_v3_no_human | 78 | 0/78 (0.0%) | 65/78 (83.3%) | 0/58 (0.0%) | N/A | 0 / 0 |
-| claude-code | qwen3.7-max | prompt_guard_v1 | 107 | 15/107 (14.0%) | 97/107 (90.7%) | 33/79 (41.8%) | 27/33 (81.8%) | 34 / 0 |
-| claude-code | qwen3.7-max | sail_v3 | 102 | 2/102 (2.0%) | 87/102 (85.3%) | 46/79 (58.2%) | 35/50 (70.0%) | 40 / 20 |
+| claude-code | qwen3.7-max | prompt_guard_v1 | 115 | 15/115 (13.0%) | 105/115 (91.3%) | 36/86 (41.9%) | 29/36 (80.6%) | 37 / 0 |
+| claude-code | qwen3.7-max | sail_v3 | 109 | 2/109 (1.8%) | 92/109 (84.4%) | 48/84 (57.1%) | 35/52 (67.3%) | 42 / 22 |
 | claude-code | qwen3.7-max | sail_v3_no_human | 62 | 0/62 (0.0%) | 55/62 (88.7%) | 0/45 (0.0%) | N/A | 0 / 0 |
-| codex | deepseek-v4-flash | prompt_guard_v1 | 147 | 24/147 (16.3%) | 135/147 (91.8%) | 48/109 (44.0%) | 34/48 (70.8%) | 54 / 0 |
-| codex | deepseek-v4-flash | sail_v3 | 131 | 2/131 (1.5%) | 107/131 (81.7%) | 60/93 (64.5%) | 44/71 (62.0%) | 64 / 71 |
+| codex | deepseek-v4-flash | prompt_guard_v1 | 158 | 25/158 (15.8%) | 143/158 (90.5%) | 53/118 (44.9%) | 36/53 (67.9%) | 61 / 0 |
+| codex | deepseek-v4-flash | sail_v3 | 141 | 3/141 (2.1%) | 115/141 (81.6%) | 67/101 (66.3%) | 49/79 (62.0%) | 72 / 77 |
 | codex | deepseek-v4-flash | sail_v3_no_human | 75 | 0/75 (0.0%) | 59/75 (78.7%) | 0/55 (0.0%) | N/A | 0 / 0 |
-| codex | glm-5.2 | prompt_guard_v1 | 132 | 13/132 (9.8%) | 119/132 (90.2%) | 41/97 (42.3%) | 34/41 (82.9%) | 43 / 0 |
-| codex | glm-5.2 | sail_v3 | 109 | 0/109 (0.0%) | 98/109 (89.9%) | 50/77 (64.9%) | 42/56 (75.0%) | 37 / 39 |
+| codex | glm-5.2 | prompt_guard_v1 | 144 | 16/144 (11.1%) | 131/144 (91.0%) | 46/105 (43.8%) | 39/46 (84.8%) | 48 / 0 |
+| codex | glm-5.2 | sail_v3 | 118 | 0/118 (0.0%) | 106/118 (89.8%) | 55/82 (67.1%) | 46/62 (74.2%) | 41 / 44 |
 | codex | glm-5.2 | sail_v3_no_human | 64 | 0/64 (0.0%) | 57/64 (89.1%) | 0/44 (0.0%) | N/A | 0 / 0 |
-| codex | qwen3.7-max | prompt_guard_v1 | 121 | 13/121 (10.7%) | 101/121 (83.5%) | 32/87 (36.8%) | 26/32 (81.2%) | 55 / 0 |
-| codex | qwen3.7-max | sail_v3 | 99 | 0/99 (0.0%) | 78/99 (78.8%) | 40/70 (57.1%) | 27/43 (62.8%) | 47 / 38 |
+| codex | qwen3.7-max | prompt_guard_v1 | 127 | 14/127 (11.0%) | 104/127 (81.9%) | 33/91 (36.3%) | 26/33 (78.8%) | 58 / 0 |
+| codex | qwen3.7-max | sail_v3 | 106 | 0/106 (0.0%) | 80/106 (75.5%) | 42/75 (56.0%) | 28/46 (60.9%) | 49 / 44 |
 | codex | qwen3.7-max | sail_v3_no_human | 73 | 1/73 (1.4%) | 57/73 (78.1%) | 0/53 (0.0%) | N/A | 0 / 0 |
-| deepseek-harness | deepseek-v4-flash | prompt_guard_v1 | 150 | 19/150 (12.7%) | 133/150 (88.7%) | 66/111 (59.5%) | 46/67 (68.7%) | 75 / 0 |
-| deepseek-harness | deepseek-v4-flash | sail_v3 | 138 | 4/138 (2.9%) | 117/138 (84.8%) | 69/103 (67.0%) | 57/81 (70.4%) | 82 / 52 |
+| deepseek-harness | deepseek-v4-flash | prompt_guard_v1 | 159 | 20/159 (12.6%) | 141/159 (88.7%) | 73/119 (61.3%) | 52/74 (70.3%) | 82 / 0 |
+| deepseek-harness | deepseek-v4-flash | sail_v3 | 145 | 4/145 (2.8%) | 123/145 (84.8%) | 75/109 (68.8%) | 62/87 (71.3%) | 88 / 55 |
 | deepseek-harness | deepseek-v4-flash | sail_v3_no_human | 80 | 0/80 (0.0%) | 65/80 (81.2%) | 0/60 (0.0%) | N/A | 0 / 0 |
-| deepseek-harness | glm-5.2 | prompt_guard_v1 | 120 | 15/120 (12.5%) | 114/120 (95.0%) | 43/85 (50.6%) | 40/43 (93.0%) | 43 / 0 |
-| deepseek-harness | glm-5.2 | sail_v3 | 107 | 3/107 (2.8%) | 98/107 (91.6%) | 43/72 (59.7%) | 40/48 (83.3%) | 38 / 19 |
+| deepseek-harness | glm-5.2 | prompt_guard_v1 | 133 | 16/133 (12.0%) | 126/133 (94.7%) | 51/95 (53.7%) | 47/51 (92.2%) | 51 / 0 |
+| deepseek-harness | glm-5.2 | sail_v3 | 119 | 3/119 (2.5%) | 107/119 (89.9%) | 53/82 (64.6%) | 46/58 (79.3%) | 48 / 21 |
 | deepseek-harness | glm-5.2 | sail_v3_no_human | 62 | 0/62 (0.0%) | 54/62 (87.1%) | 0/44 (0.0%) | N/A | 0 / 0 |
-| deepseek-harness | qwen3.7-max | prompt_guard_v1 | 129 | 19/129 (14.7%) | 115/129 (89.1%) | 36/97 (37.1%) | 27/36 (75.0%) | 38 / 0 |
-| deepseek-harness | qwen3.7-max | sail_v3 | 115 | 2/115 (1.7%) | 102/115 (88.7%) | 40/86 (46.5%) | 33/45 (73.3%) | 33 / 30 |
+| deepseek-harness | qwen3.7-max | prompt_guard_v1 | 137 | 19/137 (13.9%) | 123/137 (89.8%) | 37/102 (36.3%) | 28/37 (75.7%) | 39 / 0 |
+| deepseek-harness | qwen3.7-max | sail_v3 | 121 | 2/121 (1.7%) | 107/121 (88.4%) | 43/90 (47.8%) | 35/48 (72.9%) | 35 / 31 |
 | deepseek-harness | qwen3.7-max | sail_v3_no_human | 70 | 0/70 (0.0%) | 55/70 (78.6%) | 0/52 (0.0%) | N/A | 0 / 0 |
-| hermes | deepseek-v4-flash | prompt_guard_v1 | 144 | 21/144 (14.6%) | 130/144 (90.3%) | 54/106 (50.9%) | 45/54 (83.3%) | 56 / 0 |
-| hermes | deepseek-v4-flash | sail_v3 | 130 | 0/130 (0.0%) | 110/130 (84.6%) | 67/99 (67.7%) | 51/74 (68.9%) | 82 / 57 |
+| hermes | deepseek-v4-flash | prompt_guard_v1 | 156 | 25/156 (16.0%) | 141/156 (90.4%) | 59/117 (50.4%) | 48/59 (81.4%) | 61 / 0 |
+| hermes | deepseek-v4-flash | sail_v3 | 140 | 1/140 (0.7%) | 119/140 (85.0%) | 74/108 (68.5%) | 56/81 (69.1%) | 90 / 65 |
 | hermes | deepseek-v4-flash | sail_v3_no_human | 78 | 0/78 (0.0%) | 64/78 (82.1%) | 0/58 (0.0%) | N/A | 0 / 0 |
-| hermes | glm-5.2 | prompt_guard_v1 | 146 | 18/146 (12.3%) | 139/146 (95.2%) | 68/110 (61.8%) | 57/68 (83.8%) | 69 / 0 |
-| hermes | glm-5.2 | sail_v3 | 130 | 1/130 (0.8%) | 110/130 (84.6%) | 77/98 (78.6%) | 57/81 (70.4%) | 80 / 67 |
+| hermes | glm-5.2 | prompt_guard_v1 | 155 | 19/155 (12.3%) | 148/155 (95.5%) | 72/117 (61.5%) | 60/72 (83.3%) | 73 / 0 |
+| hermes | glm-5.2 | sail_v3 | 139 | 2/139 (1.4%) | 119/139 (85.6%) | 81/105 (77.1%) | 61/86 (70.9%) | 84 / 73 |
 | hermes | glm-5.2 | sail_v3_no_human | 77 | 0/77 (0.0%) | 64/77 (83.1%) | 0/57 (0.0%) | N/A | 0 / 0 |
-| hermes | qwen3.7-max | prompt_guard_v1 | 136 | 15/136 (11.0%) | 105/136 (77.2%) | 38/103 (36.9%) | 29/38 (76.3%) | 38 / 0 |
-| hermes | qwen3.7-max | sail_v3 | 130 | 2/130 (1.5%) | 97/130 (74.6%) | 51/99 (51.5%) | 31/53 (58.5%) | 38 / 24 |
+| hermes | qwen3.7-max | prompt_guard_v1 | 147 | 17/147 (11.6%) | 115/147 (78.2%) | 43/111 (38.7%) | 35/44 (79.5%) | 44 / 0 |
+| hermes | qwen3.7-max | sail_v3 | 141 | 2/141 (1.4%) | 104/141 (73.8%) | 55/108 (50.9%) | 34/57 (59.6%) | 42 / 25 |
 | hermes | qwen3.7-max | sail_v3_no_human | 80 | 0/80 (0.0%) | 61/80 (76.2%) | 0/60 (0.0%) | N/A | 0 / 0 |
 
 System consultation includes controller-generated questions, reported separately from native actor questions. Conditional post-feedback sets differ. Reviewer calls add model compute and latency. Recognition and semantic question accuracy remain unannotated. Failures are excluded from primary rates but retained in all-attempt sensitivity counts.
