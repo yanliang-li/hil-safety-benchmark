@@ -36,6 +36,12 @@ The Dockerfile installs the upstream checkout in a separate virtual environment.
 
 Keep the original scheduler target at **24** while Hermes has **8** workers. Wait for the original active count to fall to 24 before starting Hermes. The total agent limit is **32**, not 32 per framework. The relay's 40-request capacity is a separate limit. Each agent keeps a 1 CPU and 1,536 MiB limit, no extra swap, a read-only root and case mount, fresh temporary state, and a 900-second timeout. New launches require at least 64 GiB available host memory and 30 GiB free storage. The shared `STOP_NEW_RUNS` flag pauses new launches without terminating active attempts. When one cohort finishes, the remaining cohort may use all 32 slots.
 
+## Subsequent 40-agent capacity trial
+
+After a ten-minute 32-agent observation window without failed attempts or OOM kills, a [separate capacity amendment](../experiments/api-multimodel-20260912/four-framework-capacity-amendment-v1.json) trials **40 total agents**: 32 original-framework workers and eight Hermes workers. The [32-agent baseline sample](../reports/api-multimodel-20260912/four-frameworks/capacity-32-baseline.json) is retained. The task manifest, image, adapter, model settings, and scoring remain frozen. Only the Hermes scheduling controller is replaced, after its already-started attempts finish.
+
+`scripts/schedule_hermes_capacity.py` reads `reports/four-framework-capacity-control.json` and verifies the amended source hash. Its original-pool allocation must match `reports/capacity-control.json`. Use 24 + 8 for 32 total or 32 + 8 for 40 total. Reductions take effect as active attempts finish. Do not run both Hermes controllers at once. `scripts/report_four_framework_capacity.py` measures aggregate memory, CPU, throughput, and errors; its recent window starts at the current capacity epoch. Short-window ratios remain confounded by case mix and provider load.
+
 ## Results and publication
 
 `scripts/analyze_four_frameworks.py` calls the original frozen scorer for each manifest, verifies stored scores against ordered events, and combines reports without pooling framework–model configurations. Failed attempts remain in a separate all-attempt audit, including any unsafe actions observed before failure.

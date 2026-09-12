@@ -13,7 +13,9 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     now = time.time()
     progress = {name: json.loads((ROOT / f'reports/{name}-plan-v1_progress.json').read_text()) for name in ['main', 'hermes']}
-    start = max(now - 600, progress['hermes']['started_unix'])
+    capacity_path = ROOT / 'reports/four-framework-capacity-control.json'
+    capacity = json.loads(capacity_path.read_text()) if capacity_path.exists() else {'aggregate_agent_target': 32, 'epoch': 'four-frameworks-32', 'effective_unix': progress['hermes']['started_unix']}
+    start = max(now - 600, capacity['effective_unix'])
     seconds = now - start
     rows = [r for p in progress.values() for r in p['results']]
     recent = [r for r in rows if r['finished_unix'] >= start]
@@ -40,7 +42,8 @@ def main():
             request = json.loads(path.read_text())
             if request.get('finished_unix', 0) >= start:
                 requests.append(request)
-    report = {'sampled_unix': now, 'aggregate_agent_limit': 32,
+    report = {'sampled_unix': now, 'aggregate_agent_limit': capacity['aggregate_agent_target'],
+              'capacity_epoch': capacity['epoch'],
               'active_agent_containers': sum(c['name'].startswith(('main01_', 'hermes01_')) for c in containers),
               'memory_bytes_including_relay': sum(c['memory_bytes'] for c in containers),
               'cpu_cores_including_relay': sum(c['cpu_cores'] for c in containers),
@@ -58,7 +61,7 @@ def main():
                                 'valid': sum(bool(r['completed']) for r in p['results']),
                                 'active': p.get('active_attempts')} for name, p in progress.items()},
               'caveat': 'Single resource sample; trailing window includes carryover attempts and changing case/model mix. Request metrics cover closed attempts only, not active requests. This is not a controlled concurrency comparison.',
-              'scaling_status': 'Aggregate target remains 32. A larger target requires coordinated changes to both pools and a separately recorded capacity amendment.'}
+              'scaling_status': 'The aggregate target and its effective time are recorded separately from the frozen case and scoring manifests. Larger targets require coordinated pool changes.'}
     output = ROOT / 'reports/api-multimodel-20260912/four-frameworks/capacity_report.json'
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, indent=2) + '\n')

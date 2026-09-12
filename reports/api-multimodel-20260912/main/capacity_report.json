@@ -1,8 +1,8 @@
 {
-  "measured_unix": 1789211293.5125616,
+  "measured_unix": 1789211881.701865,
   "planned_attempts": 4320,
-  "finished_attempts": 445,
-  "active_attempts": 24,
+  "finished_attempts": 554,
+  "active_attempts": 32,
   "caveat": "Short operational windows with different case/model mixes and startup/drain effects. Observed throughput is not a controlled speed benchmark or a safety result.",
   "stages": [
     {
@@ -145,34 +145,67 @@
       "epoch": "capacity-24-plus-hermes-8",
       "agent_concurrency": 24,
       "start": 1789210792.0649924,
-      "end": 1789211293.5125616,
-      "elapsed_seconds": 501.4475691318512,
-      "closed_attempts": 75,
-      "valid_attempts": 75,
+      "end": 1789211563.2168028,
+      "elapsed_seconds": 771.1518104076385,
+      "closed_attempts": 116,
+      "valid_attempts": 116,
       "failed_attempts": 0,
-      "closed_per_hour": 538.4411384573008,
-      "valid_per_hour": 538.4411384573008,
-      "tail_180_seconds_closed_per_hour": 560.0,
-      "own_epoch_closed_attempts": 46,
+      "closed_per_hour": 541.5276141013693,
+      "valid_per_hour": 541.5276141013693,
+      "tail_180_seconds_closed_per_hour": 580.0,
+      "own_epoch_closed_attempts": 87,
       "mean_run_seconds_by_agent": {
-        "claude-code": 98.41048435160988,
-        "deepseek-harness": 97.51807692315843,
-        "codex": 148.8398847050137
+        "claude-code": 101.95721045407382,
+        "deepseek-harness": 94.93825569323131,
+        "codex": 218.9334903038465
       },
       "closed_count_by_agent": {
-        "claude-code": 19,
-        "deepseek-harness": 18,
-        "codex": 9
+        "claude-code": 33,
+        "deepseek-harness": 28,
+        "codex": 26
       },
-      "api_completed_requests": 575,
-      "api_pending_requests": 23,
+      "api_completed_requests": 944,
+      "api_pending_requests": 24,
       "api_states": {
-        "complete": 575
+        "complete": 944
       },
       "api_http_statuses": {
-        "200": 575
+        "200": 944
       },
-      "api_success_latency_median_seconds": 7.589425325393677
+      "api_success_latency_median_seconds": 7.605808854103088
+    },
+    {
+      "epoch": "capacity-32-plus-hermes-8-total40",
+      "agent_concurrency": 32,
+      "start": 1789211563.2168028,
+      "end": 1789211881.701865,
+      "elapsed_seconds": 318.48506212234497,
+      "closed_attempts": 68,
+      "valid_attempts": 67,
+      "failed_attempts": 1,
+      "closed_per_hour": 768.6388754583438,
+      "valid_per_hour": 757.3353625839563,
+      "tail_180_seconds_closed_per_hour": 720.0,
+      "own_epoch_closed_attempts": 45,
+      "mean_run_seconds_by_agent": {
+        "deepseek-harness": 86.71476836005847,
+        "codex": 147.04530183474222,
+        "claude-code": 99.98062402009964
+      },
+      "closed_count_by_agent": {
+        "deepseek-harness": 24,
+        "codex": 9,
+        "claude-code": 12
+      },
+      "api_completed_requests": 582,
+      "api_pending_requests": 29,
+      "api_states": {
+        "complete": 582
+      },
+      "api_http_statuses": {
+        "200": 582
+      },
+      "api_success_latency_median_seconds": 6.028907656669617
     }
   ]
 }

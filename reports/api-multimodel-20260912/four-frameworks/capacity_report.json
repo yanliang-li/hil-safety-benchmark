@@ -1,38 +1,39 @@
 {
-  "sampled_unix": 1789211295.5761409,
-  "aggregate_agent_limit": 32,
-  "active_agent_containers": 31,
-  "memory_bytes_including_relay": 4883323289.6,
-  "cpu_cores_including_relay": 1.0882,
-  "host_available_memory_bytes": 166855233536,
+  "sampled_unix": 1789211884.1870563,
+  "aggregate_agent_limit": 40,
+  "capacity_epoch": "four-frameworks-40",
+  "active_agent_containers": 40,
+  "memory_bytes_including_relay": 6484393984.0,
+  "cpu_cores_including_relay": 2.4753,
+  "host_available_memory_bytes": 165067649024,
   "host_total_memory_bytes": 270041440256,
-  "host_load_1m": 8.271484375,
+  "host_load_1m": 9.75390625,
   "logical_cpus": 152,
-  "window_seconds": 369.78083896636963,
-  "recent_closed_attempts": 74,
-  "recent_valid_attempts": 74,
-  "recent_failed_attempts": 0,
-  "closed_attempts_per_hour": 720.4267282876391,
-  "valid_attempts_per_hour": 720.4267282876391,
+  "window_seconds": 105.02942538261414,
+  "recent_closed_attempts": 24,
+  "recent_valid_attempts": 23,
+  "recent_failed_attempts": 1,
+  "closed_attempts_per_hour": 822.6266085456664,
+  "valid_attempts_per_hour": 788.3504998562637,
   "recent_oom_kills": 0,
   "http_status_counts_closed_attempt_requests": {
-    "200": 566
+    "200": 101
   },
-  "transport_errors_closed_attempt_requests": 2,
+  "transport_errors_closed_attempt_requests": 0,
   "cohorts": {
     "main": {
       "planned": 4320,
-      "closed": 446,
-      "valid": 433,
-      "active": 24
+      "closed": 554,
+      "valid": 540,
+      "active": 32
     },
     "hermes": {
       "planned": 1440,
-      "closed": 14,
-      "valid": 14,
+      "closed": 30,
+      "valid": 30,
       "active": 8
     }
   },
   "caveat": "Single resource sample; trailing window includes carryover attempts and changing case/model mix. Request metrics cover closed attempts only, not active requests. This is not a controlled concurrency comparison.",
-  "scaling_status": "Aggregate target remains 32. A larger target requires coordinated changes to both pools and a separately recorded capacity amendment."
+  "scaling_status": "The aggregate target and its effective time are recorded separately from the frozen case and scoring manifests. Larger targets require coordinated pool changes."
 }

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "recorded_unix": 1789211561.358535,
+  "reason": "Owner requested starting with 32 parallel agents and checking whether further acceleration is feasible. A ten-minute 32-agent window had no failed attempts or OOM kills and ample spare server memory. Trial 40 aggregate agents while retaining all case and per-attempt settings.",
+  "authorized_aggregate_targets": [
+    32,
+    40
+  ],
+  "initial_allocation": {
+    "main": 24,
+    "hermes": 8
+  },
+  "trial_allocation": {
+    "main": 32,
+    "hermes": 8
+  },
+  "original_plan_sha256": "06c86ec4a948089bff38c80745a8c3f4542ba422c53263f72639e73f2310acb2",
+  "hermes_plan_sha256": "a381704bc69ed3c3c60ff1e18d6f8efc6734ae39c2c04c977f4013ccf65101e9",
+  "baseline_sha256": "6ffc78597556544c32e9d5157360d734d34949bf56918756f31436a05c4a7f31",
+  "source_sha256": {
+    "scripts/schedule_hermes_capacity.py": "49155fc60db6a3c500e64f94a3aae4c9c943024a93e227f24270b1d9d089ac61"
+  },
+  "per_attempt_changes": false,
+  "gateway_inflight_limit_unchanged": 40,
+  "safety_reserves": {
+    "available_host_memory_gib": 64,
+    "free_disk_gib": 30
+  },
+  "resumption": "Original Hermes scheduler drains already-started attempts before replacement; completed statuses and original run IDs retained. No active attempt is interrupted or retried.",
+  "interpretation": "Operational throughput comparison across calendar windows, not randomized; changing model/case mix and provider load confound observed speedup. Trial may be reverted to aggregate32 if throughput or reliability worsens."
+}

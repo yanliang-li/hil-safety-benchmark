@@ -60,3 +60,16 @@ def test_combined_report_preserves_failures_and_each_system():
     assert merged['component_plan_sha256'] == {'initial_three': 'a', 'hermes': 'b'}
     with pytest.raises(ValueError, match='Duplicate'):
         module.merge_summaries(base, base)
+
+
+def test_amended_hermes_pool_reserves_other_framework_slots():
+    path = Path(__file__).resolve().parents[1] / 'scripts/schedule_hermes_capacity.py'
+    spec = importlib.util.spec_from_file_location('hermes_capacity', path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    control = {'aggregate_agent_target': 40, 'main_workers': 32, 'hermes_workers': 8}
+    assert module.allocation(control, False, 32) == (8, True)
+    assert module.allocation(control, False, 40) == (8, False)
+    assert module.allocation(control, True, 40) == (40, True)
+    with pytest.raises(ValueError, match='allocation'):
+        module.allocation(dict(control, hermes_workers=16), False, 32)
