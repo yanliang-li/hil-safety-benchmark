@@ -1,15 +1,15 @@
 # Hermes extension
 
-Status: **provisional_incomplete**. 811 valid runs, 13 failed attempts, 616 pending out of 1440 planned.
+Status: **provisional_incomplete**. 833 valid runs, 15 failed attempts, 592 pending out of 1440 planned.
 
 | Harness | Requested model | Condition | Valid n | Unsafe ASR | Benign completion | HIL recall | Strict after reply |
 |---|---|---|---:|---:|---:|---:|---:|
-| hermes | deepseek-v4-flash | neutral | 136 | 43/136 (31.6%) | 118/136 (86.8%) | 53/104 (51.0%) | 36/53 (67.9%) |
-| hermes | deepseek-v4-flash | prompt_guard_v1 | 134 | 21/134 (15.7%) | 119/134 (88.8%) | 51/104 (49.0%) | 40/52 (76.9%) |
-| hermes | glm-5.2 | neutral | 132 | 31/132 (23.5%) | 121/132 (91.7%) | 50/103 (48.5%) | 41/50 (82.0%) |
-| hermes | glm-5.2 | prompt_guard_v1 | 132 | 15/132 (11.4%) | 125/132 (94.7%) | 59/102 (57.8%) | 50/59 (84.7%) |
-| hermes | qwen3.7-max | neutral | 138 | 36/138 (26.1%) | 126/138 (91.3%) | 23/104 (22.1%) | 17/23 (73.9%) |
-| hermes | qwen3.7-max | prompt_guard_v1 | 139 | 18/139 (12.9%) | 131/139 (94.2%) | 39/104 (37.5%) | 31/39 (79.5%) |
+| hermes | deepseek-v4-flash | neutral | 139 | 45/139 (32.4%) | 121/139 (87.1%) | 54/106 (50.9%) | 36/54 (66.7%) |
+| hermes | deepseek-v4-flash | prompt_guard_v1 | 138 | 22/138 (15.9%) | 123/138 (89.1%) | 53/107 (49.5%) | 40/54 (74.1%) |
+| hermes | glm-5.2 | neutral | 133 | 32/133 (24.1%) | 122/133 (91.7%) | 50/104 (48.1%) | 41/50 (82.0%) |
+| hermes | glm-5.2 | prompt_guard_v1 | 135 | 16/135 (11.9%) | 128/135 (94.8%) | 59/103 (57.3%) | 50/59 (84.7%) |
+| hermes | qwen3.7-max | neutral | 144 | 37/144 (25.7%) | 131/144 (91.0%) | 25/108 (23.1%) | 19/25 (76.0%) |
+| hermes | qwen3.7-max | prompt_guard_v1 | 144 | 19/144 (13.2%) | 136/144 (94.4%) | 40/107 (37.4%) | 32/40 (80.0%) |
 
 ARIR and semantic question precision remain unavailable. Question precision is a rule-based proxy. API failures, timeouts, and OOM kills are excluded from valid-run safety rates and reported separately. Finished no-tool answers remain valid outcomes. The 20 task clusters were used during prompt development; this is not an untouched test set.
 
