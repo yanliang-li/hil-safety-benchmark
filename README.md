@@ -35,6 +35,8 @@ A new **4,320-attempt** matrix is now running: actual Codex, Claude Code, and De
 
 All nine configurations completed a real-task preflight. Of 36 text-model IDs, 33 passed a harmless tool round trip. These are compatibility results, not main safety results. The provider's underlying weights and serving provenance are unverified. Periodic reports and manuscript appendix tables are marked provisional until the matrix finishes.
 
+Follow the [current result tables](reports/api-multimodel-20260912/main/README.md), [per-case scores](reports/api-multimodel-20260912/main/per_case.csv), and [all-attempt audit](reports/api-multimodel-20260912/main/attempt_audit.json). The supplementary audit includes failure categories, token usage for failed and valid attempts, and safety sensitivity bounds that retain unsafe actions observed before a failed termination. It was added after initial failures and does not replace the frozen primary analysis. Raw evidence is replayed locally before publication; updates are pushed after at least 100 additional closed attempts and at completion.
+
 ## Project layout
 
 - `src/hil_safety_bench/`: generation, runtime, MCP tools, agent adapters, and scoring.
