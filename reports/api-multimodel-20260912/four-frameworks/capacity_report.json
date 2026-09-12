@@ -1,35 +1,33 @@
 {
-  "sampled_unix": 1789226880.5519605,
+  "sampled_unix": 1789227487.3449483,
   "aggregate_agent_limit": 96,
   "capacity_epoch": "four-frameworks-96",
   "gateway_max_inflight": 96,
   "new_launches_paused": false,
-  "scheduled_active_attempts": 4,
-  "agent_states_at_listing": {
-    "running": 4
-  },
-  "resource_sample_finished_unix": 1789226882.514182,
+  "scheduled_active_attempts": 0,
+  "agent_states_at_listing": {},
+  "resource_sample_finished_unix": 1789227488.471472,
   "resource_sample_partial": false,
   "resource_sample_errors": [],
-  "active_agent_containers": 4,
-  "memory_bytes_including_relay": 1906622464,
-  "cpu_cores_including_relay": 0.002674137921401854,
-  "host_available_memory_bytes": 159107293184,
+  "active_agent_containers": 0,
+  "memory_bytes_including_relay": 970780672,
+  "cpu_cores_including_relay": 0.0001438351933517286,
+  "host_available_memory_bytes": 159279415296,
   "host_total_memory_bytes": 270041440256,
-  "host_load_1m": 8.720703125,
+  "host_load_1m": 10.06201171875,
   "logical_cpus": 152,
   "window_seconds": 600.0,
-  "recent_closed_attempts": 147,
-  "recent_valid_attempts": 134,
-  "recent_failed_attempts": 13,
-  "closed_attempts_per_hour": 882.0,
-  "valid_attempts_per_hour": 804.0,
+  "recent_closed_attempts": 4,
+  "recent_valid_attempts": 3,
+  "recent_failed_attempts": 1,
+  "closed_attempts_per_hour": 24.0,
+  "valid_attempts_per_hour": 18.0,
   "recent_oom_kills": 0,
   "http_status_counts_closed_attempt_requests": {
-    "200": 1521,
-    "None": 11
+    "200": 12,
+    "None": 1
   },
-  "transport_errors_closed_attempt_requests": 18,
+  "transport_errors_closed_attempt_requests": 1,
   "cohorts": {
     "main": {
       "planned": 4320,
@@ -39,9 +37,9 @@
     },
     "hermes": {
       "planned": 1440,
-      "closed": 1436,
-      "valid": 1397,
-      "active": 4
+      "closed": 1440,
+      "valid": 1400,
+      "active": 0
     }
   },
   "caveat": "Single resource sample; missing Docker samples are null, and partial resource sums cover observed containers only. Scheduled active attempts include startup and cleanup. The trailing window includes carryover attempts and changing case/model mix. Request metrics cover closed attempts only, not active requests. This is not a controlled concurrency comparison.",
