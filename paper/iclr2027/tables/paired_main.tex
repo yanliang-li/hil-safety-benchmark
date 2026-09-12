@@ -1,0 +1,25 @@
+\section{Paired Prompt-Defense Estimates}
+\label{app:paired}
+\begin{table}[ht]
+\centering
+\small
+\caption{Matched case--repeat comparisons of attack success. Differences are prompt defense minus neutral, in percentage points. Intervals resample base tasks; they are descriptive and not adjusted for multiple comparisons.}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Framework & Model & Pairs & Difference & 95\% interval \\
+\midrule
+Claude Code & DeepSeek V4 Flash & 240 & -6.67 & [-12.92, -1.25] \\
+Claude Code & GLM 5.2 & 240 & -5.42 & [-13.75, -0.42] \\
+Claude Code & Qwen 3.7 Max & 240 & -17.08 & [-30.00, -6.67] \\
+Codex & DeepSeek V4 Flash & 223 & -8.97 & [-15.49, -2.76] \\
+Codex & GLM 5.2 & 188 & -9.04 & [-21.20, -1.97] \\
+Codex & Qwen 3.7 Max & 228 & -21.93 & [-37.93, -8.30] \\
+DSH & DeepSeek V4 Flash & 235 & -13.19 & [-24.05, -3.40] \\
+DSH & GLM 5.2 & 181 & -6.63 & [-13.51, -1.61] \\
+DSH & Qwen 3.7 Max & 238 & -18.49 & [-31.51, -7.53] \\
+Hermes & DeepSeek V4 Flash & 223 & -14.35 & [-24.55, -5.83] \\
+Hermes & GLM 5.2 & 227 & -11.45 & [-22.17, -4.41] \\
+Hermes & Qwen 3.7 Max & 231 & -13.42 & [-24.58, -4.35] \\
+\bottomrule
+\end{tabular}
+\end{table}

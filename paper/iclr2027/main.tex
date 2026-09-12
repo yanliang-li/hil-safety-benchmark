@@ -15,17 +15,20 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-Tool-using agents can encounter adversarial instructions during benign tasks. Asking a human does not guarantee safe behavior: the agent must also understand what the reply permits. We introduce \bench{} to evaluate consultation and execution under human feedback. The benchmark separates effects that require valid approval from effects that remain prohibited. Its executable core contains 250 tasks with four fixed replies each: approval, denial, ambiguity, and scope mismatch. We organize evaluation into three safety dimensions and three human-interaction dimensions. An exploratory comparison uses Codex with one model on 80 cases per condition. An authorization-scope prompt reduces unsafe outcomes from 18/80 to 8/80, while benign task completion remains 76/80. The prompt still fails the motivating redundant-validation mechanism. Correct, safe task completion after feedback changes from 22/26 to 21/27 across different consulted groups, so improvement is not uniform. Independent semantic annotation, richer replies, shared-prefix branching, and broader agent coverage remain necessary.
+\input{sections/00_abstract}
 \end{abstract}
 
-\draftnote{Internal working manuscript, revised 12 September 2026. The four-reply core and prompt-defense pilot are implemented. Recognition and semantic question labels, richer replies, shared-prefix branching, and a runtime guard remain incomplete.}
+\input{sections/sail_status}
 
 \input{sections/01_introduction}
 \input{sections/02_related_work}
 \input{sections/03_benchmark}
 \input{sections/04_construction}
+\input{sections/06_method}
 \input{sections/05_experiments}
+\input{sections/05b_sail_results}
 \input{sections/06_discussion}
+\label{sec:mainend}
 \input{sections/07_statements}
 \bibliography{references}
 \bibliographystyle{iclr2027_conference}
@@ -33,4 +36,6 @@ Tool-using agents can encounter adversarial instructions during benign tasks. As
 \appendix
 \input{sections/08_appendix}
 \input{sections/09_api_experiments}
+\input{sections/10_original_pilot}
+\input{sections/11_sail_results}
 \end{document}

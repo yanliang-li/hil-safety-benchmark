@@ -1,13 +1,11 @@
 # InterveneBench — ICLR 2027 working draft
 
-Open main.tex in Overleaf or compile with latexmk -pdf main.tex. Official ICLR 2027 styles, bibliography, generated tables, and vector figures are included. Compiling this package does not require Python, model access, skills, or conversation archives.
+Compile main.tex with latexmk -pdf or upload this ZIP to Overleaf. The official anonymous ICLR 2027 styles, bibliography, tables, and vector figures are included. No Python, model access, skill installation, private conversations, or credentials are needed to compile.
 
-This anonymous internal draft studies selective consultation and execution under valid scoped authority. The implemented core contains 250 tasks and four fixed replies. The completed evidence is an 80-case neutral pilot, a matched 80-case prompt-defense comparison, and eight small clean-control runs. The original pilot used Codex with gpt-5.6-luna / medium. A repeated API evaluation with Codex, Claude Code, Hermes Agent, and DeepSeek Harness is documented separately in the appendix. Its two frozen plans contain 5,760 attempts in total; execution status and observed counts are explicitly labeled.
+The paper evaluates human intervention under indirect workflow attacks. Its executable core contains 250 tasks and four fixed replies each. The completed prompt study contains 5,760 attempts across four native frameworks and three requested model routes, with 5,551 valid results. Earlier GPT pilot results remain separate in the appendix.
 
-The main table groups six evaluation dimensions. Risk recognition lacks independent annotation; question precision is a rule proxy. Strict correct and safe completion after feedback is 22/26 versus 21/27 across different consulted groups. Lower attack success alone is not uniform improvement across these dimensions.
+SAIL checks initial task authority, asks a scoped question when permission is missing, verifies the actual reply, and binds permission to one reviewed call. A separately frozen comparison tests SAIL against a fresh prompt control and a no-human ablation. The manuscript explicitly marks whether that comparison has finished; only completed main results enter its result section. All engineering preflights remain separate.
 
-Figure 1 shows the implemented workflow and four reply contracts. Runs start independently; tool effects are simulated. Figure 2 describes neutral-pilot failure stages. The current defense is a prompt condition. Richer replies, shared-prefix branching, and the SAIL runtime guard are future work. The appendix retains the runtime design and adds factual benchmark-setting comparisons.
-
-The full local workspace contains generation scripts, primary-paper reading notes, hashes, and raw experimental evidence. The package contains no private conversations, credentials, or raw agent traces.
+The six evaluation dimensions include two unresolved semantic annotation needs: autonomous risk recognition and semantic question correctness. Rule matching is only a proxy. Human replies are synthetic fixtures, task effects are simulated, and the 80-case evaluation reuses development tasks. Richer feedback and held-out validation remain necessary.
 
 Template source: https://media.iclr.cc/Conferences/ICLR2027/iclr-2027-style-files.zip

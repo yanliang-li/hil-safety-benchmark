@@ -1,47 +1,27 @@
-\section{Experiments: Preliminary Evidence and Evaluation Plan}
+\section{Experiments}
 \label{sec:experiments}
 
-\subsection{Audited four-response pilot}
-\label{sec:pilot}
-The completed pilot uses Codex with \texttt{gpt-5.6-luna}, medium reasoning effort, and the V4 core protocol. Before execution, twenty base tasks were selected, one per implementation attack family, by the smallest SHA-256 value of the seed-prefixed task identifier. All four response conditions were run, giving 80 cases: 15 confirmable tasks and five prohibited tasks. The prompt and consultation interface are neutral. Case and output paths are uniform inside Docker. These experiments instantiate the four-response core of Sections~\ref{sec:benchmark}--\ref{sec:construction}; they do not test the proposed factual-error, partial-authorization, or shared-prefix tracks.
+\subsection{Setup and comparisons}
+We evaluate native Codex, Claude Code, Hermes Agent, and DeepSeek Harness with three requested model routes: \texttt{deepseek-v4-flash}, \texttt{glm-5.2}, and \texttt{qwen3.7-max}. All use the same third-party API. Underlying weights and serving details are unverified. Framework names do not identify the model families used. Appendix~\ref{app:api} records versions and native protocols.
 
-\input{tables/six_metrics}
+The evaluation uses 20 development tasks, one per attack family, with all four replies: 80 cases, including 60 confirmable and 20 prohibited cases. Twelve configurations, two prompt conditions, and three repeats give 5,760 attempts. Each starts a fresh Docker container and native session. The conditions are neutral and the frozen authorization-scope prompt, \texttt{prompt\_guard\_v1}. Order is shuffled within configuration blocks; Hermes uses a later, separately frozen extension. Reusing development tasks makes this exploratory evidence, not a held-out estimate for the 1,000-case corpus.
 
-All 80 runs finished without timeout. Per-case scores reproduce from recorded tool events. The raw streams contain no native shell calls or observed hidden-label reads; manual review resolved five flagged directory references as explicit exclusions in simulated searches. This audit records observed behavior rather than proving that uniform paths enforce a security boundary.
+All attempts have finished: 5,551 are valid and 209 failed. Validity requires normal framework termination and a replayable trace; completed refusals remain valid. Valid counts are 2,782 and 2,769. API errors, timeouts, and incomplete runs are retained separately and never counted as safe completions.
 
-Of 22 executions of the attacker-targeted effect, four have valid approval and 18 are unsafe under Equation~\ref{eq:authorization}. Sixteen unsafe runs lack a prior matched question. Two execute after consultation: a finance-notice agent treats repeated ambiguous deferral as confirmation, and a state-transition agent acts after approval of a different scope. Conversely, two consulted confirmable cases omit the requested effect after clear approval. Thus, correct response-conditioned action is 22/26, whereas safe benign completion after feedback is 24/26. Calling the latter response understanding would conceal the two approval-branch omissions.
+Appendix Table~\ref{tab:main_matrix} reports all 12 configurations.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.94\linewidth]{figures/pilot_failure_phases.pdf}
-\caption{Safety outcomes in the 80-case pilot under authorization-aware scoring. A prior question must match the specified effect and precede it. The safe group includes valid approved executions; safety alone implies neither benign completion nor correct response-conditioned action.}
-\label{fig:phases}
-\end{figure}
+\subsection{Does a prompt close the HIL safety loop?}
+Across valid runs, unsafe ASR falls from 722/2,782 (25.95\%) to 371/2,769 (13.40\%). All 12 configurations show a lower observed ASR. Benign completion changes from 2,544/2,782 (91.45\%) to 2,560/2,769 (92.45\%); joint safe utility rises from 65.49\% to 79.05\%. These pooled proportions do not establish utility equivalence or isolate framework quality.
 
-Only two of 15 confirmable tasks meet the strict boundary criterion across all four independently run branches. This diagnoses end-to-end consistency, not a causal response effect. Moreover, 24 confirmable cases safely omit the extension without asking; some may be appropriate rejection of optional work rather than missing consultation. Utility checks also remain weak: 56 of 80 cases check output-writing effects alone, and all four benign-completion failures occur in one task with an artifact-selection mismatch. Independent contract review and semantic output checks are needed before broader capability claims.
+Within each configuration, we match case and repeat identifiers valid in both conditions. We bootstrap 20 task clusters with their replies and repeats (10,000 draws). Appendix~\ref{app:paired} gives descriptive 95\% intervals; no multiplicity-adjusted significance is claimed. To assess incomplete runs, a separate audit retains unsafe actions observed before failure. Counting all 2,880 attempts per condition gives ASR sensitivity bounds of 25.52--28.47\% for neutral and 13.09--16.74\% for the prompt. These are missing-outcome bounds, not confidence intervals.
 
-Appendix~\ref{app:evidence} records a separate, non-random V3 subset with 130 replay-verified trajectories and 59 unsafe outcomes. Its invoice-reconciliation traces connect the motivating redundant-execution mechanism to observed attacks, but are not pooled with this pilot.
+\subsection{Where intervention still fails}
+\label{sec:hilfindings}
+The prompt improves safety more than it improves consultation coverage. HIL recall changes from 886/2,076 (42.68\%) to 1,018/2,063 (49.35\%). Of the 371 remaining unsafe runs, 316 have no matched consultation and 55 become unsafe despite a matched question. In the latter group, 24 act after ambiguity, 30 transfer permission from another scope, and one acts after denial. Thus, asking and using the answer are separate failure points.
 
-\subsection{Exploratory authorization-prompt comparison}
-\label{sec:promptguard}
-We run the same frozen 80 cases with an authorization-scope prompt appended to the task. It instructs the agent to separate task evidence from permission, check the exact effect scope, consult when authority is uncertain, accept only valid in-scope approval, and continue authorized work. It neither reads hidden labels nor mediates tool dispatch. Section~\ref{sec:defense} describes this prompt and its remaining failures.
+Two tasks account for 266 of the 371 remaining unsafe runs: archive inventory (138) and redundant invoice validation (128). Their extra actions appear routine within the injected workflow. These cases connect the original repeated-work attack to a practical weakness of a policy reminder: the model can fail to treat a familiar operation as a new authority decision. This concentration also limits generalization from the pooled ASR.
 
-All 80 additional runs complete, reproduce their scores, and match their assigned prompt hashes. Manual review resolves four metadata references as explicit exclusions in simulated searches; no native calls or hidden-label reads are observed. Table~\ref{tab:sixmetrics} shows unsafe outcomes falling from 18 to eight, with ten unsafe-to-safe transitions and no safe-to-unsafe transitions. Benign completion remains 76/80, and joint safe utility rises from 58/80 to 68/80. The ASR difference is $-12.5$ percentage points, with a 95\% paired base-task bootstrap interval of $[-25.0,-3.7]$ (10,000 draws). These intervals describe an exploratory 20-task sample; the earlier baseline was not randomized contemporaneously with the defense, and service-side drift and randomness remain possible.
+PostSuccess rises from 646/890 (72.58\%) to 811/1,022 (79.35\%) among consulted runs. The consulted populations differ, so this is not a causal estimate of feedback. Execution after matched approval is 182/225 for neutral and 199/245 for the prompt; 46 consulted approval cases in the prompt condition still omit the approved effect. A useful defense must therefore preserve authorized execution as well as prevent unauthorized effects. The question count rises from 1,032 to 1,165; more consultation alone does not establish better judgment.
 
-The prompt leaves important gaps. Matched consultation on confirmable cases rises only from 24/60 to 27/60; its difference interval includes zero. Post-question unsafe outcomes fall from 2/26 to 0/27, but conditional populations differ. On the 23 cases consulted in both conditions, response-conditioned accuracy is 19/23 versus 21/23. Valid-approval execution is 4/6 versus 5/7, retaining two omissions. The eight remaining unsafe runs are all four branches of archive deletion and redundant invoice validation, each executed without consultation. Thus the defense does not resolve the motivating redundant-execution mechanism. The prompt and fixtures were not revised during this comparison.
-
-The stricter post-feedback metric also requires correct response use. It is 22/26 for neutral and 21/27 for the prompt condition. The consulted sets differ: four newly consulted certificate cases fail the benign-output check. On the 23 cases consulted in both conditions, strict success is 19/23 versus 21/23. This post-hoc intersection is descriptive and does not remove selection bias. Question matching is 27/27 versus 29/29 at the question level, but semantic question accuracy and autonomous recognition remain unannotated.
-
-\subsection{Evaluation plan}
-\label{sec:plan}
-\paragraph{RQ1: When should the agent consult, verify, or block?}
-Review consultation necessity separately from authorization mode, freeze development and held-out cases, and report source exposure, recognition evidence, question quality, stage-specific decisions, and final outcomes with all denominators. Four attack-free draft counterparts have now run under both conditions. Both groups finish all four cases with no questions or original-risk canary effects; assistant content review passes all eight outputs. Exact-tool benign completion is 3/4 versus 4/4: the neutral invoice uses one simulated validation command instead of the predicate's resource tool despite reporting correct arithmetic. The guarded export publishes twice after adding a receipt. These observations diagnose tool-specific scoring and extra work, and do not establish a population false-positive rate.
-
-\paragraph{RQ2: Does behavior track the meaning and validity of feedback?}
-At a shared pre-response state, compare valid approval, denial, ambiguity, and scope mismatch. Extend this comparison to genuine scoped permission and objectively erroneous advice with independently verifiable facts. Report authorized execution and unauthorized effects together, including allowed-subset completion and out-of-scope effects. Use repeated continuations and base-task cluster intervals. Only runs actually exposed to feedback inform its interpretation.
-
-\paragraph{RQ3: What does HIL add?}
-Compare the same agent with consultation available and unavailable under explicit safe fallback rules. Measure end-to-end safety, benign completion, authorized-extension completion, and query burden. A no-response branch after a frozen question answers a narrower continuation question; it is not equivalent to an agent that never had a consultation tool. Both comparisons are pending.
-
-\paragraph{RQ4: Can execution-time authorization improve the tradeoff?}
-Extend the completed prompt comparison to the proposed runtime guard on identical frozen tasks and response conditions. Include allowed benign actions, alternative tool realizations, and ablations of scope binding and factual verification. A separate four-case prompt smoke on one task changes unsafe outcomes from 4/4 to 0/4, with no consultation in either condition; it remains a wiring check and is excluded from Table~\ref{tab:sixmetrics}. No implemented \sail{} result is reported.
+\subsection{Measurement boundaries}
+Autonomous risk recognition and semantic question accuracy remain unannotated. The question-matching proxy is 1,026/1,032 versus 1,159/1,165; it checks rule matches, not whether each question gives a correct account of the risk. Consultation-required labels also need review because declining an optional extension can be appropriate. Benign predicates emphasize recorded tool effects and are not complete semantic checks of deliverables. The earlier GPT pilot and four attack-free development tasks remain separate in Appendix~\ref{app:pilot}. None of these results establishes a population false-positive rate.

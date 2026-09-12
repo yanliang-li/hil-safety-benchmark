@@ -16,7 +16,8 @@ Clean controls & Four draft tasks in two conditions; eight trajectories & Small 
 Erroneous / partial-approval tracks & Original research aims and protocol specification & New fixtures, predicates, and evaluation pending.\\
 Shared-prefix branching & Controlled comparison specified & Runner checkpoint/resume and experiments pending.\\
 3,000 cases / eight configurations & Old manuscript text without matching artifacts & Unverified; not a result of this draft.\\
-Runtime guard & Design specification; separate prompt comparison exists & No completed execution-layer defense or efficacy claim.\\
+Four-framework matrix & 5,760 attempts; 5,551 replayed valid runs & Completed repeated prompt comparison on the same development tasks.\\
+Runtime guard & Implemented SAIL controller; separate frozen comparison & Main method efficacy remains pending; preflights are development evidence.\\
 \bottomrule
 \end{tabularx}
 \caption{Evidence inventory. Available core components are distinguished from proposed extensions; versions are not pooled.}
@@ -93,16 +94,16 @@ For partial authorization, separately measure completion of permitted effects an
 \toprule
 Comparison & Controlled variables & Status\\
 \midrule
-Neutral agents & Frozen tasks, tools, reply fixtures, resource limits & 80-case GPT pilot complete; full and other-model runs pending.\\
+Neutral agents & Frozen tasks, tools, reply fixtures, resource limits & GPT pilot and 5,760-attempt four-framework prompt study complete.\\
 Four core replies & Same pre-response state, question, tool state & Independent-start pilot complete; shared-prefix runs pending.\\
 Erroneous / partial replies & Truth, source authority, permitted subset & New fixtures and effect predicates pending.\\
 HIL available vs. unavailable & Same task contracts and safe fallbacks & Experiment pending; not inferred from natural ask/no-ask groups.\\
 Attack vs. benign control & Legitimate goal and required normal actions & Four drafts, eight runs complete; independent review pending.\\
-Prompt-only vs. runtime guard & Agent, cases, response conditions & 80-case prompt comparison complete; runtime guard pending.\\
+Prompt-only vs. runtime guard & Agent, cases, response conditions & Prompt studies complete; implemented SAIL comparison pending.\\
 Surface-style robustness & Reply meaning fixed, wording varied & Existing styles; controlled repeated evaluation pending.\\
 \bottomrule
 \end{tabularx}
-\caption{Completed pilot evidence and planned comparisons. None supplies an implemented runtime-defense result.}
+\caption{Completed evidence and remaining comparisons. Method evaluation status is separate from implementation.}
 \end{table}
 
 Freeze generation, semantic annotations, and held-out test cases before examining their outcomes. The existing pilot is development evidence and cannot become an unseen test after its failures guide revisions. Record run completion and infrastructure failures separately from safety scores. Report proposed versus admitted effects under a guard, and distinguish forced consultation from spontaneous questions. Replaying an identical pre-response state still needs repeated continuations to characterize model randomness.
@@ -117,7 +118,7 @@ The two safe approval-branch omissions in the new pilot occur in the schema-migr
 
 \section{Future Runtime Guard Design}
 \label{app:guarddesign}
-We retain the working name \sail{} for a proposed guard between agent proposals and tool dispatch. Its purpose is to bind permission to effects while preserving legitimate work. The following is a design specification; the recovered runtime does not implement it.
+This appendix preserves the broader design specification that motivated \sail{}. Section~\ref{sec:defense} implements task-only scope inference, conditional consultation, reply review, and one-use exact-call binding. The following general effect normalization, factual verification, partial-approval, and expiry requirements extend beyond that implementation.
 
 \paragraph{Authority and effect representation.}
 Initialize an authority ledger from the user's task and explicitly trusted deployment policy. Workflow artifacts supply data but cannot expand that authority. Normalize each consequential call into an effect signature containing action class, object, destination or principal, and scope attributes such as count, privilege, persistence, and purpose. Map uploads and messages to a common disclosure effect when they transfer the same material. This requires tool adapters and validation; tool-name matching alone does not provide semantic equivalence.
@@ -137,3 +138,6 @@ The guard may use only the user request, deployment constraints, observed eviden
 
 \section{Additional Pilot Metrics}
 \input{tables/defense_results}
+
+\section{Construction Taxonomy}
+\input{tables/taxonomy}

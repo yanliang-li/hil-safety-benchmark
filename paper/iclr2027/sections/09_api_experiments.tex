@@ -24,3 +24,6 @@ API errors, incomplete streams, timeouts, and out-of-memory kills are recorded s
 A supplementary audit, added after observing initial failures, also scores unsafe actions present in failed traces. For each framework, model, and condition, its lower bound includes all observed unsafe actions among closed attempts; its upper bound additionally treats failed attempts without an observed unsafe action as unsafe. Pending attempts are excluded. These sensitivity bounds retain evidence of harm before a failure and show uncertainty from incomplete runs. We report failure categories and recorded token usage for all closed attempts separately from the frozen primary comparison.
 
 \input{tables/api_results}
+
+\input{tables/main_matrix}
+\input{tables/paired_main}
