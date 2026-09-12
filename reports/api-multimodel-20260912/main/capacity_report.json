@@ -1,8 +1,8 @@
 {
-  "measured_unix": 1789210269.707885,
+  "measured_unix": 1789210835.2099586,
   "planned_attempts": 4320,
-  "finished_attempts": 263,
-  "active_attempts": 29,
+  "finished_attempts": 375,
+  "active_attempts": 24,
   "caveat": "Short operational windows with different case/model mixes and startup/drain effects. Observed throughput is not a controlled speed benchmark or a safety result.",
   "stages": [
     {
@@ -111,30 +111,60 @@
       "epoch": "capacity-29-hermes-preflight-3",
       "agent_concurrency": 29,
       "start": 1789210147.7883577,
-      "end": 1789210269.707885,
-      "elapsed_seconds": 121.91952729225159,
-      "closed_attempts": 17,
-      "valid_attempts": 17,
-      "failed_attempts": 0,
-      "closed_per_hour": 501.9704501748792,
-      "valid_per_hour": 501.9704501748792,
-      "tail_180_seconds_closed_per_hour": 501.9704501748792,
-      "own_epoch_closed_attempts": 1,
+      "end": 1789210792.0649924,
+      "elapsed_seconds": 644.2766346931458,
+      "closed_attempts": 124,
+      "valid_attempts": 121,
+      "failed_attempts": 3,
+      "closed_per_hour": 692.8700746886625,
+      "valid_per_hour": 676.107089010711,
+      "tail_180_seconds_closed_per_hour": 660.0,
+      "own_epoch_closed_attempts": 93,
       "mean_run_seconds_by_agent": {
-        "claude-code": 61.22806167602539
+        "claude-code": 106.01989572299154,
+        "deepseek-harness": 93.57293890504276,
+        "codex": 164.18003837267557
       },
       "closed_count_by_agent": {
-        "claude-code": 1
+        "claude-code": 38,
+        "deepseek-harness": 34,
+        "codex": 21
       },
-      "api_completed_requests": 114,
-      "api_pending_requests": 25,
+      "api_completed_requests": 984,
+      "api_pending_requests": 29,
       "api_states": {
-        "complete": 114
+        "complete": 983,
+        "transport_error": 1
       },
       "api_http_statuses": {
-        "200": 114
+        "200": 984
       },
-      "api_success_latency_median_seconds": 9.790924191474915
+      "api_success_latency_median_seconds": 6.997864007949829
+    },
+    {
+      "epoch": "capacity-24-plus-hermes-8",
+      "agent_concurrency": 24,
+      "start": 1789210792.0649924,
+      "end": 1789210835.2099586,
+      "elapsed_seconds": 43.14496612548828,
+      "closed_attempts": 5,
+      "valid_attempts": 5,
+      "failed_attempts": 0,
+      "closed_per_hour": 417.1981488558021,
+      "valid_per_hour": 417.1981488558021,
+      "tail_180_seconds_closed_per_hour": 417.1981488558021,
+      "own_epoch_closed_attempts": 0,
+      "mean_run_seconds_by_agent": {},
+      "closed_count_by_agent": {},
+      "api_completed_requests": 11,
+      "api_pending_requests": 20,
+      "api_states": {
+        "complete": 11
+      },
+      "api_http_statuses": {
+        "200": 11
+      },
+      "api_success_latency_median_seconds": 7.485742807388306
     }
   ]
 }
