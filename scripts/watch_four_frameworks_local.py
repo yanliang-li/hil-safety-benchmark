@@ -124,6 +124,11 @@ def main():
                 (ROOT / 'reports/api-multimodel-20260912/main/capacity_report.json').write_text(json.dumps(capacity, indent=2) + '\n')
                 resources = common.remote(prefix + "import subprocess\np=subprocess.run(['python3','scripts/report_four_framework_capacity.py'],cwd=root,capture_output=True,text=True,check=True,timeout=180)\nprint(p.stdout)\n")
                 (ROOT / 'reports/api-multimodel-20260912/four-frameworks/capacity_report.json').write_text(json.dumps(resources, indent=2) + '\n')
+                observations = common.remote(prefix + "import re\nfolder=root/'reports/api-multimodel-20260912/four-frameworks'\nallowed=r'capacity-ramp-(?:64-baseline|64-reference|96-window[12]|128-window[12]|handoff|decisions|old-relay-cleanup)\\.json'\nprint(json.dumps({p.name:json.loads(p.read_text()) for p in folder.glob('capacity-ramp-*.json') if re.fullmatch(allowed,p.name)}))\n")
+                for name, observation in observations.items():
+                    if not re.fullmatch(r'capacity-ramp-(?:64-baseline|64-reference|96-window[12]|128-window[12]|handoff|decisions|old-relay-cleanup)\.json', name):
+                        raise ValueError('Unexpected operational report name')
+                    (ROOT / 'reports/api-multimodel-20260912/four-frameworks' / name).write_text(json.dumps(observation, indent=2) + '\n')
                 common.build_paper()
                 copy_public()
                 if state['last_published_count'] < 0 or count - state['last_published_count'] >= 100 or complete:

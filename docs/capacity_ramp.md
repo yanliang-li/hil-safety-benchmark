@@ -6,7 +6,7 @@ The [64-agent reference](../reports/api-multimodel-20260912/four-frameworks/capa
 
 ## Handoff and live limits
 
-The old controller first stops new launches and lets registered attempts and their relay requests finish. Its scheduler locks are then released. The new `scripts/schedule_four_frameworks_ramp.py` verifies frozen source and case hashes, image IDs, runner snapshots, the amendment, and existing attempt identities before resuming only never-started IDs.
+The old controller stopped new launches and preserved all 1,554 closed attempts before releasing its scheduler locks. No old agent container remained. One old relay request outlived its client attempt. The [recorded handoff exception](../experiments/api-multimodel-20260912/capacity-ramp-handoff-exception-v1.json) retains that relay without new callers while 96 new agents start. During overlap, upstream activity may include the residual request in addition to the new relay limit. The old relay is removed after its pending evidence finalizes. The new `scripts/schedule_four_frameworks_ramp.py` verifies frozen source and case hashes, image IDs, runner snapshots, the amendment, and existing attempt identities before resuming only never-started IDs.
 
 One thread pool has a maximum of 128 unfinished attempts. The initial 96-agent allocation gives 72 slots to the original Codex/Claude Code/DeepSeek Harness plan and 24 to Hermes. At 128, the shares become 96 and 32. FIFO order remains unchanged within each plan. Spare slots serve the other plan when one queue is exhausted.
 

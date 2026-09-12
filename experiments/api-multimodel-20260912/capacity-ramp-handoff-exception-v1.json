@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "recorded_unix": 1789216694.0348258,
+  "amendment_sha256": "0ed3a91f99076e487b33ec438c6601ad5179e9470391412e665787841b4d20ff",
+  "reason": "All1,554 agent attempts have closed and all agent containers are gone, but one old relay request remains pending after its client attempt ended. Retaining that old relay lets its raw evidence finalize without blocking new work.",
+  "exception": "Proceed after all registered agents close and old scheduler locks are released, even if the recorded old relay request is still pending. Keep the old relay alive without new callers until it finalizes, then remove only that relay. Do not cancel, overwrite, or retry any attempt or gateway evidence.",
+  "agent_concurrency_limit": 96,
+  "new_relay_admission_limit": 96,
+  "old_relay_straggler_requests_at_decision": 1,
+  "caveat": "During overlap, total upstream requests can include a residual old request in addition to the new relay admission limit. The warmup and operational timestamps must be retained; this is not a controlled capacity comparison."
+}

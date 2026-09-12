@@ -1,8 +1,8 @@
 {
-  "measured_unix": 1789216309.6587622,
+  "measured_unix": 1789216905.6160488,
   "planned_attempts": 4320,
-  "finished_attempts": 1318,
-  "active_attempts": 2,
+  "finished_attempts": 1364,
+  "active_attempts": 72,
   "caveat": "Short operational windows with different case/model mixes and startup/drain effects. Observed throughput is not a controlled speed benchmark or a safety result.",
   "stages": [
     {
@@ -247,36 +247,69 @@
       "epoch": "four-frameworks-64",
       "agent_concurrency": 48,
       "start": 1789214027.9152317,
-      "end": 1789216309.6587622,
-      "elapsed_seconds": 2281.743530511856,
-      "closed_attempts": 502,
+      "end": 1789216701.544928,
+      "elapsed_seconds": 2673.629696369171,
+      "closed_attempts": 504,
       "valid_attempts": 479,
-      "failed_attempts": 23,
-      "closed_per_hour": 792.0259116915724,
-      "valid_per_hour": 755.7378719128749,
-      "tail_180_seconds_closed_per_hour": 60.0,
-      "own_epoch_closed_attempts": 502,
+      "failed_attempts": 25,
+      "closed_per_hour": 678.6280098788483,
+      "valid_per_hour": 644.9659062142229,
+      "tail_180_seconds_closed_per_hour": 0.0,
+      "own_epoch_closed_attempts": 504,
       "mean_run_seconds_by_agent": {
-        "claude-code": 122.01823134687211,
         "deepseek-harness": 125.22831562923831,
-        "codex": 255.85414376099905
+        "claude-code": 122.01823134687211,
+        "codex": 264.44479267063895
       },
       "closed_count_by_agent": {
-        "claude-code": 180,
         "deepseek-harness": 172,
-        "codex": 150
+        "claude-code": 180,
+        "codex": 152
       },
-      "api_completed_requests": 4065,
-      "api_pending_requests": 3,
+      "api_completed_requests": 4069,
+      "api_pending_requests": 1,
       "api_states": {
-        "complete": 4061,
-        "transport_error": 4
+        "complete": 4063,
+        "transport_error": 6
       },
       "api_http_statuses": {
-        "200": 4063,
-        "None": 2
+        "200": 4066,
+        "None": 3
       },
-      "api_success_latency_median_seconds": 6.233806133270264
+      "api_success_latency_median_seconds": 6.247681140899658
+    },
+    {
+      "epoch": "four-frameworks-96",
+      "agent_concurrency": 72,
+      "start": 1789216701.544928,
+      "end": 1789216905.6160488,
+      "elapsed_seconds": 204.07112073898315,
+      "closed_attempts": 44,
+      "valid_attempts": 44,
+      "failed_attempts": 0,
+      "closed_per_hour": 776.1999808027774,
+      "valid_per_hour": 776.1999808027774,
+      "tail_180_seconds_closed_per_hour": 880.0,
+      "own_epoch_closed_attempts": 44,
+      "mean_run_seconds_by_agent": {
+        "claude-code": 128.36653575897216,
+        "deepseek-harness": 109.37358870506287,
+        "codex": 152.0741503408977
+      },
+      "closed_count_by_agent": {
+        "claude-code": 20,
+        "deepseek-harness": 10,
+        "codex": 14
+      },
+      "api_completed_requests": 461,
+      "api_pending_requests": 22,
+      "api_states": {
+        "complete": 461
+      },
+      "api_http_statuses": {
+        "200": 461
+      },
+      "api_success_latency_median_seconds": 4.88630223274231
     }
   ]
 }
