@@ -1,0 +1,83 @@
+{
+  "baseline32": {
+    "sampled_unix": 1789211557.0737646,
+    "aggregate_agent_limit": 32,
+    "capacity_epoch": "four-frameworks-32",
+    "active_agent_containers": 31,
+    "memory_bytes_including_relay": 5790781931.52,
+    "cpu_cores_including_relay": 1.5935,
+    "host_available_memory_bytes": 165783973888,
+    "host_total_memory_bytes": 270041440256,
+    "host_load_1m": 5.9501953125,
+    "logical_cpus": 152,
+    "window_seconds": 600.0,
+    "recent_closed_attempts": 116,
+    "recent_valid_attempts": 116,
+    "recent_failed_attempts": 0,
+    "closed_attempts_per_hour": 696.0,
+    "valid_attempts_per_hour": 696.0,
+    "recent_oom_kills": 0,
+    "http_status_counts_closed_attempt_requests": {
+      "200": 981
+    },
+    "transport_errors_closed_attempt_requests": 2,
+    "cohorts": {
+      "main": {
+        "planned": 4320,
+        "closed": 485,
+        "valid": 472,
+        "active": 24
+      },
+      "hermes": {
+        "planned": 1440,
+        "closed": 21,
+        "valid": 21,
+        "active": 8
+      }
+    },
+    "caveat": "Single resource sample; trailing window includes carryover attempts and changing case/model mix. Request metrics cover closed attempts only, not active requests. This is not a controlled concurrency comparison.",
+    "scaling_status": "The aggregate target and its effective time are recorded separately from the frozen case and scoring manifests. Larger targets require coordinated pool changes."
+  },
+  "trial40": {
+    "sampled_unix": 1789212079.190694,
+    "aggregate_agent_limit": 40,
+    "capacity_epoch": "four-frameworks-40",
+    "active_agent_containers": 40,
+    "memory_bytes_including_relay": 5937320427.5199995,
+    "cpu_cores_including_relay": 1.911,
+    "host_available_memory_bytes": 165392691200,
+    "host_total_memory_bytes": 270041440256,
+    "host_load_1m": 6.6826171875,
+    "logical_cpus": 152,
+    "window_seconds": 300.03306317329407,
+    "recent_closed_attempts": 70,
+    "recent_valid_attempts": 69,
+    "recent_failed_attempts": 1,
+    "closed_attempts_per_hour": 839.9074333166043,
+    "valid_attempts_per_hour": 827.9087556977956,
+    "recent_oom_kills": 0,
+    "http_status_counts_closed_attempt_requests": {
+      "200": 506
+    },
+    "transport_errors_closed_attempt_requests": 1,
+    "cohorts": {
+      "main": {
+        "planned": 4320,
+        "closed": 593,
+        "valid": 579,
+        "active": 32
+      },
+      "hermes": {
+        "planned": 1440,
+        "closed": 37,
+        "valid": 37,
+        "active": 8
+      }
+    },
+    "caveat": "Single resource sample; trailing window includes carryover attempts and changing case/model mix. Request metrics cover closed attempts only, not active requests. This is not a controlled concurrency comparison.",
+    "scaling_status": "The aggregate target and its effective time are recorded separately from the frozen case and scoring manifests. Larger targets require coordinated pool changes."
+  },
+  "observed_valid_throughput_ratio": 1.189524074278442,
+  "interpretation": "Operational, provisional comparison between different-duration calendar windows with different case/model mix and carryover attempts. Not a causal estimate of concurrency speedup.",
+  "decision": "Continue40 while monitoring existing host-resource guards and per-request limits; do not increase beyond40 in this trial."
+}
