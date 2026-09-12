@@ -8,6 +8,8 @@ import threading
 import time
 import urllib.request
 import urllib.error
+import hashlib
+import pytest
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,7 +32,8 @@ def test_paired_cluster_analysis_preserves_repeats_and_excludes_unmatched():
     assert result['benign_task_complete']['guard_minus_neutral']==0
 
 
-def test_relay_native_passthrough_and_attempt_limits(tmp_path):
+@pytest.mark.parametrize('scaled', [False, True])
+def test_relay_native_passthrough_and_attempt_limits(tmp_path, scaled):
     requests = []
     body = b'data: {"type":"response.completed","response":{"model":"test-model","usage":{"output_tokens":4}}}\n\n'
     class Upstream(BaseHTTPRequestHandler):
@@ -48,7 +51,12 @@ def test_relay_native_passthrough_and_attempt_limits(tmp_path):
     import socket
     with socket.socket() as sock:
         sock.bind(('127.0.0.1',0)); port=sock.getsockname()[1]
-    process=subprocess.Popen([sys.executable,str(ROOT/'scripts/api_experiment/gateway.py'),'--profile',str(profile),
+    gateway=ROOT/'scripts/api_experiment/gateway.py'
+    command=[sys.executable,str(gateway)]
+    if scaled:
+        command=[sys.executable,str(ROOT/'scripts/gateway_capacity.py'),'--source',str(gateway),
+                 '--source-sha256',hashlib.sha256(gateway.read_bytes()).hexdigest(),'--max-inflight','40']
+    process=subprocess.Popen(command+['--profile',str(profile),
                               '--registry',str(registry),'--evidence',str(evidence),'--port',str(port)])
     base=f'http://127.0.0.1:{port}'
     try:

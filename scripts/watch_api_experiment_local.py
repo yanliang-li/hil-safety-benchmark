@@ -112,6 +112,10 @@ def main():
                 run([PYTHON,'scripts/api_experiment/analyze.py','--plan',str(PLAN),'--output','reports/api-multimodel-20260912/main',
                     '--bootstrap','10000' if complete else '1000'],cwd=ROOT,env=env,timeout=240)
                 run([PYTHON,'scripts/audit_api_attempts.py'],cwd=ROOT,env=env,timeout=240)
+                capacity=remote(prefix+"import subprocess\nnames=['capacity-8-baseline.json','capacity-history.json']\ndata={n:json.loads((root/'reports'/n).read_text()) for n in names if (root/'reports'/n).exists()}\nif 'capacity-history.json' in data:\n subprocess.run(['python3','scripts/report_api_capacity.py'],cwd=root,capture_output=True,check=True,timeout=180)\n data['capacity_report.json']=json.loads((root/'reports/api-multimodel-20260912/main/capacity_report.json').read_text())\nprint(json.dumps(data))\n")
+                for name,data in capacity.items():
+                    dest=ROOT/'reports/api-multimodel-20260912/main'/name if name=='capacity_report.json' else ROOT/'reports'/name
+                    dest.write_text(json.dumps(data,indent=2)+'\n')
                 build_paper();copy_public()
                 if state['last_published_count']<0 or count-state['last_published_count']>=100 or complete:
                     state['published_commit']=publish(count,complete);state['last_published_count']=count

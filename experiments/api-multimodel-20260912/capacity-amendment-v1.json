@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "06c86ec4a948089bff38c80745a8c3f4542ba422c53263f72639e73f2310acb2",
+  "recorded_unix": 1789208701.1152804,
+  "authorization": "User requested more concurrent agents and measured speedup. No budget ceiling.",
+  "initial_agent_concurrency": 8,
+  "evaluation_stages": [
+    16,
+    32
+  ],
+  "gateway_max_inflight": 40,
+  "gateway_memory_mib": 1024,
+  "gateway_cpu_limit": 2,
+  "agent_memory_mib": 1536,
+  "agent_cpu_limit": 1,
+  "minimum_available_memory_gib_before_launch": 64,
+  "minimum_free_disk_gib": 30,
+  "maximum_host_load_fraction_before_launch": 0.75,
+  "unchanged": [
+    "model IDs",
+    "case/reply selection",
+    "condition prompts",
+    "repeat count",
+    "attempt IDs",
+    "per-attempt timeout",
+    "per-attempt API request limit",
+    "MCP and scoring source",
+    "Docker agent image"
+  ],
+  "implementation_sha256": {
+    "scripts/gateway_capacity.py": "77300ca5a5cacd3ed60722f8d26d7847b84467321054ac163610889cad5014d5",
+    "scripts/schedule_api_capacity.py": "4435f79f91e3eebe6bfd942e10cad23d914bcd0d943799d3f2d5d4e26ab3f121"
+  },
+  "analysis_note": "Capacity varies over calendar time and may affect provider latency or behavior. Preserve capacity epochs; do not infer a safety effect from the speed comparison."
+}

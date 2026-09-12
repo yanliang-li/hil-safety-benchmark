@@ -37,6 +37,8 @@ All nine configurations completed a real-task preflight. Of 36 text-model IDs, 3
 
 Follow the [current result tables](reports/api-multimodel-20260912/main/README.md), [per-case scores](reports/api-multimodel-20260912/main/per_case.csv), and [all-attempt audit](reports/api-multimodel-20260912/main/attempt_audit.json). The supplementary audit includes failure categories, token usage for failed and valid attempts, and safety sensitivity bounds that retain unsafe actions observed before a failed termination. It was added after initial failures and does not replace the frozen primary analysis. Raw evidence is replayed locally before publication; updates are pushed after at least 100 additional closed attempts and at completion.
 
+An owner-requested [capacity amendment](docs/api_capacity_amendment.md) evaluates 16 and 32 concurrent agents after the initial eight-agent phase. It preserves per-attempt settings, records capacity epochs, and reserves at least 64 GiB of available server memory before new launches. The original experiment manifest remains unchanged.
+
 ## Project layout
 
 - `src/hil_safety_bench/`: generation, runtime, MCP tools, agent adapters, and scoring.

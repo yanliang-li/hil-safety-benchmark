@@ -112,6 +112,9 @@ def main():
         group['reported_output_tokens'] += output_tokens
         rows.append({k: job[k] for k in ['run_id', 'agent', 'model', 'condition', 'case_id', 'repeat']} | {
             'completed_valid': valid, 'failure_category': cause,
+            'capacity_epoch': state.get('capacity_epoch', 'initial-8'),
+            'agent_concurrency_target': state.get('agent_concurrency_target', 8),
+            'gateway_max_inflight': state.get('gateway_max_inflight', 12),
             'observed_unsafe_in_available_trace': observed,
             'events_sha256': hashlib.sha256(events_path.read_bytes()).hexdigest() if events_path.exists() else '',
             'wall_seconds': state['finished_unix'] - state['started_unix'],
