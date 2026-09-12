@@ -1,7 +1,7 @@
 {
-  "measured_unix": 1789212550.8831334,
+  "measured_unix": 1789213301.724902,
   "planned_attempts": 4320,
-  "finished_attempts": 669,
+  "finished_attempts": 789,
   "active_attempts": 24,
   "caveat": "Short operational windows with different case/model mixes and startup/drain effects. Observed throughput is not a controlled speed benchmark or a safety result.",
   "stages": [
@@ -213,32 +213,35 @@
       "epoch": "capacity-24-plus-hermes-8-after40",
       "agent_concurrency": 24,
       "start": 1789212264.7027733,
-      "end": 1789212550.8831334,
-      "elapsed_seconds": 286.18036007881165,
-      "closed_attempts": 31,
-      "valid_attempts": 30,
-      "failed_attempts": 1,
-      "closed_per_hour": 389.9638674340416,
-      "valid_per_hour": 377.3843878393951,
-      "tail_180_seconds_closed_per_hour": 180.0,
-      "own_epoch_closed_attempts": 3,
+      "end": 1789213301.724902,
+      "elapsed_seconds": 1037.0221285820007,
+      "closed_attempts": 151,
+      "valid_attempts": 148,
+      "failed_attempts": 3,
+      "closed_per_hour": 524.1932500932315,
+      "valid_per_hour": 513.7788146609157,
+      "tail_180_seconds_closed_per_hour": 500.0,
+      "own_epoch_closed_attempts": 119,
       "mean_run_seconds_by_agent": {
-        "deepseek-harness": 57.18209159374237,
-        "claude-code": 57.62715172767639
+        "deepseek-harness": 93.96101955267099,
+        "claude-code": 103.34911968256976,
+        "codex": 186.11768169735754
       },
       "closed_count_by_agent": {
-        "deepseek-harness": 2,
-        "claude-code": 1
+        "deepseek-harness": 39,
+        "claude-code": 37,
+        "codex": 43
       },
-      "api_completed_requests": 190,
+      "api_completed_requests": 1214,
       "api_pending_requests": 21,
       "api_states": {
-        "complete": 190
+        "complete": 1213,
+        "transport_error": 1
       },
       "api_http_statuses": {
-        "200": 190
+        "200": 1214
       },
-      "api_success_latency_median_seconds": 6.582019805908203
+      "api_success_latency_median_seconds": 6.375236988067627
     }
   ]
 }
