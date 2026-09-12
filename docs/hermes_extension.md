@@ -42,6 +42,8 @@ After a ten-minute 32-agent observation window without failed attempts or OOM ki
 
 `scripts/schedule_hermes_capacity.py` reads `reports/four-framework-capacity-control.json` and verifies the amended source hash. Its original-pool allocation must match `reports/capacity-control.json`. Use 24 + 8 for 32 total or 32 + 8 for 40 total. Reductions take effect as active attempts finish. Do not run both Hermes controllers at once. `scripts/report_four_framework_capacity.py` measures aggregate memory, CPU, throughput, and errors; its recent window starts at the current capacity epoch. Short-window ratios remain confounded by case mix and provider load.
 
+The subsequent [reliability follow-up](../reports/api-multimodel-20260912/four-frameworks/capacity40-followup.json) supersedes the first five-minute speed checkpoint as the operational decision. A later burst of upstream connection failures led to a return to **32 total workers (24 + 8)**. New launches briefly paused; DNS, authenticated model listing, and all three model routes were checked before resuming. The relay remained running without an OOM kill. The record does not establish whether concurrency, provider load, or another network condition caused the burst. All failed attempts remain in the audit.
+
 ## Results and publication
 
 `scripts/analyze_four_frameworks.py` calls the original frozen scorer for each manifest, verifies stored scores against ordered events, and combines reports without pooling framework–model configurations. Failed attempts remain in a separate all-attempt audit, including any unsafe actions observed before failure.

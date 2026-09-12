@@ -1,0 +1,33 @@
+{
+  "recorded_unix": 1789212482.6348286,
+  "trial40_started_unix": 1789211779.157631,
+  "trial40_ended_unix": 1789212262.8263292,
+  "closed_during_trial40": 125,
+  "valid_during_trial40": 110,
+  "failed_during_trial40": 15,
+  "failure_observation": "A later burst of upstream URLError transport failures occurred across frameworks and models. Relay remained running without OOM. This is an observed association, not proof that concurrency caused the failures.",
+  "initial_checkpoint_superseded": "The first five-minute checkpoint suggested19% higher valid throughput. The later reliability loss means that checkpoint does not establish stable acceleration.",
+  "decision": "Return to32 aggregate agents,24 original-framework workers plus8 Hermes; briefly pause new launches, verify DNS and authenticated model listing inside relay and on host, and verify all three model routes before resuming.",
+  "resumed_unix": 1789212482.6348286,
+  "diagnostic_model_probes": [
+    {
+      "model": "deepseek-v4-flash",
+      "http": 200,
+      "seconds": 1.71,
+      "choices_present": true
+    },
+    {
+      "model": "glm-5.2",
+      "http": 200,
+      "seconds": 1.97,
+      "choices_present": true
+    },
+    {
+      "model": "qwen3.7-max",
+      "http": 200,
+      "seconds": 11.52,
+      "choices_present": true
+    }
+  ],
+  "diagnostic_probes_excluded_from_main": true
+}
