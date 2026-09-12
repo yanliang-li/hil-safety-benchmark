@@ -18,7 +18,9 @@ def is_experiment_container(name):
 def resource_sample():
     owned, containers, errors = [], [], []
     try:
-        listing = subprocess.check_output(['docker', 'ps', '-a', '--format', '{{json .}}'], text=True, timeout=20)
+        listing = subprocess.check_output(['docker', 'ps', '-a', '--filter', 'name=main01_',
+                                           '--filter', 'name=hermes01_', '--filter', 'name=hil-api-gateway-capacity',
+                                           '--format', '{{json .}}'], text=True, timeout=20)
         owned = [item for line in listing.splitlines() if is_experiment_container((item := json.loads(line))['Names'])]
     except (subprocess.SubprocessError, OSError, ValueError) as error:
         return [], None, ['container_listing:' + type(error).__name__]
