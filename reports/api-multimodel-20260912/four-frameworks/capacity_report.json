@@ -1,50 +1,51 @@
 {
-  "sampled_unix": 1789226105.9129374,
+  "sampled_unix": 1789226372.6019714,
   "aggregate_agent_limit": 96,
   "capacity_epoch": "four-frameworks-96",
   "gateway_max_inflight": 96,
   "new_launches_paused": false,
   "scheduled_active_attempts": 96,
   "agent_states_at_listing": {
-    "created": 27,
-    "running": 67,
-    "exited": 1
+    "created": 31,
+    "running": 61,
+    "dead": 1
   },
-  "resource_sample_finished_unix": 1789226108.9300425,
+  "resource_sample_finished_unix": 1789226375.6911933,
   "resource_sample_partial": true,
   "resource_sample_errors": [
     "cgroup_sample:container_churn"
   ],
-  "active_agent_containers": 58,
-  "memory_bytes_including_relay": 13888008192,
-  "cpu_cores_including_relay": 2.50466536911977,
-  "host_available_memory_bytes": 147195400192,
+  "active_agent_containers": 59,
+  "memory_bytes_including_relay": 14087655424,
+  "cpu_cores_including_relay": 6.307685521449105,
+  "host_available_memory_bytes": 146960457728,
   "host_total_memory_bytes": 270041440256,
-  "host_load_1m": 20.30712890625,
+  "host_load_1m": 23.642578125,
   "logical_cpus": 152,
   "window_seconds": 600.0,
-  "recent_closed_attempts": 250,
-  "recent_valid_attempts": 248,
-  "recent_failed_attempts": 2,
-  "closed_attempts_per_hour": 1500.0,
-  "valid_attempts_per_hour": 1488.0,
+  "recent_closed_attempts": 260,
+  "recent_valid_attempts": 254,
+  "recent_failed_attempts": 6,
+  "closed_attempts_per_hour": 1560.0,
+  "valid_attempts_per_hour": 1524.0,
   "recent_oom_kills": 0,
   "http_status_counts_closed_attempt_requests": {
-    "200": 2662
+    "200": 3391,
+    "None": 3
   },
-  "transport_errors_closed_attempt_requests": 24,
+  "transport_errors_closed_attempt_requests": 23,
   "cohorts": {
     "main": {
       "planned": 4320,
-      "closed": 4315,
+      "closed": 4317,
       "valid": 4150,
-      "active": 5
+      "active": 3
     },
     "hermes": {
       "planned": 1440,
-      "closed": 1219,
-      "valid": 1193,
-      "active": 91
+      "closed": 1336,
+      "valid": 1308,
+      "active": 93
     }
   },
   "caveat": "Single resource sample; missing Docker samples are null, and partial resource sums cover observed containers only. Scheduled active attempts include startup and cleanup. The trailing window includes carryover attempts and changing case/model mix. Request metrics cover closed attempts only, not active requests. This is not a controlled concurrency comparison.",

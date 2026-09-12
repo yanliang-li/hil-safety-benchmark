@@ -1,6 +1,6 @@
 # Three-harness API experiment
 
-Status: **provisional_incomplete**. 4147 valid runs, 165 failed attempts, 8 pending out of 4320 planned.
+Status: **provisional_incomplete**. 4150 valid runs, 167 failed attempts, 3 pending out of 4320 planned.
 
 | Harness | Requested model | Condition | Valid n | Unsafe ASR | Benign completion | HIL recall | Strict after reply |
 |---|---|---|---:|---:|---:|---:|---:|
@@ -11,11 +11,11 @@ Status: **provisional_incomplete**. 4147 valid runs, 165 failed attempts, 8 pend
 | claude-code | qwen3.7-max | neutral | 240 | 70/240 (29.2%) | 228/240 (95.0%) | 73/180 (40.6%) | 51/73 (69.9%) |
 | claude-code | qwen3.7-max | prompt_guard_v1 | 240 | 29/240 (12.1%) | 229/240 (95.4%) | 86/180 (47.8%) | 72/87 (82.8%) |
 | codex | deepseek-v4-flash | neutral | 229 | 55/229 (24.0%) | 206/229 (90.0%) | 68/170 (40.0%) | 47/68 (69.1%) |
-| codex | deepseek-v4-flash | prompt_guard_v1 | 232 | 34/232 (14.7%) | 211/232 (90.9%) | 66/172 (38.4%) | 48/66 (72.7%) |
+| codex | deepseek-v4-flash | prompt_guard_v1 | 233 | 34/233 (14.6%) | 211/233 (90.6%) | 67/173 (38.7%) | 48/67 (71.6%) |
 | codex | glm-5.2 | neutral | 209 | 45/209 (21.5%) | 192/209 (91.9%) | 56/152 (36.8%) | 46/56 (82.1%) |
-| codex | glm-5.2 | prompt_guard_v1 | 210 | 25/210 (11.9%) | 195/210 (92.9%) | 67/151 (44.4%) | 62/67 (92.5%) |
+| codex | glm-5.2 | prompt_guard_v1 | 211 | 25/211 (11.8%) | 196/211 (92.9%) | 68/152 (44.7%) | 63/68 (92.6%) |
 | codex | qwen3.7-max | neutral | 237 | 82/237 (34.6%) | 224/237 (94.5%) | 44/177 (24.9%) | 30/44 (68.2%) |
-| codex | qwen3.7-max | prompt_guard_v1 | 229 | 29/229 (12.7%) | 214/229 (93.4%) | 69/172 (40.1%) | 55/69 (79.7%) |
+| codex | qwen3.7-max | prompt_guard_v1 | 230 | 29/230 (12.6%) | 214/230 (93.0%) | 69/173 (39.9%) | 55/69 (79.7%) |
 | deepseek-harness | deepseek-v4-flash | neutral | 236 | 68/236 (28.8%) | 210/236 (89.0%) | 96/177 (54.2%) | 68/97 (70.1%) |
 | deepseek-harness | deepseek-v4-flash | prompt_guard_v1 | 237 | 37/237 (15.6%) | 213/237 (89.9%) | 103/177 (58.2%) | 78/104 (75.0%) |
 | deepseek-harness | glm-5.2 | neutral | 212 | 42/212 (19.8%) | 196/212 (92.5%) | 75/153 (49.0%) | 60/76 (78.9%) |
