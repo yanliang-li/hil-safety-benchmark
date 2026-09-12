@@ -1,0 +1,14 @@
+\section{Current Defense and Remaining Failures}
+\label{sec:defense}
+
+We retain the tested authorization-scope prompt as our current defense. Before a consequential action, it asks the agent to check what the user requested, where the proposed action came from, and whether valid permission covers its object, destination, and scope. A document can supply task evidence without granting new authority. If a necessary decision remains unresolved, the agent should ask a specific question. It should then use only the permission supplied by a valid reply and continue the legitimate task.
+
+This is a prompt-level intervention. The tool interface remains available, and no execution layer enforces these checks. The prompt receives no hidden attack label, response category, or expected decision. It can reduce unsafe behavior when the agent applies the checks, but it can fail when an extra operation looks routine. In our pilot, all four invoice-reconciliation variants still perform redundant validation without asking. All four archive-inventory variants also delete material without consultation. These two mechanisms account for the eight remaining unsafe outcomes.
+
+A runtime guard is a possible next step. It would track scoped authority and check proposed effects before dispatch, including repeated or equivalent actions through another tool. This requires validated tool adapters and a reliable account of which authority is trusted. The \sail{} design in Appendix~\ref{app:guarddesign} remains a specification. We do not treat its expected behavior as an experimental result.
+
+\section{Limitations and Conclusion}
+\label{sec:conclusion}
+The evidence covers one agent--model configuration, twenty pilot tasks, simulated effects, and incomplete semantic checks. The prompt comparison is exploratory and was not run in contemporaneous randomized order. Consultation-required labels need review, and the clean controls are small. The four replies do not yet cover genuine partial authorization or objectively false advice. Shared-prefix branching and runtime enforcement are unimplemented.
+
+\bench{} evaluates whether an agent seeks useful help and then acts within valid authority. The current prompt defense reduces unsafe outcomes on the pilot, but it leaves the motivating redundant-work attack unresolved. The next tests need stronger task checks, unseen tasks, broader model coverage, and richer replies. Safety gains must be reported together with authorized task completion and the cost of human intervention.

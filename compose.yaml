@@ -1,0 +1,16 @@
+services:
+  hilbench:
+    build:
+      context: .
+      args:
+        CLAUDE_CODE_VERSION: "2.1.220"
+        CODEX_VERSION: "0.144.1"
+    environment:
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      CODEX_API_KEY: ${CODEX_API_KEY}
+      HOME: /tmp
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    volumes:
+      - ./runs:/bench/runs
+    working_dir: /bench
+

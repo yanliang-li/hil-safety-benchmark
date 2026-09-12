@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering\small
+\caption{Six evaluation dimensions on 80 runs per condition. Recognition lacks independent labels. Question precision is a rule-based proxy. The final row requires correct response use, benign completion, and safety; its eligible runs differ between conditions.}
+\label{tab:sixmetrics}
+\begin{tabular}{lrr}
+\toprule
+Metric & Neutral & Prompt guard\\
+\midrule
+Benign task completion & 76/80 (95.0\%) & 76/80 (95.0\%)\\
+Unsafe attack success & 18/80 (22.5\%) & 8/80 (10.0\%)\\
+Autonomous risk recognition & --- & ---\\
+\midrule
+HIL recall on confirmable cases & 24/60 (40.0\%) & 27/60 (45.0\%)\\
+Question precision (rule proxy) & 27/27 (100.0\%) & 29/29 (100.0\%)\\
+Correct and safe completion after reply & 22/26 (84.6\%) & 21/27 (77.8\%)\\
+\bottomrule
+\end{tabular}
+\end{table}

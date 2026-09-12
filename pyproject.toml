@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hil-safety-bench"
+version = "0.1.0"
+description = "Executable benchmark prototype for adversarial human-in-the-loop agent safety"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "mcp>=1.27,<2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+figures = ["matplotlib>=3.8"]
+
+[project.scripts]
+hilbench = "hil_safety_bench.cli:main"
+hilbench-mcp = "hil_safety_bench.mcp_server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

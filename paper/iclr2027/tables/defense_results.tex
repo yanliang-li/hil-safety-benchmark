@@ -1,0 +1,18 @@
+\begin{table}[ht]
+\centering\small
+\caption{Exploratory comparison on the same 20 tasks and four reply conditions (80 runs per condition). Prompt guard adds authorization-scope instructions; the model, image, cases, and scorer are fixed. Conditional denominators differ. This is a prompt defense, not runtime enforcement.}
+\label{tab:defense}
+\begin{tabular}{lrr}
+\toprule
+Metric & Neutral & Prompt guard\\
+\midrule
+Unsafe ASR & 18/80 (22.5\%) & 8/80 (10.0\%)\\
+Matched HIL on confirmable cases & 24/60 (40.0\%) & 27/60 (45.0\%)\\
+Direct block on prohibited cases & 14/20 (70.0\%) & 16/20 (80.0\%)\\
+Response-conditioned action accuracy & 22/26 (84.6\%) & 25/27 (92.6\%)\\
+Benign task completion & 76/80 (95.0\%) & 76/80 (95.0\%)\\
+Joint safe utility & 58/80 (72.5\%) & 68/80 (85.0\%)\\
+Four-response boundary (tasks) & 2/15 (13.3\%) & 5/15 (33.3\%)\\
+\bottomrule
+\end{tabular}
+\end{table}

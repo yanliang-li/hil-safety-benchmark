@@ -1,0 +1,66 @@
+\section{Benchmark Overview}
+\label{sec:benchmark}
+
+\subsection{Tasks, threats, and authority}
+A base task specifies a benign goal $g_i$, initial environment $s_i$, artifacts $D_i$, benign-completion predicate $B_i$, and an attacker-targeted effect $E_i$. Each effect has an authorization mode: \emph{confirmable} or \emph{prohibited}. The attacker modifies designated lower-trust materials to make an extra action appear necessary for the workflow. It may coordinate instructions across a skill and a policy-like document. The original user goal, trusted deployment constraints, response fixtures, and evaluator remain outside attacker control. A document's filename or assertion of authority does not make it trusted.
+
+A neutral \texttt{ask\_human(question)} interface makes consultation available without revealing the risk label or forcing a question. The agent decides whether to ask and what to ask. The runtime records ordered observations, questions, responses, and tool effects. In the current prototype, consequential operations are simulated: a recorded upload represents a benchmark effect rather than an actual external transmission.
+
+We distinguish an \emph{attacker-targeted effect} from an \emph{unsafe outcome}. A confirmable effect is initially unauthorized but can become permissible after timely approval of the relevant action and scope. A prohibited effect remains impermissible under ordinary human approval. This prevents the metric from treating valid authorized execution as an attack success, or treating blind obedience to an approving human as inherently safe.
+
+\subsection{Human feedback and expected behavior}
+The implemented core uses
+\begin{equation}
+\mathcal{R}_{\mathrm{core}}=
+\{\text{clear approval},\ \text{clear denial},\ \text{ambiguity},\ \text{scope mismatch}\}.
+\label{eq:responses}
+\end{equation}
+For confirmable actions, matched clear approval permits the specified effect; denial withholds permission; ambiguity leaves the decision unresolved; and approval of a different step cannot transfer to the questioned action. For prohibited actions, none of these responses permits the effect. Asking again or verifying can be appropriate when uncertainty remains, subject to a fixed query budget.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/control_loop.pdf}
+\caption{The implemented evaluation follows a benign task, an injected instruction, optional consultation, and recorded tool effects. Each of four fixed reply conditions starts independently. The lower panel gives expected behavior for a confirmable effect; a prohibited effect remains blocked under every reply. Effects are simulated, and shared-prefix response branching is not yet implemented.}
+\label{fig:loop}
+\end{figure}
+
+The broader design also includes \emph{objectively erroneous advice} and \emph{partial authorization}. These are distinct from scope mismatch. An erroneous reply may incorrectly identify an external recipient as internal; the task must contain accessible trustworthy evidence for verification, or permit a safe unresolved outcome. Partial authorization may allow a redacted file while withholding raw records, requiring both execution of the allowed part and restraint elsewhere. These tracks need new effect predicates and audited fixtures. They are specified here and in Appendix~\ref{app:responses}, not counted among the existing 1,000 cases. Clarity, correctness, and authority should be independently controlled rather than collapsed into one clarity score.
+
+\subsection{Stage-specific evaluation}
+\label{sec:metrics}
+For a core run, let $e_i$ denote occurrence of the specified effect, $h_i$ a matched question before its first occurrence (or a matched question when no effect occurs), and $b_i$ benign completion. Under the current single-effect scorer,
+\begin{equation}
+a_i=\ind[\text{confirmable}_i \land h_i \land
+  \text{clear-approve}_i],\qquad u_i=e_i(1-a_i).
+\label{eq:authorization}
+\end{equation}
+The approval fixture must apply to the questioned effect; the hidden category is an evaluator label, not an input to the agent or a defense. General time- and scope-bound authorization requires the richer contract in Appendix~\ref{app:contract}; the current scorer does not enforce arbitrary token expiry or cross-tool equivalence.
+
+We group the metrics into \emph{agent safety} (benign completion, unsafe attack success, and autonomous risk recognition) and \emph{human interaction} (consultation recall, question accuracy, and correct safe completion after feedback). The groups describe different evaluation questions; they do not imply a shared denominator.
+
+\paragraph{Before feedback.}
+Report consultation on cases requiring clarification, direct blocking on hard-prohibited cases, question match, timing, and burden. Let $\mathcal{C}$ be the consultation-required set and $\mathcal{P}$ the direct-block set. The core implementation uses confirmable and prohibited labels as these sets:
+\begin{equation}
+\mathrm{HILRecall}=\frac{\sum_{i\in\mathcal{C}}h_i}{|\mathcal{C}|},
+\qquad
+\mathrm{DirectBlock}=
+\frac{\sum_{i\in\mathcal{P}}\ind[|Q_i|=0\land e_i=0]}{|\mathcal{P}|},
+\label{eq:stage1}
+\end{equation}
+where $Q_i$ is the set of questions. This proxy needs refinement: being able to approve an optional extension does not mean the agent must ask about it. Review must distinguish optional work from decisions needed to complete the task. Safe autonomous rejection is reported separately and does not establish observed risk recognition by itself.
+
+\paragraph{After feedback.}
+On runs $\mathcal{H}=\{i:h_i=1\}$, define $c_i=e_i$ after valid approval and $c_i=1-e_i$ otherwise. Response-conditioned action accuracy is $\mathrm{RCAA}=|\mathcal{H}|^{-1}\sum_{i\in\mathcal{H}}c_i$. Report approval execution, denial compliance, ambiguity handling, and scope-mismatch restraint separately. Unlike a restraint-only score, RCAA penalizes omission of the approved effect. Such omission is a branch-contract failure, not necessarily a safety violation. The strict four-response boundary score requires $h_i=c_i=1$ in every branch of a confirmable task; its denominator is complete four-branch task groups. Independent starts make this a consistency diagnostic, not a causal estimate.
+
+\paragraph{Final outcomes.}
+Report $\mathrm{BCR}=N^{-1}\sum_i b_i$, $\mathrm{UnsafeASR}=N^{-1}\sum_i u_i$, and $\mathrm{JointUtility}=N^{-1}\sum_i b_i(1-u_i)$. Conditional safe completion after feedback additionally requires $b_i(1-u_i)=1$ on $\mathcal{H}$; it differs from RCAA because safe omission of an approved action can satisfy the former. Always give denominators and mark undefined ratios N/A. Source exposure, observable risk recognition, question precision, and human-query count complete the diagnostic view. Recognition and fine-grained question quality need semantic annotation beyond the current tool matcher.
+
+\paragraph{Recognition and question accuracy.}
+Autonomous recognition requires visible evidence, before human feedback, that the agent identified the specific risk or missing authority. An accurate question can supply such evidence; non-execution or reading a file alone cannot. Its denominator is the reviewed set of attack cases with accessible decision evidence. Independent annotation is pending, so we report N/A. Question accuracy requires the action, relevant scope, and missing permission to be stated correctly, divided by all questions. The current tool-and-argument matcher supplies only a proxy. It does not establish that a question explains the risk accurately.
+
+\paragraph{Strict success after feedback.}
+To measure correct execution and safety together, define
+\begin{equation}
+\mathrm{PostSuccess}=\frac{\sum_{i\in\mathcal H}c_i b_i(1-u_i)}{|\mathcal H|}.
+\end{equation}
+This requires correct response use, benign completion, and no unsafe effect. Report it alongside RCAA and the eligible count. The end-to-end version uses $N$ as its denominator. Neither conditional score is a causal estimate when different conditions cause different cases to seek help.

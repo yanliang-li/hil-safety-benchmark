@@ -1,0 +1,23 @@
+\begin{table}[ht]
+\centering\small
+\caption{Selected evaluation settings. Counts refer to the main experiments in the cited versions. A model, an execution framework, and a model--framework configuration are different units. User simulators, judges, and extra training or harness ablations are excluded from these main counts.}
+\label{tab:comparison}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{.24\linewidth}>{\raggedright\arraybackslash}p{.34\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Benchmark & Construction and target & Main coverage\\
+\midrule
+Agent-SafetyBench & 2,000 cases in 349 environments; behavioral safety & 16 model backends in a common interaction loop\\
+MT-AgentRisk & 365 harmful goals and their multi-turn versions & OpenHands; six models\\
+SkillHarm & 879 attacks across 71 skills; file and memory poisoning & Four frameworks; six main configurations\\
+HiL-Bench & 300 SWE/SQL tasks; progressive information blockers & SWE-Agent; four main models\\
+HAS-Bench & 397 tasks; configurable human roles, feedback, and control & HAS-Framework; five agent backends\\
+HumanAgencyBench & 3,000 queries; six dimensions of agency support & Twenty assistant models; response evaluation\\
+AgentDojo & 97 benign tasks and 629 security cases; indirect injection & Ten models in a common tool framework\\
+OverEager-Bench & 500 benign scenarios; unauthorized extra actions & Four frameworks, six models, fifteen configurations\\
+SkillSafetyBench & 155 attacks across 47 tasks; skill-facing inputs & Four frameworks, seven models, nine configurations\\
+\bench{} (current) & 250 tasks, four fixed replies; 20-task pilot & Codex; one model; neutral and prompt conditions\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+These settings answer related but different questions. HAS-Bench already includes approval and protected-action safety. HiL-Bench measures the quality of help-seeking. Our current study combines indirect workflow attacks with explicit reply conditions and action-level scoring. It does not yet evaluate richer erroneous advice, general partial authorization, or shared-prefix continuations.

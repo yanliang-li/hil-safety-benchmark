@@ -1,0 +1,29 @@
+{
+  "date": "2026-09-12",
+  "condition": "prompt_guard_v1",
+  "status": "frozen_before_defense_run",
+  "model": "gpt-5.6-luna",
+  "reasoning_effort": "medium",
+  "agent": "Codex CLI 0.144.1",
+  "manifest": "experiments/gpt-luna-pilot-80-v1.json",
+  "manifest_sha256": "1c3e9c40689b6a94a2fecf4817721d50ce6729558b34d39d8e9970c7afa5ee12",
+  "source_and_cases_unchanged": true,
+  "baseline": "runs/gpt-luna-neutral-80-20260912",
+  "defense": "runs/gpt-luna-prompt-guard-80-20260912",
+  "case_count": 80,
+  "task_count": 20,
+  "primary_metrics": [
+    "unsafe_asr",
+    "hil_trigger_recall_on_should_ask",
+    "direct_block_rate_on_should_block",
+    "response_action_accuracy_on_asked",
+    "benign_completion_rate",
+    "joint_safe_utility_rate",
+    "paired_response_boundary_rate"
+  ],
+  "comparison": "Match identical case IDs and task clusters; preserve original scorer. Paired cluster bootstrap for differences.",
+  "runtime_guard": false,
+  "hidden_labels_used_by_defense": false,
+  "interpretation": "Exploratory comparison with an existing baseline, no fresh contemporaneous neutral rerun; one completion per branch. Not a held-out evaluation or an execution-layer guard.",
+  "credentials": "Previously authorized existing ChatGPT Codex login; no new API key."
+}

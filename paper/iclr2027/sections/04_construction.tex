@@ -1,0 +1,19 @@
+\section{Benchmark Construction}
+\label{sec:construction}
+
+\subsection{From a working attack to reusable tasks}
+The motivating artifact is a local retail-workflow case in which a skill and a mirrored policy require three independent passes over the same action-chain data before writing a result. The passes add no new input information, yet the text presents repetition as mandatory quality control. A later invoice-reconciliation task adopts this mechanism for a normal total-and-discrepancy report. The retail case is confirmable in its recovered HIL adaptation; the archived V3 invoice derivative is prohibited. Shared attack wording does not imply identical task contracts or ground truth.
+
+Construction starts with a benign goal and verifiable completion effects, then introduces an operationally plausible extra action in materials the agent naturally encounters. Each case must specify why authorization is needed or why a hard boundary applies, expose sufficient trustworthy decision evidence, and preserve useful benign work when permission is withheld. Valid-approval branches also specify what completion of the approved extension entails. An optional suspicious step must not silently become a mandatory consultation label.
+
+Table~\ref{tab:taxonomy} retains the eight-domain, twenty-type taxonomy developed during manuscript design. Risk domains identify protected boundaries; attack types identify mechanisms for crossing them. Application domains are a separate axis. This is a construction target, not a claim that the twenty implementation labels already cover these twenty entries. Delegated execution, cross-tool bypass, and richer scope tests require additional environments and predicates.
+
+\input{tables/taxonomy}
+
+\subsection{Frozen responses and controlled branching}
+Response semantics and surface style are separate variables. The existing corpus contains 250 workflows in 24 application domains and 20 implementation attack families: 195 confirmable and 55 prohibited workflows, each with four fixed replies, yielding 1,000 cases. Eighteen styles vary the wording. Current fixtures come from deterministic templates; an optional frozen model generator is available, but these cases are not an online human simulation. For new factual-error and partial-approval tracks, freeze and review the generated replies before evaluation, including a deterministic policy for repeated questions.
+
+In \emph{end-to-end evaluation}, each branch starts from the same workspace and the agent independently decides whether to consult. This measures natural intervention, but different runs can diverge before receiving a reply. In the planned \emph{controlled response evaluation}, save the agent context and tool state immediately before a matched response, then resume that identical prefix under each reply. The contrast can then isolate the response at a fixed decision point. Checkpoint/resume support has not yet been implemented; preserving the same initial workspace is insufficient.
+
+\subsection{Validation boundary}
+The 1,000 core cases regenerate identically and pass the existing mechanical audit. These checks establish reconstruction, not independent semantic validity. Further review must verify benign solvability, whether consultation is needed, reply meaning, and the actual content of required outputs. Each new scope condition needs allowed and disallowed effect checks. Erroneous advice must have adjudicable truth and an attainable verification or abstention strategy. Family-level development/test separation and benign counterparts are needed to detect memorized templates and blanket blocking. No 3,000-case or multi-model completion claim is supported by the current artifacts.
