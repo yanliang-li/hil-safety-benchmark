@@ -1,33 +1,33 @@
 # Four-framework API experiment
 
-Status: **provisional_incomplete**. 2226/5760 attempts closed; 2148 valid, 78 failed, 3534 pending.
+Status: **provisional_incomplete**. 2406/5760 attempts closed; 2324 valid, 82 failed, 3354 pending.
 
 | Framework | Requested model | Condition | Unsafe ASR | Benign completion | HIL recall | Strict after reply |
 |---|---|---|---:|---:|---:|---:|
-| claude-code | deepseek-v4-flash | neutral | 29/99 (29.3%) | 84/99 (84.8%) | 47/73 (64.4%) | 27/47 (57.4%) |
-| claude-code | deepseek-v4-flash | prompt_guard_v1 | 19/97 (19.6%) | 81/97 (83.5%) | 47/71 (66.2%) | 29/47 (61.7%) |
-| claude-code | glm-5.2 | neutral | 16/99 (16.2%) | 90/99 (90.9%) | 45/75 (60.0%) | 35/45 (77.8%) |
-| claude-code | glm-5.2 | prompt_guard_v1 | 10/98 (10.2%) | 88/98 (89.8%) | 44/75 (58.7%) | 36/44 (81.8%) |
-| claude-code | qwen3.7-max | neutral | 27/102 (26.5%) | 97/102 (95.1%) | 30/76 (39.5%) | 21/30 (70.0%) |
-| claude-code | qwen3.7-max | prompt_guard_v1 | 11/102 (10.8%) | 98/102 (96.1%) | 36/76 (47.4%) | 31/37 (83.8%) |
-| codex | deepseek-v4-flash | neutral | 26/102 (25.5%) | 91/102 (89.2%) | 34/77 (44.2%) | 25/34 (73.5%) |
-| codex | deepseek-v4-flash | prompt_guard_v1 | 16/105 (15.2%) | 93/105 (88.6%) | 29/79 (36.7%) | 20/29 (69.0%) |
-| codex | glm-5.2 | neutral | 22/88 (25.0%) | 79/88 (89.8%) | 25/65 (38.5%) | 20/25 (80.0%) |
-| codex | glm-5.2 | prompt_guard_v1 | 11/85 (12.9%) | 80/85 (94.1%) | 27/62 (43.5%) | 25/27 (92.6%) |
-| codex | qwen3.7-max | neutral | 39/104 (37.5%) | 99/104 (95.2%) | 20/76 (26.3%) | 13/20 (65.0%) |
-| codex | qwen3.7-max | prompt_guard_v1 | 17/101 (16.8%) | 94/101 (93.1%) | 31/76 (40.8%) | 23/31 (74.2%) |
-| deepseek-harness | deepseek-v4-flash | neutral | 27/101 (26.7%) | 90/101 (89.1%) | 44/79 (55.7%) | 31/44 (70.5%) |
-| deepseek-harness | deepseek-v4-flash | prompt_guard_v1 | 17/100 (17.0%) | 89/100 (89.0%) | 46/78 (59.0%) | 32/46 (69.6%) |
-| deepseek-harness | glm-5.2 | neutral | 14/86 (16.3%) | 81/86 (94.2%) | 28/62 (45.2%) | 24/28 (85.7%) |
-| deepseek-harness | glm-5.2 | prompt_guard_v1 | 7/83 (8.4%) | 78/83 (94.0%) | 33/60 (55.0%) | 29/33 (87.9%) |
-| deepseek-harness | qwen3.7-max | neutral | 34/110 (30.9%) | 105/110 (95.5%) | 20/84 (23.8%) | 14/20 (70.0%) |
-| deepseek-harness | qwen3.7-max | prompt_guard_v1 | 12/110 (10.9%) | 104/110 (94.5%) | 28/84 (33.3%) | 24/28 (85.7%) |
-| hermes | deepseek-v4-flash | neutral | 18/64 (28.1%) | 55/64 (85.9%) | 25/48 (52.1%) | 20/25 (80.0%) |
-| hermes | deepseek-v4-flash | prompt_guard_v1 | 10/62 (16.1%) | 53/62 (85.5%) | 22/47 (46.8%) | 16/23 (69.6%) |
-| hermes | glm-5.2 | neutral | 14/57 (24.6%) | 51/57 (89.5%) | 20/46 (43.5%) | 15/20 (75.0%) |
-| hermes | glm-5.2 | prompt_guard_v1 | 7/57 (12.3%) | 55/57 (96.5%) | 24/46 (52.2%) | 20/24 (83.3%) |
-| hermes | qwen3.7-max | neutral | 15/67 (22.4%) | 60/67 (89.6%) | 12/51 (23.5%) | 9/12 (75.0%) |
-| hermes | qwen3.7-max | prompt_guard_v1 | 8/69 (11.6%) | 64/69 (92.8%) | 19/52 (36.5%) | 15/19 (78.9%) |
+| claude-code | deepseek-v4-flash | neutral | 30/110 (27.3%) | 95/110 (86.4%) | 52/81 (64.2%) | 32/52 (61.5%) |
+| claude-code | deepseek-v4-flash | prompt_guard_v1 | 22/112 (19.6%) | 94/112 (83.9%) | 53/83 (63.9%) | 34/53 (64.2%) |
+| claude-code | glm-5.2 | neutral | 18/111 (16.2%) | 100/111 (90.1%) | 51/86 (59.3%) | 39/51 (76.5%) |
+| claude-code | glm-5.2 | prompt_guard_v1 | 10/109 (9.2%) | 99/109 (90.8%) | 47/83 (56.6%) | 38/47 (80.9%) |
+| claude-code | qwen3.7-max | neutral | 28/110 (25.5%) | 105/110 (95.5%) | 33/83 (39.8%) | 23/33 (69.7%) |
+| claude-code | qwen3.7-max | prompt_guard_v1 | 11/110 (10.0%) | 106/110 (96.4%) | 40/83 (48.2%) | 34/41 (82.9%) |
+| codex | deepseek-v4-flash | neutral | 27/107 (25.2%) | 95/107 (88.8%) | 34/81 (42.0%) | 25/34 (73.5%) |
+| codex | deepseek-v4-flash | prompt_guard_v1 | 16/110 (14.5%) | 98/110 (89.1%) | 30/82 (36.6%) | 21/30 (70.0%) |
+| codex | glm-5.2 | neutral | 22/91 (24.2%) | 82/91 (90.1%) | 26/68 (38.2%) | 21/26 (80.8%) |
+| codex | glm-5.2 | prompt_guard_v1 | 11/89 (12.4%) | 84/89 (94.4%) | 30/66 (45.5%) | 28/30 (93.3%) |
+| codex | qwen3.7-max | neutral | 40/114 (35.1%) | 109/114 (95.6%) | 23/86 (26.7%) | 16/23 (69.6%) |
+| codex | qwen3.7-max | prompt_guard_v1 | 18/112 (16.1%) | 105/112 (93.8%) | 35/85 (41.2%) | 27/35 (77.1%) |
+| deepseek-harness | deepseek-v4-flash | neutral | 31/111 (27.9%) | 98/111 (88.3%) | 45/85 (52.9%) | 32/45 (71.1%) |
+| deepseek-harness | deepseek-v4-flash | prompt_guard_v1 | 19/111 (17.1%) | 98/111 (88.3%) | 49/85 (57.6%) | 34/49 (69.4%) |
+| deepseek-harness | glm-5.2 | neutral | 16/90 (17.8%) | 85/90 (94.4%) | 30/65 (46.2%) | 25/30 (83.3%) |
+| deepseek-harness | glm-5.2 | prompt_guard_v1 | 7/89 (7.9%) | 83/89 (93.3%) | 36/65 (55.4%) | 31/36 (86.1%) |
+| deepseek-harness | qwen3.7-max | neutral | 35/112 (31.2%) | 107/112 (95.5%) | 21/86 (24.4%) | 14/21 (66.7%) |
+| deepseek-harness | qwen3.7-max | prompt_guard_v1 | 12/112 (10.7%) | 106/112 (94.6%) | 29/86 (33.7%) | 25/29 (86.2%) |
+| hermes | deepseek-v4-flash | neutral | 20/70 (28.6%) | 61/70 (87.1%) | 27/53 (50.9%) | 22/27 (81.5%) |
+| hermes | deepseek-v4-flash | prompt_guard_v1 | 11/67 (16.4%) | 58/67 (86.6%) | 24/51 (47.1%) | 18/25 (72.0%) |
+| hermes | glm-5.2 | neutral | 16/64 (25.0%) | 58/64 (90.6%) | 24/50 (48.0%) | 18/24 (75.0%) |
+| hermes | glm-5.2 | prompt_guard_v1 | 8/68 (11.8%) | 66/68 (97.1%) | 29/52 (55.8%) | 25/29 (86.2%) |
+| hermes | qwen3.7-max | neutral | 16/72 (22.2%) | 65/72 (90.3%) | 13/55 (23.6%) | 10/13 (76.9%) |
+| hermes | qwen3.7-max | prompt_guard_v1 | 9/73 (12.3%) | 68/73 (93.2%) | 19/55 (34.5%) | 15/19 (78.9%) |
 
 Hermes was added later, with a configured 65,536-token context; Codex and DeepSeek Harness use 32,768, and Claude Code retains native context handling. Different framework prompts, runtimes, calendar periods and serving behavior remain possible confounds.
 
