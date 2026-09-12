@@ -1,27 +1,27 @@
 # Three-harness API experiment
 
-Status: **provisional_incomplete**. 3102 valid runs, 106 failed attempts, 1112 pending out of 4320 planned.
+Status: **provisional_incomplete**. 3178 valid runs, 108 failed attempts, 1034 pending out of 4320 planned.
 
 | Harness | Requested model | Condition | Valid n | Unsafe ASR | Benign completion | HIL recall | Strict after reply |
 |---|---|---|---:|---:|---:|---:|---:|
-| claude-code | deepseek-v4-flash | neutral | 175 | 43/175 (24.6%) | 147/175 (84.0%) | 79/131 (60.3%) | 51/80 (63.8%) |
-| claude-code | deepseek-v4-flash | prompt_guard_v1 | 174 | 32/174 (18.4%) | 147/174 (84.5%) | 79/130 (60.8%) | 55/80 (68.8%) |
-| claude-code | glm-5.2 | neutral | 186 | 31/186 (16.7%) | 171/186 (91.9%) | 79/140 (56.4%) | 62/80 (77.5%) |
-| claude-code | glm-5.2 | prompt_guard_v1 | 183 | 21/183 (11.5%) | 168/183 (91.8%) | 79/138 (57.2%) | 62/79 (78.5%) |
-| claude-code | qwen3.7-max | neutral | 176 | 51/176 (29.0%) | 167/176 (94.9%) | 53/133 (39.8%) | 36/53 (67.9%) |
-| claude-code | qwen3.7-max | prompt_guard_v1 | 176 | 21/176 (11.9%) | 168/176 (95.5%) | 64/133 (48.1%) | 53/65 (81.5%) |
-| codex | deepseek-v4-flash | neutral | 173 | 43/173 (24.9%) | 156/173 (90.2%) | 55/130 (42.3%) | 38/55 (69.1%) |
-| codex | deepseek-v4-flash | prompt_guard_v1 | 175 | 26/175 (14.9%) | 157/175 (89.7%) | 52/131 (39.7%) | 36/52 (69.2%) |
-| codex | glm-5.2 | neutral | 160 | 36/160 (22.5%) | 148/160 (92.5%) | 43/113 (38.1%) | 34/43 (79.1%) |
-| codex | glm-5.2 | prompt_guard_v1 | 158 | 19/158 (12.0%) | 148/158 (93.7%) | 51/111 (45.9%) | 48/51 (94.1%) |
-| codex | qwen3.7-max | neutral | 178 | 59/178 (33.1%) | 168/178 (94.4%) | 37/135 (27.4%) | 27/37 (73.0%) |
-| codex | qwen3.7-max | prompt_guard_v1 | 177 | 24/177 (13.6%) | 166/177 (93.8%) | 57/136 (41.9%) | 45/57 (78.9%) |
-| deepseek-harness | deepseek-v4-flash | neutral | 172 | 50/172 (29.1%) | 152/172 (88.4%) | 68/131 (51.9%) | 49/68 (72.1%) |
-| deepseek-harness | deepseek-v4-flash | prompt_guard_v1 | 172 | 27/172 (15.7%) | 153/172 (89.0%) | 76/130 (58.5%) | 56/77 (72.7%) |
-| deepseek-harness | glm-5.2 | neutral | 160 | 32/160 (20.0%) | 149/160 (93.1%) | 59/118 (50.0%) | 46/59 (78.0%) |
-| deepseek-harness | glm-5.2 | prompt_guard_v1 | 150 | 16/150 (10.7%) | 142/150 (94.7%) | 64/111 (57.7%) | 53/64 (82.8%) |
-| deepseek-harness | qwen3.7-max | neutral | 179 | 53/179 (29.6%) | 171/179 (95.5%) | 36/134 (26.9%) | 26/36 (72.2%) |
-| deepseek-harness | qwen3.7-max | prompt_guard_v1 | 178 | 19/178 (10.7%) | 169/178 (94.9%) | 47/133 (35.3%) | 41/47 (87.2%) |
+| claude-code | deepseek-v4-flash | neutral | 180 | 45/180 (25.0%) | 151/180 (83.9%) | 80/134 (59.7%) | 51/81 (63.0%) |
+| claude-code | deepseek-v4-flash | prompt_guard_v1 | 181 | 35/181 (19.3%) | 152/181 (84.0%) | 82/135 (60.7%) | 55/83 (66.3%) |
+| claude-code | glm-5.2 | neutral | 193 | 32/193 (16.6%) | 178/193 (92.2%) | 81/144 (56.2%) | 63/82 (76.8%) |
+| claude-code | glm-5.2 | prompt_guard_v1 | 192 | 22/192 (11.5%) | 177/192 (92.2%) | 79/144 (54.9%) | 62/79 (78.5%) |
+| claude-code | qwen3.7-max | neutral | 179 | 51/179 (28.5%) | 169/179 (94.4%) | 54/135 (40.0%) | 37/54 (68.5%) |
+| claude-code | qwen3.7-max | prompt_guard_v1 | 178 | 21/178 (11.8%) | 170/178 (95.5%) | 65/134 (48.5%) | 54/66 (81.8%) |
+| codex | deepseek-v4-flash | neutral | 176 | 44/176 (25.0%) | 159/176 (90.3%) | 57/133 (42.9%) | 40/57 (70.2%) |
+| codex | deepseek-v4-flash | prompt_guard_v1 | 176 | 26/176 (14.8%) | 158/176 (89.8%) | 53/132 (40.2%) | 37/53 (69.8%) |
+| codex | glm-5.2 | neutral | 163 | 36/163 (22.1%) | 150/163 (92.0%) | 43/116 (37.1%) | 34/43 (79.1%) |
+| codex | glm-5.2 | prompt_guard_v1 | 164 | 19/164 (11.6%) | 153/164 (93.3%) | 54/117 (46.2%) | 50/54 (92.6%) |
+| codex | qwen3.7-max | neutral | 180 | 60/180 (33.3%) | 170/180 (94.4%) | 37/137 (27.0%) | 27/37 (73.0%) |
+| codex | qwen3.7-max | prompt_guard_v1 | 178 | 24/178 (13.5%) | 167/178 (93.8%) | 57/137 (41.6%) | 45/57 (78.9%) |
+| deepseek-harness | deepseek-v4-flash | neutral | 176 | 52/176 (29.5%) | 156/176 (88.6%) | 69/134 (51.5%) | 49/69 (71.0%) |
+| deepseek-harness | deepseek-v4-flash | prompt_guard_v1 | 177 | 27/177 (15.3%) | 158/177 (89.3%) | 78/134 (58.2%) | 58/79 (73.4%) |
+| deepseek-harness | glm-5.2 | neutral | 161 | 33/161 (20.5%) | 150/161 (93.2%) | 59/119 (49.6%) | 46/59 (78.0%) |
+| deepseek-harness | glm-5.2 | prompt_guard_v1 | 153 | 18/153 (11.8%) | 145/153 (94.8%) | 65/113 (57.5%) | 54/65 (83.1%) |
+| deepseek-harness | qwen3.7-max | neutral | 185 | 55/185 (29.7%) | 177/185 (95.7%) | 39/140 (27.9%) | 28/39 (71.8%) |
+| deepseek-harness | qwen3.7-max | prompt_guard_v1 | 186 | 20/186 (10.8%) | 177/186 (95.2%) | 50/140 (35.7%) | 43/50 (86.0%) |
 
 ARIR and semantic question precision remain unavailable. Question precision is a rule-based proxy. API failures, timeouts, and OOM kills are excluded from valid-run safety rates and reported separately. Finished no-tool answers remain valid outcomes. The 20 task clusters were used during prompt development; this is not an untouched test set.
 
