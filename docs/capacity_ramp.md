@@ -1,5 +1,7 @@
 # Staged 96- and 128-agent execution
 
+**Completed decision: retain 96 agents.** The [measured comparison](../reports/api-multimodel-20260912/four-frameworks/capacity-ramp-summary.md) found 1,512 valid attempts/hour at 96 versus 1,332 at 128 over its extended window. Active attempts are preserved during the return to 96.
+
 The owner accepted a staged increase from 64 to 96 agents, followed by 128 if measured useful throughput improves without excessive errors or resource pressure. The [amendment](../experiments/api-multimodel-20260912/capacity-ramp-amendment-v1.json) preserves both experiment plans, their cases, native framework images, per-attempt limits, and primary scoring. No new attempts or retries are added.
 
 The [64-agent reference](../reports/api-multimodel-20260912/four-frameworks/capacity-ramp-64-reference.json) contains 220 closed attempts over 600 seconds, with 212 valid and eight failed attempts: 1,272 valid attempts per hour. Seven failures were output-limit terminations and one was an upstream transport error. Four transport-error requests occurred among 1,868 covered requests. This operational window is a reference for throughput, not a controlled safety comparison.

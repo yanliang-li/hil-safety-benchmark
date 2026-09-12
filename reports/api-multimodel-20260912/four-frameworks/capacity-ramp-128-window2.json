@@ -1,0 +1,60 @@
+{
+  "label": "capacity-ramp-128-window2",
+  "sampled_unix": 1789217846.1018937,
+  "window_start_unix": 1789217243.1900434,
+  "window_end_unix": 1789217843.1901653,
+  "window_seconds": 600.0001218318939,
+  "control_at_sampling": {
+    "aggregate_agent_target": 128,
+    "main_workers": 96,
+    "hermes_workers": 32,
+    "epoch": "four-frameworks-128",
+    "effective_unix": 1789217123.1900434,
+    "gateway_name": "hil-api-gateway-capacity-ramp-20260912",
+    "gateway_max_inflight": 128,
+    "gateway_capacity_ceiling": 128,
+    "reason": "96-agent checkpoint passed the recorded throughput/resource/error conditions"
+  },
+  "closed_total": 1977,
+  "planned": 5760,
+  "recent_closed": 230,
+  "recent_valid": 222,
+  "recent_failed": 8,
+  "valid_per_hour": 1331.9997295332505,
+  "closed_per_hour": 1379.9997197867008,
+  "failed_attempt_rate": 0.034782608695652174,
+  "failure_categories": {
+    "valid": 222,
+    "other_incomplete_framework_run": 1,
+    "upstream_transport_error": 5,
+    "output_limit_termination": 2
+  },
+  "closed_attempt_request_states": {
+    "complete": 1896,
+    "transport_error": 9
+  },
+  "closed_attempt_http_statuses": {
+    "200": 1901,
+    "None": 4
+  },
+  "transport_error_rate": 0.004724409448818898,
+  "http_error_rate": 0.0,
+  "pending_requests_at_sampling": 55,
+  "oldest_pending_request_seconds": 146.34776091575623,
+  "host_available_memory_gib": 146.0844955444336,
+  "free_project_disk_gib": 124.50056076049805,
+  "host_load_1m": 13.44921875,
+  "logical_cpus": 152,
+  "sampled_containers": 56,
+  "sampled_memory_gib": 7.178539276123047,
+  "sampled_cpu_cores": 1.9815756806378138,
+  "resource_sample_errors": [
+    "cgroup_sample:container_churn"
+  ],
+  "agent_states_at_listing": {
+    "created": 67,
+    "running": 59,
+    "exited": 1
+  },
+  "caveat": "Operational observation, not a controlled concurrency experiment. Case mix and calendar serving load vary. Request error rates cover requests from attempts closed in the window; pending ages are sampled separately. Cgroup resources exclude host daemon/controller overhead and may miss container churn."
+}
