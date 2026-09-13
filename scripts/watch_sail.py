@@ -112,7 +112,7 @@ def main():
                 common.run([PYTHON,'scripts/analyze_sail_v3.py','--plan',PLAN,'--output',REPORT,
                             '--bootstrap','10000' if complete else '1000'],cwd=ROOT,timeout=480)
                 if complete:
-                    common.run([PYTHON,'scripts/audit_sail_inputs.py','--plan',PLAN,
+                    common.run([PYTHON,'scripts/audit_sail_inputs_v2.py','--plan',PLAN,
                                 '--output',REPORT+'/input_audit.json'],cwd=ROOT,timeout=240)
                 common.run([PYTHON,'scripts/build_sail_results.py'],cwd=ROOT,timeout=60)
                 if complete:

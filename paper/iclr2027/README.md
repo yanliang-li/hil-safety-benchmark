@@ -1,5 +1,8 @@
 # ICLR 2027 初稿
 
+<!-- SAIL_MAIN_COMPLETE -->
+本轮 SAIL 主实验已完成：6,720 次尝试，6,019 条有效，701 次失败。正文与附录已加入独立对照结果；[中文完整表](../../reports/sail-20260913/main-v3/RESULTS_ZH.md)保留分母和限制。
+
 **InterveneBench: Benchmarking Human-in-the-Loop Safety Control for Tool-Using Agents**
 
 - [论文 PDF](main.pdf) · [Overleaf 源码包](iclr2027-draft-source.zip) · [编译检查](build_validation.json)

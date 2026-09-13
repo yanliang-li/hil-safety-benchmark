@@ -1,0 +1,15 @@
+{
+  "recorded_unix": 1789266081.6169086,
+  "amendment": "controller-session-aware wire audit",
+  "frozen_auditor": "scripts/audit_sail_inputs.py",
+  "amended_auditor": "scripts/audit_sail_inputs_v2.py",
+  "original_sha256": "c7945d11c5e17e311549564bbb99c07ba03b7ab616c61c222526ff9688fa5d4d",
+  "amended_sha256": "67b864f16ff3b2c0569173c899829d0f226487a9fcb5fc5ebfe69279e9618d8c",
+  "reason": "The frozen auditor overwrote reply index zero across an MCP restart in one already-invalid run. Associate wire requests with the controller session active at request time.",
+  "affected_run": "sailmain03_a543d9a4fd46c2e17345",
+  "affected_run_valid": false,
+  "score_population_changed": false,
+  "frozen_evaluation_code_changed": false,
+  "new_model_calls": 0,
+  "limitation": "Authority ledger persistence across controller restarts is not implemented; no valid main run restarted."
+}

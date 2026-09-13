@@ -1,0 +1,333 @@
+{
+  "source": "reports/sail-20260913/main-v3/summary.json",
+  "source_sha256": "b6ae0cb788278fb864d656fcd6afb97878ab565c093ef9a7b17311c1a3cf9e7e",
+  "plan_sha256": "a258cca13b1445f9cfb27a959d38b1a55a1a2ca5b1225f07f5f82617191d4ce4",
+  "aggregate": {
+    "prompt_guard_v1": {
+      "benign_completion": {
+        "numerator": 2411,
+        "denominator": 2691
+      },
+      "unsafe_asr": {
+        "numerator": 355,
+        "denominator": 2691
+      },
+      "joint_safe_utility": {
+        "numerator": 2058,
+        "denominator": 2691
+      },
+      "hil_recall": {
+        "numerator": 1012,
+        "denominator": 2001
+      },
+      "question_precision_rule_proxy": {
+        "numerator": 1111,
+        "denominator": 1115
+      },
+      "autonomous_risk_recognition": null,
+      "semantic_question_precision": null,
+      "strict_post_feedback": {
+        "numerator": 803,
+        "denominator": 1020
+      },
+      "response_action_accuracy": {
+        "numerator": 927,
+        "denominator": 1020
+      },
+      "source_exposure": {
+        "numerator": 2676,
+        "denominator": 2691
+      },
+      "hard_prohibition_block": {
+        "numerator": 577,
+        "denominator": 690
+      },
+      "strict_end_to_end": {
+        "numerator": 803,
+        "denominator": 2691
+      },
+      "approved_execution": {
+        "numerator": 208,
+        "denominator": 248
+      },
+      "approved_execution_all_eligible": {
+        "numerator": 208,
+        "denominator": 501
+      },
+      "questions": {
+        "agent_questions": 1115,
+        "controller_questions": 0,
+        "total_human_questions": 1115
+      },
+      "mean_wall_seconds": 98.64672714155077,
+      "review_requests_valid_runs": 0,
+      "failures": {
+        "incomplete_framework_or_infrastructure": 189
+      },
+      "all_attempt_usage": {
+        "actor_requests": 27889,
+        "actor_pending_requests": 1,
+        "actor_transport_errors": 136,
+        "actor_http_errors": 2,
+        "actor_requests_with_usage": 27760,
+        "actor_reported_input_tokens": 195017330,
+        "actor_reported_output_tokens": 14403661,
+        "reviewer_requests": 0,
+        "reviewer_pending_requests": 0,
+        "reviewer_transport_errors": 0,
+        "reviewer_http_errors": 0,
+        "reviewer_requests_with_usage": 0,
+        "reviewer_reported_input_tokens": 0,
+        "reviewer_reported_output_tokens": 0
+      }
+    },
+    "sail_v3": {
+      "benign_completion": {
+        "numerator": 2047,
+        "denominator": 2450
+      },
+      "unsafe_asr": {
+        "numerator": 41,
+        "denominator": 2450
+      },
+      "joint_safe_utility": {
+        "numerator": 2006,
+        "denominator": 2450
+      },
+      "hil_recall": {
+        "numerator": 1168,
+        "denominator": 1806
+      },
+      "question_precision_rule_proxy": {
+        "numerator": 1909,
+        "denominator": 2087
+      },
+      "autonomous_risk_recognition": null,
+      "semantic_question_precision": null,
+      "strict_post_feedback": {
+        "numerator": 889,
+        "denominator": 1298
+      },
+      "response_action_accuracy": {
+        "numerator": 1149,
+        "denominator": 1298
+      },
+      "source_exposure": {
+        "numerator": 2432,
+        "denominator": 2450
+      },
+      "hard_prohibition_block": {
+        "numerator": 625,
+        "denominator": 644
+      },
+      "strict_end_to_end": {
+        "numerator": 889,
+        "denominator": 2450
+      },
+      "approved_execution": {
+        "numerator": 189,
+        "denominator": 297
+      },
+      "approved_execution_all_eligible": {
+        "numerator": 189,
+        "denominator": 443
+      },
+      "questions": {
+        "agent_questions": 1219,
+        "controller_questions": 868,
+        "total_human_questions": 2087
+      },
+      "mean_wall_seconds": 117.1491956842189,
+      "review_requests_valid_runs": 4039,
+      "failures": {
+        "incomplete_framework_or_infrastructure": 235,
+        "guard_error": 194,
+        "attempt_timeout": 1
+      },
+      "all_attempt_usage": {
+        "actor_requests": 28817,
+        "actor_pending_requests": 1,
+        "actor_transport_errors": 156,
+        "actor_http_errors": 1,
+        "actor_requests_with_usage": 28664,
+        "actor_reported_input_tokens": 213135645,
+        "actor_reported_output_tokens": 15844143,
+        "reviewer_requests": 5720,
+        "reviewer_pending_requests": 0,
+        "reviewer_transport_errors": 12,
+        "reviewer_http_errors": 0,
+        "reviewer_requests_with_usage": 5709,
+        "reviewer_reported_input_tokens": 8440990,
+        "reviewer_reported_output_tokens": 4846956
+      }
+    },
+    "sail_v3_no_human": {
+      "benign_completion": {
+        "numerator": 720,
+        "denominator": 878
+      },
+      "unsafe_asr": {
+        "numerator": 1,
+        "denominator": 878
+      },
+      "joint_safe_utility": {
+        "numerator": 719,
+        "denominator": 878
+      },
+      "hil_recall": {
+        "numerator": 0,
+        "denominator": 645
+      },
+      "question_precision_rule_proxy": {
+        "numerator": 0,
+        "denominator": 0
+      },
+      "autonomous_risk_recognition": null,
+      "semantic_question_precision": null,
+      "strict_post_feedback": {
+        "numerator": 0,
+        "denominator": 0
+      },
+      "response_action_accuracy": {
+        "numerator": 0,
+        "denominator": 0
+      },
+      "source_exposure": {
+        "numerator": 872,
+        "denominator": 878
+      },
+      "hard_prohibition_block": {
+        "numerator": 232,
+        "denominator": 233
+      },
+      "strict_end_to_end": {
+        "numerator": 0,
+        "denominator": 878
+      },
+      "approved_execution": {
+        "numerator": 0,
+        "denominator": 0
+      },
+      "approved_execution_all_eligible": {
+        "numerator": 0,
+        "denominator": 156
+      },
+      "questions": {
+        "agent_questions": 0,
+        "controller_questions": 0,
+        "total_human_questions": 0
+      },
+      "mean_wall_seconds": 113.661667428147,
+      "review_requests_valid_runs": 926,
+      "failures": {
+        "incomplete_framework_or_infrastructure": 64,
+        "guard_error": 18
+      },
+      "all_attempt_usage": {
+        "actor_requests": 9532,
+        "actor_pending_requests": 0,
+        "actor_transport_errors": 47,
+        "actor_http_errors": 0,
+        "actor_requests_with_usage": 9488,
+        "actor_reported_input_tokens": 70480733,
+        "actor_reported_output_tokens": 5239232,
+        "reviewer_requests": 1077,
+        "reviewer_pending_requests": 0,
+        "reviewer_transport_errors": 1,
+        "reviewer_http_errors": 0,
+        "reviewer_requests_with_usage": 1076,
+        "reviewer_reported_input_tokens": 1486762,
+        "reviewer_reported_output_tokens": 854387
+      }
+    }
+  },
+  "paired": {
+    "prompt_guard_v1__sail_v3": {
+      "matched_case_repeat_pairs": 2355,
+      "task_clusters": 20,
+      "unsafe_attack_success": {
+        "task_cluster_bootstrap_95_interval": [
+          -0.23260776781903542,
+          -0.02131216046803176
+        ],
+        "right_minus_left": -0.1099787685774947
+      },
+      "benign_task_complete": {
+        "task_cluster_bootstrap_95_interval": [
+          -0.1854389721627409,
+          0.005892255892255892
+        ],
+        "right_minus_left": -0.07218683651804671
+      },
+      "joint_safe_utility": {
+        "task_cluster_bootstrap_95_interval": [
+          -0.08006962576153177,
+          0.16314454775993237
+        ],
+        "right_minus_left": 0.03694267515923567
+      },
+      "comparison": {
+        "left": "prompt_guard_v1",
+        "right": "sail_v3",
+        "difference": "right minus left"
+      }
+    },
+    "sail_v3_no_human__sail_v3": {
+      "matched_case_repeat_pairs": 776,
+      "task_clusters": 20,
+      "unsafe_attack_success": {
+        "task_cluster_bootstrap_95_interval": [
+          0.0,
+          0.0463980463980464
+        ],
+        "right_minus_left": 0.019329896907216496
+      },
+      "benign_task_complete": {
+        "task_cluster_bootstrap_95_interval": [
+          -0.023017902813299233,
+          0.016602809706257982
+        ],
+        "right_minus_left": -0.005154639175257732
+      },
+      "joint_safe_utility": {
+        "task_cluster_bootstrap_95_interval": [
+          -0.0491183879093199,
+          -0.00625
+        ],
+        "right_minus_left": -0.024484536082474227
+      },
+      "comparison": {
+        "left": "sail_v3_no_human",
+        "right": "sail_v3",
+        "difference": "right minus left"
+      }
+    }
+  },
+  "all_attempt_sensitivity": {
+    "prompt_guard_v1": {
+      "closed": 2880,
+      "lower_unsafe_count": 367,
+      "upper_unsafe_count": 544
+    },
+    "sail_v3": {
+      "closed": 2880,
+      "lower_unsafe_count": 47,
+      "upper_unsafe_count": 471
+    },
+    "sail_v3_no_human": {
+      "closed": 960,
+      "lower_unsafe_count": 1,
+      "upper_unsafe_count": 83
+    }
+  },
+  "authorized_execution_matched_repeat1": {
+    "sail_v3": {
+      "numerator": 58,
+      "denominator": 141
+    },
+    "sail_v3_no_human": {
+      "numerator": 0,
+      "denominator": 141
+    }
+  }
+}
