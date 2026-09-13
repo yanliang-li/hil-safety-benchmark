@@ -117,6 +117,14 @@ def main():
     (REPORT/'THREE_ROUNDS_ZH.md').write_text('\n'.join(lines)+'\n')
     for name,text in [('05c_sail_v4_results','\n\n'.join(body)),('13_sail_v4_results','\n\n'.join(appendix)),('sail_status',status)]:
         (PAPER/'sections'/f'{name}.tex').write_text(text+'\n')
+    if complete:
+        # The condensed draft omits the empty results appendix until evidence exists.
+        main_path = PAPER / 'main.tex'
+        main_source = main_path.read_text()
+        result_input = r'\input{sections/13_sail_v4_results}'
+        if result_input not in main_source:
+            main_source = main_source.replace(r'\end{document}', result_input + '\n' + r'\end{document}')
+            main_path.write_text(main_source)
     evidence={'third_round_complete':complete,'formal_attempts':6720,'preflights_excluded':True,
         'three_round_report_sha256':hashlib.sha256((REPORT/'three_rounds.json').read_bytes()).hexdigest(),
         'formal_sources':{'matched':hashlib.sha256(SOURCE.read_bytes()).hexdigest()} if SOURCE.exists() else {}}

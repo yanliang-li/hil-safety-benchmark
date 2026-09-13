@@ -1,0 +1,14 @@
+{
+  "created_unix": 1789288810.5366988,
+  "basis": "During the authorized concurrency handoff, all437started attempts ended but13gateway requests remained pending for several minutes. Every associated attempt is a terminal failure. Waiting for unrelated orphan sockets cannot improve these already-ended episodes.",
+  "adapter": "scripts/handoff_sail_v4_orphan_closeout.py",
+  "adapter_sha256": "c52055fcdae2f72ac3004410969cdb632a9bef62a1314213b7c94e21ab6da578",
+  "requirements": [
+    "No active formal episodes; owned launch pause",
+    "Every pending request belongs to a frozen-plan episode with completed=false and terminal status older than60seconds",
+    "Gateway thread count equals one listener plus the recorded pending requests",
+    "Save immutable request and attempt-status hashes before old gateway shutdown"
+  ],
+  "effects": "Only allow the previously prepared gateway handoff to close orphan sockets. Preserve original request evidence, terminal failures and missing usage. No replacement calls, score changes or new formal runs.",
+  "capacity_amendment_sha256": "5aa75d8865f8413a80328c8af0c178f393507fd277af1ca0aa7e1852d2c2a89e"
+}

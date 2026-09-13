@@ -1,8 +1,10 @@
 # ICLR 2027 初稿
 
+当前分类与结构检查：正文第 3 页为八域二十类总览，附录第 14 页保留完整定义；方法章明确区分已评估的 SAIL v3 与待评估的 v4。正文 9 页、全文 18 页。[章节对照与官方要求](STRUCTURE_AND_SUBMISSION_REVIEW_20260913.md)及[投稿格式检查](submission_format_validation.json)记录依据、检查结果和作者待办。
+
 本次附录精简合并为六节，保留完整结果分母、区间、失败记录、评分边界与复现协议，删去重复表格和工程流水账。[附录修改记录](REVISION_NOTES_APPENDIX_20260913.md)列出取舍及篇幅变化。正文实验结果与 agent 分析保留。
 
-本次历史稿恢复后正文为 9 页：第 7 页为 12 组 agent 的结果矩阵，第 8 页为 SAIL v3 的安全、完成率和交互指标。已从原对话补回摘要与引言场景、任务定义、构造细节、方法组织、案例结构和分类表定义；[逐章回顾与来源](ARCHIVE_REVIEW_20260913.md)记录采用内容及证据边界。正文保留逐配置评价、回复误用、正常任务损失、无人工回复消融以及失败和开销分析；此前的[结果正文修改记录](REVISION_NOTES_MAIN_TEXT_20260913.md)保留当时的内容分配和字数变化。
+本次历史稿恢复后正文为 9 页：第 7 页为 12 组 agent 的结果矩阵，第 9 页为 SAIL v3 的安全、完成率和交互指标。已从原对话补回摘要与引言场景、任务定义、构造细节、方法组织、案例结构和分类表定义；[逐章回顾与来源](ARCHIVE_REVIEW_20260913.md)记录采用内容及证据边界。正文保留逐配置评价、回复误用、正常任务损失、无人工回复消融以及失败和开销分析；此前的[结果正文修改记录](REVISION_NOTES_MAIN_TEXT_20260913.md)保留当时的内容分配和字数变化。
 
 <!-- SAIL_MAIN_COMPLETE -->
 本轮 SAIL 主实验已完成：6,720 次尝试，6,019 条有效，701 次失败。正文与附录已加入独立对照结果；[中文完整表](../../reports/sail-20260913/main-v3/RESULTS_ZH.md)保留分母和限制。
@@ -30,6 +32,7 @@ SAIL v3 的独立 6,720 次比较已经完成，降低了有效运行的 ASR，�
 .venv/bin/python scripts/build_main_results.py
 .venv/bin/python scripts/build_sail_results.py
 .venv/bin/python scripts/package_iclr_v4_draft.py
+.venv/bin/python scripts/check_iclr_submission.py
 ```
 
 最后一步会编译正文、生成源码包，并在临时目录独立编译后核对全文。Overleaf 选择 `main.tex`；源码包自带图表，不需要模型访问、Python 或 skills。图表修改沿用 Python 和 nature-figure 工作流。
