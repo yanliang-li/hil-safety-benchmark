@@ -53,7 +53,7 @@ def main():
         if not progress.get('finished_unix'):
             with (ROOT / 'reports' / (stage + '.log')).open('ab') as log:
                 subprocess.run([sys.executable, freeze.get('launcher','scripts/hil_guard_v4/launch.py'), relative,
-                    '--concurrency', '64', '--adaptive'], cwd=ROOT, env=env, stdout=log,
+                    '--concurrency', '96', '--adaptive'], cwd=ROOT, env=env, stdout=log,
                     stderr=subprocess.STDOUT, check=True)
         output = 'reports/sail-v4-20260913/' + stage
         with (ROOT / 'reports' / (stage + '-analysis.log')).open('ab') as log:

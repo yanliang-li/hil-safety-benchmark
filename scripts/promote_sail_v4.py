@@ -3,6 +3,7 @@
 The launch gate uses protocol/provenance and configuration coverage, never
 ASR/BCR outcomes. Any blocked gate is recorded for review rather than bypassed.
 """
+import argparse
 import fcntl
 import json
 import os
@@ -17,6 +18,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--engineering-revision', type=int, choices=(2, 3), default=2)
+    args = parser.parse_args()
+    revision = args.engineering_revision
     lock = (ROOT / 'reports/sail4-promotion.lock').open('w')
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     state_path = ROOT / 'reports/sail4-promotion.json'
@@ -25,21 +30,24 @@ def main():
         raise ValueError('Only the user-corrected 6720-attempt scope may launch')
     env = dict(os.environ, PYTHONPATH=str(ROOT / 'src') + ':' + str(ROOT / 'scripts'))
     while True:
-        path = ROOT / 'reports/sail4-preflight-r1_progress.json'
+        preceding = 'sail4-preflight-r1' if revision == 2 else 'sail4-preflight-matched-r2'
+        path = ROOT / 'reports' / (preceding + '_progress.json')
         progress = json.loads(path.read_text()) if path.exists() else {}
         if progress.get('finished_unix'):
             break
-        save(state_path, {'state': 'waiting_for_r1_to_drain', 'checked_unix': time.time(),
-            'closed_attempts': progress.get('finished_attempts', 0), 'planned': 480})
+        save(state_path, {'state': 'waiting_for_previous_engineering_to_drain', 'previous_phase': preceding,
+            'checked_unix': time.time(), 'closed_attempts': progress.get('finished_attempts', 0),
+            'planned': progress.get('planned')})
         time.sleep(30)
-    save(state_path, {'state': 'engineering_r2', 'started_unix': time.time()})
-    plan_rel = 'experiments/sail-v4-20260913/sail4-preflight-matched-r2.json'
-    progress_path = ROOT / 'reports/sail4-preflight-matched-r2_progress.json'
+    save(state_path, {'state': f'engineering_r{revision}', 'started_unix': time.time()})
+    stage = f'sail4-preflight-matched-r{revision}'
+    plan_rel = f'experiments/sail-v4-20260913/{stage}.json'
+    progress_path = ROOT / 'reports' / (stage + '_progress.json')
     progress = json.loads(progress_path.read_text()) if progress_path.exists() else {}
     # A restarted coordinator must wait for an existing preflight launcher,
     # not start a duplicate or replace any attempt.
     while not progress.get('finished_unix'):
-        with (ROOT/'reports/sail4-preflight-matched-r2.lock').open('a') as handle:
+        with (ROOT/'reports'/(stage+'.lock')).open('a') as handle:
             try:
                 fcntl.flock(handle,fcntl.LOCK_EX|fcntl.LOCK_NB)
                 running=False
@@ -50,10 +58,12 @@ def main():
         time.sleep(30)
         progress=json.loads(progress_path.read_text()) if progress_path.exists() else {}
     if not progress.get('finished_unix'):
-        with (ROOT / 'reports/sail4-preflight-matched-r2.log').open('ab') as log:
-            subprocess.run([sys.executable, 'scripts/hil_guard_v4/launch.py', plan_rel, '--concurrency', '32'],
+        with (ROOT / 'reports' / (stage + '.log')).open('ab') as log:
+            launcher = 'scripts/hil_guard_v4/launch.py' if revision == 2 else 'scripts/launch_sail_v4_sequential.py'
+            capacity = ['--concurrency', '32'] if revision == 2 else ['--concurrency', '96', '--adaptive']
+            subprocess.run([sys.executable, launcher, plan_rel, *capacity],
                 cwd=ROOT, env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
-    output = 'reports/sail-v4-20260913/sail4-preflight-matched-r2'
+    output = 'reports/sail-v4-20260913/' + stage
     for command in ([sys.executable, 'scripts/analyze_sail_v4.py', '--plan', plan_rel, '--output', output, '--bootstrap', '10000'],
                     [sys.executable, 'scripts/audit_sail_v4.py', '--plan', plan_rel, '--output', output + '/input_audit.json']):
         subprocess.run(command, cwd=ROOT, env=env, check=True)
@@ -67,7 +77,7 @@ def main():
     gate = {'complete_288_attempts': summary['finished_attempts'] == 288,
         'valid_input_violation_runs': audit['valid_violation_runs'], 'configurations_without_valid_controller_episode': missing,
         'outcome_threshold_used': False, 'whole_episode_retries': False,
-        'engineering_revision': 2, 'checked_unix': time.time()}
+        'engineering_revision': revision, 'checked_unix': time.time(), 'preflight_plan': plan_rel}
     gate['passed'] = gate['complete_288_attempts'] and not missing and audit['valid_violation_runs'] == 0
     save(ROOT / 'experiments/sail-v4-20260913/matched_engineering_gate.json', gate)
     if not gate['passed']:

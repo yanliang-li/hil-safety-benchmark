@@ -1,0 +1,29 @@
+{
+  "created_unix": 1789282852.1487832,
+  "authorization": "User requested more concurrency to finish third-round main and then ablation sooner.",
+  "scope": "Scheduling only; same 5760 main and 960 ablation attempts, same frozen episode execution, cases, scoring, limits and failure retention.",
+  "engineering_preflight": "Existing r2 32-worker launcher drains unchanged. Final bounded r3 protocol engineering uses the same eight cases in 288 separate attempts, starts at 96 and may trial 128. All preflights are excluded from formal evidence; none are replacement formal runs.",
+  "formal_initial_concurrency": 96,
+  "formal_maximum_concurrency": 128,
+  "backoff_levels": [
+    128,
+    96,
+    64,
+    32
+  ],
+  "window_seconds": 300,
+  "ramp_healthy_windows": 2,
+  "minimum_requests_per_healthy_window": 50,
+  "api_error_rate_backoff": 0.05,
+  "ramp_memory_reserve_gib": 64,
+  "additional_worker_reserve_gib": 1.5,
+  "pause_below_available_memory_gib": 64,
+  "pause_below_free_disk_gib": 30,
+  "pause_above_load_per_logical_cpu": 0.75,
+  "trial_128_windows": 2,
+  "minimum_trial_successful_request_throughput_ratio": 1.05,
+  "retry_128_cooldown_seconds": 1800,
+  "throughput_comparison_limit": "Operational heuristic across consecutive windows, not a causal benchmark; request mix and serving conditions may change.",
+  "gateway_capacity_ceiling": 128,
+  "ablation_order": "All main attempts finish and are accounted before any ablation starts."
+}

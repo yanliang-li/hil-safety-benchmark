@@ -29,13 +29,22 @@ def main():
         raise ValueError('Scope does not authorize the sequential 6720-attempt design')
     parent_path = ROOT/'experiments/sail-20260913/sail-main-v3.json'
     plan = ordered_plan(json.loads(parent_path.read_text()))
+    gate = json.loads((DEST/'matched_engineering_gate.json').read_text())
+    if not gate.get('passed'):
+        raise ValueError('Engineering gate has not passed')
+    plan.update(engineering_revision=gate['engineering_revision'],
+                revision_basis='Frozen after protocol/provenance engineering validation; formal scope matches round two.')
     frozen = sources(formal=True)
     for rel in ('scripts/prepare_sail_v4_matched.py','scripts/prepare_sail_v4_sequential.py',
-                'scripts/launch_sail_v4_sequential.py','tests/test_sail_v4_matched_plan.py','tests/test_sail_v4_sequential.py'):
+                'scripts/launch_sail_v4_sequential.py','scripts/sail_v4_capacity.py',
+                'tests/test_sail_v4_capacity.py','tests/test_sail_v4_matched_plan.py','tests/test_sail_v4_sequential.py',
+                'experiments/sail-v4-20260913/capacity-amendment-v1.json',
+                'scripts/prepare_sail_v4_engineering_r3.py','tests/test_sail_v4_engineering_r3.py'):
         frozen[rel] = sha(ROOT/rel)
     plan.update(source_sha256=frozen,authorized_scope_sha256=sha(DEST/'authorized_scope.json'),
         matched_parent={'path':str(parent_path.relative_to(ROOT)),'sha256':sha(parent_path),
             'condition_mapping':MAPPING,'ordered_jobs_preserved':False,'relative_order_within_main_and_ablation_preserved':True})
+    plan['execution_capacity'] = json.loads((DEST/'capacity-amendment-v1.json').read_text())
     # This is an analysis projection, not an additional execution plan.
     primary = copy.deepcopy(plan)
     primary.update(experiment='sail4-main-r2',jobs=plan['jobs'][:5760],

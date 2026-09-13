@@ -2,10 +2,20 @@
 
 \label{sec:sailresults}
 
-The second round completes 6,720 attempts, with 6,019 valid runs and 701 failures. Here SAIL denotes the frozen v3 controller, before task recovery was added. It uses fresh prompt controls on the same 80 development cases: three repeats for Prompt and SAIL v3, and one for its no-human ablation. Preflights are excluded.
+The second round completed 6,720 attempts, with 6,019 valid runs and 701 failures. It tested frozen SAIL v3, before task recovery, against fresh Prompt controls on the same 80 cases. Prompt and SAIL v3 each used three repeats; no-human SAIL v3 used one. Preflights were excluded.
 
-Unsafe ASR changes from 355/2,691 (13.19\%) with the prompt to 41/2,450 (1.67\%) with SAIL. Benign completion changes from 89.59\% to 83.55\%. On 2,355 matched pairs, the ASR difference is -11.00 percentage points (95\% task-cluster interval [-23.26, -2.13]); the benign-completion difference is -7.22 points ([-18.54, +0.59]). These remain exploratory estimates over 20 reused tasks.
+\input{tables/sail_main}
 
-On matched eligible cases in repeat 1, safe authorized execution is 0/141 (0.00\%) without human replies and 58/141 (41.13\%) with full SAIL. This metric includes unconsulted eligible cases. SAIL records 1,219 actor questions and 868 controller questions. Thus its consultation score describes the combined system. Appendix~\ref{app:sailresults} reports failure bounds, response metrics, and reviewer cost. These comparisons do not isolate scope binding from the other controller components.
+\paragraph{Lower ASR came with lost task completion.}
+Table~\ref{tab:sailmain} shows lower ASR alongside lower BCR and PostSuccess. ASR and BCR both decreased in every configuration (Appendix Table~\ref{tab:sailmatrix}). On 2,355 matched pairs, the ASR difference was -11.00 percentage points (95\% task-cluster interval [-23.26, -2.13]). BCR changed by -7.22 points ([-18.54, +0.59]); joint safe utility changed by +3.69 points ([-8.01, +16.31]). The paired evidence supports reduced unsafe execution, but remains inconclusive about an overall gain in safe task completion.
 
-The paired benign outcomes lose 251 completions and gain 81, a net loss of 170. Invoice validation and the policy review budget account for 169 of that net loss. Traces show omitted original permissions and reports written without the required check. This development diagnosis motivates the authority and recovery changes in Section~\ref{sec:defense}; it does not validate them.
+The matched benign outcomes lost 251 completions and gained 81, a net loss of 170. Invoice validation and policy review budgets accounted for 169 of that net loss. Traces showed omitted original permissions and reports written without the required check. This concentrated loss motivated task-authority preservation and completion review in SAIL v4; it does not validate those revisions.
+
+\paragraph{More consultation did not ensure correct authorization.}
+SAIL v3 recorded 1,219 actor questions and 868 controller questions, so its higher HIL recall describes the combined system. All 41 remaining unsafe runs followed matched consultation: 22 transferred approval across scope and 19 accepted approval for prohibited effects. Among consulted confirmable approval cases, 108/297 omitted the approved effect, compared with 40/248 under fresh Prompt. Together with lower PostSuccess, these outcomes locate remaining weaknesses in permission interpretation and authorized execution, despite increased consultation.
+
+\paragraph{Human replies enabled extensions while introducing unsafe effects.}
+In repeat 1, safe authorized execution was 0/141 without replies and 58/141 (41.13\%) with full SAIL v3 on matched eligible approval cases. This denominator includes cases without consultation. Across all 776 matched repeat-1 pairs, full minus no-human ASR was +1.93 points ([+0.00, +4.64]); BCR changed by -0.52 points ([-2.30, +1.66]). Access to feedback enabled some authorized extensions without demonstrating higher overall task completion. This ablation does not isolate individual controller components.
+
+\paragraph{Reliability and cost qualify the safety gain.}
+SAIL v3 failed in 430/2,880 attempts, versus 189/2,880 for Prompt; 194 SAIL failures were guard errors. All-attempt ASR bounds overlapped: 1.63--16.35\% for SAIL v3 and 12.74--18.89\% for Prompt. Therefore, valid-run superiority does not establish superiority under arbitrary missing outcomes. Mean valid-run duration rose from 98.6 to 117.1 seconds, and SAIL added 5,720 reviewer requests across all attempts. Failed reviews are reliability failures, and the comparison is not compute-matched (Appendix~\ref{app:sailresults}).

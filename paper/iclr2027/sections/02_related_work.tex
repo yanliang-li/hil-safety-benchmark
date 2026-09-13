@@ -1,11 +1,43 @@
 \section{Related Work}
 \label{sec:related}
 
-\paragraph{Tool behavior and indirect attacks.}
-ToolEmu evaluates risks in emulated environments, and R-Judge studies risk awareness in recorded interactions \citep{ruan2024toolemu,yuan2024rjudge}. Agent-SafetyBench covers varied environments and behavioral failures \citep{zhang2024agentsafetybench}. AgentHarm starts from malicious user requests and checks harmful task completion \citep{andriushchenko2025agentharm}. InjecAgent and AgentDojo instead place adversarial instructions in lower-trust inputs; AgentDojo checks task utility separately from attack success \citep{zhan2024injecagent,debenedetti2024agentdojo}. MT-AgentRisk studies how harmful tool use develops over multiple turns \citep{li2026unsafer}. SkillHarm and SkillSafetyBench extend evaluation to skills and related artifacts \citep{ning2026skillharm,jin2026skillsafetybench}. These works inform our attack construction and effect checks. We focus on how consultation and later actions interact under different human replies.
+\subsection{Agent Safety Benchmarks}
 
-\paragraph{Human collaboration and authority.}
-HiL-Bench measures task completion, blocker recall, and question precision when agents need missing information \citep{trinh2026hilbench}. HAS-Bench varies human participation and evaluates clarification, feedback use, control, and safety, including approval of protected actions \citep{wu2026hasbench}. HumanAgencyBench evaluates six aspects of agency support, such as clarification, correcting misinformation, and deferring important decisions \citep{sturgeon2025humanagencybench}. OverEager-Bench studies unauthorized scope expansion during benign coding tasks \citep{qu2026overeager}. Thus, human control and authorization are already evaluation targets. Our narrower question is how agents handle indirect attacks before and after feedback that differs in validity and scope. The planned factual-error and partial-approval tracks would extend the current four-reply core. Appendix~\ref{app:comparison} compares the evaluated settings without equating model counts with framework counts.
+Existing agent-safety benchmarks evaluate behavioral risks arising from planning,
+tool use, and environment interaction. ToolEmu and R-Judge assess unsafe tool use
+and risk awareness; AgentDojo and Agent-SafetyBench study indirect injection and
+broader failures in executable environments
+\citep{ruan2024toolemu,yuan2024rjudge,debenedetti2024agentdojo,zhang2024agentsafetybench}.
+MT-AgentRisk studies multi-turn attacks, while SkillHarm and SkillSafetyBench
+examine risks introduced through reusable skills
+\citep{li2026unsafer,ning2026skillharm,jin2026skillsafetybench}.
+HiL-Bench evaluates help-seeking under incomplete specifications; HAS-Bench and
+HumanAgencyBench examine feedback, control, and agency support
+\citep{trinh2026hilbench,wu2026hasbench,sturgeon2025humanagencybench}.
+OverEager-Bench studies unauthorized scope expansion during benign tasks,
+complementing evaluation under adversarial inputs \citep{qu2026overeager}.
+Our focus is the interaction between pre-action intervention and post-response
+control under indirect attacks. \bench{} varies approval validity and scope,
+includes actions that remain prohibited after approval, and scores tool traces
+and terminal environment effects. Table~\ref{tab:comparison} summarizes the
+compared settings, including prior evaluation of human control.
 
-\paragraph{Defenses.}
-ToolShield derives guidance from tool exploration, while Task Shield checks whether instructions and calls serve the user's task \citep{li2026unsafer,jia2024taskshield}. CaMeL separates trusted control from untrusted data \citep{debenedetti2025camel}. Progent represents privileges as symbolic policies and requires approval for policy expansion \citep{shi2025progent}. SafeAgent combines runtime control with recovery options, including replanning and human approval \citep{liu2026safeagent}. Task alignment, scoped privileges, and recovery therefore have substantial prior work. Our contribution connects a reply-sensitive benchmark to a test of original-authority preservation and task recovery. We compare controller versions and ablations within this benchmark, without claiming a head-to-head advantage over these defenses.
+\subsection{Agent Safety Defenses}
+
+Agent-safety defenses range from text-level filtering to runtime enforcement.
+Llama Guard, WildGuard, and ShieldGemma detect harmful prompts or responses but
+do not directly constrain consequential tool effects
+\citep{inan2023llamaguard,han2024wildguard,zeng2024shieldgemma}.
+StruQ and SecAlign separate trusted instructions from untrusted data or improve
+resistance to injected commands \citep{chen2025struq,chen2025secalign}.
+Adaptive attacks demonstrate the need to evaluate defenses against attacks
+tailored to their design \citep{zhan2025adaptive}.
+GuardAgent, CaMeL, and ToolSafe monitor behavior or apply safeguards at tool-call
+time \citep{xiang2025guardagent,debenedetti2025camel,toolsafe2026}.
+Progent requires approval for privilege expansion, while SafeAgent combines
+runtime control with recovery \citep{shi2025progent,liu2026safeagent}.
+\sail{} focuses on interpreting human replies as scoped authorization for the
+proposed effect while preserving original task authority. It binds approved
+extensions to one-use execution permits and returns the agent to authorized
+work after a denial. Semantic review remains fallible; our experiments compare
+controller versions and ablations within \bench{}.

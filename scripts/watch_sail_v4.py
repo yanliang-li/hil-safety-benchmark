@@ -45,7 +45,7 @@ def ensure_connection():
 def sync_control():
     prefix = 'from pathlib import Path\nimport json\nr=Path(' + repr(connection.CONFIG['remote_root']) + ')\n'
     code = prefix + '''files={}
-for name in ('authorized_scope.json','matched_formal_freeze.json','matched_engineering_gate.json','sail4-matched-r2.json','sail4-main-r2.json'):
+for name in ('authorized_scope.json','matched_formal_freeze.json','matched_engineering_gate.json','sail4-matched-r2.json','sail4-main-r2.json','sail4-preflight-matched-r3.json'):
  p=r/'experiments/sail-v4-20260913'/name
  if p.exists():files[name]=p.read_text()
 control={}
@@ -75,7 +75,7 @@ def main():
             ensure_connection()
             control = sync_control()
             state['remote_control'] = control
-            names = ['sail4-preflight-r1', 'sail4-preflight-matched-r2', 'sail4-matched-r2']
+            names = ['sail4-preflight-r1', 'sail4-preflight-matched-r2', 'sail4-preflight-matched-r3', 'sail4-matched-r2']
             for name in names:
                 path = ROOT / 'experiments/sail-v4-20260913' / (name + '.json')
                 if not path.exists() or state['phases'].get(name, {}).get('final_processed'):

@@ -1,4 +1,4 @@
-"""Use the unchanged native launcher, with a barrier before the ablation."""
+"""Preserve native episodes and the ablation barrier with bounded capacity."""
 from concurrent.futures import ThreadPoolExecutor, wait
 import json
 from pathlib import Path
@@ -6,6 +6,7 @@ import sys
 import time
 
 from hil_guard_v4 import launch as native
+import sail_v4_capacity
 
 
 class MainFirstPool(ThreadPoolExecutor):
@@ -43,8 +44,8 @@ class MainFirstPool(ThreadPoolExecutor):
 
 
 def main():
-    # Keep native argparse, resource limits, adaptive capacity, snapshots,
-    # failure accounting and Docker dispatch unchanged.
+    # Episode execution is unchanged. The capacity amendment changes only
+    # admission scheduling and records every capacity decision.
     plan_path = Path(sys.argv[1])
     plan = json.loads(plan_path.read_text())
     if plan.get('analysis_only') or plan.get('execution_order') != 'main_then_ablation':
@@ -52,9 +53,10 @@ def main():
     main_jobs = [j for j in plan['jobs'] if j['condition'] != 'sail_v4_no_human']
     MainFirstPool.expected_main = len(main_jobs)
     MainFirstPool.already_closed_main = sum((native.ROOT/'runs'/j['stage']/j['run_id']/'attempt_status.json').exists() for j in main_jobs)
-    MainFirstPool.checkpoint = native.ROOT/'reports/sail4-main-completion.json'
-    native.ThreadPoolExecutor = MainFirstPool
-    native.main()
+    checkpoint = ('sail4-main-completion.json' if plan['phase'] != 'preflight'
+                  else plan['experiment'] + '-main-completion.json')
+    MainFirstPool.checkpoint = native.ROOT/'reports'/checkpoint
+    sail_v4_capacity.main(pool_type=MainFirstPool)
 
 
 if __name__ == '__main__':
