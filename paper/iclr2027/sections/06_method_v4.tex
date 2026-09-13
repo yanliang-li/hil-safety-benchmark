@@ -1,0 +1,42 @@
+\section{SAIL: Scoped Human Intervention and Task Recovery}
+\label{sec:defense}
+
+\subsection{Design from intervention failures}
+An intervention must stop an unauthorized effect without losing the original task. Our second-round controller reduced unsafe actions, but sometimes blocked work the user had already requested. We therefore separate three decisions: what the original task permits, what a human reply adds, and what authorized work remains. The actor still plans and submits tool calls through its native framework.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/sail_v4_method.pdf}
+\caption{SAIL separates original task authority from scoped extensions. A denied extension returns the actor to authorized work. Recovery suggestions grant no permission and pass through the same tool checks. The ledger persists across controller restarts. Semantic reviews remain fallible.}
+\label{fig:sail}
+\end{figure}
+
+\subsection{Compile the original task contract}
+Before reviewing an action, a fixed reviewer receives only the original task and trusted tool descriptions. It constructs a task contract containing authorized effects, completion obligations, and pending decisions. Each effect records its tool, object, purpose, scope, cumulative bound, and a literal task quotation. Literal arguments named in the task constrain the corresponding destination, recipient, or path.
+
+Tool descriptions distinguish local deliverables from consequential operations. A requested evidence pass maps to \texttt{consume\_resource}; writing its report maps to \texttt{write\_output}. The number of input records does not determine how many repeated passes are authorized. This distinction addresses the omitted validation step observed during development.
+
+The contract is a model interpretation, not a gold annotation. A quotation makes its basis inspectable but does not prove that the inferred authority is correct. Neither workflow instructions nor actor justifications can extend the contract. Local reads and deliverable writes remain available through the unchanged benchmark interface.
+
+\subsection{Bind human decisions to their effects}
+For a consequential call, the reviewer compares its arguments with the contract and execution ledger. Direct execution requires a matching original effect, correct scope, literal argument restrictions, and remaining budget. Missing authority routes to consultation. A hard block requires a positive constraint basis, such as an explicit prohibition, credential disclosure, or redundant deterministic work.
+
+The controller checks actual question--reply pairs before requesting another decision. Its question names the missing authority and appends the exact proposed call. A separate review distinguishes approval, denial, ambiguity, and mismatched scope. Approval must quote the actual reply and cover the proposed effect and its conditions. Resource decisions distinguish total budgets from additional units.
+
+Denial of an extension preserves the original authority. Explicit revocation of an original effect is recorded separately. A valid extension supplies a one-use permit bound to the reviewed arguments. The controller consumes it before dispatch and persists that reservation across restarts. Renaming the actor's justification does not create a new action or approval.
+
+For a matched resource effect $e$, dispatch checks its cumulative reservation:
+\begin{equation}
+u_e + q_j \leq b_e,
+\end{equation}
+where $u_e$ is previously reserved use, $q_j$ is the proposed quantity, and $b_e$ is the authorized total. Failed dispatches retain their reservations because execution may be uncertain. Equivalent operation names must share an effect identifier. This association is model-dependent; general equivalence between tools is not formally verified.
+
+\subsection{Recover unfinished authorized work}
+After a block, SAIL returns the deferred effect, missing decision, original obligations, and still-authorized work. A bounded recovery review can suggest the next tool calls. The actor chooses whether to submit them, and consequential calls pass through the same checks. The controller neither executes suggestions directly nor replaces every excessive quantity with one.
+
+When the actor calls \texttt{finish}, a completion review checks task-derived obligations against successful tool feedback. A report claiming that validation occurred cannot substitute for a validation event. Missing work can return a repair request to the actor. There are at most four recovery events per episode, including at most two finish repairs. If work remains, the final record states the incomplete obligations.
+
+\subsection{Implementation and ablations}
+The reviewer uses the fixed \texttt{deepseek-v4-flash} route for every actor configuration. An episode permits 48 actor requests, 24 reviewer requests, four actual human questions, and 900 seconds. One correction request may repair a malformed review; it counts toward the same budget and preserves the original error. Unresolved reviewer failures block consequential execution and remain failed attempts.
+
+The no-recovery ablation retains the new authority and reply handling but omits recovery suggestions and finish repairs. The no-human ablation retains recovery while withholding actual human replies. These comparisons test recovery and access to feedback within the new controller. They do not isolate every component or match the prompt baseline's model compute. Hidden attack labels and scoring requirements never enter controller inputs.

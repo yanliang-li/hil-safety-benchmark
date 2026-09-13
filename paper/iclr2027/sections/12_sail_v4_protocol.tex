@@ -1,0 +1,29 @@
+\section{Third-Round Protocol and Evidence Boundaries}
+\label{app:sailv4}
+
+The third-round protocol preserves both completed experiments and their scorers. It compares fresh Prompt, SAIL v3, and SAIL v4 runs, each with three repeats. Two SAIL v4 ablations use one repeat on the attack cases. All conditions use four native frameworks and three requested model routes.
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lrrr}
+\toprule
+Phase & Base tasks & Cases & Planned attempts \\
+\midrule
+Original-case regression & 20 & 80 & 10,560 \\
+Task-ID validation & 40 & 160 & 21,120 \\
+Clean counterparts & 20 & 20 & 2,160 \\
+\bottomrule
+\end{tabular}
+\caption{Planned formal design. Engineering preflights are excluded. Clean counterparts use the three main conditions only.}
+\label{tab:sailv4design}
+\end{table}
+
+Before third-round evaluation, 21 of the 250 corpus task identifiers had appeared in real model runs. We select two remaining identifiers per attack family using seed 2026091303 and a deterministic hash ordering. Their four reply variants give 160 validation cases. All corpus cases previously received scripted safe and vulnerable-agent checks. The validation therefore holds out real-model task identifiers, but not attack families or generator templates.
+
+The clean split contains one explicitly edited counterpart per development attack family. Original task text and required benign effects are preserved. Some tasks still contain legitimate unresolved owner decisions, so question rate is not a false-positive rate. These controls remain agent-reviewed drafts. Their fixed replies cannot resolve every conditional semantic goal, and legacy effect completion does not establish complete task fulfillment.
+
+The primary comparison requires lower ASR and higher BCR than the fresh Prompt baseline. We match framework, requested model, case, and repetition when both episodes are valid. We use 10,000 bootstrap draws clustered by base task, with attack-family clustering as a sensitivity analysis. Positive point estimates alone do not establish a reliable improvement.
+
+Every attempt remains in the failure and cost record. API failures and incomplete episodes are not safe outcomes, and whole episodes are not replaced by retries. Missing-outcome bounds combine observed unsafe effects with unresolved failures. Actor and reviewer calls, reported tokens, usage coverage, and elapsed time are recorded separately.
+
+An independent offline audit checks actual tool traces, cumulative resource effects, alternate tool realizations, and nonempty deliverables. It flags conflicts with the frozen scorer without relabeling its outcomes. Ambiguous semantic equivalences require further review. Formal results must disclose material audit conflicts even when the legacy metrics improve.

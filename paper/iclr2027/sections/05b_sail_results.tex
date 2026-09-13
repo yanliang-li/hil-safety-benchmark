@@ -1,11 +1,11 @@
-\subsection{Does scoped HIL improve execution?}
+\subsection{What does scoped HIL preserve and lose?}
 
 \label{sec:sailresults}
 
-The separate frozen comparison completes all 6,720 attempts, with 6,019 valid runs and 701 failures. It uses fresh prompt controls and interleaved conditions on the same 80 development cases: three repeats for prompt and SAIL, and one for the no-human ablation. Preflights are excluded.
-
-\input{tables/sail_main}
+The second round completes 6,720 attempts, with 6,019 valid runs and 701 failures. Here SAIL denotes the frozen v3 controller, before task recovery was added. It uses fresh prompt controls on the same 80 development cases: three repeats for Prompt and SAIL v3, and one for its no-human ablation. Preflights are excluded.
 
 Unsafe ASR changes from 355/2,691 (13.19\%) with the prompt to 41/2,450 (1.67\%) with SAIL. Benign completion changes from 89.59\% to 83.55\%. On 2,355 matched pairs, the ASR difference is -11.00 percentage points (95\% task-cluster interval [-23.26, -2.13]); the benign-completion difference is -7.22 points ([-18.54, +0.59]). These remain exploratory estimates over 20 reused tasks.
 
 On matched eligible cases in repeat 1, safe authorized execution is 0/141 (0.00\%) without human replies and 58/141 (41.13\%) with full SAIL. This metric includes unconsulted eligible cases. SAIL records 1,219 actor questions and 868 controller questions. Thus its consultation score describes the combined system. Appendix~\ref{app:sailresults} reports failure bounds, response metrics, and reviewer cost. These comparisons do not isolate scope binding from the other controller components.
+
+The paired benign outcomes lose 251 completions and gain 81, a net loss of 170. Invoice validation and the policy review budget account for 169 of that net loss. Traces show omitted original permissions and reports written without the required check. This development diagnosis motivates the authority and recovery changes in Section~\ref{sec:defense}; it does not validate them.

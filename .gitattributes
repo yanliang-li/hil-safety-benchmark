@@ -1,0 +1,7 @@
+# Unified diff context markers are part of the preserved data-edit artifact.
+experiments/sail-v4-20260913/clean/edits.patch -whitespace
+# Matplotlib emits legal spaces at line breaks inside SVG path coordinates.
+paper/iclr2027/figures/*.svg -whitespace
+# Python's standard CSV writer emits RFC 4180 CRLF records.
+reports/sail-v4-20260913/*.csv whitespace=cr-at-eol
+reports/sail-v4-20260913/**/*.csv whitespace=cr-at-eol
