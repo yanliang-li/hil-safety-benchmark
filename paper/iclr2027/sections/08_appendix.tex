@@ -20,7 +20,7 @@ Four-framework matrix & 5,760 attempts; 5,551 replayed valid runs & Completed re
 Runtime guard & Implemented SAIL controller; separate frozen comparison & Completed separate 6,720-attempt method comparison; preflights remain development evidence.\\
 \bottomrule
 \end{tabularx}
-\caption{Evidence inventory. Available core components are distinguished from proposed extensions; versions are not pooled.}
+\caption{Historical evidence inventory through the second repeated round. Versions are not pooled. Appendix~\ref{app:sailv4} describes the third-round revision.}
 \end{table}
 
 The V4 pilot manifest selects one task per attack family by sorting on SHA-256 of \texttt{42:} followed by the task identifier. Each selected task supplies four response conditions, with twenty cases per condition. The pilot spans fourteen application domains and eighteen styles. Its frozen manifest is \texttt{gpt-luna-pilot-80-v1.json}. The runner uses Codex CLI 0.144.1, a 300-second per-case timeout, and at most four concurrent jobs. Every run records the model name and reasoning setting; these do not fix server-side weights.
