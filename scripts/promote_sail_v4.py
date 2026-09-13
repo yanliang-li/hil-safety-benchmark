@@ -36,6 +36,19 @@ def main():
     plan_rel = 'experiments/sail-v4-20260913/sail4-preflight-matched-r2.json'
     progress_path = ROOT / 'reports/sail4-preflight-matched-r2_progress.json'
     progress = json.loads(progress_path.read_text()) if progress_path.exists() else {}
+    # A restarted coordinator must wait for an existing preflight launcher,
+    # not start a duplicate or replace any attempt.
+    while not progress.get('finished_unix'):
+        with (ROOT/'reports/sail4-preflight-matched-r2.lock').open('a') as handle:
+            try:
+                fcntl.flock(handle,fcntl.LOCK_EX|fcntl.LOCK_NB)
+                running=False
+            except BlockingIOError:
+                running=True
+        if not running:
+            break
+        time.sleep(30)
+        progress=json.loads(progress_path.read_text()) if progress_path.exists() else {}
     if not progress.get('finished_unix'):
         with (ROOT / 'reports/sail4-preflight-matched-r2.log').open('ab') as log:
             subprocess.run([sys.executable, 'scripts/hil_guard_v4/launch.py', plan_rel, '--concurrency', '32'],
@@ -62,7 +75,7 @@ def main():
         return
     freeze = ROOT / 'experiments/sail-v4-20260913/matched_formal_freeze.json'
     if not freeze.exists():
-        subprocess.run([sys.executable, 'scripts/prepare_sail_v4_matched.py', '--phase', 'formal'], cwd=ROOT, env=env, check=True)
+        subprocess.run([sys.executable, 'scripts/prepare_sail_v4_sequential.py'], cwd=ROOT, env=env, check=True)
     save(state_path, {'state': 'formal_phases', 'started_unix': time.time(), 'gate': gate})
     subprocess.run([sys.executable, 'scripts/supervise_sail_v4.py', '--freeze', str(freeze)], cwd=ROOT, env=env, check=True)
     save(state_path, {'state': 'formal_experiments_complete', 'finished_unix': time.time(), 'gate': gate})

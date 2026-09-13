@@ -39,7 +39,8 @@ def main():
     # Provisional observations remain in the live phase report, outside paper tables.
     third = observed if complete else {'status':'pending','aggregate':{}}
     history['round3'] = {'status':third['status'],'formal_planned_attempts':6720,
-        'engineering_preflights_excluded':True,'scope':'same second-round cases/configurations/repeats; defense replaced',
+        'engineering_preflights_excluded':True,'scope':'same second-round cases/configurations/repeats; defense replaced; main before ablation',
+        'main_attempts':5760,'ablation_attempts':960,'execution_order':'main_then_ablation',
         'phases':{'matched':third},'expanded_validation_cancelled_before_formal_start':True}
     REPORT.mkdir(parents=True,exist_ok=True)
     (REPORT/'three_rounds.json').write_text(json.dumps(history,indent=2)+'\n')
@@ -62,7 +63,7 @@ def main():
     body=[r'\subsection{Can recovery improve safety and task completion?}',r'\label{sec:sailv4results}','']
     appendix=[r'\section{Third-Round Detailed Results}',r'\label{app:sailv4results}','']
     if not complete:
-        body += [r'The revised controller is implemented, and engineering checks are in progress. The third round retains the second-round design: the same 80 cases, twelve framework--model configurations, three repeats for Prompt and full SAIL, and one for the no-human ablation. Only the defense and its corresponding ablation change. The 6,720 formal attempts have no completed result yet; engineering checks do not support a performance claim. Appendix~\ref{app:sailv4} gives the protocol.']
+        body += [r'The revised controller is implemented, and engineering checks are in progress. The third round retains the same 80 cases, twelve framework--model configurations, and repeat allocation as round two. The 5,760 main attempts compare fresh Prompt and full SAIL v4, with three repeats each. All main attempts finish before the 960 no-human ablation attempts start. Formal results are pending; engineering checks do not support a performance claim. Appendix~\ref{app:sailv4} gives the protocol.']
         appendix += ['Formal third-round results are pending. This round evaluates the same development cases as round two. New tasks, clean counterparts, a concurrent v3 arm, and a no-recovery ablation are outside its scope.']
         status=r'\draftnote{Internal manuscript. Two rounds are complete. The equal-scale 6,720-attempt SAIL v4 round is pending. Engineering results are excluded; independent semantic annotation and author review remain incomplete.}'
     else:
@@ -71,7 +72,7 @@ def main():
             inference='The paired point estimates meet both objectives. '+('Both task-cluster intervals support their directions.' if third['both_directional_intervals_supported'] else 'The intervals do not establish both directions, so the joint improvement remains descriptive.')
         else:
             inference='The paired point estimates do not meet lower ASR and higher BCR together.'
-        body += [f"All 6,720 formal attempts finish, with {third['valid_runs']:,} valid runs and {third['failed_attempts']:,} failures. Cases, framework images, model routes, repeat allocation, and ordered design match round two. Prompt is rerun alongside the revised defense; historical v3 results remain a separate comparison.",r'\input{tables/sail_v4_matched_main}',
+        body += [f"All 6,720 formal attempts finish, with {third['valid_runs']:,} valid runs and {third['failed_attempts']:,} failures. Cases, framework images, model routes, and repeat allocation match round two. The 5,760 main attempts finish before the 960 ablation attempts start. Prompt is rerun alongside the revised defense; historical v3 results remain a separate comparison.",r'\input{tables/sail_v4_matched_main}',
             f"The primary comparison contains {pair['matched_case_repeat_pairs']:,} valid pairs. SAIL v4 minus Prompt changes ASR by {ci_text(pair['unsafe_attack_success'])} and BCR by {ci_text(pair['benign_task_complete'])}. {inference}"]
         flags=sum(sum(m['all_attempt_audit_flags'].values()) for m in third['aggregate'].values())
         body += [f"Independent effect and deliverable checks record {flags:,} flags across all attempts, with multiple flags possible per episode. They do not change legacy scores. Failure bounds and unresolved semantic judgments limit the inference; Appendix~\\ref{{app:sailv4results}} gives all configurations, human-feedback metrics, and costs."]
@@ -93,7 +94,7 @@ def main():
         appendix += [r'\input{tables/sail_v4_matched_matrix}',r'\input{tables/sail_v4_matched_hil}',
             'The task and attack-family clustered comparisons, all-attempt failure categories, and effect-audit flags are retained in the derived reports. Both conditions must be valid to enter a paired estimate. Earlier v3 runs are not treated as concurrent controls.']
         ablation=third['aggregate_paired']['sail_v4_no_human__sail_v4']
-        appendix += [f"Full SAIL v4 minus its no-human ablation uses {ablation['matched_case_repeat_pairs']:,} repeat-1 pairs. ASR changes by {ci_text(ablation['unsafe_attack_success'])}; BCR changes by {ci_text(ablation['benign_task_complete'])}."]
+        appendix += [f"Full SAIL v4 minus its no-human ablation uses {ablation['matched_case_repeat_pairs']:,} repeat-1 pairs. ASR changes by {ci_text(ablation['unsafe_attack_success'])}; BCR changes by {ci_text(ablation['benign_task_complete'])}. The ablation is run afterward, so changes in serving conditions may affect this comparison."]
         for c in CONDITIONS:
             m=third['aggregate'][c];b=third['all_attempt_sensitivity'][c];u=m['all_attempt_usage']
             appendix += [f"\\paragraph{{{DISPLAY[c]}.}} All-attempt ASR bounds are {100*b['lower_unsafe_count']/b['planned']:.2f}--{100*b['upper_unsafe_count_including_pending']/b['planned']:.2f}\\%. These are missing-outcome bounds, not sampling intervals. There are {u['actor_requests']:,} actor and {u['reviewer_requests']:,} reviewer requests; usage is reported for {u['actor_requests_with_usage']:,} and {u['reviewer_requests_with_usage']:,}, respectively."]

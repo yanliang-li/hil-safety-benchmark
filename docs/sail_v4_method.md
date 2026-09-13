@@ -36,7 +36,7 @@ Each fresh Docker episode has 48 actor requests, 24 combined reviewer/recovery/p
 
 Engineering preflights use 32 concurrent episodes. Formal phases start at 64 and can rise to 96 after two healthy five-minute windows. Persistent upstream errors reduce concurrency. New launches pause below 64 GiB available memory, below 30 GiB free disk, or above 75% of logical-CPU count in load average. Existing unrelated containers and processes are not modified.
 
-Formal design: 6,720 attempts, exactly matching round two after mapping its defense conditions to the new controller. The same 80 cases and twelve framework-model configurations receive three repeats for fresh Prompt (2,880) and full SAIL v4 (2,880), plus one for SAIL v4 without human replies (960). The exact second-round job order, container images, task fixtures, and limits are preserved. The method and analysis are frozen before formal start. Complete every frozen condition regardless of outcome. The previously proposed 33,840-attempt expansion was cancelled before formal execution at the user's request.
+Formal design: 6,720 attempts, exactly matching round two after mapping its defense conditions to the new controller. The same 80 cases and twelve framework-model configurations receive three repeats for fresh Prompt (2,880) and full SAIL v4 (2,880), plus one for SAIL v4 without human replies (960). Container images, task fixtures, repeat allocation, and limits are preserved. At the user's request, the 5,760 main attempts all finish before the 960 no-human ablation attempts start. Each group preserves its original relative job order; the grouping introduces a serving-time limitation for the ablation comparison. The method and analysis are frozen before formal start. Complete every frozen condition regardless of outcome. The previously proposed 33,840-attempt expansion was cancelled before formal execution at the user's request.
 
 ## Evidence and limits
 
@@ -50,9 +50,9 @@ Human replies are fixed synthetic fixtures, and consequential tools record simul
 
 1. `experiments/sail-v4-20260913/authorized_scope.json` fixes the active 6,720-attempt scope.
 2. `scripts/prepare_sail_v4_matched.py --phase preflight` freezes the eight-case, three-condition r2 engineering check (288 attempts).
-3. `scripts/promote_sail_v4.py` drains the already-running r1 check, runs matched r2, audits protocol validity, then freezes and starts the 6,720-attempt formal comparison. It does not select on ASR/BCR.
+3. `scripts/promote_sail_v4.py` drains the already-running r1 check, runs matched r2, audits protocol validity, then freezes and starts the 6,720-attempt formal comparison in main-then-ablation order using `prepare_sail_v4_sequential.py`. It does not select on ASR/BCR.
 4. `scripts/supervise_sail_v4.py` reads `matched_formal_freeze.json`; it rejects the superseded expanded design.
-5. `scripts/watch_sail_v4.py` mirrors closed attempts, replays scores, audits inputs, and updates the paper when the single formal phase finishes.
+5. `scripts/watch_sail_v4.py` mirrors closed attempts and produces a separate 5,760-attempt main report as soon as it is complete. It later combines the 960 ablation attempts for the final paper. `sail4-main-r2.json` is an analysis projection of existing jobs, not another execution plan.
 6. `scripts/build_sail_v4_paper.py` dispatches to the equal-scale report builder under the authorized scope.
 
 The earlier `prepare_sail_v4.py` and expanded-split generator are archived design utilities, not the active launch path. The unused 480-attempt r2 plan was superseded before execution by the 288-attempt matched-condition check; the runtime remains engineering revision 2.

@@ -32,6 +32,9 @@ def main():
     for rel, expected in freeze['source_sha256'].items():
         if hashlib.sha256((ROOT / rel).read_bytes()).hexdigest() != expected:
             raise ValueError('Frozen source changed: ' + rel)
+    for rel, expected in freeze.get('analysis_plans',{}).items():
+        if hashlib.sha256((ROOT/rel).read_bytes()).hexdigest()!=expected:
+            raise ValueError('Frozen analysis projection changed: '+rel)
     path = ROOT / 'reports/sail4-formal-supervisor.json'
     state = json.loads(path.read_text()) if path.exists() else {'started_unix': time.time(), 'phases': {}}
     env = dict(os.environ, PYTHONPATH=str(ROOT / 'src') + ':' + str(ROOT / 'scripts'))
@@ -49,7 +52,7 @@ def main():
         progress = json.loads(progress_path.read_text()) if progress_path.exists() else {}
         if not progress.get('finished_unix'):
             with (ROOT / 'reports' / (stage + '.log')).open('ab') as log:
-                subprocess.run([sys.executable, 'scripts/hil_guard_v4/launch.py', relative,
+                subprocess.run([sys.executable, freeze.get('launcher','scripts/hil_guard_v4/launch.py'), relative,
                     '--concurrency', '64', '--adaptive'], cwd=ROOT, env=env, stdout=log,
                     stderr=subprocess.STDOUT, check=True)
         output = 'reports/sail-v4-20260913/' + stage

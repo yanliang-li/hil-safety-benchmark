@@ -45,11 +45,11 @@ def ensure_connection():
 def sync_control():
     prefix = 'from pathlib import Path\nimport json\nr=Path(' + repr(connection.CONFIG['remote_root']) + ')\n'
     code = prefix + '''files={}
-for name in ('authorized_scope.json','matched_formal_freeze.json','matched_engineering_gate.json','sail4-matched-r2.json'):
+for name in ('authorized_scope.json','matched_formal_freeze.json','matched_engineering_gate.json','sail4-matched-r2.json','sail4-main-r2.json'):
  p=r/'experiments/sail-v4-20260913'/name
  if p.exists():files[name]=p.read_text()
 control={}
-for name in ('sail4-promotion.json','sail4-formal-supervisor.json'):
+for name in ('sail4-promotion.json','sail4-formal-supervisor.json','sail4-main-completion.json'):
  p=r/'reports'/name
  if p.exists():control[name]=json.loads(p.read_text())
 print(json.dumps({'files':files,'control':control}))
@@ -101,6 +101,17 @@ def main():
                 old.update(progress=progress)
                 state['phases'][name] = old
                 save(state)
+            primary_plan = ROOT/'experiments/sail-v4-20260913/sail4-main-r2.json'
+            if not state.get('primary_report_complete') and control.get('sail4-main-completion.json') and primary_plan.exists():
+                output='reports/sail-v4-20260913/sail4-main-r2'
+                subprocess.run([sys.executable,'scripts/analyze_sail_v4.py','--plan',str(primary_plan),
+                    '--output',output,'--bootstrap','10000'],cwd=ROOT,env=env,check=True)
+                primary=json.loads((ROOT/output/'summary.json').read_text())
+                if primary['status']=='complete':
+                    subprocess.run([sys.executable,'scripts/audit_sail_v4.py','--plan',str(primary_plan),
+                        '--output',output+'/input_audit.json'],cwd=ROOT,env=env,check=True)
+                    state.update(primary_report_complete=True,primary_report=output,primary_reported_unix=time.time())
+                    save(state)
             formal = ('sail4-matched-r2',)
             if all(state['phases'].get(name, {}).get('final_processed') for name in formal):
                 subprocess.run([sys.executable, 'scripts/build_sail_v4_paper.py', '--require-complete'], cwd=ROOT, env=env, check=True)
