@@ -143,6 +143,7 @@ def main():
     comparisons = [('prompt_guard_v1', 'sail_v4'), ('prompt_guard_v1', 'sail_v3'), ('sail_v3', 'sail_v4')]
     if not clean:
         comparisons += [('sail_v4_no_recovery', 'sail_v4'), ('sail_v4_no_human', 'sail_v4')]
+    comparisons = [(left,right) for left,right in comparisons if left in plan['conditions'] and right in plan['conditions']]
     summary = {'experiment': plan['experiment'], 'phase': plan['phase'], 'scope': plan['scope'],
         'status': 'complete' if len(attempts) == len(plan['jobs']) else 'provisional_incomplete',
         'planned_attempts': len(plan['jobs']), 'finished_attempts': len(attempts), 'valid_runs': len(rows),

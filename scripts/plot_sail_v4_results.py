@@ -18,21 +18,21 @@ from audit_panel_alignment import require_matplotlib_panel_alignment
 
 def main():
     rows = []
-    for phase, title in (('regression', 'Original80'), ('heldout', 'Task-ID validation')):
-        source = ROOT / 'reports/sail-v4-20260913' / f'sail4-{phase}-r2/summary.json'
+    sources = [('round2', 'Round 2', ROOT/'reports/sail-20260913/main-v3/summary.json', 'sail_v3'),
+        ('round3', 'Round 3', ROOT/'reports/sail-v4-20260913/sail4-matched-r2/summary.json', 'sail_v4')]
+    for phase, title, source, condition in sources:
         data = json.loads(source.read_text())
         if data['status'] != 'complete':
             raise ValueError('Quantitative paper plot requires completed formal phases')
-        for condition in ('sail_v3', 'sail_v4'):
-            pair = data['aggregate_paired']['prompt_guard_v1__' + condition]
-            for metric in ('unsafe_attack_success', 'benign_task_complete'):
-                item = pair[metric]
-                interval = item['task_cluster_bootstrap_95_interval']
-                rows.append({'phase': phase, 'split_label': title, 'condition': condition,
-                    'metric': metric, 'paired_n': pair['matched_case_repeat_pairs'], 'task_clusters': pair['task_clusters'],
-                    'difference_pp': None if item['right_minus_left'] is None else 100 * item['right_minus_left'],
-                    'ci_low_pp': None if interval is None else 100 * interval[0],
-                    'ci_high_pp': None if interval is None else 100 * interval[1]})
+        pair = data['aggregate_paired']['prompt_guard_v1__' + condition]
+        for metric in ('unsafe_attack_success', 'benign_task_complete'):
+            item = pair[metric]
+            interval = item['task_cluster_bootstrap_95_interval']
+            rows.append({'phase': phase, 'split_label': title, 'condition': condition,
+                'metric': metric, 'paired_n': pair['matched_case_repeat_pairs'], 'task_clusters': pair['task_clusters'],
+                'difference_pp': None if item['right_minus_left'] is None else 100 * item['right_minus_left'],
+                'ci_low_pp': None if interval is None else 100 * interval[0],
+                'ci_high_pp': None if interval is None else 100 * interval[1]})
     plt.rcParams.update({'font.family': 'sans-serif', 'font.sans-serif': ['DejaVu Sans'],
         'font.size': 8, 'axes.labelsize': 8, 'xtick.labelsize': 7.5, 'ytick.labelsize': 7.5,
         'svg.fonttype': 'none', 'pdf.fonttype': 42, 'axes.spines.top': False,
@@ -46,7 +46,7 @@ def main():
         vals = [v for r in points for v in (r['difference_pp'], r['ci_low_pp'], r['ci_high_pp']) if v is not None]
         extent = max([abs(v) for v in vals] + [1]) * 1.2
         ax.set_xlim(-extent, extent)
-        ax.set_ylim(3.6, -.6)
+        ax.set_ylim(len(points)-.4, -.6)
         ax.axvline(0, color='#9DA5AD', linewidth=.8, zorder=1)
         for y, row in enumerate(points):
             color = '#167D8D' if row['condition'] == 'sail_v4' else '#747F8A'
@@ -60,8 +60,8 @@ def main():
                 ax.hlines(y, row['ci_low_pp'], row['ci_high_pp'], color=color, linewidth=1.2)
                 ax.vlines([row['ci_low_pp'], row['ci_high_pp']], y-.07, y+.07, color=color, linewidth=1.0)
             ax.scatter(row['difference_pp'], y, color=color, marker='o' if row['condition'] == 'sail_v4' else 's', s=24, zorder=3)
-        ax.set_yticks(range(4))
-        ax.set_yticklabels(labels if index == 0 else [''] * 4)
+        ax.set_yticks(range(len(points)))
+        ax.set_yticklabels(labels if index == 0 else [''] * len(points))
         ax.tick_params(axis='y', length=0, pad=8)
         ax.xaxis.set_major_locator(MaxNLocator(4))
         ax.set_xlabel('Change from Prompt (pp)')
@@ -87,7 +87,7 @@ def main():
         'roles': {'a': 'Safety part of joint objective', 'b': 'Utility part of joint objective'},
         'archetype': 'two-panel paired comparison', 'backend': 'Python/matplotlib',
         'statistics': 'Right-minus-left proportions; 10,000 base-task cluster bootstrap draws; both-valid matched episodes.',
-        'data_scope': 'All requested configurations and eligible paired observations; engineering, failed/unmatched episodes and clean controls excluded by the predeclared estimand.',
+        'data_scope': 'Each round uses its own fresh Prompt control; all configurations retained. Engineering and failed/unmatched episodes are excluded by the estimand. Rounds are separate, not a direct concurrent v3-v4 contrast.',
         'failure_evidence': 'All-attempt failure and missing-outcome bounds remain in the main result files.',
         'width_note': '6.6-inch source is placed at ICLR 5.5-inch linewidth; 7.5-pt ticks render at 6.25 pt.',
         'semantic_boundary': 'Legacy effect scores; independent audit flags are not silently relabeled.'}

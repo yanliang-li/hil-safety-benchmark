@@ -66,7 +66,7 @@ def main():
     summary=ROOT/'reports/sail-20260913/main-v3/summary.json'
     report['sail_comparison_status']=json.loads(summary.read_text())['status'] if summary.exists() else 'pending'
     report['third_round_status'] = {}
-    for phase in ('regression','heldout','clean'):
+    for phase in ('matched',):
         phase_path = ROOT / 'reports/sail-v4-20260913' / ('sail4-' + phase + '-r2/summary.json')
         report['third_round_status'][phase] = json.loads(phase_path.read_text())['status'] if phase_path.exists() else 'pending'
     (PAPER/'build_validation.json').write_text(json.dumps(report,indent=2)+'\n')

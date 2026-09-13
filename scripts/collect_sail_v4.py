@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def collect(plan_path):
     plan = json.loads(plan_path.read_text())
     stage = plan['experiment']
-    if not re.fullmatch(r'sail4-(preflight|regression|heldout|clean)-r[123]', stage):
+    if not re.fullmatch(r'sail4-(preflight(?:-matched)?|matched|regression|heldout|clean)-r[123]', stage):
         raise ValueError('Unexpected third-round stage')
     state_path = ROOT / 'recovery/sail-v4-20260913' / (stage + '-collection.json')
     state_path.parent.mkdir(parents=True, exist_ok=True)

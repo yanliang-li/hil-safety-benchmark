@@ -62,6 +62,10 @@ def ci_text(metric):
 
 
 def main():
+    scope_path = ROOT / 'experiments/sail-v4-20260913/authorized_scope.json'
+    if scope_path.exists() and read(scope_path).get('scope') == 'match_second_round':
+        from build_sail_v4_matched_paper import main as matched_main
+        return matched_main()
     parser = argparse.ArgumentParser()
     parser.add_argument('--require-complete', action='store_true')
     args = parser.parse_args()

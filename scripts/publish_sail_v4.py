@@ -33,7 +33,8 @@ def main():
         'scripts/promote_sail_v4.py', 'scripts/watch_sail_v4.py', 'scripts/publish_sail_v4.py',
         'scripts/diagnose_sail_v3_utility.py', 'scripts/plot_sail_v4_method.py',
         'scripts/build_sail_v4_paper.py', 'scripts/package_iclr_v4_draft.py',
-        'scripts/plot_sail_v4_results.py']
+        'scripts/plot_sail_v4_results.py', 'scripts/prepare_sail_v4_matched.py',
+        'scripts/build_sail_v4_matched_paper.py', 'tests/test_sail_v4_matched_plan.py']
     selected.update(ROOT / n for n in names if (ROOT / n).exists())
     for path in (ROOT / 'reports/sail-v4-20260913').rglob('*'):
         if path.is_file() and path.suffix in ('.json', '.csv', '.md'):
@@ -48,7 +49,7 @@ def main():
         if path.is_file() and 'build' not in path.relative_to(ROOT / 'paper/iclr2027').parts and path.suffix in ('.tex', '.bib', '.sty', '.bst', '.md', '.json', '.csv', '.pdf', '.svg', '.zip'):
             selected.add(path)
     if args.complete:
-        for phase in ('regression', 'heldout', 'clean'):
+        for phase in ('matched',):
             path = ROOT / 'reports/sail-v4-20260913' / f'sail4-{phase}-r2/summary.json'
             if not path.exists() or json.loads(path.read_text())['status'] != 'complete':
                 raise ValueError('Formal results are not complete')
@@ -82,7 +83,7 @@ def main():
     if changed:
         connection.run(['git', 'commit', '--quiet', '-m',
             'Complete frozen SAIL v4 evaluation and revise ICLR draft' if args.complete else
-            'Implement SAIL task recovery and freeze third-round engineering checks'], cwd=public, timeout=60)
+            'Match third-round evaluation to the second-round experimental design'], cwd=public, timeout=60)
     connection.run(['git', 'push', 'origin', 'main'], cwd=public, env=env, timeout=120)
     commit = connection.run(['git', 'rev-parse', 'HEAD'], cwd=public, timeout=10).stdout.strip()
     output = {'github_owner': account, 'commit': commit, 'complete_formal_results': args.complete,

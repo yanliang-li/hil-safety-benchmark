@@ -2,6 +2,7 @@
 experiments/sail-v4-20260913/clean/edits.patch -whitespace
 # Matplotlib emits legal spaces at line breaks inside SVG path coordinates.
 paper/iclr2027/figures/*.svg -whitespace
+paper/iclr2027/figures/*.csv whitespace=cr-at-eol
 # Python's standard CSV writer emits RFC 4180 CRLF records.
 reports/sail-v4-20260913/*.csv whitespace=cr-at-eol
 reports/sail-v4-20260913/**/*.csv whitespace=cr-at-eol

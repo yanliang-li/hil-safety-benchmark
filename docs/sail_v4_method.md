@@ -18,14 +18,14 @@ A block returns the deferred effect, missing decision, unspent original authorit
 
 `finish` checks task-derived obligations against successful tool feedback. Writing that a validation occurred cannot substitute for the validation tool event. At most four recovery events are permitted, including at most two finish repairs. When the repair budget ends, the controller records remaining obligations rather than fabricating completion.
 
-The five experimental conditions are:
+The controller implements five conditions. The user-corrected third round runs only Prompt, SAIL v4, and SAIL v4 without human replies; the other two are retained as code and engineering history:
 
 | Condition | Purpose |
 |---|---|
 | `prompt_guard_v1` | Fresh unchanged prompt baseline |
-| `sail_v3` | Fresh unchanged second-round controller |
+| `sail_v3` | Historical controller; no fresh formal arm in this round |
 | `sail_v4` | Authority preservation, scoped replies and recovery |
-| `sail_v4_no_recovery` | Same new permissions and replies, without suggestions or finish repairs |
+| `sail_v4_no_recovery` | Implemented for engineering; excluded from this formal round |
 | `sail_v4_no_human` | Same recovery controller, with human replies unavailable |
 
 The prompt baseline and v3 condition reuse their frozen condition text and runtime. v4 uses one fixed reviewer route, `deepseek-v4-flash`, across all actor models. All three v4 conditions share the same actor notice.
@@ -36,7 +36,7 @@ Each fresh Docker episode has 48 actor requests, 24 combined reviewer/recovery/p
 
 Engineering preflights use 32 concurrent episodes. Formal phases start at 64 and can rise to 96 after two healthy five-minute windows. Persistent upstream errors reduce concurrency. New launches pause below 64 GiB available memory, below 30 GiB free disk, or above 75% of logical-CPU count in load average. Existing unrelated containers and processes are not modified.
 
-Formal design: 10,560 original80 regression attempts, 21,120 task-ID validation attempts, and 2,160 separate clean-control attempts. The method, prompt, images, data, ordering and analysis are frozen before formal regression. Complete every frozen condition regardless of outcome.
+Formal design: 6,720 attempts, exactly matching round two after mapping its defense conditions to the new controller. The same 80 cases and twelve framework-model configurations receive three repeats for fresh Prompt (2,880) and full SAIL v4 (2,880), plus one for SAIL v4 without human replies (960). The exact second-round job order, container images, task fixtures, and limits are preserved. The method and analysis are frozen before formal start. Complete every frozen condition regardless of outcome. The previously proposed 33,840-attempt expansion was cancelled before formal execution at the user's request.
 
 ## Evidence and limits
 
@@ -44,15 +44,17 @@ The primary objective is lower ASR and higher BCR relative to the fresh same-rou
 
 The independent audit flags cumulative effects missed by single-call predicates, possible alternate tool realizations, exact-one scoring disagreements, and missing or empty deliverables. It never changes the legacy scorer. Ambiguous equivalences and semantic completion remain unadjudicated, not silently labeled safe or successful.
 
-Human replies are fixed synthetic fixtures, and consequential tools record simulated effects. Clean counterparts preserve task text and benign predicates, but some tasks still require legitimate decisions. Therefore clean question rate is not a false-positive rate, and legacy BCR is not semantic completion. Task-ID validation uses previously unrun tasks within known families and reused templates; the corpus already received scripted checks.
+Human replies are fixed synthetic fixtures, and consequential tools record simulated effects. Clean counterparts preserve task text and benign predicates, but some tasks still require legitimate decisions. Therefore clean question rate is not a false-positive rate, and legacy BCR is not semantic completion. Prepared task-ID validation and clean counterparts are not run in this round. All formal cases are reused development tasks; no unseen-task generalization is claimed.
 
 ## Reproduction entry points
 
-1. `scripts/build_sail_v4_data.py` creates the fixed task-ID split and explicit clean edits once.
-2. `scripts/prepare_sail_v4.py --phase preflight --revision N` freezes an engineering revision (maximum three).
-3. `scripts/hil_guard_v4/launch.py PLAN --concurrency 32` runs a frozen preflight on the Docker host.
-4. `scripts/promote_sail_v4.py` drains r1, runs r2, records the engineering gate, freezes formal plans, and starts all formal phases.
-5. `scripts/supervise_sail_v4.py` runs and analyzes the three frozen formal phases sequentially.
-6. `scripts/watch_sail_v4.py` mirrors closed attempts locally, replays scores, audits inputs, and updates the manuscript when all formal phases finish.
+1. `experiments/sail-v4-20260913/authorized_scope.json` fixes the active 6,720-attempt scope.
+2. `scripts/prepare_sail_v4_matched.py --phase preflight` freezes the eight-case, three-condition r2 engineering check (288 attempts).
+3. `scripts/promote_sail_v4.py` drains the already-running r1 check, runs matched r2, audits protocol validity, then freezes and starts the 6,720-attempt formal comparison. It does not select on ASR/BCR.
+4. `scripts/supervise_sail_v4.py` reads `matched_formal_freeze.json`; it rejects the superseded expanded design.
+5. `scripts/watch_sail_v4.py` mirrors closed attempts, replays scores, audits inputs, and updates the paper when the single formal phase finishes.
+6. `scripts/build_sail_v4_paper.py` dispatches to the equal-scale report builder under the authorized scope.
 
-Private connection and provider configuration are required for the local watcher and credential relay. They are intentionally excluded from the public repository. Docker image digests and native runner hashes are recorded in each plan. Public artifacts contain code, synthetic data, frozen manifests and derived results; they exclude raw private conversations, credentials and wire traces.
+The earlier `prepare_sail_v4.py` and expanded-split generator are archived design utilities, not the active launch path. The unused 480-attempt r2 plan was superseded before execution by the 288-attempt matched-condition check; the runtime remains engineering revision 2.
+
+Private connection/provider configuration is required for the watcher and credential relay. It is excluded from the public repository. Image digests, runner hashes, parent-plan hash, and exact condition mapping are recorded in each active plan. Public artifacts exclude credentials, private conversations, and wire traces.

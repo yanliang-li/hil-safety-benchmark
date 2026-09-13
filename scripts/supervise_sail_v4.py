@@ -21,9 +21,12 @@ def save(path, value):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--freeze', type=Path, default=Path('experiments/sail-v4-20260913/formal_freeze.json'))
+    parser.add_argument('--freeze', type=Path, default=Path('experiments/sail-v4-20260913/matched_formal_freeze.json'))
     args = parser.parse_args()
     freeze = json.loads(args.freeze.read_text())
+    scope = json.loads((ROOT / 'experiments/sail-v4-20260913/authorized_scope.json').read_text())
+    if scope.get('scope') != 'match_second_round' or freeze.get('formal_attempts') != 6720:
+        raise ValueError('Expanded formal evaluation is outside the current user scope')
     lock = (ROOT / 'reports/sail4-formal-supervisor.lock').open('w')
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     for rel, expected in freeze['source_sha256'].items():

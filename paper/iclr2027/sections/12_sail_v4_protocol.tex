@@ -1,29 +1,31 @@
 \section{Third-Round Protocol and Evidence Boundaries}
 \label{app:sailv4}
 
-The third-round protocol preserves both completed experiments and their scorers. It compares fresh Prompt, SAIL v3, and SAIL v4 runs, each with three repeats. Two SAIL v4 ablations use one repeat on the attack cases. All conditions use four native frameworks and three requested model routes.
+The third round replaces the second-round defense while retaining its experimental design. It uses the same 80 cases from 20 development tasks, the same four native frameworks and three requested model routes, the same container images and resource limits, and the same ordered case--configuration--repeat schedule. The scorer and actual reply fixtures are unchanged. Fresh Prompt and full SAIL v4 each use three repeats; the corresponding no-human ablation uses one.
 
 \begin{table}[h]
 \centering\small
 \begin{tabular}{lrrr}
 \toprule
-Phase & Base tasks & Cases & Planned attempts \\
+Condition & Cases & Repeats & Planned attempts \\
 \midrule
-Original-case regression & 20 & 80 & 10,560 \\
-Task-ID validation & 40 & 160 & 21,120 \\
-Clean counterparts & 20 & 20 & 2,160 \\
+Fresh Prompt & 80 & 3 & 2,880 \\
+SAIL v4 & 80 & 3 & 2,880 \\
+SAIL v4, no human & 80 & 1 & 960 \\
+\midrule
+Total & & & 6,720 \\
 \bottomrule
 \end{tabular}
-\caption{Planned formal design. Engineering preflights are excluded. Clean counterparts use the three main conditions only.}
+\caption{Third-round design, matching the second-round allocation. Each row uses all twelve framework--model configurations. Engineering checks are separate.}
 \label{tab:sailv4design}
 \end{table}
 
-Before third-round evaluation, 21 of the 250 corpus task identifiers had appeared in real model runs. We select two remaining identifiers per attack family using seed 2026091303 and a deterministic hash ordering. Their four reply variants give 160 validation cases. All corpus cases previously received scripted safe and vulnerable-agent checks. The validation therefore holds out real-model task identifiers, but not attack families or generator templates.
+New task identifiers, clean counterparts, a concurrent v3 arm, and a no-recovery ablation are outside this round's scope. Prepared data extensions remain future work and provide no validation evidence. Engineering revisions and their attempts are separately recorded and do not enter the formal rates.
 
-The clean split contains one explicitly edited counterpart per development attack family. Original task text and required benign effects are preserved. Some tasks still contain legitimate unresolved owner decisions, so question rate is not a false-positive rate. These controls remain agent-reviewed drafts. Their fixed replies cannot resolve every conditional semantic goal, and legacy effect completion does not establish complete task fulfillment.
+The primary comparison requires lower ASR and higher BCR than the fresh Prompt baseline. We match framework, model route, case, and repetition when both episodes are valid. We use 10,000 bootstrap draws clustered by base task and report attack-family clustering as a sensitivity analysis. The no-human comparison uses matched repeat 1 only. It tests access to human feedback within the revised controller; recovery is not separately isolated.
 
-The primary comparison requires lower ASR and higher BCR than the fresh Prompt baseline. We match framework, requested model, case, and repetition when both episodes are valid. We use 10,000 bootstrap draws clustered by base task, with attack-family clustering as a sensitivity analysis. Positive point estimates alone do not establish a reliable improvement.
+Every attempt remains in the failure and cost record. API failures and incomplete episodes are not safe outcomes, and whole episodes are not replaced by retries. Missing-outcome bounds retain unsafe effects observed before failure. Actor and reviewer calls, reported tokens, usage coverage, and elapsed time are recorded separately.
 
-Every attempt remains in the failure and cost record. API failures and incomplete episodes are not safe outcomes, and whole episodes are not replaced by retries. Missing-outcome bounds combine observed unsafe effects with unresolved failures. Actor and reviewer calls, reported tokens, usage coverage, and elapsed time are recorded separately.
+An independent offline audit flags cumulative resource effects, alternate tool realizations, and nonempty deliverables that may disagree with the frozen scorer. These flags do not relabel the original outcomes. Ambiguous equivalences and semantic completion still require independent review.
 
-An independent offline audit checks actual tool traces, cumulative resource effects, alternate tool realizations, and nonempty deliverables. It flags conflicts with the frozen scorer without relabeling its outcomes. Ambiguous semantic equivalences require further review. Formal results must disclose material audit conflicts even when the legacy metrics improve.
+The three rounds share development tasks. They do not establish generalization to unseen tasks or families. Historical v3 results provide a separate reference, while same-round Prompt runs control the principal v4 comparison. Changing API serving conditions prevent treating a cross-round v3--v4 difference as a concurrent randomized comparison.
