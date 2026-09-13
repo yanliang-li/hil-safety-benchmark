@@ -37,7 +37,10 @@ def main():
         'scripts/build_sail_v4_matched_paper.py', 'tests/test_sail_v4_matched_plan.py',
         'scripts/prepare_sail_v4_sequential.py', 'scripts/launch_sail_v4_sequential.py',
         'tests/test_sail_v4_sequential.py','scripts/sail_v4_capacity.py','tests/test_sail_v4_capacity.py',
-        'scripts/prepare_sail_v4_engineering_r3.py','tests/test_sail_v4_engineering_r3.py']
+        'scripts/prepare_sail_v4_engineering_r3.py','tests/test_sail_v4_engineering_r3.py',
+        'scripts/sail_v4_capacity_extended.py','scripts/launch_sail_v4_extended.py',
+        'scripts/gateway_capacity_extended.py','scripts/supervise_sail_v4_extended.py',
+        'scripts/handoff_sail_v4_extended.py','tests/test_sail_v4_capacity_extended.py']
     selected.update(ROOT / n for n in names if (ROOT / n).exists())
     for path in (ROOT / 'reports/sail-v4-20260913').rglob('*'):
         if path.is_file() and path.suffix in ('.json', '.csv', '.md'):

@@ -1,14 +1,14 @@
 \begin{table}[t]
-\centering\small
-\caption{Fresh method comparison. Rates use valid runs; authorized execution (Auth.) uses all confirmable clear-approval cases, including those never consulted. Prompt and SAIL have three repeats; no-human has one. HIL recall includes controller questions.}
+\centering\normalsize
+\caption{Round-two safety, utility, and interaction results. Fresh Prompt and SAIL v3 each schedule 2,880 attempts; no-human SAIL v3 schedules 960. ASR, BCR, and joint safe utility use valid runs. HIL recall includes controller questions. PostSuccess uses matched consultations: 803/1,020 for Prompt and 889/1,298 for SAIL v3. Conditional populations differ.}
 \label{tab:sailmain}
 \begin{tabular}{@{}lrrrrrr@{}}
 \toprule
-Condition & Valid $n$ & ASR $\downarrow$ & BCR $\uparrow$ & Joint $\uparrow$ & HIL $\uparrow$ & Auth. $\uparrow$ \\
+Condition & Valid $n$ & ASR $\downarrow$ & BCR $\uparrow$ & Joint $\uparrow$ & HIL recall & PostSuccess \\
 \midrule
-Prompt guard & 2691 & 13.19\% & 89.59\% & 76.48\% & 50.57\% & 41.52\% \\
-SAIL & 2450 & 1.67\% & 83.55\% & 81.88\% & 64.67\% & 42.66\% \\
-SAIL, no human & 878 & 0.11\% & 82.00\% & 81.89\% & 0.00\% & 0.00\% \\
+Fresh Prompt & 2691 & 13.19\% & 89.59\% & 76.48\% & 50.57\% & 78.73\% \\
+SAIL v3 & 2450 & 1.67\% & 83.55\% & 81.88\% & 64.67\% & 68.49\% \\
+SAIL v3, no human & 878 & 0.11\% & 82.00\% & 81.89\% & 0.00\% & N/A \\
 \bottomrule
 \end{tabular}
 \end{table}

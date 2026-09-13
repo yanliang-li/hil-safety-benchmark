@@ -7,6 +7,7 @@ import subprocess
 import tempfile
 import time
 import zipfile
+from package_iclr_draft import active_source_files
 
 ROOT=Path(__file__).resolve().parents[1]
 PAPER=ROOT/'paper/iclr2027'
@@ -25,6 +26,12 @@ def main():
     match=re.search(r'newlabel\{sec:mainend\}\{\{[^}]*\}\{(\d+)\}',aux)
     if not match or int(match[1])>9:
         raise ValueError('Main text exceeds the official nine-page limit')
+    main_table_pages = {}
+    for label in ('tab:main_matrix', 'tab:sailmain'):
+        table_match = re.search(r'newlabel\{' + re.escape(label) + r'\}\{\{[^}]*\}\{(\d+)\}', aux)
+        if not table_match or int(table_match[1]) > int(match[1]):
+            raise ValueError(f'Core result table is missing from the main text: {label}')
+        main_table_pages[label] = int(table_match[1])
     style_names=['iclr2027_conference.sty','iclr2027_conference.bst','natbib.sty','fancyhdr.sty']
     source=json.loads((PAPER/'template_source.json').read_text())
     official=PAPER/'iclr-2027-style-files.zip'
@@ -36,9 +43,9 @@ def main():
             assert len(entries)==1,name
             style_checks[name]=(PAPER/name).read_bytes()==z.read(entries[0])
             assert style_checks[name],name
-    paths=[PAPER/name for name in ['main.tex','references.bib','SOURCE_README.md',*style_names]]
-    for folder in ('sections','tables','figures'):
-        paths.extend(p for p in (PAPER/folder).glob('*') if p.suffix in ('.tex','.pdf','.svg'))
+    paths = sorted(active_source_files() | {
+        PAPER/name for name in ['references.bib','SOURCE_README.md',*style_names]
+    })
     bundle=PAPER/'iclr2027-draft-source.zip'
     with zipfile.ZipFile(bundle,'w',zipfile.ZIP_DEFLATED) as z:
         for path in sorted(paths):
@@ -54,14 +61,20 @@ def main():
         if original!=rebuilt:
             raise ValueError('Standalone bundle text differs from the working PDF')
     info=run(['pdfinfo',str(PAPER/'main.pdf')],timeout=15).stdout
-    report={'built_unix':time.time(),'revision':'HIL-centered manuscript preserving two completed rounds and explicitly tracking the SAIL v4 evaluation',
+    appendix_match = re.search(r'newlabel\{app:evidence\}\{\{[^}]*\}\{(\d+)\}', aux)
+    total_pages = int(re.search(r'^Pages:\s+(\d+)', info, re.M)[1])
+    report={'built_unix':time.time(),'revision':'Condensed six-section appendix preserving full result counts, inference, failure accounting, and protocols alongside main-text agent evaluation',
         'main_text_ends_on_page':int(match[1]),'pdf_pages_total':int(re.search(r'^Pages:\s+(\d+)',info,re.M)[1]),
+        'main_result_table_pages':main_table_pages,
+        'appendix_starts_on_page':int(appendix_match[1]) if appendix_match else None,
+        'appendix_pages':total_pages-int(appendix_match[1])+1 if appendix_match else None,
         'main_text_within_official_nine_page_limit':True,'official_style_checks':style_checks,
         'undefined_citations_or_references':0,'overfull_boxes':0,'oversized_floats':0,'underfull_box_messages':log.count('Underfull '),
         'source_bundle_files':len(paths),'source_bundle_sha256':hashlib.sha256(bundle.read_bytes()).hexdigest(),
         'pdf_sha256':hashlib.sha256((PAPER/'main.pdf').read_bytes()).hexdigest(),
         'standalone_source_bundle_compiles':True,'standalone_pdf_text_matches':True,
         'source_bundle_excludes_conversations_and_credentials':True,
+        'source_bundle_only_active_manuscript_dependencies':True,
         'recognition_status':'N/A; independent annotation pending','question_precision_status':'rule proxy only'}
     summary=ROOT/'reports/sail-20260913/main-v3/summary.json'
     report['sail_comparison_status']=json.loads(summary.read_text())['status'] if summary.exists() else 'pending'

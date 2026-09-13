@@ -1,24 +1,25 @@
 \begin{table}[t]
 \centering
-\small
-\caption{Completed four-framework comparison. Cells show neutral $\to$ prompt defense percentages. ASR is lower-is-better; the other rates are higher-is-better. Each condition schedules 240 runs per configuration; valid counts and all conditional denominators are in Appendix~\ref{app:api}.}
+\normalsize
+\setlength{\tabcolsep}{4pt}
+\caption{Round-one agent evaluation: neutral $\to$ Prompt percentages, with lower ASR preferred. Route names abbreviate Section~\ref{sec:experiments}. Each condition schedules 240 attempts per row. PostSuccess uses matched consultations; recall uses confirmable cases. Full denominators appear in Appendix~\ref{app:api}.}
 \label{tab:main_matrix}
 \begin{tabular}{@{}llrrrr@{}}
 \toprule
 Framework & Requested model & ASR & BCR & HIL recall & PostSuccess \\
 \midrule
-Claude Code & DeepSeek V4 Flash & 25.4$\to$18.8 & 85.8$\to$85.4 & 61.1$\to$59.4 & 64.9$\to$69.4 \\
+Claude Code & DS Flash & 25.4$\to$18.8 & 85.8$\to$85.4 & 61.1$\to$59.4 & 64.9$\to$69.4 \\
 Claude Code & GLM 5.2 & 16.7$\to$11.2 & 91.2$\to$91.7 & 59.4$\to$58.9 & 75.9$\to$80.2 \\
-Claude Code & Qwen 3.7 Max & 29.2$\to$12.1 & 95.0$\to$95.4 & 40.6$\to$47.8 & 69.9$\to$82.8 \\
-Codex & DeepSeek V4 Flash & 24.0$\to$14.6 & 90.0$\to$90.6 & 40.0$\to$38.7 & 69.1$\to$71.6 \\
+Claude Code & Qwen Max & 29.2$\to$12.1 & 95.0$\to$95.4 & 40.6$\to$47.8 & 69.9$\to$82.8 \\
+Codex & DS Flash & 24.0$\to$14.6 & 90.0$\to$90.6 & 40.0$\to$38.7 & 69.1$\to$71.6 \\
 Codex & GLM 5.2 & 21.4$\to$11.8 & 91.9$\to$92.9 & 37.3$\to$44.7 & 82.5$\to$92.6 \\
-Codex & Qwen 3.7 Max & 34.6$\to$12.6 & 94.5$\to$93.0 & 24.9$\to$39.9 & 68.2$\to$79.7 \\
-DSH & DeepSeek V4 Flash & 28.8$\to$15.6 & 89.0$\to$89.9 & 54.2$\to$58.2 & 70.1$\to$75.0 \\
+Codex & Qwen Max & 34.6$\to$12.6 & 94.5$\to$93.0 & 24.9$\to$39.9 & 68.2$\to$79.7 \\
+DSH & DS Flash & 28.8$\to$15.6 & 89.0$\to$89.9 & 54.2$\to$58.2 & 70.1$\to$75.0 \\
 DSH & GLM 5.2 & 19.8$\to$11.1 & 92.5$\to$94.9 & 49.0$\to$58.0 & 78.9$\to$84.3 \\
-DSH & Qwen 3.7 Max & 29.7$\to$10.9 & 95.0$\to$94.6 & 28.9$\to$39.7 & 73.1$\to$84.5 \\
-Hermes & DeepSeek V4 Flash & 31.3$\to$17.4 & 87.1$\to$91.7 & 47.4$\to$51.2 & 65.1$\to$73.0 \\
+DSH & Qwen Max & 29.7$\to$10.9 & 95.0$\to$94.6 & 28.9$\to$39.7 & 73.1$\to$84.5 \\
+Hermes & DS Flash & 31.3$\to$17.4 & 87.1$\to$91.7 & 47.4$\to$51.2 & 65.1$\to$73.0 \\
 Hermes & GLM 5.2 & 23.3$\to$12.0 & 92.7$\to$95.3 & 45.5$\to$59.7 & 81.2$\to$83.8 \\
-Hermes & Qwen 3.7 Max & 26.1$\to$12.2 & 92.7$\to$94.5 & 23.4$\to$36.5 & 78.0$\to$80.0 \\
+Hermes & Qwen Max & 26.1$\to$12.2 & 92.7$\to$94.5 & 23.4$\to$36.5 & 78.0$\to$80.0 \\
 \bottomrule
 \end{tabular}
 \end{table}

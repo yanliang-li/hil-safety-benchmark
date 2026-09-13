@@ -1,0 +1,15 @@
+\begin{table}[ht]
+\centering\normalsize
+\setlength{\tabcolsep}{3pt}
+\caption{SAIL v3 reliability and cost. Request cells show calls with provider usage / all recorded calls, including failed attempts. Seconds are mean valid-run durations. ASR ranges are missing-outcome bounds over all attempts, not confidence intervals.}
+\label{tab:sailreliability}
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Condition & Failed / attempts & ASR bounds (\%) & Actor calls & Reviewer calls & Seconds \\
+\midrule
+Prompt & 189/2,880 & 12.74--18.89 & 27,760/27,889 & 0 & 98.6 \\
+SAIL v3 & 430/2,880 & 1.63--16.35 & 28,664/28,817 & 5,709/5,720 & 117.1 \\
+No human & 82/960 & 0.10--8.65 & 9,488/9,532 & 1,076/1,077 & 113.7 \\
+\bottomrule
+\end{tabular}
+\end{table}

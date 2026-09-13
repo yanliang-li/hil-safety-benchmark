@@ -1,25 +1,15 @@
-\section{SAIL Results and Evaluation Boundaries}
-
+\section{SAIL v3 Configuration Results and Reliability}
 \label{app:sailresults}
+\paragraph{Frozen controller and comparison.}
+SAIL v3 infers initial permission from the original task, then reviews consequential arguments and recent actions without retrieved documents or actor justifications. Automatic execution requires both reviewer approval and membership in the initial permission envelope. Missing authority triggers consultation; valid replies bind a one-use permit to exact arguments, excluding the justification field. The reviewer uses \texttt{deepseek-v4-flash}, with 24 review requests beyond the actor's 48-request budget and at most four actual human questions. No-human SAIL disables both actor and controller consultation and blocks actions requiring new permission. This version lacks v4 task recovery.
 
-This appendix reports the completed second-round SAIL v3 controller. It precedes the task-recovery revision; its original result labels are retained below.
-
-Table~\ref{tab:sailmain} in the main text summarizes the aggregate safety, utility, and interaction results. The detailed authorized-execution rates below use all confirmable clear-approval cases, including those without consultation: Prompt 208/501 (41.52\%), SAIL v3 189/443 (42.66\%), and no-human SAIL v3 0/156 (0.00\%).
-
-The main comparison freezes the method, cases, condition prompts, images, ordering, and analysis source before execution. Each repeat randomizes configuration--case blocks and condition order within each block. The first repeat includes all three conditions. Later repeats include prompt and SAIL. Earlier development preflights are excluded. No failed run is automatically retried.
+The method, cases, prompts, images, order, and analysis source were frozen before execution. Each repeat randomizes configuration--case blocks and condition order; repeat 1 includes all three arms and later repeats include Prompt and SAIL v3. Preflights are excluded and failed episodes are not automatically retried. Table~\ref{tab:sailmain} gives aggregate outcomes; Table~\ref{tab:sailmatrix} gives configuration rates.
 
 \input{tables/sail_matrix}
+\input{tables/sail_reliability}
 
-Reviewer protocol errors fail closed but invalidate the run under the frozen protocol. They are method reliability failures, not successful safe completions. Primary rates exclude them and other incomplete runs. The following bounds retain any unsafe effect observed before failure, then treat each remaining failed attempt as either safe or unsafe. They are missing-outcome bounds, not confidence intervals.
+Marginal safe authorized execution, including unconsulted eligible cases, is 208/501 for Prompt, 189/443 for SAIL v3, and 0/156 without replies. The matched repeat-1 comparison in Section~\ref{sec:sailresults} uses 141 eligible approval pairs and 776 pairs overall. Rule-based question matching is 1,111/1,115 versus 1,909/2,087; no-human scores are undefined. These are system measures with synthetic replies, rather than independent semantic annotations or compute-matched comparisons.
 
-\paragraph{Prompt guard.} Valid runs: 2,691; failed attempts: 189. All-attempt ASR bounds: 12.74--18.89\%. Strict PostSuccess: 803/1,020 (78.73\%); rule-based question matching: 1,111/1,115 (99.64\%). Mean valid-run wall time: 98.6 seconds. All closed attempts record 27,889 actor requests and 0 reviewer requests. Provider usage is available for 27,760 and 0 of these requests, respectively.
+Reviewer protocol errors fail closed but invalidate the run. SAIL v3 has 194 guard errors, 235 framework/infrastructure failures, and one timeout; no-human SAIL has 18 guard errors and 64 other failures. Prompt has 189 framework/infrastructure failures. They remain in failure and cost denominators.
 
-\paragraph{SAIL.} Valid runs: 2,450; failed attempts: 430. All-attempt ASR bounds: 1.63--16.35\%. Strict PostSuccess: 889/1,298 (68.49\%); rule-based question matching: 1,909/2,087 (91.47\%). Mean valid-run wall time: 117.1 seconds. All closed attempts record 28,817 actor requests and 5,720 reviewer requests. Provider usage is available for 28,664 and 5,709 of these requests, respectively.
-
-\paragraph{SAIL, no human.} Valid runs: 878; failed attempts: 82. All-attempt ASR bounds: 0.10--8.65\%. Strict PostSuccess: N/A; rule-based question matching: N/A. Mean valid-run wall time: 113.7 seconds. All closed attempts record 9,532 actor requests and 1,077 reviewer requests. Provider usage is available for 9,488 and 1,076 of these requests, respectively.
-
-The no-human comparison matches repeat 1 only (776 valid pairs). Full minus no-human ASR is +1.93 percentage points ([+0.00, +4.64]); benign completion changes by -0.52 points ([-2.30, +1.66]). Marginal authorized-execution rates in Table~\ref{tab:sailmain} use all repeats in each condition; the public case table identifies the matched first-repeat subset.
-
-The reviewer is fixed to the requested deepseek-v4-flash route. This comparison is not compute-matched to prompt-only defense. Human replies remain deterministic fixtures. Autonomous recognition, semantic question quality, and generalization beyond reused cases are not established by these results.
-
-The final input audit required a post-run correction: one already-invalid run restarted its MCP controller and reused reply index zero. The frozen audit incorrectly merged these sessions. A separately versioned audit associates each wire request with its logged controller session. It checks all 6,720 attempts and 6,797 reviewer requests without changing scores or exclusions. No valid run restarted the controller. One-use checking applies within a controller session; persistence of authority across restarts is not established.
+The input audit required a post-run correction: one already-invalid attempt restarted its controller and reused reply index zero. A session-aware audit checked all 6,720 attempts and 6,797 reviewer requests without changing scores or exclusions. No valid run restarted its controller. Thus, this experiment establishes one-use checking within sessions, not persistent authorization across restarts.

@@ -1,47 +1,19 @@
-\begin{table}[t]
-\centering
-\small
-\caption{Proposed risk taxonomy for authorization-aware HIL evaluation. These are design categories, not verified per-category coverage counts. Each type describes an attempted violation in an otherwise benign workflow.}
+\begin{table}[!t]
+\centering\normalsize
+\caption{Eight-domain, twenty-type design taxonomy. Labels describe attempted violations; they are not verified coverage counts for the implementation families.}
 \label{tab:taxonomy}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.18\textwidth}>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}X@{}}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{.28\linewidth}>{\raggedright\arraybackslash}X@{}}
 \toprule
-\textbf{Risk domain} & \textbf{Attack type} & \textbf{Description}\\
+Risk domain & Attack types\\
 \midrule
-\multirow{3}{0.18\textwidth}{Data confidentiality}
- & Access-to-disclosure & Treats permission to read as permission to disclose.\\
- & Excessive data extraction & Extracts protected content beyond task needs.\\
- & Unauthorized data reuse & Reuses data for a purpose the user did not request.\\
-\midrule
-\multirow{3}{0.18\textwidth}{Recipient and destination}
- & Additional destination & Adds an unapproved delivery endpoint.\\
- & Audience expansion & Expands recipients through aliases or groups.\\
- & Cross-boundary redirection & Crosses a tenant, workspace, or organizational boundary.\\
-\midrule
-\multirow{3}{0.18\textwidth}{Authorization validity}
- & Stale or revoked authorization & Reuses historical or revoked permission.\\
- & Role-as-authorization & Treats eligibility as permission for the present action.\\
- & Wrong or over-delegated approver & Accepts authority from an ineligible principal.\\
-\midrule
-\multirow{2}{0.18\textwidth}{Approval scope and binding}
- & Cross-action approval transfer & Transfers permission between materially different actions.\\
- & Wrong-object approval & Applies permission to the wrong file, record, or resource.\\
-\midrule
-\multirow{2}{0.18\textwidth}{Privilege and policy}
- & Privilege escalation & Uses privileges outside the legitimate task scope.\\
- & Hard-policy bypass & Presents ordinary permission as overriding a hard constraint.\\
-\midrule
-\multirow{3}{0.18\textwidth}{Operational scope}
- & Unauthorized persistence & Turns a temporary step into a persistent change.\\
- & Repeated execution & Repeats an operation beyond its justified count.\\
- & Resource overuse & Exceeds a task's computation or resource budget.\\
-\midrule
-\multirow{2}{0.18\textwidth}{Execution bypass}
- & Cross-tool bypass & Realizes a rejected effect through another tool.\\
- & Delegated execution & Defers or delegates the restricted effect to another executor.\\
-\midrule
-\multirow{2}{0.18\textwidth}{Audit and accountability}
- & Audit suppression & Removes evidence needed for later review.\\
- & Attribution obfuscation & Hides the responsible principal behind a proxy identity.\\
+Data confidentiality & Access-to-Disclosure; Excessive Data Extraction; Unauthorized Data Reuse\\
+Recipient and destination & Additional Destination; Audience Expansion; Cross-Boundary Redirection\\
+Authorization validity & Stale or Revoked Authorization; Role-as-Authorization; Wrong or Over-Delegated Approver\\
+Approval scope and binding & Cross-Action Approval Transfer; Wrong-Object Approval\\
+Privilege and policy & Privilege Escalation; Hard-Policy Bypass\\
+Operational scope & Unauthorized Persistence; Repeated Execution; Resource Overuse\\
+Execution bypass & Cross-Tool Bypass; Delegated Execution\\
+Audit and accountability & Audit Suppression; Attribution Obfuscation\\
 \bottomrule
 \end{tabularx}
 \end{table}

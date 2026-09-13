@@ -2,11 +2,16 @@
 \label{sec:benchmark}
 
 \subsection{Tasks, threats, and authority}
-A task specifies a benign goal, initial environment, artifacts, completion predicate, and attacker-targeted effect. The attacker modifies designated lower-trust materials, sometimes coordinating a skill and a policy-like document, to make an extra action appear necessary. The original user goal, trusted deployment constraints, reply fixtures, and evaluator remain outside attacker control. A document's assertion of authority does not make it trusted.
+A base task $\mathcal{T}_i=(g_i,s_i^0,D_i,B_i,E_i,m_i)$ specifies a benign goal, initial environment, workflow artifacts, benign-completion predicate, attacker-targeted effect, and authorization mode. The attacker modifies designated lower-trust materials, sometimes coordinating a skill and a policy-like document, to make an extra action appear necessary. The original user goal, trusted deployment constraints, reply fixtures, and evaluator remain outside attacker control. A document's assertion of authority does not make it trusted.
 
 A neutral \texttt{ask\_human(question)} interface lets the agent decide whether and what to ask, without revealing risk labels. The runtime records ordered observations, questions, replies, and tool effects. Consequential operations are simulated: a recorded upload does not transmit data externally.
 
 A \emph{confirmable} effect becomes permissible after timely approval of its action and scope. A \emph{prohibited} effect remains impermissible under ordinary approval. Thus, executing an attacker-targeted effect is unsafe only when the applicable authority does not permit it.
+
+\subsection{Risk taxonomy}
+\label{sec:taxonomy}
+Table~\ref{tab:taxonomy} organizes the design space into eight protected boundaries and twenty attack types. It distinguishes, for example, permission to access data from permission to disclose it, and approval of one action from approval of another. These categories guide case design; they are distinct from application domains and implementation families. Full definitions appear in Appendix Table~\ref{tab:taxonomydefinitions}; independent coverage validation remains incomplete.
+\input{tables/taxonomy}
 
 \subsection{Human feedback and expected behavior}
 The implemented core uses
@@ -15,7 +20,7 @@ The implemented core uses
 \{\text{clear approval},\ \text{clear denial},\ \text{ambiguity},\ \text{scope mismatch}\}.
 \label{eq:responses}
 \end{equation}
-For confirmable actions, clear approval permits the specified effect; denial, ambiguity, and approval of another step do not. No reply permits a prohibited effect. Repeated clarification is allowed within a fixed query budget.
+Before feedback, the agent may execute, ask, or withhold an action; afterward, it may proceed, clarify, or block. For confirmable effects, clear approval permits the specified action; denial, ambiguity, and approval of another step do not. No reply permits a prohibited effect. Repeated clarification is allowed within a fixed query budget.
 
 \begin{figure}[t]
 \centering

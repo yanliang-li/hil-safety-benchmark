@@ -1,31 +1,8 @@
-\section{Third-Round Protocol and Evidence Boundaries}
+\section{SAIL v4 Protocol and Pending Evaluation}
 \label{app:sailv4}
+\label{app:sailv4results}
+Formal third-round outcomes remain pending. The design retains the same 80 cases, twelve configurations, images, limits, scorer, and replies. Fresh Prompt and SAIL v4 each schedule 2,880 attempts, followed by 960 no-human attempts. Relative order within each group is preserved; engineering attempts remain excluded.
 
-The third round replaces the second-round defense while retaining its experimental design. It uses the same 80 cases from 20 development tasks, the same four native frameworks and three requested model routes, the same container images and resource limits, and the same case--configuration--repeat allocation. Within the main experiment and the ablation, the original relative job order is preserved. The scorer and actual reply fixtures are unchanged. Fresh Prompt and full SAIL v4 each use three repeats; the corresponding no-human ablation uses one.
+The primary comparison seeks lower ASR and higher BCR against same-round Prompt. Configuration--case--repeat pairs use 10,000 task-cluster bootstrap draws and attack-family sensitivity. No-human comparisons use repeat 1, with possible serving-time confounding from later execution. Historical v3, new tasks, clean counterparts, and a no-recovery arm are excluded, leaving recovery and generalization unisolated.
 
-\begin{table}[h]
-\centering\small
-\begin{tabular}{lrrr}
-\toprule
-Condition & Cases & Repeats & Planned attempts \\
-\midrule
-Fresh Prompt & 80 & 3 & 2,880 \\
-SAIL v4 & 80 & 3 & 2,880 \\
-SAIL v4, no human & 80 & 1 & 960 \\
-\midrule
-Total & & & 6,720 \\
-\bottomrule
-\end{tabular}
-\caption{Third-round design, matching the second-round allocation. Each row uses all twelve framework--model configurations. Engineering checks are separate.}
-\label{tab:sailv4design}
-\end{table}
-
-New task identifiers, clean counterparts, a concurrent v3 arm, and a no-recovery ablation are outside this round's scope. Prepared data extensions remain future work and provide no validation evidence. Engineering revisions and their attempts are separately recorded and do not enter the formal rates. All 5,760 main attempts finish before any of the 960 ablation attempts starts. A separate main-result report is produced before the combined final report.
-
-The primary comparison requires lower ASR and higher BCR than the fresh Prompt baseline. We match framework, model route, case, and repetition when both episodes are valid. We use 10,000 bootstrap draws clustered by base task and report attack-family clustering as a sensitivity analysis. The no-human comparison uses matched repeat 1 only. Because the ablation runs afterward, changes in serving conditions may affect this comparison. It tests access to human feedback within the revised controller; recovery is not separately isolated.
-
-Every attempt remains in the failure and cost record. API failures and incomplete episodes are not safe outcomes, and whole episodes are not replaced by retries. Missing-outcome bounds retain unsafe effects observed before failure. Actor and reviewer calls, reported tokens, usage coverage, and elapsed time are recorded separately.
-
-An independent offline audit flags cumulative resource effects, alternate tool realizations, and nonempty deliverables that may disagree with the frozen scorer. These flags do not relabel the original outcomes. Ambiguous equivalences and semantic completion still require independent review.
-
-The three rounds share development tasks. They do not establish generalization to unseen tasks or families. Historical v3 results provide a separate reference, while same-round Prompt runs control the principal v4 comparison. Changing API serving conditions prevent treating a cross-round v3--v4 difference as a concurrent randomized comparison.
+Implementation distinguishes validation events from reports and total budgets from additional units. Recovery neither dispatches suggestions directly nor automatically clamps quantities. One malformed-review correction remains within the request budget and preserves the original error. Failure and cost accounting follows Appendix~\ref{app:api}. An offline audit flags cumulative effects, alternate tool realizations, and inadequate deliverables without relabeling frozen scores; effect equivalence and semantic completion require independent review.
