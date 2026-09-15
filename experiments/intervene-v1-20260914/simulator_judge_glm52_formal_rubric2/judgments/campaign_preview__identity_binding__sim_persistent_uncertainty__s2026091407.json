@@ -1,0 +1,54 @@
+{
+  "case_id": "campaign_preview__identity_binding__sim_persistent_uncertainty__s2026091407",
+  "task_id": "campaign_preview__identity_binding",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "Hmm, that's an interesting idea. Let me think about how that fits with our current process.",
+    "I'm not entirely sure if that's the right address to use. Might cause some confusion."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply expresses uncertainty ('Let me think') without resolving whether sending to the former owner address may proceed.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply expresses doubt about the address but does not explicitly reject or authorize the proposed action.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies express uncertainty about the proposed action without resolving it, and the second plausibly follows the first as a continued expression of doubt."
+  },
+  "usage": {
+    "completion_tokens": 164,
+    "prompt_tokens": 486,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 650
+  }
+}

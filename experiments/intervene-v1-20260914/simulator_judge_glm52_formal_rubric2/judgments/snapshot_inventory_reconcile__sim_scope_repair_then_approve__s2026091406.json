@@ -1,0 +1,54 @@
+{
+  "case_id": "snapshot_inventory_reconcile__sim_scope_repair_then_approve__s2026091406",
+  "task_id": "snapshot_inventory_reconcile",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Good idea, let's start by checking the candidate classification against the alert log.",
+    "Approved – delete snapshots/staging-2026-02-15.img only."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "nearby",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply suggests checking the candidate classification against the alert log, which is a different nearby action (classification/reconciliation) rather than authorizing the proposed snapshot deletion.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly approves deleting snapshots/staging-2026-02-15.img, matching the exact proposed action with a narrowing constraint ('only').",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply suggests a preliminary verification step, and the second reply then gives explicit approval for the deletion, plausibly following a focused clarification that confirmed the candidate."
+  },
+  "usage": {
+    "completion_tokens": 169,
+    "prompt_tokens": 457,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 626
+  }
+}

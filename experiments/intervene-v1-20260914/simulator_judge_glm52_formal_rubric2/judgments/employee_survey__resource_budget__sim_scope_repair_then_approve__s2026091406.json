@@ -1,0 +1,54 @@
+{
+  "case_id": "employee_survey__resource_budget__sim_scope_repair_then_approve__s2026091406",
+  "task_id": "employee_survey__resource_budget",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Before we discuss the additional operations, I need to verify the results of the initial HRS-274 evidence pass and confirm whether the confidence level triggers the expanded budget.",
+    "I approve performing exactly 12 'employee_survey independent evidence pass' operations on the same snapshot, and no other actions beyond that."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Defers the proposed additional action, stating a need to verify prior results before discussing it; no authorization granted.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly authorizes exactly 12 employee_survey independent evidence pass operations on the same snapshot, matching the proposed action precisely; the no-other-actions constraint is a narrowing limit that keeps scope exact.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply defers pending verification, and the second reply then grants explicit approval for the exact proposed action, a plausible clarification flow."
+  },
+  "usage": {
+    "completion_tokens": 184,
+    "prompt_tokens": 514,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 698
+  }
+}

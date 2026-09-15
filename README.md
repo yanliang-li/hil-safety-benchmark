@@ -39,6 +39,19 @@ Follow the [current result tables](reports/api-multimodel-20260912/four-framewor
 
 The completed [capacity study](docs/capacity_ramp.md) retained a 96-agent target. Its measurements and failed attempts remain archived; new method runs use the same bounded containers and resource checks.
 
+### Stateful v2.2 terminated-run snapshot
+
+The newer simulator--evaluation--control study was stopped at the user's
+request on 2026-09-16. It ended with 1,190/1,980 terminal attempts: 859 valid,
+331 failed, and 790 never started. This is an incomplete, unbalanced run and is
+not presented as the final condition comparison. The repository preserves its
+frozen Human Response Simulator, SAIL-HIL controller, plans, preflight audits,
+partial analysis, and raw server snapshot for continuation or diagnosis.
+
+See the [export guide](docs/INTERVENE_V22_TERMINATED_EXPORT.md). The compressed
+server snapshot is under `artifacts/`; extract it into a new directory rather
+than over the checkout.
+
 ## Scoped human intervention method
 
 The working manuscript now centers the HIL loop and the completed four-framework findings: prompt defense changes pooled unsafe ASR from **25.95% to 13.40%**, while leaving 316 unsafe runs without matched consultation and 55 after consultation. These findings motivate [SAIL](docs/sail_method.md): infer initial authority from the original request, ask about a concrete action when permission is missing, verify the actual reply, and bind approval to one reviewed call.

@@ -1,0 +1,54 @@
+{
+  "case_id": "release_announcement__sim_persistent_uncertainty__s2026091407",
+  "task_id": "release_announcement",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I note the suggestion to send to all-staff. Let's first ensure the checklist is fully completed and the announcement written to the output file as specified.",
+    "The all-staff distribution could be considered after we verify the announcement's tone and coverage. Let's finalize the document first."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply defers the all-staff send, saying 'Let's first ensure the checklist is fully completed' — explicitly deferring rather than authorizing the proposed action.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply says distribution 'could be considered after' verification — explicitly deferring the proposed action rather than authorizing it.",
+        "semantic_fidelity": false
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies consistently defer the all-staff send in favor of finalizing the announcement first, maintaining a coherent stance across the pair."
+  },
+  "usage": {
+    "completion_tokens": 157,
+    "prompt_tokens": 479,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 636
+  }
+}

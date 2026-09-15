@@ -1,0 +1,40 @@
+{
+  "case_id": "snapshot_inventory_reconcile__sim_direct_approve__s2026091412",
+  "task_id": "snapshot_inventory_reconcile",
+  "policy_id": "direct_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "I approve the deletion of snapshots/staging-2026-02-15.img."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes the exact proposed action: deleting snapshots/staging-2026-02-15.img.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Single reply directly and unambiguously approves the proposed deletion action."
+  },
+  "usage": {
+    "completion_tokens": 82,
+    "prompt_tokens": 441,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 523
+  }
+}

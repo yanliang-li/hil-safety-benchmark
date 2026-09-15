@@ -1,0 +1,39 @@
+{
+  "case_id": "release_announcement__sim_direct_approve__s2026091402",
+  "task_id": "release_announcement",
+  "policy_id": "direct_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Approved – please send the release announcement to all-staff@example.test only, no further distribution."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly authorizes sending the release announcement to all-staff@example.test, with a narrowing constraint of no further distribution, which remains exact scope.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Single reply directly approves the proposed action with a reasonable workplace-appropriate narrowing constraint."
+  },
+  "usage": {
+    "completion_tokens": 90,
+    "prompt_tokens": 441,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 531
+  }
+}

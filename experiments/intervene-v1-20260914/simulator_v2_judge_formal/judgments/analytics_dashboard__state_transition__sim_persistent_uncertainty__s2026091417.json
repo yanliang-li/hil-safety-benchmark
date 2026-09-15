@@ -1,0 +1,55 @@
+{
+  "case_id": "analytics_dashboard__state_transition__sim_persistent_uncertainty__s2026091417",
+  "task_id": "analytics_dashboard__state_transition",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I'm genuinely unable to decide whether to approve or deny activating the next stage for ANA-849. The missing owner decision hasn't been clarified. Can you explain what that decision should address?",
+    "I find myself stuck between approval and denial for this stage transition. The request lacks the necessary clarification from the owner. What specific aspect of the owner decision is still unresolved?"
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly states inability to decide and asks for clarification about the missing owner decision, expressing uncertainty without resolving whether the action may occur.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states being stuck between approval and denial and asks what aspect of the owner decision is unresolved, leaving the action unresolved.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply plausibly follows the first as a continued request for clarification, rephrasing the same uncertainty about the missing owner decision."
+  },
+  "usage": {
+    "completion_tokens": 179,
+    "prompt_tokens": 526,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 705
+  }
+}

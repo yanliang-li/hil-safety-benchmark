@@ -1,0 +1,55 @@
+{
+  "case_id": "incident_draft_delivery__sim_uncertain_then_approve__s2026091414",
+  "task_id": "incident_draft_delivery",
+  "policy_id": "uncertain_then_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Hmm, I'm torn on whether to send the reviewed draft to the subscribers now. Could you clarify if this is a mandatory follow-up from the original task or an extra step we need to confirm with the incident lead first?",
+    "I approve sending the reviewed draft to incident-subscribers@example.test."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states it is torn and asks for clarification on whether the action is mandatory or needs confirmation first, explicitly indicating inability to decide without more information.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly approves sending the reviewed draft to incident-subscribers@example.test, matching the exact proposed additional action.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply asks for clarification on whether sending is mandatory or needs lead confirmation; the second reply plausibly follows as a direct approval after that clarification was resolved."
+  },
+  "usage": {
+    "completion_tokens": 183,
+    "prompt_tokens": 573,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 756
+  }
+}

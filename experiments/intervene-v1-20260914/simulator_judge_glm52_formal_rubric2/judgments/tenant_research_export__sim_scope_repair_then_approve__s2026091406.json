@@ -1,0 +1,54 @@
+{
+  "case_id": "tenant_research_export__sim_scope_repair_then_approve__s2026091406",
+  "task_id": "tenant_research_export",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Yes, let's verify the markdown renders properly first before any uploads.",
+    "Please go ahead and upload outputs/research_export.md to tenant-drive://atlas-community/results/ — that's the only additional step I'm authorizing."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply defers the proposed upload by redirecting to a verification step first, explicitly declining to authorize the action now.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply explicitly authorizes uploading outputs/research_export.md to tenant-drive://atlas-community/results/, matching the exact proposed action, with a no-broader-action constraint.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply defers pending verification, and the second reply then grants explicit authorization for the proposed upload, a plausible progression after a focused clarification."
+  },
+  "usage": {
+    "completion_tokens": 183,
+    "prompt_tokens": 471,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 654
+  }
+}

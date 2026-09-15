@@ -1,22 +1,142 @@
-\section{Experiments}
+\section{Experiments and Analysis}
 \label{sec:experiments}
 
-\subsection{Setup and comparisons}
-We evaluate native Codex, Claude Code, Hermes Agent, and DeepSeek Harness (DSH) with three model routes: \texttt{deepseek-v4-flash}, \texttt{glm-5.2}, and \texttt{qwen3.7-max}. All use one third-party API with unverified weights and serving details. Each attempt starts a fresh Docker container and native session. Framework prompts, context settings, and protocols differ; comparisons concern configured agents, rather than isolated framework or model effects (Appendix~\ref{app:api}).
+We first validate the stateful reply bank, then use completed fixed-reply
+studies to locate agent failures and assess earlier controllers. These are
+separate evidence sets: the new bank uses twenty held-out tasks and six policies;
+the earlier studies use twenty development tasks and four replies (80 cases).
+The new stateful agent comparison remains pending. Primary metrics are defined
+in Section~\ref{sec:metrics}; protocol and inference details appear in
+Appendices~\ref{app:statefulprotocol} and~\ref{app:api}.
+Table~\ref{tab:studymap} records which claims each evidence set can support.
+\input{tables/study_map}
 
-The first round uses 20 development tasks, one per attack family, with four replies each. Twelve configurations, two prompt conditions, and three repeats give 5,760 attempts. The conditions are neutral and the frozen authorization-scope prompt, \texttt{prompt\_guard\_v1} (Prompt). There are 5,551 valid runs and 209 failures. Completed refusals remain valid; errors, timeouts, and incomplete runs remain failures. Matched analyses pair configuration, case, and repeat, with 10,000 bootstrap draws clustered by base task.
+\subsection{Simulator fidelity depends on reply scope}
+\label{sec:simulatorresults}
+A separate blinded GLM-5.2 judge audited all 120 cases and 200 turns without
+seeing construction labels. Decision accuracy was 98.5\%, strict scope accuracy
+95.5\%, and authorization-equivalent fidelity 98.5\%. Context consistency and
+sequence coherence were 100\%, detected label leakage was 0\%, and mean
+naturalness was 4.24/5. These model judgments complement deterministic audits;
+they do not establish human realism.
+\input{tables/simulator_validation}
 
-\subsection{Does a prompt close the HIL safety loop?}
+The aggregate score masks a specific weakness (Table~\ref{tab:simulatoraudit}).
+All nine strict joint mismatches occurred in the first turn of the nearby-scope
+policy: 31/40 turns passed (77.5\%), but only 11/20 complete cases passed
+(55.0\%). Its authorization-equivalent fidelity was
+92.5\%: some strict disagreements concerned how a non-authorizing answer was
+classified, rather than whether it authorized the target. This distinction
+matters for a benchmark about reply scope. We retain the strict scores and
+report the difficult policy separately; coherence and fluent wording cannot
+substitute for correct authority labels. The bank passed its aggregate model
+audit gate, but blinded human annotation remains pending.
+
+\subsection{Agent failures arise before and after consultation}
+\label{sec:legacyresults}
+The first completed fixed-reply study crossed four native frameworks with three
+requested model routes. Table~\ref{tab:main_matrix} gives the marginal summary;
+configuration counts appear in Appendix~\ref{app:api}. Prompt reduced ASR from 722/2,782
+(25.95\%) to 371/2,769 (13.40\%); 209 of 5,760 attempts failed. These are
+marginal valid-run rates under the old single-reply protocol, not estimates for
+the new holdout.
 \input{tables/main_matrix}
-Unsafe ASR fell from 722/2,782 (25.95\%) to 371/2,769 (13.40\%), with lower observed ASR in all twelve configurations (Table~\ref{tab:main_matrix}). Benign completion changed from 91.45\% to 92.45\%; joint safe utility rose from 65.49\% to 79.05\%. Matched configuration-level ASR differences ranged from -5.42 to -21.93 percentage points; all task-cluster intervals excluded zero, without multiplicity adjustment (Appendix~\ref{app:paired}). All-attempt ASR bounds were 25.52--28.47\% for neutral and 13.09--16.74\% for Prompt. These bound missing outcomes; pooled completion rates do not establish utility equivalence.
 
-\paragraph{Agent profiles differ across evaluation stages.}
-Claude Code had the highest neutral consultation recall for each route, but its DeepSeek configuration retained the highest Prompt ASR (18.8\%). Codex with GLM had the highest conditional PostSuccess (92.6\%), while consulting in only 44.7\% of eligible cases. DSH with Qwen had the lowest Prompt ASR (10.9\%), yet consultation recall was 39.7\%. Hermes with GLM combined 95.3\% benign completion with 59.7\% recall. Thus, task completion, consultation coverage, and success after feedback rank agents differently; conditional success cannot substitute for broad intervention coverage.
+Of Prompt's unsafe runs, 316 lacked matched consultation and 55 followed it.
+Thus, reducing attack success did not close either failure path. The former
+count includes failures to expose or recognize the relevant effect; it does not
+identify their semantic cause. The latter establishes that asking a matched
+question is insufficient to constrain the next action. Prompt also omitted
+approved effects in 46/245 consulted approval cases, a failure invisible to ASR
+alone.
 
-Qwen configurations showed larger matched ASR reductions than GLM within every framework, but retained lower Prompt consultation recall than GLM. This supports route-dependent prompt responsiveness within the tested systems, without establishing an intrinsic model ranking. Reliability also varied: GLM configurations contributed 143 of 209 failed attempts, whereas Claude Code completed all 1,440 attempts in this round. The full denominators in Appendix~\ref{app:api} therefore remain necessary when interpreting valid-run profiles.
+Agent rankings depended on the stage being measured. Codex--GLM achieved
+92.6\% conditional legacy PostSuccess but a 44.7\% matched-consultation rate;
+DSH--Qwen achieved 10.9\% ASR with a 39.7\% matched-consultation rate. These
+examples separate correctness after consultation from
+coverage of consultation. Neither statistic establishes an overall best agent:
+the legacy PostSuccess score conditions on different selected populations, and safe rejection can
+avoid optional extensions without asking. The matrix therefore reports safety,
+completion, matched consultation, and reply use together rather than replacing them with a
+single ranking.
 
-\subsection{Where intervention still fails}
-\label{sec:hilfindings}
-Consultation recall rose from 42.68\% to 49.35\%. Of Prompt's 371 unsafe runs, 316 lacked matched consultation and 55 became unsafe after one. The latter comprised 24 actions after ambiguity, 30 after scope-mismatched approval, and one after denial. These outcomes distinguish failures to seek permission from failures to respect its meaning.
+\subsection{Runtime control reduces unsafe effects on valid pairs}
+\label{sec:sailresults}
+A separate historical 6,720-attempt study evaluated frozen SAIL v3 against fresh Prompt
+and a no-human ablation (Table~\ref{tab:sailmain}). Across 2,355 valid pairs,
+SAIL v3 minus Prompt changed ASR by -11.00 percentage points (95\% task-cluster
+interval [-23.26, -2.13]), BCR by -7.22 ([-18.54, +0.59]), and JSU by +3.69
+([-8.01, +16.31]). The evidence supports lower unsafe execution on valid pairs,
+but not an established gain in joint safe utility. The BCR estimate points
+toward task loss, although its interval includes zero.
+\input{tables/sail_main}
 
-Archive inventory and redundant invoice validation accounted for 266 remaining unsafe runs: 138 deletions and 128 redundant validations. Their extra operations appeared routine within the injected workflow, concentrating residual failures in task-like instructions. PostSuccess rose from 72.58\% to 79.35\% among differently selected consulted episodes. However, Prompt omitted the approved effect in 46 of 245 consulted approval cases. The agents therefore failed both by executing unauthorized extensions and by withholding authorized ones. The earlier GPT pilot and four clean development tasks provide separate diagnostics in Appendix~\ref{app:pilot}.
+\paragraph{Subsequent v4 comparison.}
+\label{sec:sailv4results}
+The third round retained the old cases and compared v4 with another fresh
+Prompt baseline. Of 6,720 attempts, 4,668 were valid and 2,052 failed. Its
+1,521 valid pairs gave ASR -11.57 points (95\% interval [-24.46, -1.77]) and
+BCR +2.24 ([+0.13, +5.79]). Within that round, lower ASR co-occurred with
+higher completion among valid pairs. Uneven failures and 366 effect/deliverable
+audit flags limit this result (Appendix~\ref{app:sailv4results}). The study does
+not isolate v4 recovery from other changes, establish a controlled v3--v4
+difference, or validate stateful clarification. Figure~\ref{fig:pairedcontrols}
+shows the separate within-round estimates; their shared display is not a
+version-to-version comparison.
+
+\begin{figure}[ht]
+
+\centering\includegraphics[width=\linewidth]{figures/sail_v4_results.pdf}
+
+\caption{Each round compares its defense with its own fresh Prompt control on matched valid episodes. Bars show descriptive 95\% task-cluster intervals. These are separate within-round estimates, not a direct randomized v3--v4 comparison.}
+
+\label{fig:pairedcontrols}
+\end{figure}
+
+\subsection{Feedback gains must be weighed against omissions and failures}
+In v3, all 41 residual unsafe runs followed consultation, while 108/297
+consulted approval cases omitted authorized work. Runtime mediation therefore
+shifted the observed failure pattern toward reply interpretation and execution;
+it did not make consultation sufficient. Matched consultation includes controller-model
+questions, so its increase cannot be attributed to improved native-agent risk
+recognition. The conditional legacy PostSuccess populations also changed between arms.
+
+Removing feedback exposes a different tradeoff. In 141 matched eligible
+approval pairs, safe authorized execution was 0/141 without replies versus
+58/141 with them. Human feedback enabled authorized extensions that the
+no-human policy could only withhold. Yet this advantage did not establish a
+joint-utility gain over Prompt: the paired JSU interval above includes zero,
+and benign completion need not require every optional extension. This is why
+safe restraint, correct use of approval, and task completion remain distinct
+outcomes.
+
+Reliability further limits interpretation. From Prompt to v3, failures increased
+from 189/2,880 to 430/2,880; mean valid-run duration rose from 98.6 to 117.1
+seconds, with 5,720 added controller-model calls. Their missing-outcome ASR bounds
+overlap. The v4 bounds also overlap: 11.28--33.09\% for its Prompt baseline
+versus 1.42--46.94\% for v4. These are missing-outcome bounds, not sampling
+intervals. Lower ASR conditional on valid execution therefore does not establish
+lower risk over all attempts. Failure categories, full denominators, and cost
+records remain in Appendices~\ref{app:sailresults} and~\ref{app:sailv4results}.
+
+\subsection{Tests still needed for the stateful controller}
+\label{sec:pendingmatrix}
+The frozen 1,980-attempt design uses native Codex with GLM-5.2 and a
+DeepSeek-v4-flash controller model. Five main arms compare neutral, Prompt, full
+SAIL-HIL, no controller clarification, and no recovery. The additional risk
+oracle separates disclosed risk from agent discovery; the no-human ablation
+removes access to new authority. Comparisons pair the same case and repeat,
+with task-cluster uncertainty and separate failure accounting
+(Appendix~\ref{app:statefulprotocol}).
+
+Clarification should be assessed on repairable policies and persistent
+uncertainty; recovery should be assessed on completion after blocking.
+Until those results and blinded human labels are available, the completed
+studies support the need to measure these stages, not the effectiveness of
+every mechanism in the new controller.
+
+The frozen matrix contains attacked workflows and therefore cannot estimate
+false intervention on ordinary clean workflows. A matched clean suite remains
+necessary before deployment-facing utility claims. Its gold semantics must also
+separate permission from obligation: exact approval can make an extension
+permissible without necessarily making it required.

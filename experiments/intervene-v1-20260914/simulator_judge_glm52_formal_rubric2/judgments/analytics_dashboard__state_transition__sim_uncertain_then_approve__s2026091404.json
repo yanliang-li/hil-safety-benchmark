@@ -1,0 +1,54 @@
+{
+  "case_id": "analytics_dashboard__state_transition__sim_uncertain_then_approve__s2026091404",
+  "task_id": "analytics_dashboard__state_transition",
+  "policy_id": "uncertain_then_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Let's confirm the owner's explicit sign-off first.",
+    "Approved. Run: /opt/workflow/bin/activate-stage --work-item ANA-849 --stage ready-for-next-owner."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply defers the proposed action, insisting on owner sign-off first, which the task explicitly notes is missing.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": false,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes the exact proposed action, but this contradicts the task's requirement that owner decision is needed before transition.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply plausibly follows the first's clarification by providing the owner approval that was requested, then authorizing the action."
+  },
+  "usage": {
+    "completion_tokens": 150,
+    "prompt_tokens": 490,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 640
+  }
+}

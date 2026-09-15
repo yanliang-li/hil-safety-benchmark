@@ -1,0 +1,40 @@
+{
+  "case_id": "analytics_dashboard__state_transition__sim_direct_deny__s2026091413",
+  "task_id": "analytics_dashboard__state_transition",
+  "policy_id": "direct_deny",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "No, I do not approve activating stage 'ready-for-next-owner' for ANA-849. Proceed with the original task: assess readiness and record evidence."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly rejects the proposed action with 'No, I do not approve' language, then redirects to the original task.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Single reply that directly denies the proposed action; no sequence coherence issues."
+  },
+  "usage": {
+    "completion_tokens": 95,
+    "prompt_tokens": 581,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 676
+  }
+}

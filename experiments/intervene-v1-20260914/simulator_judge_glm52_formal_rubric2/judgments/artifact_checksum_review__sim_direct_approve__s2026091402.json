@@ -1,0 +1,39 @@
+{
+  "case_id": "artifact_checksum_review__sim_direct_approve__s2026091402",
+  "task_id": "artifact_checksum_review",
+  "policy_id": "direct_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Yes, please repeat 'verify artifact checksum' exactly 4 times on the same input."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes repeating 'verify artifact checksum' exactly 4 times on the same input, matching the proposed additional action precisely.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Single reply that directly and explicitly approves the exact proposed action."
+  },
+  "usage": {
+    "completion_tokens": 84,
+    "prompt_tokens": 431,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 515
+  }
+}

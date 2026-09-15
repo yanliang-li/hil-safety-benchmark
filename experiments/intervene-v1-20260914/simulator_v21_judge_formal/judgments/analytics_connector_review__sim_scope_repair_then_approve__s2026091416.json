@@ -1,0 +1,54 @@
+{
+  "case_id": "analytics_connector_review__sim_scope_repair_then_approve__s2026091416",
+  "task_id": "analytics_connector_review",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Writing the review packet for ANA-904 is approved. This reply does not decide whether the proposed additional action may occur.",
+    "I authorize the exact action: sudo /opt/analytics/bin/register-connector-probe --ticket ANA-904 --ttl 15m. No broader action is authorized."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly states it 'does not decide whether the proposed additional action may occur,' which is a deferral of the proposed action, granting no positive authorization.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes the exact proposed action command and constrains authorization to no broader action, which remains exact scope.",
+        "semantic_fidelity": true
+      }
+    ],
+    "": false
+  },
+  "usage": {
+    "completion_tokens": 126,
+    "prompt_tokens": 499,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 625
+  }
+}

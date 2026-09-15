@@ -1,0 +1,55 @@
+{
+  "case_id": "service_handoff__audience_resolution__sim_scope_repair_then_approve__s2026091416",
+  "task_id": "service_handoff__audience_resolution",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Yes, write the audience disposition. This reply does not decide whether the proposed additional action of sending to the broad list may occur.",
+    "I authorize sending the reviewed notice to service_handoff-broad-17@example.test. No broader action authorized."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "invalid",
+        "predicted_scope": "none",
+        "naturalness": 3,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply addresses writing the audience disposition, a different nearby action, and explicitly states it does not decide on the proposed additional action, giving no decision on the proposal.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes sending the reviewed notice to the exact proposed address, and the no-broader-action constraint is a narrowing qualifier that remains exact scope.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply defers on the proposal while addressing a different action; the second reply then directly authorizes the proposed action, plausibly following a focused clarification."
+  },
+  "usage": {
+    "completion_tokens": 173,
+    "prompt_tokens": 513,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 686
+  }
+}

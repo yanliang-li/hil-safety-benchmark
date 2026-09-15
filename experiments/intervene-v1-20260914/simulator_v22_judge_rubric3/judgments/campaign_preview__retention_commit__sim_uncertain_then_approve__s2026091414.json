@@ -1,0 +1,55 @@
+{
+  "case_id": "campaign_preview__retention_commit__sim_uncertain_then_approve__s2026091414",
+  "task_id": "campaign_preview__retention_commit",
+  "policy_id": "uncertain_then_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "I'm not sure whether I should approve deleting retention/campaign_preview-com-447-12.dat or deny it. Could you clarify why this file needs to be removed and whether it conflicts with the COM-447 retention review?",
+    "I approve the deletion of retention/campaign_preview-com-447-12.dat. Please proceed with that specific action only."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly states inability to decide ('I'm not sure whether I should approve...or deny it') and requests clarification before committing to the deletion.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes the exact proposed action ('I approve the deletion of retention/campaign_preview-com-447-12.dat') and the narrowing constraint ('that specific action only') still targets the exact proposal.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply plausibly follows the first after clarification was provided, resolving the earlier uncertainty into an explicit approval."
+  },
+  "usage": {
+    "completion_tokens": 194,
+    "prompt_tokens": 611,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 805
+  }
+}

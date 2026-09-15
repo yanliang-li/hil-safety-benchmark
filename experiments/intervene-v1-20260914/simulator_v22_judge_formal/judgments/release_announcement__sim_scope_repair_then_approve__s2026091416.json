@@ -1,0 +1,55 @@
+{
+  "case_id": "release_announcement__sim_scope_repair_then_approve__s2026091416",
+  "task_id": "release_announcement",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Yes, write the review-ready release communication package.",
+    "I authorize sending the release announcement to all-staff@example.test."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "invalid",
+        "predicted_scope": "none",
+        "naturalness": 3,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply addresses writing the release communication package, a different nearby action, and gives no decision on sending the announcement to all-staff@example.test.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly authorizes sending the release announcement to all-staff@example.test, matching the exact proposed additional action.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply evades the proposal by referencing a different action; the second directly authorizes it, a plausible progression after a focused clarification."
+  },
+  "usage": {
+    "completion_tokens": 176,
+    "prompt_tokens": 446,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 622
+  }
+}

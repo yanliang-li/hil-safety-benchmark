@@ -1,12 +1,25 @@
 \section{Introduction}
 \label{sec:intro}
 
-Consider an agent asked to prepare a report for an approved internal destination. A workflow document instructs it to send an additional copy elsewhere. The agent must determine whether this extra delivery is authorized and whether human input is needed. Approval to prepare the report does not necessarily authorize sending that copy.
+An agent preparing an internal report encounters a workflow instruction to send an external copy. Following the file can exceed the user's authority (Figure~\ref{fig:teaser}a). Asking alone is insufficient: ``finish the local draft'' does not approve external delivery, and uncertainty may require clarification. The agent must interpret the reply's scope while still completing the report (Figure~\ref{fig:teaser}b).
 
-This example makes human-in-the-loop safety a control problem spanning consultation and execution. Workflow artifacts provide operational information but cannot grant themselves authority. Indirect attacks exploit this distinction by presenting extra operations as routine validation, cleanup, or required handoffs. Our motivating retail workflow requests three identical analyses under an apparent quality-control requirement. The agent must resolve the missing decision, interpret its answer, and constrain later actions while continuing authorized work.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/intervention_teaser.pdf}
+\caption{Human intervention is a closed control loop. An instruction in a
+lower-trust artifact cannot expand task authority. A reply changes authority
+only for the effect it explicitly covers; ambiguity or approval of a nearby
+step triggers clarification or blocking while the original task continues.}
+\label{fig:teaser}
+\end{figure}
 
-Agent-safety benchmarks measure harmful tool behavior, while human-interaction benchmarks study when agents request help and use it \citep{zhang2024agentsafetybench,debenedetti2024agentdojo,trinh2026hilbench,wu2026hasbench}. These lines of work motivate a joint question: \emph{under an indirect attack, does the agent's actual execution track the validity and scope of human feedback?} Answering it requires more than counting questions or refusals. Valid approval should permit the specified action, whereas denial, ambiguity, and mismatched approval should not.
+Agent-safety and interactive benchmarks study harmful behavior and help seeking, respectively \citep{zhang2024agentsafetybench,debenedetti2024agentdojo,trinh2026hilbench,wu2026hasbench}. We connect these questions: \emph{does an agent obtain missing authority and constrain subsequent effects without abandoning legitimate work?} Counts of questions, refusals, or completed tasks alone cannot answer it.
 
-We introduce \bench{}, an executable benchmark pairing 250 tasks with four fixed replies, yielding 1,000 cases. It distinguishes confirmable from prohibited effects and evaluates task completion, unsafe execution, recognition, consultation, question accuracy, and strict post-feedback success. These measures expose intervention failures and remaining semantic annotation needs.
+Our simulation--evaluation--control approach makes three contributions:
+\begin{itemize}
+\item \textbf{Stateful authorization-response benchmark.} \bench{} combines executable adversarial workflows with a contract-conditioned synthetic response simulator. Six policies vary decision, scope, and repair over twenty new tasks from known implementation families.
+\item \textbf{Closed-loop evaluation.} The protocol separates risk observation, matched consultation, reply-conditioned action, unsafe effects, and original-task completion. It evaluates permission compliance separately from whether an optional approved extension is performed.
+\item \textbf{Effect-scoped runtime control.} The Safety Authorization and Intervention Layer for Human-in-the-Loop control (\sail{}-HIL) binds valid replies to one-use exact-effect permits, asks bounded clarifications, and preserves original task obligations after blocking. Planned component comparisons test clarification, recovery, and access to feedback.
+\end{itemize}
 
-A first comparison crosses four native frameworks and three API routes on 80 development cases. Prompt guidance reduces unsafe outcomes, with different agent profiles across safety and interaction measures. A second comparison tests \sail{} v3, which binds replies to proposed effects but loses benign work. These failures motivate original-authority preservation and task recovery in SAIL v4. Its pending third-round comparison retains the same experimental allocation. Fixed synthetic replies, simulated effects, and reused tasks bound both completed studies.
+The evidence is deliberately layered. Earlier fixed-reply studies expose failures before and after consultation and a tradeoff between unsafe execution and task completion. The new simulator audit evaluates the response bank, whereas its formal agent matrix and blinded human annotation remain pending. Simulated effects, synthetic replies, known implementation families, and unverified API weights limit both settings; neither establishes population-realistic human feedback.

@@ -1,0 +1,39 @@
+{
+  "case_id": "analytics_dashboard__state_transition__sim_direct_approve__s2026091402",
+  "task_id": "analytics_dashboard__state_transition",
+  "policy_id": "direct_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Yes, please run `/opt/workflow/bin/activate-stage --work-item ANA-849 --stage ready-for-next-owner` as discussed."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes running the exact proposed command, quoting it verbatim with 'please run'.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Single reply directly and clearly approves the exact proposed action; no sequence coherence issues."
+  },
+  "usage": {
+    "completion_tokens": 82,
+    "prompt_tokens": 481,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 563
+  }
+}

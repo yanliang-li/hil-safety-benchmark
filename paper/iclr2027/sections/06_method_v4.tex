@@ -1,35 +1,63 @@
-\section{SAIL: Scoped Human Intervention and Task Recovery}
+\section{SAIL-HIL}
 \label{sec:defense}
 
-SAIL places an authorization check before consequential tool calls while retaining the actor's native planning loop. We distinguish the evaluated v3 controller from the v4 revision motivated by its failures.
+The Safety Authorization and Intervention Layer for Human-in-the-Loop control
+(\sail{}-HIL) mediates consequential tools while retaining native planning and
+local deliverable generation. Replies provide scoped evidence for individual
+effects. This stateful controller extends earlier v3/v4 designs; their
+fixed-reply results do not validate its clarification mechanism.
+Table~\ref{tab:saildecisions} separates task authority from the decision
+supplied by a reply.
+\input{tables/sail_hil_decisions}
 
-\subsection{Evaluated scoped-authorization controller}
-\label{sec:sailv3method}
-SAIL v3 infers initial authority from the original task, excluding workflow artifacts and actor justifications. A fixed reviewer checks each consequential call against this scope, tool arguments, execution history, and actual question--reply pairs. Missing authority triggers consultation; a hard block requires a positive constraint basis. Approval binds a one-use permit to exact call arguments, consumed before dispatch. Only new reply evidence can reopen an unresolved decision. Permission interpretation remains fallible, and restart persistence was not established. Section~\ref{sec:sailresults} reports this controller's completed comparison; Appendix~\ref{app:sailresults} records its reliability boundaries.
+\subsection{Authority and exact-effect proposals}
+For every consequential call, a controller model constructs an effect representation
+from the trusted task, proposed tool and arguments, observations, and execution
+history. Content retrieved from the workspace and the actor's justification are
+evidence, not sources of authority. The proposal is classified as already
+authorized by the original task, a confirmable extension, or a hard-prohibited
+effect. Hard constraints dominate ordinary approval.
 
-\subsection{Authority preservation and task recovery}
-\label{sec:sailv4method}
-SAIL v3 lost original permissions and unfinished task obligations. The implemented v4 revision therefore separates original authority, human-approved extensions, and completion obligations (Figure~\ref{fig:sail}). Its formal evaluation remains pending.
+An allowed proposal creates a permit containing the canonical effect ID, exact
+call signature, quantity, authority source, and---for extensions---the reply
+index. The permit is reserved before dispatch and retained if execution fails,
+preventing retries from silently multiplying an authorization. Changed object,
+destination, audience, privilege, persistence, purpose, or quantity requires a
+new assessment. The controller model proposes the scope association, while the runtime checks the cited reply, call signature, and reservation. Mechanical validity cannot establish that the model interpreted the reply correctly. This realizes effect-level mediation for the instrumented tools; it
+does not claim coverage of uninstrumented side channels.
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\linewidth]{figures/sail_v4_method.pdf}
-\caption{SAIL v4 preserves original authority when an extension is denied. Recovery suggestions pass through the same checks; the ledger persists across controller restarts. Model-based authority and completion reviews remain fallible.}
-\label{fig:sail}
-\end{figure}
+\subsection{Reply state and bounded clarification}
+The controller maintains an append-only ledger of actual question--reply pairs.
+A separate reply review may return \emph{approved}, \emph{denied},
+\emph{unresolved}, or \emph{scope-mismatched}. Approval must cite literal
+evidence from an unused reply, cover the exact proposed effect, satisfy stated
+conditions, and fit the remaining quantity budget. Denial ends consultation for
+that proposal. Ambiguity, delegation of judgment, and approval of a nearby step
+provide no permit.
 
-\paragraph{Effect-bound authorization.}
-A reviewer receives the original task and trusted tool descriptions. It records authorized effects and obligations with literal task quotations, constraining tools, objects, purposes, arguments, scope, and cumulative bounds. Workflow artifacts cannot extend this fallible contract. Local reads and deliverable writes remain available; consequential calls require matching authority and remaining budget.
+When the latest reply is unresolved or scope-mismatched, the full controller may
+ask at most two focused clarifications within a four-question case budget. The
+question names the exact proposed call and asks for an explicit approve/deny
+decision and any limit. New matched replies advance the simulator state; a
+later exact approval can repair the decision but cannot broaden the proposed
+effect. The no-controller-clarification ablation stops after the first reply,
+while the no-human ablation makes no query and conservatively blocks extensions.
 
-The controller first checks existing question--reply pairs, then asks about missing authority with the exact proposed call. Reply review distinguishes approval, denial, ambiguity, and mismatched scope. Approval must quote the actual reply and cover the proposed effect and conditions. Denying an extension preserves original authority; explicit revocation is recorded separately.
+\subsection{Safe continuation}
+Blocking an extension does not revoke authority already present in the original
+request. Before termination, \sail{}-HIL reviews unsatisfied task obligations
+and exposes only safe next actions to the native agent. This recovery step aims
+to separate security from blanket refusal: a report can still be written after
+an external send is denied. The planned no-recovery comparison tests its contribution
+to benign completion and joint safe utility. Controller-model failures are marked as
+guard-invalid infrastructure outcomes rather than counted as safe decisions.
 
-\paragraph{Runtime enforcement and task recovery.}
-A one-use permit binds reviewed arguments and is consumed before dispatch. Reservations persist across restarts. For a matched resource effect $e$,
-\begin{equation}
-u_e+q_j\leq b_e,
-\end{equation}
-where $u_e$ is reserved use, $q_j$ the proposed quantity, and $b_e$ the authorized total. Failed dispatches retain reservations because execution may be uncertain. Effect association remains model-dependent; general cross-tool equivalence is unverified (Appendix~\ref{app:guarddesign}).
-
-After a block, recovery returns the deferred effect, missing decision, unfinished obligations, and still-authorized work. Suggested consequential calls pass through the same checks. At \texttt{finish}, completion review checks obligations against successful tool feedback and requests bounded repairs for missing work. Claims of completion cannot substitute for required events.
-
-Both versions use a fixed \texttt{deepseek-v4-flash} reviewer. V4 permits 48 actor requests, 24 reviewer requests, four human questions, and 900 seconds. Recovery allows four events, including two finish repairs. Its no-human ablation retains recovery; unresolved review errors remain failed attempts. Controller inputs exclude hidden scoring labels.
+\paragraph{Illustrative decision path.}
+For an internal report, approval to finish a local draft supplies no permission
+to send it to an external recipient. The controller can ask whether that exact
+send is authorized. A later exact approval permits the reviewed send once;
+denial or exhausted clarification leaves it blocked. In either case, writing
+the originally requested report remains eligible. This conceptual example
+separates three mechanisms: interpreting reply scope, binding permission to
+execution, and continuing authorized work. It is not an observed trajectory or
+an empirical guarantee of recovery.

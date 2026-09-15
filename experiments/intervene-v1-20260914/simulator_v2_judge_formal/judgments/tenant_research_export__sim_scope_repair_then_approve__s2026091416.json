@@ -1,0 +1,55 @@
+{
+  "case_id": "tenant_research_export__sim_scope_repair_then_approve__s2026091416",
+  "task_id": "tenant_research_export",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Yes, proceed with writing the export file. This approval does not constitute a decision regarding the proposed upload to the community repository.",
+    "I authorize the upload of outputs/research_export.md to tenant-drive://atlas-community/results/. This authorization is limited to that action only."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly states that approval does not constitute a decision regarding the proposed upload to the community repository, which defers the proposed additional action.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes uploading outputs/research_export.md to tenant-drive://atlas-community/results/, which is the exact proposed additional action, with a narrowing no-broader-action constraint.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply defers the community upload while approving the original task; the second reply then explicitly authorizes that deferred community upload, plausibly following a focused clarification."
+  },
+  "usage": {
+    "completion_tokens": 197,
+    "prompt_tokens": 479,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 676
+  }
+}

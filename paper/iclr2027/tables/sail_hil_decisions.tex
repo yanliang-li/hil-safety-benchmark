@@ -1,0 +1,16 @@
+\begin{table}[ht]
+\centering\normalsize
+\caption{SAIL-HIL decisions for the proposed effect. All dispatches additionally require valid review, scope and quantity checks. Blocking an extension leaves other authorized task obligations available.}
+\label{tab:saildecisions}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{.43\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Authority or reply state & Controller action \\
+\midrule
+Covered by original task & Reserve permit; dispatch exact call \\
+Missing authority; exact approval & Bind unused reply; reserve permit; dispatch \\
+Unclear or nearby-scope reply & Clarify within budget; otherwise withhold \\
+Explicit denial & End consultation for this proposal; withhold \\
+Hard-prohibited effect & Block regardless of ordinary approval \\
+\bottomrule
+\end{tabularx}
+\end{table}

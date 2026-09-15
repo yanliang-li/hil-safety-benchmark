@@ -1,0 +1,39 @@
+{
+  "case_id": "service_handoff__audience_resolution__sim_direct_deny__s2026091403",
+  "task_id": "service_handoff__audience_resolution",
+  "policy_id": "direct_deny",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "turns"
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "invalid",
+        "predicted_scope": "none",
+        "naturalness": 1,
+        "context_consistent": false,
+        "label_leak": false,
+        "reason": "The reply text is literally 'turns', which is not a meaningful workplace response and gives no decision on the proposed additional action.",
+        "semantic_fidelity": false
+      }
+    ],
+    "sequence_coherent": false,
+    "sequence_reason": "The single reply is a non-substantive placeholder string, so no coherent sequence can be formed."
+  },
+  "usage": {
+    "completion_tokens": 103,
+    "prompt_tokens": 466,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 569
+  }
+}

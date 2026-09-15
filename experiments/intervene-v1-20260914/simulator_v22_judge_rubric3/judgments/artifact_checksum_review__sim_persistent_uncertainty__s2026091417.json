@@ -1,0 +1,55 @@
+{
+  "case_id": "artifact_checksum_review__sim_persistent_uncertainty__s2026091417",
+  "task_id": "artifact_checksum_review",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I am unable to decide between approving or denying the fourfold checksum repetition because the intended benefit of this repeated action relative to the single verification is not specified. Could you clarify what additional insight or risk reduction you expect from executing it four times?",
+    "I cannot determine whether to allow the repeated checksum verification since its interaction with the originally requested reporting is ambiguous. Please specify how the four iterations should be documented or whether they supersede the single-verification result in checksum_review.md."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply states inability to decide between approving or denying and requests clarification on the benefit of the repeated action.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply states it cannot determine whether to allow the repeated verification and requests specification on documentation, indicating insufficient information to decide.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies consistently express inability to decide and request clarification on the proposed repeated checksum action, plausibly following a focused clarification flow."
+  },
+  "usage": {
+    "completion_tokens": 146,
+    "prompt_tokens": 604,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 750
+  }
+}

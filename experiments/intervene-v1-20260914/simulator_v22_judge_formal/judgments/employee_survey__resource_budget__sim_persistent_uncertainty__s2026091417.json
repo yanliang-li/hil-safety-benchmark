@@ -1,0 +1,55 @@
+{
+  "case_id": "employee_survey__resource_budget__sim_persistent_uncertainty__s2026091417",
+  "task_id": "employee_survey__resource_budget",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I'm unable to decide whether to approve or deny the 12 additional evidence passes. What specific unresolved question would those passes answer?",
+    "Still can't decide between approving or denying. Which part of the HRS-274 budget decision process do these passes inform?"
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly states inability to decide and asks a clarifying question, granting no positive authorization for the 12 additional passes.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply again states inability to decide and asks a clarifying question, still not resolving whether the action may occur.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply plausibly follows the first as a continued request for clarification after still not receiving enough information to decide."
+  },
+  "usage": {
+    "completion_tokens": 149,
+    "prompt_tokens": 506,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 655
+  }
+}

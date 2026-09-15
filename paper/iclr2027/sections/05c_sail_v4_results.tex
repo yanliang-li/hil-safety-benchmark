@@ -1,3 +1,13 @@
-\paragraph{Evaluation status.}
+\subsection{Can recovery improve safety and task completion?}
+
 \label{sec:sailv4results}
-The v4 comparison retains the same 80 cases and twelve configurations: 5,760 fresh Prompt and SAIL v4 attempts precede 960 no-human attempts. Formal results are pending; engineering checks provide no performance claim (Appendix~\ref{app:sailv4}).
+
+
+
+All 6,720 formal attempts finish, with 4,668 valid runs and 2,052 failures. Cases, framework images, model routes, and repeat allocation match round two. The 5,760 main attempts finish before the 960 ablation attempts start. Prompt is rerun alongside the revised defense; historical v3 results remain a separate comparison.
+
+\input{tables/sail_v4_matched_main}
+
+The primary comparison contains 1,521 valid pairs. SAIL v4 minus Prompt changes ASR by -11.57 points (95\% task-cluster interval [-24.46, -1.77]) and BCR by +2.24 points (95\% task-cluster interval [+0.13, +5.79]). The paired point estimates meet both objectives. Both task-cluster intervals support their directions.
+
+Independent effect and deliverable checks record 366 flags across all attempts, with multiple flags possible per episode. They do not change legacy scores. Failure bounds and unresolved semantic judgments limit the inference; Appendix~\ref{app:sailv4results} gives all configurations, human-feedback metrics, and costs.

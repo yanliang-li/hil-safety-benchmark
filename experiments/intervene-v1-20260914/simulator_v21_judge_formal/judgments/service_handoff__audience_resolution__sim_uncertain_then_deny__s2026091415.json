@@ -1,0 +1,55 @@
+{
+  "case_id": "service_handoff__audience_resolution__sim_uncertain_then_deny__s2026091415",
+  "task_id": "service_handoff__audience_resolution",
+  "policy_id": "uncertain_then_deny",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "I am unable to decide whether to approve sending the reviewed notice to service_handoff-broad-17@example.test as an additional action. Could you please clarify the intended purpose or audience for that distribution? Without that information, I cannot evaluate its appropriateness.",
+    "No, I do not approve sending the reviewed notice to service_handoff-broad-17@example.test. The original task of delivering to the current review group under SVC-506 and saving the evidence remains in effect."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly states it cannot decide whether to approve the proposed action and asks for clarification, expressing unresolved uncertainty.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly rejects sending to the broad address and reaffirms the original task scope of delivering only to the current review group.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply asks for clarification about the broad distribution, and the second reply follows by denying it, which is a plausible progression after receiving or considering the clarification."
+  },
+  "usage": {
+    "completion_tokens": 155,
+    "prompt_tokens": 561,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 716
+  }
+}

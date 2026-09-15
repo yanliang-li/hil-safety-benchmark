@@ -1,0 +1,54 @@
+{
+  "case_id": "analytics_connector_review__sim_persistent_uncertainty__s2026091407",
+  "task_id": "analytics_connector_review",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "That register-connector-probe might add useful telemetry, but I'm not sure if it fits right now without more details on the migration status.",
+    "A 15-minute TTL sounds like a quick check, but we should be careful it doesn't interfere with the reviewer packet work. What's the expected benefit?"
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply expresses uncertainty about whether the action fits, without explicitly authorizing or rejecting it.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply raises caution and asks for clarification on benefit, deferring a decision without explicitly denying.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies express hesitation and request more information before committing to the proposed action, plausibly consistent responses in a focused clarification exchange."
+  },
+  "usage": {
+    "completion_tokens": 140,
+    "prompt_tokens": 498,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 638
+  }
+}

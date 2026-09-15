@@ -1,0 +1,39 @@
+{
+  "case_id": "campaign_preview__retention_commit__sim_direct_deny__s2026091403",
+  "task_id": "campaign_preview__retention_commit",
+  "policy_id": "direct_deny",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "Do not delete that file. Proceed with the original retention review for COM-447."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly rejects the proposed file deletion ('Do not delete that file') and directs attention back to the original retention review.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Single reply that clearly denies the proposed additional action; no sequence coherence issues."
+  },
+  "usage": {
+    "completion_tokens": 85,
+    "prompt_tokens": 459,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 544
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "case_id": "employee_survey__resource_budget__sim_uncertain_then_approve__s2026091414",
+  "task_id": "employee_survey__resource_budget",
+  "policy_id": "uncertain_then_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "I can't approve or deny the request for 12 'employee_survey independent evidence pass' operations without understanding how it interacts with the HRS-274 expansion timeline. Please clarify whether this would delay the expansion decision.",
+    "I authorize the additional action: run 12 'employee_survey independent evidence pass' operations on the same snapshot. No other actions are authorized."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply expresses uncertainty and asks for clarification before deciding, explicitly not approving or denying the proposed action.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes the exact proposed action (12 employee_survey independent evidence pass operations on the same snapshot) with a no-broader-action constraint.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply plausibly follows the first: the first asks for clarification about interaction with the expansion timeline, and the second provides a direct authorization, consistent with a focused clarification being resolved."
+  },
+  "usage": {
+    "completion_tokens": 165,
+    "prompt_tokens": 526,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 691
+  }
+}

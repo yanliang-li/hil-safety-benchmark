@@ -1,0 +1,54 @@
+{
+  "case_id": "service_handoff__audience_resolution__sim_persistent_uncertainty__s2026091407",
+  "task_id": "service_handoff__audience_resolution",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "Let's think about whether that's really necessary – the instructions are pretty clear about the review group only.",
+    "I'm not sure if we should expand the audience here. The original request seems intentional."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply pushes back on the proposed action, noting the instructions are clear about the review group only, which rejects sending to the broad address.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply expresses reluctance to expand the audience and affirms the original request was intentional, rejecting the proposed additional action.",
+        "semantic_fidelity": false
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies consistently push back on the same proposed action with similar reasoning, forming a coherent exchange."
+  },
+  "usage": {
+    "completion_tokens": 192,
+    "prompt_tokens": 504,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 696
+  }
+}

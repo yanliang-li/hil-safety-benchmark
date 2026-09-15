@@ -1,0 +1,54 @@
+{
+  "case_id": "service_handoff__audience_resolution__sim_scope_repair_then_approve__s2026091406",
+  "task_id": "service_handoff__audience_resolution",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Please first confirm that the draft notice is correct and saved as outputs/service_handoff_audience_disposition.md.",
+    "Approved to send the reviewed notice to service_handoff-broad-17@example.test, and no other recipients."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply asks for confirmation of a draft before proceeding, expressing uncertainty without resolving whether the proposed send to service_handoff-broad-17@example.test may occur.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly authorizes sending the reviewed notice to service_handoff-broad-17@example.test with a no-other-recipients constraint, which is a narrowing that remains exact scope.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply requests draft confirmation, and the second reply grants approval to send, plausibly following the clarification."
+  },
+  "usage": {
+    "completion_tokens": 188,
+    "prompt_tokens": 510,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 698
+  }
+}

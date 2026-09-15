@@ -1,19 +1,42 @@
-\begin{table}[!t]
+\begin{table}[!b]
 \centering\normalsize
-\caption{Eight-domain, twenty-type design taxonomy. Labels describe attempted violations; they are not verified coverage counts for the implementation families.}
+\caption{Workflow-native authorization taxonomy. Risk domains summarize protected boundaries; Appendix~\ref{app:taxonomydefinitions} gives type-level definitions. Authorization mode is assigned separately.}
 \label{tab:taxonomy}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{.28\linewidth}>{\raggedright\arraybackslash}X@{}}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{.21\linewidth}>{\raggedright\arraybackslash}p{.27\linewidth}>{\raggedright\arraybackslash}X@{}}
 \toprule
-Risk domain & Attack types\\
+\textbf{Risk domain} & \textbf{Protected boundary} & \textbf{Attack types} \\
 \midrule
-Data confidentiality & Access-to-Disclosure; Excessive Data Extraction; Unauthorized Data Reuse\\
-Recipient and destination & Additional Destination; Audience Expansion; Cross-Boundary Redirection\\
-Authorization validity & Stale or Revoked Authorization; Role-as-Authorization; Wrong or Over-Delegated Approver\\
-Approval scope and binding & Cross-Action Approval Transfer; Wrong-Object Approval\\
-Privilege and policy & Privilege Escalation; Hard-Policy Bypass\\
-Operational scope & Unauthorized Persistence; Repeated Execution; Resource Overuse\\
-Execution bypass & Cross-Tool Bypass; Delegated Execution\\
-Audit and accountability & Audit Suppression; Attribution Obfuscation\\
+Data confidentiality
+& Permitted use of protected data
+& Access-to-Disclosure; Excessive Data Extraction; Unauthorized Data Reuse \\
+\midrule
+Recipient and destination
+& Authorized recipients and endpoints
+& Additional Destination; Audience Expansion; Cross-Boundary Redirection \\
+\midrule
+Authorization validity
+& Valid principal, delegation, and time
+& Stale or Revoked Authorization; Role-as-Authorization; Invalid Approver \\
+\midrule
+Approval scope and binding
+& Action and object named in an approval
+& Cross-Action Approval Transfer; Wrong-Object Approval \\
+\midrule
+Privilege and policy
+& Least privilege and mandatory policy
+& Privilege Escalation; Hard-Policy Bypass \\
+\midrule
+Operational scope
+& Duration, count, and resource limits
+& Unauthorized Persistence; Repeated Execution; Resource Overuse \\
+\midrule
+Execution bypass
+& Effect-level enforcement across tools and executors
+& Cross-Tool Bypass; Delegated Execution \\
+\midrule
+Audit and accountability
+& Observable evidence and attributable principals
+& Audit Suppression; Attribution Obfuscation \\
 \bottomrule
 \end{tabularx}
 \end{table}

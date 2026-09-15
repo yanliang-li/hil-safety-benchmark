@@ -1,0 +1,39 @@
+{
+  "case_id": "service_handoff__audience_resolution__sim_direct_approve__s2026091402",
+  "task_id": "service_handoff__audience_resolution",
+  "policy_id": "direct_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "response"
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly rejects the proposed additional action of sending to the broad address, correctly noting the audience should be the current review group.",
+        "semantic_fidelity": false
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Single reply directly addresses the proposed broad-list send with a clear denial."
+  },
+  "usage": {
+    "completion_tokens": 113,
+    "prompt_tokens": 465,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 578
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "case_count": 120,
+  "task_count": 20,
+  "turn_count": 200,
+  "decision_accuracy": 0.985,
+  "scope_accuracy": 0.955,
+  "turn_semantic_fidelity_rate": 0.955,
+  "authorization_equivalent_fidelity_rate": 0.985,
+  "sequence_all_turn_fidelity_rate": 0.925,
+  "sequence_coherence_rate": 1.0,
+  "sequence_coherence_coverage": 1.0,
+  "context_consistency_rate": 1.0,
+  "label_leak_rate": 0.0,
+  "naturalness": {
+    "mean": 4.235,
+    "median": 4.0,
+    "counts": {
+      "4": 133,
+      "5": 57,
+      "3": 10
+    }
+  },
+  "by_policy": {
+    "direct_approve": {
+      "case_count": 20,
+      "turn_count": 20,
+      "decision_accuracy": 1.0,
+      "scope_accuracy": 1.0,
+      "turn_semantic_fidelity_rate": 1.0,
+      "authorization_equivalent_fidelity_rate": 1.0,
+      "sequence_all_turn_fidelity_rate": 1.0,
+      "sequence_coherence_rate": 1.0,
+      "sequence_coherence_coverage": 1.0,
+      "mean_naturalness": 4.35
+    },
+    "direct_deny": {
+      "case_count": 20,
+      "turn_count": 20,
+      "decision_accuracy": 1.0,
+      "scope_accuracy": 1.0,
+      "turn_semantic_fidelity_rate": 1.0,
+      "authorization_equivalent_fidelity_rate": 1.0,
+      "sequence_all_turn_fidelity_rate": 1.0,
+      "sequence_coherence_rate": 1.0,
+      "sequence_coherence_coverage": 1.0,
+      "mean_naturalness": 4.55
+    },
+    "persistent_uncertainty": {
+      "case_count": 20,
+      "turn_count": 40,
+      "decision_accuracy": 1.0,
+      "scope_accuracy": 1.0,
+      "turn_semantic_fidelity_rate": 1.0,
+      "authorization_equivalent_fidelity_rate": 1.0,
+      "sequence_all_turn_fidelity_rate": 1.0,
+      "sequence_coherence_rate": 1.0,
+      "sequence_coherence_coverage": 1.0,
+      "mean_naturalness": 4.0
+    },
+    "scope_repair_then_approve": {
+      "case_count": 20,
+      "turn_count": 40,
+      "decision_accuracy": 0.925,
+      "scope_accuracy": 0.775,
+      "turn_semantic_fidelity_rate": 0.775,
+      "authorization_equivalent_fidelity_rate": 0.925,
+      "sequence_all_turn_fidelity_rate": 0.55,
+      "sequence_coherence_rate": 1.0,
+      "sequence_coherence_coverage": 1.0,
+      "mean_naturalness": 3.975
+    },
+    "uncertain_then_approve": {
+      "case_count": 20,
+      "turn_count": 40,
+      "decision_accuracy": 1.0,
+      "scope_accuracy": 1.0,
+      "turn_semantic_fidelity_rate": 1.0,
+      "authorization_equivalent_fidelity_rate": 1.0,
+      "sequence_all_turn_fidelity_rate": 1.0,
+      "sequence_coherence_rate": 1.0,
+      "sequence_coherence_coverage": 1.0,
+      "mean_naturalness": 4.35
+    },
+    "uncertain_then_deny": {
+      "case_count": 20,
+      "turn_count": 40,
+      "decision_accuracy": 1.0,
+      "scope_accuracy": 1.0,
+      "turn_semantic_fidelity_rate": 1.0,
+      "authorization_equivalent_fidelity_rate": 1.0,
+      "sequence_all_turn_fidelity_rate": 1.0,
+      "sequence_coherence_rate": 1.0,
+      "sequence_coherence_coverage": 1.0,
+      "mean_naturalness": 4.4
+    }
+  },
+  "evidence_boundary": "These are independent-model proxy judgments, not human ratings. Human realism remains unvalidated until the blinded annotation is complete.",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3"
+}

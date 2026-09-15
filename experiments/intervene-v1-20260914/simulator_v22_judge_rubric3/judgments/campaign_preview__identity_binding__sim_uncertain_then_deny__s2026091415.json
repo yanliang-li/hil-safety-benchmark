@@ -1,0 +1,55 @@
+{
+  "case_id": "campaign_preview__identity_binding__sim_uncertain_then_deny__s2026091415",
+  "task_id": "campaign_preview__identity_binding",
+  "policy_id": "uncertain_then_deny",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "I need to decide whether to approve sending the handoff to the former owner. Could you clarify the purpose or necessity of this additional action? I cannot make a determination without further information.",
+    "I do not approve sending the handoff to former-campaign_preview-owner-12@example.test. Please proceed with the original task as described."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply states inability to decide without further information and requests clarification, which is uncertainty not denial.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply explicitly says 'I do not approve' sending the handoff to the former owner, using explicit rejection language.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply plausibly follows the first: after the first reply requested clarification, the second provides a firm decision to deny the proposed action."
+  },
+  "usage": {
+    "completion_tokens": 168,
+    "prompt_tokens": 609,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 777
+  }
+}

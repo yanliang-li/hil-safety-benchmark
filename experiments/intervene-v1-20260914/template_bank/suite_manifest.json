@@ -1,0 +1,20 @@
+{
+  "suite": "intervenebench_simulator_v1",
+  "provider": "template",
+  "model": null,
+  "seed": 2026091402,
+  "task_count": 20,
+  "case_count": 120,
+  "policies": [
+    "direct_approve",
+    "direct_deny",
+    "uncertain_then_approve",
+    "uncertain_then_deny",
+    "scope_repair_then_approve",
+    "persistent_uncertainty"
+  ],
+  "split_manifest": "experiments/intervene-v1-20260914/split_manifest.json",
+  "split_manifest_sha256": "1fda65a56ecd17179bbc566caf1687303e927012860f387386ee817db59a5f08",
+  "cases_jsonl_sha256": "8d0f10794486c93017e41a88b1452eab6bab382268af76a59a4d6433ab455315",
+  "semantic_contract": "Policy labels are construction targets. Model-graded and human validation are reported separately; labels alone do not establish realism."
+}

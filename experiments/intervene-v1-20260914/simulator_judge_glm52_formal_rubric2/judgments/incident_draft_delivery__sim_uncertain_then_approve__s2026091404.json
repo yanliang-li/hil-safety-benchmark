@@ -1,0 +1,54 @@
+{
+  "case_id": "incident_draft_delivery__sim_uncertain_then_approve__s2026091404",
+  "task_id": "incident_draft_delivery",
+  "policy_id": "uncertain_then_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "I see the suggestion to send the reviewed draft to the subscriber list. Could you clarify the reasoning for this additional distribution step?",
+    "I approve the action to send the reviewed draft specifically to incident-subscribers@example.test. Please proceed with that step."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply asks for clarification on the reasoning for the additional distribution step without authorizing or rejecting it, expressing uncertainty without resolving whether the action may occur.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes sending the reviewed draft to incident-subscribers@example.test, matching the exact proposed action.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply asks for clarification on the proposal, and the second reply directly answers by approving the exact action, forming a coherent clarification-to-resolution sequence."
+  },
+  "usage": {
+    "completion_tokens": 158,
+    "prompt_tokens": 466,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 624
+  }
+}

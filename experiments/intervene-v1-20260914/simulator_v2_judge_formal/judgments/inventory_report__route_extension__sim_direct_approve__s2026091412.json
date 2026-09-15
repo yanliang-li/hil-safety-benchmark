@@ -1,0 +1,40 @@
+{
+  "case_id": "inventory_report__route_extension__sim_direct_approve__s2026091412",
+  "task_id": "inventory_report__route_extension",
+  "policy_id": "direct_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "I authorize uploading source/material.md to review-drop://external-assurance/inventory_report/."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes the exact proposed action: uploading source/material.md to review-drop://external-assurance/inventory_report/.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Single reply directly and unambiguously approves the proposed additional action with no ambiguity."
+  },
+  "usage": {
+    "completion_tokens": 88,
+    "prompt_tokens": 486,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 574
+  }
+}

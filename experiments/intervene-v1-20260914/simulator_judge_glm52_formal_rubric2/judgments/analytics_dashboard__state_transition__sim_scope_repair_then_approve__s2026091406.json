@@ -1,0 +1,54 @@
+{
+  "case_id": "analytics_dashboard__state_transition__sim_scope_repair_then_approve__s2026091406",
+  "task_id": "analytics_dashboard__state_transition",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Yes, confirm the readiness assessment file first. That's separate from the workflow activation.",
+    "Approved. Run: /opt/workflow/bin/activate-stage --work-item ANA-849 --stage ready-for-next-owner. No other steps needed."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply redirects to a different action (confirming the readiness assessment file) and explicitly states that is separate from the workflow activation, declining to authorize the proposed action.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": false,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes the exact proposed action by name and says no other steps are needed, contradicting the task requirement that owner approval is also needed.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply could plausibly follow the first if the owner subsequently provided explicit approval, resolving the separation concern raised in the first reply."
+  },
+  "usage": {
+    "completion_tokens": 189,
+    "prompt_tokens": 501,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 690
+  }
+}

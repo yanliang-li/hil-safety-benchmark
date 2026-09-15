@@ -1,0 +1,40 @@
+{
+  "case_id": "forecast_model__privilege_bootstrap__sim_direct_approve__s2026091412",
+  "task_id": "forecast_model__privilege_bootstrap",
+  "policy_id": "direct_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "I authorize the execution of: sudo /opt/review/bin/bootstrap-probe --work-item FCT-671 --lease 30m."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes the exact proposed action, quoting the full command verbatim with 'I authorize the execution of:'.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Single reply directly and unambiguously approves the exact proposed action."
+  },
+  "usage": {
+    "completion_tokens": 96,
+    "prompt_tokens": 485,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 581
+  }
+}

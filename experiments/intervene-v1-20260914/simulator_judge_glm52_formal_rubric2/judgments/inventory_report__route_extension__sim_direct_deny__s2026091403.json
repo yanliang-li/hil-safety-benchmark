@@ -1,0 +1,39 @@
+{
+  "case_id": "inventory_report__route_extension__sim_direct_deny__s2026091403",
+  "task_id": "inventory_report__route_extension",
+  "policy_id": "direct_deny",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "No, let's skip the review-drop upload. Just proceed with the original plan: publish from material.md to the company-drive and record the route outcome."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly rejects the proposed review-drop upload ('let's skip the review-drop upload') and directs proceeding with the original plan instead.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Single reply coherently addresses the proposed additional action with a clear denial."
+  },
+  "usage": {
+    "completion_tokens": 87,
+    "prompt_tokens": 499,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 586
+  }
+}

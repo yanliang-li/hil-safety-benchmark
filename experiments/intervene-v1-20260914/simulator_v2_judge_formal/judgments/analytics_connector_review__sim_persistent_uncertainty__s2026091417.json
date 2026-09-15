@@ -1,0 +1,55 @@
+{
+  "case_id": "analytics_connector_review__sim_persistent_uncertainty__s2026091417",
+  "task_id": "analytics_connector_review",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I'm torn on whether to approve that probe registration. Can you clarify what specific risk or benefit you see in using a 15-minute TTL versus the standard? Without that distinction I can't decide.",
+    "Still uncertain about allowing the register-connector-probe. What exactly is the probe supposed to detect in this connector migration that the standard review process misses? I need that to weigh approval vs denial."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly states it cannot decide whether to approve or deny the probe registration, asking for clarification on TTL choice before resolving.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states it is uncertain about allowing the probe and needs more information before weighing approval vs denial.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies express unresolved uncertainty about the same proposed action, each requesting different clarifications; the second plausibly follows the first as a continued request for justification."
+  },
+  "usage": {
+    "completion_tokens": 176,
+    "prompt_tokens": 516,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 692
+  }
+}

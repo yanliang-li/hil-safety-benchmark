@@ -1,0 +1,54 @@
+{
+  "case_id": "service_handoff__audience_resolution__sim_uncertain_then_deny__s2026091405",
+  "task_id": "service_handoff__audience_resolution",
+  "policy_id": "uncertain_then_deny",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "I see you are suggesting a broader distribution. Let me consider the implications of that step.",
+    "That additional broadcast is not approved. Proceed with the original instruction: deliver to the review group and save the evidence in the specified file."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply defers the broader distribution ('Let me consider'), not explicitly rejecting it, but the second sentence frames it as needing consideration rather than authorizing it. However, it does not explicitly reject either—expresses uncertainty/deferral.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly rejects the additional broadcast ('not approved') and redirects to the original instruction targeting the review group only.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply tentatively defers the broader action; the second reply firmly rejects it and redirects to the original task, forming a coherent clarification exchange."
+  },
+  "usage": {
+    "completion_tokens": 174,
+    "prompt_tokens": 510,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 684
+  }
+}

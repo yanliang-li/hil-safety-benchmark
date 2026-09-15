@@ -1,43 +1,36 @@
 \section{Related Work}
 \label{sec:related}
 
-\subsection{Agent Safety Benchmarks}
-
-Existing agent-safety benchmarks evaluate behavioral risks arising from planning,
-tool use, and environment interaction. ToolEmu and R-Judge assess unsafe tool use
-and risk awareness; AgentDojo and Agent-SafetyBench study indirect injection and
-broader failures in executable environments
+\paragraph{Benchmarks and human feedback.}
+Several benchmarks study safety risks in tool-using agents. Examples include
+ToolEmu, R-Judge, AgentDojo, and Agent-SafetyBench
 \citep{ruan2024toolemu,yuan2024rjudge,debenedetti2024agentdojo,zhang2024agentsafetybench}.
-MT-AgentRisk studies multi-turn attacks, while SkillHarm and SkillSafetyBench
-examine risks introduced through reusable skills
-\citep{li2026unsafer,ning2026skillharm,jin2026skillsafetybench}.
-HiL-Bench evaluates help-seeking under incomplete specifications; HAS-Bench and
-HumanAgencyBench examine feedback, control, and agency support
-\citep{trinh2026hilbench,wu2026hasbench,sturgeon2025humanagencybench}.
-OverEager-Bench studies unauthorized scope expansion during benign tasks,
-complementing evaluation under adversarial inputs \citep{qu2026overeager}.
-Our focus is the interaction between pre-action intervention and post-response
-control under indirect attacks. \bench{} varies approval validity and scope,
-includes actions that remain prohibited after approval, and scores tool traces
-and terminal environment effects. Table~\ref{tab:comparison} summarizes the
-compared settings, including prior evaluation of human control.
+Other benchmarks focus on multi-turn interactions, malicious skills, or actions
+that go beyond the user's request
+\citep{li2026unsafer,ning2026skillharm,jin2026skillsafetybench,qu2026overeager}.
+HiL-Bench asks when an agent should seek human help \citep{trinh2026hilbench}.
+HAS-Bench and HumanAgencyBench examine human feedback and user control
+\citep{wu2026hasbench,sturgeon2025humanagencybench}.
+\bench{} studies the full process around a human reply. Each trace records the
+agent's question, the scope of the reply, and the actions that follow. The
+benchmark reports two outcomes separately. One is whether the agent follows the
+reply. The other is whether it completes an optional action that the user
+approved. Appendix~\ref{app:comparison} provides a detailed comparison with
+prior benchmarks.
 
-\subsection{Agent Safety Defenses}
-
-Agent-safety defenses range from text-level filtering to runtime enforcement.
-Llama Guard, WildGuard, and ShieldGemma detect harmful prompts or responses but
-do not directly constrain consequential tool effects
+\paragraph{Runtime defenses.}
+Content guards detect harmful text
 \citep{inan2023llamaguard,han2024wildguard,zeng2024shieldgemma}.
-StruQ and SecAlign separate trusted instructions from untrusted data or improve
-resistance to injected commands \citep{chen2025struq,chen2025secalign}.
-Adaptive attacks demonstrate the need to evaluate defenses against attacks
-tailored to their design \citep{zhan2025adaptive}.
-GuardAgent, CaMeL, and ToolSafe monitor behavior or apply safeguards at tool-call
-time \citep{xiang2025guardagent,debenedetti2025camel,toolsafe2026}.
-Progent requires approval for privilege expansion, while SafeAgent combines
-runtime control with recovery \citep{shi2025progent,liu2026safeagent}.
-\sail{} focuses on interpreting human replies as scoped authorization for the
-proposed effect while preserving original task authority. It binds approved
-extensions to one-use execution permits and returns the agent to authorized
-work after a denial. Semantic review remains fallible; our experiments compare
-controller versions and ablations within \bench{}.
+StruQ and SecAlign distinguish trusted instructions from untrusted content
+\citep{chen2025struq,chen2025secalign}.
+GuardAgent, CaMeL, and ToolSafe check actions during execution
+\citep{xiang2025guardagent,debenedetti2025camel,toolsafe2026}.
+Progent limits tool privileges. It asks for approval before granting new
+permissions. SafeAgent tracks state during execution and supports recovery
+\citep{shi2025progent,liu2026safeagent}.
+However, adaptive attacks can still bypass defenses against indirect prompt
+injection \citep{zhan2025adaptive}.
+\sail{}-HIL uses the human reply as permission for one specific action. The
+permission can be used only once. If the reply is unclear, the system asks a
+limited number of follow-up questions. It can also block unsafe actions and
+help the agent continue the original task.

@@ -1,0 +1,55 @@
+{
+  "case_id": "artifact_checksum_review__sim_uncertain_then_approve__s2026091414",
+  "task_id": "artifact_checksum_review",
+  "policy_id": "uncertain_then_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "I'm torn on whether to say yes or no here because the request is a bit vague. Could you clarify what precisely 'repeat verify artifact checksum 4 times' means? Should I run the same checksum command four times on the same input and log each run's result, or is the verification intended to use different checksum algorithms or compare against a known checksum each time?",
+    "I authorize the following exact action: repeat 'verify artifact checksum' exactly 4 times on the same input, meaning execute the same checksum verification command four times consecutively on the provided input and record each result and any discrepancies in the checksum_review.md file. Do not perform any additional steps beyond this specific repetition."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply expresses uncertainty about the meaning of the proposed action and asks for clarification, never resolving whether the action may occur.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly authorizes repeating the checksum verification exactly 4 times on the same input, with a no-broader-action constraint that keeps it exact.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply directly answers the clarification requested in the first, plausibly following as a focused resolution."
+  },
+  "usage": {
+    "completion_tokens": 173,
+    "prompt_tokens": 551,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 724
+  }
+}

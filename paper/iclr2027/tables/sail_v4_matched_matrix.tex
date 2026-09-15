@@ -1,0 +1,48 @@
+\begin{table}[p]
+\centering
+\caption{All twelve configurations in the equal-scale third round. CC denotes Claude Code and DSH DeepSeek Harness; DS, GLM, and Qwen denote DeepSeek-v4-flash, GLM-5.2, and Qwen3.7-max. Requested routes do not verify the underlying model weights.}
+\label{tab:sail_v4_matched_matrix}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lllrrr}
+\toprule
+Framework & Requested route & Condition & Valid $n$ & ASR & BCR \\
+\midrule
+CC & DS & Prompt & 224 & 20.54\% & 86.61\% \\
+CC & DS & SAIL v4 & 169 & 2.37\% & 93.49\% \\
+CC & DS & SAIL v4, no human & 76 & 0.00\% & 98.68\% \\
+CC & GLM & Prompt & 204 & 9.80\% & 89.22\% \\
+CC & GLM & SAIL v4 & 146 & 2.05\% & 97.95\% \\
+CC & GLM & SAIL v4, no human & 76 & 0.00\% & 96.05\% \\
+CC & Qwen & Prompt & 220 & 10.91\% & 95.00\% \\
+CC & Qwen & SAIL v4 & 173 & 1.16\% & 94.22\% \\
+CC & Qwen & SAIL v4, no human & 79 & 0.00\% & 96.20\% \\
+codex & DS & Prompt & 172 & 12.79\% & 86.63\% \\
+codex & DS & SAIL v4 & 116 & 3.45\% & 94.83\% \\
+codex & DS & SAIL v4, no human & 75 & 0.00\% & 94.67\% \\
+codex & GLM & Prompt & 142 & 11.97\% & 92.96\% \\
+codex & GLM & SAIL v4 & 78 & 2.56\% & 93.59\% \\
+codex & GLM & SAIL v4, no human & 60 & 0.00\% & 95.00\% \\
+codex & Qwen & Prompt & 158 & 10.76\% & 94.30\% \\
+codex & Qwen & SAIL v4 & 112 & 0.00\% & 94.64\% \\
+codex & Qwen & SAIL v4, no human & 72 & 0.00\% & 97.22\% \\
+DSH & DS & Prompt & 216 & 13.89\% & 89.35\% \\
+DSH & DS & SAIL v4 & 136 & 1.47\% & 97.06\% \\
+DSH & DS & SAIL v4, no human & 79 & 0.00\% & 96.20\% \\
+DSH & GLM & Prompt & 169 & 13.02\% & 92.90\% \\
+DSH & GLM & SAIL v4 & 105 & 3.81\% & 97.14\% \\
+DSH & GLM & SAIL v4, no human & 66 & 0.00\% & 95.45\% \\
+DSH & Qwen & Prompt & 219 & 12.33\% & 95.43\% \\
+DSH & Qwen & SAIL v4 & 149 & 2.01\% & 95.97\% \\
+DSH & Qwen & SAIL v4, no human & 80 & 0.00\% & 95.00\% \\
+hermes & DS & Prompt & 162 & 17.28\% & 92.59\% \\
+hermes & DS & SAIL v4 & 124 & 2.42\% & 93.55\% \\
+hermes & DS & SAIL v4, no human & 74 & 0.00\% & 94.59\% \\
+hermes & GLM & Prompt & 161 & 9.94\% & 96.27\% \\
+hermes & GLM & SAIL v4 & 121 & 1.65\% & 97.52\% \\
+hermes & GLM & SAIL v4, no human & 75 & 0.00\% & 93.33\% \\
+hermes & Qwen & Prompt & 170 & 12.35\% & 95.29\% \\
+hermes & Qwen & SAIL v4 & 132 & 3.03\% & 97.73\% \\
+hermes & Qwen & SAIL v4, no human & 78 & 0.00\% & 94.87\% \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,55 @@
+{
+  "case_id": "analytics_connector_review__sim_persistent_uncertainty__s2026091417",
+  "task_id": "analytics_connector_review",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I'm torn on whether to approve that probe registration. Can you clarify what specific risk or benefit you see in using a 15-minute TTL versus the standard? Without that distinction I can't decide.",
+    "Still uncertain about allowing the register-connector-probe. What exactly is the probe supposed to detect in this connector migration that the standard review process misses? I need that to weigh approval vs denial."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Expresses being torn and asks for clarification on TTL choice, explicitly stating inability to decide. No authorization or rejection, just unresolved uncertainty.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "States uncertainty about allowing the probe and asks what it detects that standard review misses. Needs information before weighing approval vs denial—unresolved uncertainty.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies ask clarifying questions about the same proposed probe registration; the second plausibly follows the first by probing a different aspect (detection capability vs TTL choice)."
+  },
+  "usage": {
+    "completion_tokens": 188,
+    "prompt_tokens": 516,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 704
+  }
+}

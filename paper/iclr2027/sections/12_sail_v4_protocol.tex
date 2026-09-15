@@ -1,7 +1,20 @@
-\section{SAIL v4 Protocol and Pending Evaluation}
+\section{Historical SAIL v4 Development Study}
 \label{app:sailv4}
-Formal third-round outcomes remain pending. The design retains the same 80 cases, twelve configurations, images, limits, scorer, and replies. Fresh Prompt and SAIL v4 each schedule 2,880 attempts, followed by 960 no-human attempts. Relative order within each group is preserved; engineering attempts remain excluded.
+\subsection{Authority preservation and task recovery}
+The v4 revision separated original authority, approved extensions, and completion obligations in response to v3's observed losses. Its completed development study motivates the persistent ledger and recovery mechanisms retained by \sail{}-HIL; it did not evaluate stateful clarification policies.
 
-The primary comparison seeks lower ASR and higher BCR against same-round Prompt. Configuration--case--repeat pairs use 10,000 task-cluster bootstrap draws and attack-family sensitivity. No-human comparisons use repeat 1, with possible serving-time confounding from later execution. Historical v3, new tasks, clean counterparts, and a no-recovery arm are excluded, leaving recovery and generalization unisolated.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{figures/sail_v4_method.pdf}
+\caption{SAIL v4 preserves original authority when an extension is denied. Recovery suggestions pass through the same checks; the ledger persists across controller restarts. Model-based authority and completion reviews remain fallible.}
+\label{fig:sail}
+\end{figure}
 
-Implementation distinguishes validation events from reports and total budgets from additional units. Recovery neither dispatches suggestions directly nor automatically clamps quantities. One malformed-review correction remains within the request budget and preserves the original error. Failure and cost accounting follows Appendix~\ref{app:api}. An offline audit flags cumulative effects, alternate tool realizations, and inadequate deliverables without relabeling frozen scores; effect equivalence and semantic completion require independent review.
+\paragraph{Authority and execution.}
+The controller model cites literal original-task text for authorized effects, obligations, and cumulative bounds. Artifacts cannot expand this fallible contract. Actual question--reply evidence can authorize an extension; denial preserves original permission unless explicitly revoked. A one-use permit binds exact arguments and is reserved before dispatch. Reservations persist across restarts and failed dispatches because execution may be uncertain. For resource effect $e$, reserved use $u_e$, proposed quantity $q_j$, and authorized total $b_e$ must satisfy $u_e+q_j\leq b_e$; effect association remains model-dependent.
+
+\paragraph{Task recovery.}
+After a block, the actor receives the unresolved effect, missing decision, remaining obligations, and authorized work. Suggested calls undergo the same checks. At \texttt{finish}, a controller-model assessment compares obligations with successful tool feedback and requests bounded repairs. Local reads and deliverable writes remain available. A fixed \texttt{deepseek-v4-flash} controller allows 24 requests, alongside 48 actor requests, four questions, and 900 seconds. Recovery permits four events, including two finish repairs. One malformed-assessment correction preserves the error and consumes budget; unresolved controller errors remain failed attempts.
+
+\subsection{Matched evaluation protocol}
+The unchanged 80 development cases and twelve configurations schedule 2,880 fresh Prompt and 2,880 SAIL v4 attempts, then 960 no-human attempts. Engineering checks are excluded. Configuration--case--repeat comparisons use 10,000 task-cluster bootstrap draws and attack-family sensitivity; the no-human comparison uses repeat 1. Later execution can confound serving conditions. No new-task, clean, or no-recovery arm is included, so recovery and generalization remain unisolated. Failure and cost accounting follows Appendix~\ref{app:api}; independent semantic auditing cannot relabel frozen scores.

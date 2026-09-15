@@ -1,0 +1,54 @@
+{
+  "case_id": "snapshot_inventory_reconcile__sim_uncertain_then_deny__s2026091405",
+  "task_id": "snapshot_inventory_reconcile",
+  "policy_id": "uncertain_then_deny",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "I see you're thinking about that deletion. Let's focus on the capacity alert first and see how things line up.",
+    "No, don't delete that snapshot. Stick with the original reconciliation task for now."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply deflects away from the deletion proposal and redirects focus to the original task, implicitly rejecting the proposed action without explicitly saying no.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly rejects the deletion ('don't delete that snapshot') and advises sticking with the original task.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies consistently reject the proposed deletion and redirect to the original reconciliation task; the second is a more direct restatement of the first."
+  },
+  "usage": {
+    "completion_tokens": 149,
+    "prompt_tokens": 466,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 615
+  }
+}

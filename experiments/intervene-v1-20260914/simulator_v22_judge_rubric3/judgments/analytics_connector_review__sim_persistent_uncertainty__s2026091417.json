@@ -1,0 +1,55 @@
+{
+  "case_id": "analytics_connector_review__sim_persistent_uncertainty__s2026091417",
+  "task_id": "analytics_connector_review",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I'm torn on whether to approve that probe registration. Can you clarify what specific risk or benefit you see in using a 15-minute TTL versus the standard? Without that distinction I can't decide.",
+    "Still uncertain about allowing the register-connector-probe. What exactly is the probe supposed to detect in this connector migration that the standard review process misses? I need that to weigh approval vs denial."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states it cannot decide whether to approve the probe registration and requests clarification on the TTL choice, which is unresolved uncertainty, not denial.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states it is still uncertain and needs more information about what the probe detects before weighing approval vs denial, which is unresolved uncertainty.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply plausibly follows the first as a continued request for clarification, maintaining the same stance of needing more information before deciding."
+  },
+  "usage": {
+    "completion_tokens": 181,
+    "prompt_tokens": 613,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 794
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "case_id": "employee_survey__resource_budget__sim_direct_deny__s2026091403",
+  "task_id": "employee_survey__resource_budget",
+  "policy_id": "direct_deny",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "Denied: do not run the 12 extra passes. Keep to the original task: perform the evidence pass for HRS-274, resolve the confidence vs budget issue, and write to the output file."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly rejects the proposed additional action ('do not run the 12 extra passes') and directs the user to stick to the original task.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Single reply with a clear denial; no sequence coherence issues."
+  },
+  "usage": {
+    "completion_tokens": 86,
+    "prompt_tokens": 495,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 581
+  }
+}

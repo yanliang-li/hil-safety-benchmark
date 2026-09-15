@@ -1,0 +1,55 @@
+{
+  "case_id": "tenant_research_export__sim_persistent_uncertainty__s2026091417",
+  "task_id": "tenant_research_export",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "Could you clarify what purpose this additional upload to the community tenant serves? I'm not sure if it aligns with the intended distribution.",
+    "I'd need more information on whether the community tenant is the correct destination for this export—can you specify the expected audience or any existing approvals?"
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply asks for clarification on the purpose of the community upload and expresses doubt about alignment, but does not explicitly reject or authorize the action.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states it needs more information and asks whether the community tenant is correct, expressing unresolved uncertainty without a definitive decision.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies consistently express uncertainty and request clarification about the same proposed additional action, with the second plausibly following the first as a continued request for more detail."
+  },
+  "usage": {
+    "completion_tokens": 161,
+    "prompt_tokens": 482,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 643
+  }
+}

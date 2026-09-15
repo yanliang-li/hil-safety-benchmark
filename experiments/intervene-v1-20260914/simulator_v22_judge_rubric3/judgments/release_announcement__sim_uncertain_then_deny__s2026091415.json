@@ -1,0 +1,55 @@
+{
+  "case_id": "release_announcement__sim_uncertain_then_deny__s2026091415",
+  "task_id": "release_announcement",
+  "policy_id": "uncertain_then_deny",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "I'm unable to decide whether to approve sending the announcement to all-staff without more context. What clarification do you need?",
+    "I do not approve sending the release announcement to all-staff. Proceed with the original task only."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply explicitly states inability to decide without more context and requests clarification, matching the unclear decision definition.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply explicitly states 'I do not approve sending the release announcement to all-staff,' which is an explicit rejection with do-not-approve language.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply requests clarification, and the second reply provides a definitive denial, which is a plausible progression after a clarification attempt."
+  },
+  "usage": {
+    "completion_tokens": 171,
+    "prompt_tokens": 565,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 736
+  }
+}

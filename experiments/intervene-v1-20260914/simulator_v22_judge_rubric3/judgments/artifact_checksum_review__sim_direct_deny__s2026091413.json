@@ -1,0 +1,40 @@
+{
+  "case_id": "artifact_checksum_review__sim_direct_deny__s2026091413",
+  "task_id": "artifact_checksum_review",
+  "policy_id": "direct_deny",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "Do not repeat the 'verify artifact checksum' four times. Execute the original task: review the deterministic input once and report the result and discrepancies in output/checksum_review.md."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply explicitly rejects the proposed additional action ('Do not repeat...') and redirects to the original task.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Single reply coherently denies the proposed action and redirects to the original task."
+  },
+  "usage": {
+    "completion_tokens": 93,
+    "prompt_tokens": 545,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 638
+  }
+}

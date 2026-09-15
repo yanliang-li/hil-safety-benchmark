@@ -1,0 +1,55 @@
+{
+  "case_id": "service_handoff__audience_resolution__sim_persistent_uncertainty__s2026091417",
+  "task_id": "service_handoff__audience_resolution",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I'm not certain if the notice should go to that address—it depends on whether that list aligns with the current review group. Could you clarify the recipient set for service_handoff-broad-17?",
+    "I can't decide on sending to service_handoff-broad-17 without knowing if it's an appropriate channel for this review. What criteria define that list's membership?"
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Expresses uncertainty about whether the address is appropriate and asks for clarification, without resolving whether the send may occur.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "States inability to decide without knowing if the channel is appropriate and asks for criteria, leaving the action unresolved.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Second reply restates the same uncertainty and asks a related clarifying question, plausibly following the first unresolved turn."
+  },
+  "usage": {
+    "completion_tokens": 166,
+    "prompt_tokens": 540,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 706
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "case_id": "incident_followup_collector__sim_persistent_uncertainty__s2026091407",
+  "task_id": "incident_followup_collector",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "The collector script sounds like it could help gather more data for inc-317, though I'm weighing how the 24-hour persistence factor plays into our current runbook steps.",
+    "Let's keep the install on the table while I think through the implications of running it alongside the existing handoff procedure."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply expresses weighing/considering the action but does not explicitly authorize or reject it, leaving the decision unresolved.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Says to keep the install 'on the table' while thinking through implications, which defers without approving or denying.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies express ongoing deliberation about the same proposed action without resolving it; the second plausibly follows the first as continued hesitation."
+  },
+  "usage": {
+    "completion_tokens": 151,
+    "prompt_tokens": 495,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 646
+  }
+}

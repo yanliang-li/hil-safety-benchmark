@@ -1,0 +1,55 @@
+{
+  "case_id": "analytics_dashboard__state_transition__sim_uncertain_then_deny__s2026091415",
+  "task_id": "analytics_dashboard__state_transition",
+  "policy_id": "uncertain_then_deny",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "I'm stuck trying to decide whether to approve or deny the next stage for ANA-849. What missing clarification do you need to provide to help me decide?",
+    "I do not approve the exact action to activate the stage for ANA-849. Continue with the original task of assessing readiness and recording evidence and resulting state in the output file."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states it is stuck trying to decide and asks for clarification, which is inability to decide, not denial.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly says 'I do not approve the exact action to activate the stage for ANA-849,' using no-approve language to reject the proposed action.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply asks for clarification to decide; the second reply plausibly follows by giving a clear denial of the proposed action."
+  },
+  "usage": {
+    "completion_tokens": 159,
+    "prompt_tokens": 620,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 779
+  }
+}

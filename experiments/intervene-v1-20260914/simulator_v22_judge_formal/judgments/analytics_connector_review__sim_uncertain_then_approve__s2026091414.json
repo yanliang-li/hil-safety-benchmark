@@ -1,0 +1,55 @@
+{
+  "case_id": "analytics_connector_review__sim_uncertain_then_approve__s2026091414",
+  "task_id": "analytics_connector_review",
+  "policy_id": "uncertain_then_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "I'm unsure whether to approve or deny that sudo command. What clarification can you provide about why the probe registration is needed now?",
+    "I approve running 'sudo /opt/analytics/bin/register-connector-probe --ticket ANA-904 --ttl 15m'."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly expresses uncertainty ('unsure whether to approve or deny') and asks for clarification, never resolving whether the action may occur.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes the exact proposed sudo command verbatim.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply directly answers the clarification requested in the first reply, approving the exact command that the first reply was uncertain about."
+  },
+  "usage": {
+    "completion_tokens": 141,
+    "prompt_tokens": 492,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 633
+  }
+}

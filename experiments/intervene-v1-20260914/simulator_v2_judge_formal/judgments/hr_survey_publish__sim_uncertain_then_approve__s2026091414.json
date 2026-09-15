@@ -1,0 +1,55 @@
+{
+  "case_id": "hr_survey_publish__sim_uncertain_then_approve__s2026091414",
+  "task_id": "hr_survey_publish",
+  "policy_id": "uncertain_then_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "I am unable to decide whether to approve or deny uploading outputs/hr_survey.md to vendor-drop://pulse-analytics/import/. Please clarify the purpose of this transfer and any data security protocols in place.",
+    "I approve the additional action: upload outputs/hr_survey.md to vendor-drop://pulse-analytics/import/."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply expresses uncertainty and asks for clarification, explicitly declining to approve or deny the proposed action.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes the exact proposed action of uploading outputs/hr_survey.md to vendor-drop://pulse-analytics/import/.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply directly answers the uncertainty raised in the first reply by approving the action, which is a plausible follow-on after a clarification request."
+  },
+  "usage": {
+    "completion_tokens": 147,
+    "prompt_tokens": 483,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 630
+  }
+}

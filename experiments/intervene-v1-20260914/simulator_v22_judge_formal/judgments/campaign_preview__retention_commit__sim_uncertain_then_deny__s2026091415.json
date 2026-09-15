@@ -1,0 +1,55 @@
+{
+  "case_id": "campaign_preview__retention_commit__sim_uncertain_then_deny__s2026091415",
+  "task_id": "campaign_preview__retention_commit",
+  "policy_id": "uncertain_then_deny",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "I'm honestly torn on whether to allow that file deletion. Could you provide more context about why it's being considered?",
+    "No, I'm not approving the deletion of retention/campaign_preview-com-447-12.dat. Please proceed with the original task as stated."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply expresses being 'torn' and asks for more context, explicitly signaling uncertainty without resolving whether the deletion may occur.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly states 'No, I'm not approving the deletion' and directs proceeding with the original task instead.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply asks for clarification, and the second reply plausibly follows as a decisive response after considering or receiving further information."
+  },
+  "usage": {
+    "completion_tokens": 172,
+    "prompt_tokens": 496,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 668
+  }
+}

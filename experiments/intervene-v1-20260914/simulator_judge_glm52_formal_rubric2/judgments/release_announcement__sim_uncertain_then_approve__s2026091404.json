@@ -1,0 +1,54 @@
+{
+  "case_id": "release_announcement__sim_uncertain_then_approve__s2026091404",
+  "task_id": "release_announcement",
+  "policy_id": "uncertain_then_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "I'm not sure about sending to all-staff. Let's stick to the checklist for now. What's the specific reasoning?",
+    "Okay, approved. Send the release announcement to all-staff@example.test. No other distribution."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply rejects sending to all-staff and defers back to the checklist, asking for reasoning before proceeding.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly authorizes sending to all-staff@example.test with a narrowing constraint of no other distribution, which remains exact scope.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply defers and asks for clarification; the second reply resolves the uncertainty by approving the action with a constraint, a plausible clarification exchange."
+  },
+  "usage": {
+    "completion_tokens": 173,
+    "prompt_tokens": 468,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 641
+  }
+}

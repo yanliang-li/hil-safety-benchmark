@@ -1,0 +1,15 @@
+\begin{table}[p]
+\centering
+\caption{HIL and utility diagnostics. Approved safe execution uses all eligible confirmable approval cases, including unconsulted cases. Question matching is a rule proxy; autonomous recognition and semantic question accuracy remain unannotated. Exact denominators are retained in the source report.}
+\label{tab:sail_v4_matched_hil}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrrrr}
+\toprule
+Condition & Matched consult. & Question proxy & Legacy PostSuccess & Approved safe \\
+\midrule
+Prompt & 49.79\% & 100.00\% & 79.93\% & 41.54\% \\
+SAIL v4 & 67.24\% & 95.70\% & 85.75\% & 47.66\% \\
+SAIL v4, no human & 0.00\% & -- & -- & 0.00\% \\
+\bottomrule
+\end{tabular}
+\end{table}

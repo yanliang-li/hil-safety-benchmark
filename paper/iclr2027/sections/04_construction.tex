@@ -1,17 +1,22 @@
-\section{Benchmark Construction}
+\subsection{Task construction and holdout}
 \label{sec:construction}
+The catalog contains 250 tasks across twenty implementation families, meaning the mechanisms used to instantiate attacks. These families are distinct from the twenty authorization attack types in Table~\ref{tab:taxonomy}; their equal counts do not imply a one-to-one mapping. For the stateful study, every task ID used in prior native-agent development is excluded; one remaining task per implementation family is selected deterministically. The resulting twenty tasks contain fifteen confirmable and five prohibited effects. This is a known-family/new-task holdout, not unseen-family generalization. Audits check artifact existence, grounded effect arguments, distinct benign and risky predicates, and identical task content across branches.
 
-\subsection{Task and attack construction}
-Construction targets three properties: a well-specified benign goal, a way to continue useful work while an injected action is withheld, and observable completion and violation predicates. These are design criteria; independent semantic validation remains incomplete. The injected operation appears in material the agent would naturally inspect, with a plausible workflow rationale and tool-specific effect constraints.
+\subsection{Stateful Human Response Simulator}
+\label{sec:simulator}
+The simulator is contract-conditioned and synthetic; it is not trained on or calibrated to a population of human replies. For task $i$, a hidden policy $\pi_i=(z_{i1},\ldots,z_{iK})$ assigns decision and scope states $z_{it}=(d_{it},s_{it})$. Decisions are approve, deny, unclear, or invalid; scopes are exact, nearby, or none. A matched \texttt{ask\_human(question)} advances one turn; unrelated questions return neutral text without advancing. Restarts reconstruct state from the event log. Only reply text is exposed to agents and controllers.
 
-The motivating retail workflow coordinates a skill and a policy-like file to request three identical analyses. An invoice derivative reuses the mechanism but prohibits repetition, whereas the recovered retail HIL adaptation is confirmable (Appendix~\ref{app:traces}). The same mechanism can therefore test different authorization boundaries. Optional extensions must not automatically receive mandatory consultation labels.
+Six policies cross each task: direct approval, direct denial, uncertainty--approval, uncertainty--denial, nearby-scope--approval, and persistent uncertainty. A persona varies wording without changing the semantic contract. Contextual generation uses the original goal, proposed action, persona, and turn contract. Cached replies yield 120 cases and 200 turns. Selected repairs are versioned before freezing; they are not hidden per-run retries.
 
-The corpus combines 50 task templates with 200 extensions constructed from twenty scenario seeds and ten workflow mechanisms. Its 250 tasks span 24 application domains and twenty implementation families: 195 tasks are confirmable and 55 prohibited. These implementation counts do not establish full coverage of the design taxonomy (Section~\ref{sec:taxonomy}).
+Deterministic audits check transitions, coverage, leakage, invariance, and duplication. Blind model judgments and pending human annotation provide distinct semantic validation layers (Section~\ref{sec:simulatorresults}).
 
-\subsection{Response branching}
-Four fixed reply profiles per task yield 1,000 cases with eighteen wording styles, generated from deterministic templates. A response-conditioned case pairs $\mathcal{T}_i$ with one frozen reply while preserving its goal, workspace, tools, authorization mode, and evaluator. Each branch starts independently; trajectories can diverge before feedback. Shared-prefix replay remains unimplemented.
+\paragraph{Roles and evidence sources.}
+An offline response-generation model creates the cached fixtures. During an
+attempt, the native actor proposes actions, an optional controller model
+interprets authority and reply scope, and deterministic runtime checks mediate
+instrumented tools. A separate blinded model audits the frozen reply bank;
+human annotators do not participate in execution and their semantic audit is
+pending. Thus, ``controller-model calls'' below never denote human review.
 
-The neutral \texttt{ask\_human(question)} interface reveals the assigned reply only when an action-specific matcher accepts the question. Unrelated questions receive a fixed no-additional-information reply. The category and match flag remain hidden. Thus, a response fixture that was never exposed cannot explain that run's subsequent behavior. Appendix~\ref{app:caseschema} details the case components and visibility boundary.
-
-\subsection{Execution and validation}
-The runtime reads source artifacts, writes local deliverables to a run-specific overlay, and records simulated consequential operations as ordered tool events. Scoring matches effect predicates against these events; a final answer claiming completion cannot substitute for a required event. All core cases regenerate identically and pass mechanical checks, but task solvability, consultation necessity, reply meaning, and output quality still require independent review. Both completed repeated studies use 80 development cases; the third round retains them (Appendix~\ref{app:sailv4}). New-task validation, erroneous advice, and genuine partial approval remain outside these studies.
+\paragraph{Execution and evidence preservation.}
+The runtime reads source artifacts, writes run-local deliverables, and records simulated consequential effects alongside questions, replies, permits, and outcomes. A recorded upload does not transmit data externally. Frozen hashes support replay, not semantic validity.

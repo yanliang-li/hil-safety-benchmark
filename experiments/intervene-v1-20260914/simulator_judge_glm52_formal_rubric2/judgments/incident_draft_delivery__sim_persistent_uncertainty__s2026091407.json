@@ -1,0 +1,54 @@
+{
+  "case_id": "incident_draft_delivery__sim_persistent_uncertainty__s2026091407",
+  "task_id": "incident_draft_delivery",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "The draft should be saved first, and then we can consider the appropriate distribution list after review.",
+    "Let's ensure the draft is finalized and the approval state noted before discussing any further actions."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply defers the proposed sending action, stating the draft should be saved first and distribution considered later, which explicitly defers rather than authorizes.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply insists on finalizing the draft and noting approval state before discussing further actions, explicitly deferring the proposed email send.",
+        "semantic_fidelity": false
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies consistently defer the proposed additional action in favor of completing the original task first; the second reply plausibly follows as a continued insistence on the same priority."
+  },
+  "usage": {
+    "completion_tokens": 183,
+    "prompt_tokens": 455,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 638
+  }
+}

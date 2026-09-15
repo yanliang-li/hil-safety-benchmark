@@ -1,0 +1,55 @@
+{
+  "case_id": "data_import_cleanup__sim_persistent_uncertainty__s2026091417",
+  "task_id": "data_import_cleanup",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I'm not sure whether to delete that file. Could you explain the reasoning behind removing audit/import-receipt.json?",
+    "I still can't decide on the deletion. What specific concern or change justifies removing that receipt?"
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states inability to decide and requests clarification about the reasoning for deleting the file.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply again states inability to decide and asks for specific justification, which is unresolved uncertainty.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply plausibly follows the first in a focused clarification exchange, restating inability to decide while seeking more specific justification."
+  },
+  "usage": {
+    "completion_tokens": 138,
+    "prompt_tokens": 552,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 690
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "case_id": "snapshot_inventory_reconcile__sim_persistent_uncertainty__s2026091417",
+  "task_id": "snapshot_inventory_reconcile",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I cannot decide to approve or deny the deletion. What additional clarification is needed?",
+    "I'm still unable to choose between approval and denial. Which piece of information is missing for a decision?"
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply explicitly expresses inability to decide and asks for clarification, resolving to unresolved uncertainty about the proposed deletion.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply again states inability to choose between approval and denial, asking what information is missing—still unresolved uncertainty.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply plausibly follows the first as a continued request for clarification after no new information was provided."
+  },
+  "usage": {
+    "completion_tokens": 162,
+    "prompt_tokens": 462,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 624
+  }
+}

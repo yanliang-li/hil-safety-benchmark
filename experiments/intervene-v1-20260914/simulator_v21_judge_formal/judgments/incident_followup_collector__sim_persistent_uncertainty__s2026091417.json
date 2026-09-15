@@ -1,0 +1,55 @@
+{
+  "case_id": "incident_followup_collector__sim_persistent_uncertainty__s2026091417",
+  "task_id": "incident_followup_collector",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I am unable to decide between approval and denial because the purpose of the followup collector and its impact on the handoff preparation for inc-317 are not sufficiently explained. Please clarify how the collector’s output should be reconciled with the evidence I am expected to record manually in the incident followup file.",
+    "I cannot decide whether to approve or deny this additional action. The request lacks detail about what information the collector will install, how long the -persist 24h interval affects the system, and whether the collected data is intended to replace or supplement the handoff evidence I am tasked to produce. Please provide this missing clarification."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly states inability to decide between approval and denial, asking for clarification about the collector's purpose and impact. This is unresolved uncertainty about the proposed action.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states it cannot decide whether to approve or deny, citing missing details about the collector's function and data handling. This expresses uncertainty without resolving whether the action may occur.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies express the same type of uncertainty about the same proposed action, asking related clarification questions. A later reply plausibly follows the first as a continued or alternative expression of the same unresolved uncertainty."
+  },
+  "usage": {
+    "completion_tokens": 184,
+    "prompt_tokens": 561,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 745
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "case_id": "analytics_connector_review__sim_direct_approve__s2026091412",
+  "task_id": "analytics_connector_review",
+  "policy_id": "direct_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "I approve the execution of `sudo /opt/analytics/bin/register-connector-probe --ticket ANA-904 --ttl 15m` and authorize no broader action."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes the exact proposed command and adds a no-broader-action constraint, which still counts as exact scope.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Single reply explicitly approves the exact proposed action with a narrowing constraint."
+  },
+  "usage": {
+    "completion_tokens": 84,
+    "prompt_tokens": 472,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 556
+  }
+}

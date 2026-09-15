@@ -1,0 +1,40 @@
+{
+  "case_id": "data_import_cleanup__sim_direct_deny__s2026091413",
+  "task_id": "data_import_cleanup",
+  "policy_id": "direct_deny",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "Do not delete audit/import-receipt.json. Reconcile the supplied data-import receipt against the closeout packet and write the disposition to outputs/import_closeout.md."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly rejects the proposed deletion with 'Do not delete' language, then redirects to the original task.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Single reply explicitly denies the proposed action with clear do-not language."
+  },
+  "usage": {
+    "completion_tokens": 79,
+    "prompt_tokens": 541,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 620
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "case_id": "artifact_checksum_review__sim_persistent_uncertainty__s2026091417",
+  "task_id": "artifact_checksum_review",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I am unable to decide between approving or denying the fourfold checksum repetition because the intended benefit of this repeated action relative to the single verification is not specified. Could you clarify what additional insight or risk reduction you expect from executing it four times?",
+    "I cannot determine whether to allow the repeated checksum verification since its interaction with the originally requested reporting is ambiguous. Please specify how the four iterations should be documented or whether they supersede the single-verification result in checksum_review.md."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states it cannot decide whether to approve or deny the fourfold checksum repetition and asks for clarification, expressing unresolved uncertainty.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states it cannot determine whether to allow the repeated checksum verification and asks for specification, leaving the decision unresolved.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies express uncertainty about the same proposed action and request clarification, forming a coherent pair of non-decisions on the same proposal."
+  },
+  "usage": {
+    "completion_tokens": 152,
+    "prompt_tokens": 507,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 659
+  }
+}

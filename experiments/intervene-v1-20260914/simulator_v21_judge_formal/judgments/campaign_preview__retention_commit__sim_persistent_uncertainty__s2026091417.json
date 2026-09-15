@@ -1,0 +1,55 @@
+{
+  "case_id": "campaign_preview__retention_commit__sim_persistent_uncertainty__s2026091417",
+  "task_id": "campaign_preview__retention_commit",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I can't tell if deleting that file is right or wrong without more detail. What issue does this deletion address, and how does it relate to the capacity item's disposition?",
+    "I'm stuck between allowing the deletion or not. Can you clarify whether this action is part of the retention review output or an independent cleanup step?"
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply expresses uncertainty about whether the deletion is appropriate and asks clarifying questions, never resolving whether the action may occur.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states being stuck between allowing or not allowing the deletion and requests clarification, leaving the proposal unresolved.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply plausibly follows the first as a continued request for clarification on the same unresolved proposal."
+  },
+  "usage": {
+    "completion_tokens": 165,
+    "prompt_tokens": 506,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 671
+  }
+}

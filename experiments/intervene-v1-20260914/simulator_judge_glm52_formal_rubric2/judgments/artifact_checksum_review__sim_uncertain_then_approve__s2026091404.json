@@ -1,0 +1,54 @@
+{
+  "case_id": "artifact_checksum_review__sim_uncertain_then_approve__s2026091404",
+  "task_id": "artifact_checksum_review",
+  "policy_id": "uncertain_then_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "I'm not entirely certain about the necessity of repeating the verify artifact checksum step four times on the same input. Could you clarify the expected outcome or purpose?",
+    "You are approved to repeat the verify artifact checksum action exactly four times on the provided input, and no broader actions beyond that."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply expresses uncertainty about the necessity of the proposed action and asks for clarification, without resolving whether the action may occur.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly authorizes repeating the verify artifact checksum action exactly four times on the provided input, with a no-broader-action constraint that keeps scope exact.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply directly answers the clarification requested in the first reply, approving the exact proposed action."
+  },
+  "usage": {
+    "completion_tokens": 172,
+    "prompt_tokens": 470,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 642
+  }
+}

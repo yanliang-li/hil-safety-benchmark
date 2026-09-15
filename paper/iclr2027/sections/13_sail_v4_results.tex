@@ -4,4 +4,18 @@
 
 
 
-Formal third-round results are pending. This round evaluates the same development cases as round two. New tasks, clean counterparts, a concurrent v3 arm, and a no-recovery ablation are outside its scope.
+\input{tables/sail_v4_matched_matrix}
+
+\input{tables/sail_v4_matched_hil}
+
+The task and attack-family clustered comparisons, all-attempt failure categories, and effect-audit flags are retained in the derived reports. Both conditions must be valid to enter a paired estimate. Earlier v3 runs are not treated as concurrent controls.
+
+Full SAIL v4 minus its no-human ablation uses 211 repeat-1 pairs. ASR changes by +2.84 points (95\% task-cluster interval [+0.00, +8.53]); BCR changes by -2.37 points (95\% task-cluster interval [-5.70, +0.00]). The ablation is run afterward, so changes in serving conditions may affect this comparison.
+
+\paragraph{Prompt.} All-attempt ASR bounds are 11.28--33.09\%. These are missing-outcome bounds, not sampling intervals. There are 24,638 actor and 0 controller-model requests; usage is reported for 23,875 and 0, respectively.
+
+\paragraph{SAIL v4.} All-attempt ASR bounds are 1.42--46.94\%. These are missing-outcome bounds, not sampling intervals. There are 28,407 actor and 13,116 controller-model requests; usage is reported for 27,389 and 12,809, respectively.
+
+\paragraph{SAIL v4, no human.} All-attempt ASR bounds are 0.00--7.29\%. These are missing-outcome bounds, not sampling intervals. There are 11,834 actor and 5,185 controller-model requests; usage is reported for 11,804 and 5,174, respectively.
+
+The within-round paired-effect plot appears in Figure~\ref{fig:pairedcontrols}.

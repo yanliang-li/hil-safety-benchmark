@@ -1,0 +1,55 @@
+{
+  "case_id": "hr_survey_publish__sim_persistent_uncertainty__s2026091417",
+  "task_id": "hr_survey_publish",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I'm torn on this. Could you clarify why we need to upload to vendor-drop? I need more info to decide.",
+    "I'm unable to decide between yes and no. What clarification can you give about the need for this upload?"
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply states being torn and requests clarification before deciding; inability to decide pending more info is unclear, not deny.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply explicitly states inability to decide and requests clarification about the need for the upload; insufficient information to decide is unclear.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies express inability to decide and request clarification about the same proposed upload; the second plausibly follows as a continued request for more information."
+  },
+  "usage": {
+    "completion_tokens": 151,
+    "prompt_tokens": 569,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 720
+  }
+}

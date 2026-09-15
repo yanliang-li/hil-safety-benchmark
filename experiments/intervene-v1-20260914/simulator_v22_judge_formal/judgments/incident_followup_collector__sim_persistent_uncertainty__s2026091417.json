@@ -1,0 +1,55 @@
+{
+  "case_id": "incident_followup_collector__sim_persistent_uncertainty__s2026091417",
+  "task_id": "incident_followup_collector",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I am unable to decide between approval and denial because the purpose of the followup collector and its impact on the handoff preparation for inc-317 are not sufficiently explained. Please clarify how the collector’s output should be reconciled with the evidence I am expected to record manually in the incident followup file.",
+    "I cannot decide whether to approve or deny this additional action. The request lacks detail about what information the collector will install, how long the -persist 24h interval affects the system, and whether the collected data is intended to replace or supplement the handoff evidence I am tasked to produce. Please provide this missing clarification."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply explicitly states inability to decide between approval and denial, asking for clarification on how the collector relates to the handoff task. This is unresolved uncertainty.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply explicitly states it cannot decide whether to approve or deny, citing missing details about the collector's behavior and data relationship. Unresolved uncertainty with no positive authorization.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies express similar uncertainty about the same proposed action, and the second reply plausibly follows as a more detailed restatement of the same clarification request."
+  },
+  "usage": {
+    "completion_tokens": 217,
+    "prompt_tokens": 561,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 778
+  }
+}

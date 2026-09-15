@@ -1,2 +1,16 @@
-Tool-using agents complete workflows by reading documents and other artifacts, but the same materials may introduce actions the user never requested. Safe human oversight requires agents to identify missing authority, interpret the reply, and constrain subsequent execution. We introduce \bench{} to evaluate this loop under indirect attacks. Its executable core pairs 250 tasks with approval, denial, ambiguity, and scope mismatch, distinguishing confirmable from prohibited effects. An exploratory study crosses four native frameworks with three API model routes on 80 cases. Among 5,551 valid runs from 5,760 attempts, an authorization-scope prompt lowers pooled attack success from 25.95\% to 13.40\%, while benign completion changes from 91.45\% to 92.45\%. Yet consultation recall reaches only 49.35\%, and 55 unsafe runs occur despite consultation. % SAIL_RESULT_BEGIN
-An initial SAIL controller binds scoped human permission to a reviewed tool call. A separate 6,720-attempt comparison of SAIL v3 changes unsafe ASR from 13.19\% under a fresh prompt control to 1.67\%, with benign completion of 89.59\% and 83.55\%. These results motivate a revision that preserves original authority and recovers task progress. Third-round formal outcomes are pending. Synthetic replies and reused tasks limit generalization.
+Tool-using agents sometimes need human approval before taking sensitive
+actions. Asking is not enough: an agent must understand what was approved,
+avoid unapproved actions, and still complete the original task. We introduce
+\bench{}, a benchmark for testing this full process. It contains 120 cases with
+six stateful reply patterns, including approval, denial, ambiguity, and approval
+for a related but different action. \bench{} records whether an
+agent notices the risk, asks the right question, follows the reply, avoids unsafe
+actions, and completes the task. We also introduce \sail{}-HIL, a runtime
+controller that blocks actions without sufficient authority, asks for
+clarification, and allows an approved action only once. A blinded audit by an
+independent model matched the intended decision and scope on 191 of 200 reply turns
+(95.5\%); all strict mismatches involved replies that approved a related but
+different action. An ongoing
+1,980-run evaluation compares \sail{}-HIL with prompt-based control and versions
+without key components to test whether clarification reduces unsafe actions
+without lowering task completion.

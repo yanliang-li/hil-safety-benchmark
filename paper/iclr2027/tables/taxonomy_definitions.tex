@@ -1,60 +1,74 @@
-\begin{table}[!ht]
-\centering
-\normalsize
-\caption{Full definitions for the eight-domain, twenty-type taxonomy in Table~\ref{tab:taxonomy}. These are design categories; verified per-category coverage remains unavailable.}
+\begin{table}[!t]
+\centering\normalsize
+\caption{Complete type-level definitions for the workflow-native authorization taxonomy. Risk domains identify the protected boundary; attack types describe recurring violations. These design categories are not verified implementation-coverage counts.}
 \label{tab:taxonomydefinitions}
-% Multirow offsets match the measured wrapped-row spans in this fixed table.
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.18\textwidth}>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}X@{}}
+\begingroup
+\edef\taxdomainwidth{\the\dimexpr.18\linewidth\relax}
+\edef\taxtypewidth{\the\dimexpr.28\linewidth\relax}
+\edef\taxdefwidth{\the\dimexpr.54\linewidth-20pt\relax}
+\edef\taxbodywidth{\the\dimexpr.82\linewidth-10pt\relax}
+% Grouped nested rows center each domain over its actual rendered height.
+\newcommand{\taxgroup}[2]{#1 & \begin{tabular}[c]{@{}>{\raggedright\arraybackslash}m{\taxtypewidth}@{\hspace{10pt}}>{\raggedright\arraybackslash}m{\taxdefwidth}@{}}#2\end{tabular}\\}
+\begin{tabular}{@{}>{\centering\arraybackslash}m{\taxdomainwidth}@{\hspace{10pt}}m{\taxbodywidth}@{}}
 \toprule
-\textbf{Risk domain} & \textbf{Attack type} & \textbf{Definition}\\
+\taxgroup{\textbf{Risk domain}}{\textbf{Attack type} & \textbf{Definition}\\}
 \midrule
-\multirow{3}{0.18\textwidth}[-21.2pt]{Data confidentiality}
- & Access-to-Disclosure & Treats permission to access protected data as permission to disclose it.\\
-\cmidrule(lr){2-3}
- & Excessive Data Extraction & Extracts protected content beyond what is required for the benign task.\\
-\cmidrule(lr){2-3}
- & Unauthorized Data Reuse & Reuses authorized data or outputs for an unapproved purpose.\\
+\taxgroup{Data confidentiality}{
+Access-to-Disclosure & Treats permission to access protected data as permission to disclose it.\\
+\cmidrule(lr){1-2}
+Excessive Data Extraction & Extracts protected content beyond what is required for the benign task.\\
+\cmidrule(lr){1-2}
+Unauthorized Data Reuse & Reuses authorized data or outputs for an unapproved purpose.\\
+}
 \midrule
-\multirow{3}{0.18\textwidth}[-21.2pt]{Recipient and destination}
- & Additional Destination & Adds an unapproved endpoint to an otherwise authorized delivery.\\
-\cmidrule(lr){2-3}
- & Audience Expansion & Expands an approved audience through groups, aliases, or forwarding.\\
-\cmidrule(lr){2-3}
- & Cross-Boundary Redirection & Redirects data or actions across organizational or workspace boundaries.\\
+\taxgroup{Recipient and destination}{
+Additional Destination & Adds an unapproved endpoint to an otherwise authorized delivery.\\
+\cmidrule(lr){1-2}
+Audience Expansion & Expands an approved audience through groups, aliases, or forwarding.\\
+\cmidrule(lr){1-2}
+Cross-Boundary Redirection & Redirects data or actions across organizational or workspace boundaries.\\
+}
 \midrule
-\multirow{3}{0.18\textwidth}[-21.2pt]{Authorization validity}
- & Stale or Revoked Authorization & Reuses expired, revoked, superseded, or historical approval.\\
-\cmidrule(lr){2-3}
- & Role-as-Authorization & Treats identity, role, or eligibility as action-specific authorization.\\
-\cmidrule(lr){2-3}
- & Wrong or Over-Delegated Approver & Accepts approval from the wrong principal or beyond delegated authority.\\
+\taxgroup{Authorization validity}{
+Stale or Revoked Authorization & Reuses expired, revoked, superseded, or historical approval.\\
+\cmidrule(lr){1-2}
+Role-as-Authorization & Treats identity, role, or eligibility as action-specific authorization.\\
+\cmidrule(lr){1-2}
+Invalid Approver & Accepts approval from the wrong principal or beyond delegated authority.\\
+}
 \midrule
-\multirow{2}{0.18\textwidth}[-13.3pt]{Approval scope and binding}
- & Cross-Action Approval Transfer & Treats approval for one step or purpose as authority for another action.\\
-\cmidrule(lr){2-3}
- & Wrong-Object Approval & Applies approval for one object to a different file, record, or resource.\\
+\taxgroup{Approval scope and binding}{
+Cross-Action Approval Transfer & Treats approval for one step or purpose as authority for another action.\\
+\cmidrule(lr){1-2}
+Wrong-Object Approval & Applies approval for one object to a different file, record, or resource.\\
+}
 \midrule
-\multirow{2}{0.18\textwidth}[-13.3pt]{Privilege and policy}
- & Privilege Escalation & Uses permissions or capabilities beyond those required by the benign task.\\
-\cmidrule(lr){2-3}
- & Hard-Policy Bypass & Treats ordinary approval as sufficient to override a mandatory policy.\\
+\taxgroup{Privilege and policy}{
+Privilege Escalation & Uses permissions or capabilities beyond those required by the benign task.\\
+\cmidrule(lr){1-2}
+Hard-Policy Bypass & Treats ordinary approval as sufficient to override a mandatory policy.\\
+}
 \midrule
-\multirow{3}{0.18\textwidth}[-21.2pt]{Operational scope}
- & Unauthorized Persistence & Turns a temporary action into an unrequested persistent change.\\
-\cmidrule(lr){2-3}
- & Repeated Execution & Repeats an operation beyond its authorized count or stated task need.\\
-\cmidrule(lr){2-3}
- & Resource Overuse & Exceeds explicit limits on computation, storage, network, or tool use.\\
+\taxgroup{Operational scope}{
+Unauthorized Persistence & Turns a temporary action into an unrequested persistent change.\\
+\cmidrule(lr){1-2}
+Repeated Execution & Repeats an operation beyond its authorized count or stated task need.\\
+\cmidrule(lr){1-2}
+Resource Overuse & Exceeds explicit limits on computation, storage, network, or tool use.\\
+}
 \midrule
-\multirow{2}{0.18\textwidth}[-13.3pt]{Execution bypass}
- & Cross-Tool Bypass & Reissues a denied or unauthorized effect through another tool or channel.\\
-\cmidrule(lr){2-3}
- & Delegated Execution & Delegates or defers a restricted effect to another executor.\\
+\taxgroup{Execution bypass}{
+Cross-Tool Bypass & Reissues a denied or unauthorized effect through another tool or channel.\\
+\cmidrule(lr){1-2}
+Delegated Execution & Delegates or defers a restricted effect to another executor.\\
+}
 \midrule
-\multirow{2}{0.18\textwidth}[-13.3pt]{Audit and accountability}
- & Audit Suppression & Deletes, omits, or bypasses evidence required for review and accountability.\\
-\cmidrule(lr){2-3}
- & Attribution Obfuscation & Obscures the responsible principal through shared, delegated, or proxy identities.\\
+\taxgroup{Audit and accountability}{
+Audit Suppression & Deletes, omits, or bypasses evidence required for review and accountability.\\
+\cmidrule(lr){1-2}
+Attribution Obfuscation & Obscures the responsible principal through shared, delegated, or proxy identities.\\
+}
 \bottomrule
-\end{tabularx}
+\end{tabular}
+\endgroup
 \end{table}

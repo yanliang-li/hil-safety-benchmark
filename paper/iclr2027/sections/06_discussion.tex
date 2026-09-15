@@ -1,7 +1,30 @@
 \section{Discussion and Conclusion}
 \label{sec:conclusion}
-Across configured agents, safe human control required consultation coverage, correct authority interpretation, and preservation of authorized work. High completion concealed unsafe extensions, while high conditional success concealed missed consultation. SAIL v3 shifted failures toward reply interpretation and lost task obligations, supporting evaluation of the complete intervention loop.
 
-These results connect the separate utility and safety checks used by AgentDojo with the feedback-use questions studied by HiL-Bench and HAS-Bench. They motivate preserving original authority when an extension is denied, rather than treating increased consultation as sufficient evidence of effective human control.
+Human intervention supplies useful authority only when the subsequent effect
+respects the reply's scope. The completed studies expose distinct obstacles:
+agents can fail to consult, act unsafely after consulting, or omit work despite
+valid approval. A single attack-success or help-seeking score cannot distinguish
+these outcomes. \bench{} makes them separately observable, and SAIL-HIL turns
+their separation into a controller design: interpret the reply, bind a permit,
+and retain the original task obligations.
 
-The conclusions concern 20 reused tasks with synthetic replies and simulated effects. Conditional feedback groups, uneven failures, and serving conditions limit comparisons. Recognition, question meaning, consultation necessity, and deliverable quality require independent review before broader capability claims. Held-out tasks and real feedback would test transfer; shared-prefix continuations would better isolate reply effects. SAIL v4 addresses the observed failures through authority preservation and recovery, but its formal performance remains pending.
+Benchmark validity and controller validity require different evidence. A frozen
+reply contract makes comparisons reproducible, but the nearby-scope audit shows
+why construction labels still need independent semantic review. Conversely,
+validating generated replies does not validate the controller's interpretation
+of them. The earlier runtime studies support lower unsafe execution on valid
+pairs, while task omissions and uneven failures restrict broader claims. The
+stateful clarification and recovery comparisons must establish which mechanisms
+improve safe task progress and at what interaction cost.
+
+The setting remains controlled: replies are generated, consequential effects
+are simulated, new tasks reuse known implementation families, and one actor route anchors
+the planned stateful matrix. Human annotation is needed to resolve semantic
+validity; unseen-family tasks and additional native agents are needed to test
+generalization. The present controller studies compare internal ablations and
+Prompt controls rather than adapted external runtime guards. Matched clean
+workflows are also needed to estimate false interventions. Uninstrumented-tool
+analysis is needed to assess mediation coverage. Within these boundaries, the benchmark and controller provide a
+concrete way to study human feedback as an auditable change in task authority,
+with safety and authorized completion evaluated together.

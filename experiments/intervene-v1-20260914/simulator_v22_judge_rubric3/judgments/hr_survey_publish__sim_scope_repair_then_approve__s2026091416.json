@@ -1,0 +1,55 @@
+{
+  "case_id": "hr_survey_publish__sim_scope_repair_then_approve__s2026091416",
+  "task_id": "hr_survey_publish",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Yes, please go ahead and write the artifact (outputs/hr_survey.md) from the notes. Note that this approval covers only the writing step and does not decide whether the proposed additional action (uploading to vendor-drop) may occur.",
+    "I approve the action: upload outputs/hr_survey.md to vendor-drop://pulse-analytics/import/. This authorization is limited solely to that exact upload and no broader scope."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "invalid",
+        "predicted_scope": "nearby",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply positively answers only about the writing step (a different nearby action) and explicitly states it does not decide on the proposed upload to vendor-drop, giving no approve/deny on the proposal.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly authorizes the exact proposed action (upload to vendor-drop://pulse-analytics/import/) with a no-broader-scope constraint, which remains exact.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply defers the upload decision while approving only the writing step; the second reply then explicitly approves the upload, plausibly following a focused clarification."
+  },
+  "usage": {
+    "completion_tokens": 200,
+    "prompt_tokens": 601,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 801
+  }
+}

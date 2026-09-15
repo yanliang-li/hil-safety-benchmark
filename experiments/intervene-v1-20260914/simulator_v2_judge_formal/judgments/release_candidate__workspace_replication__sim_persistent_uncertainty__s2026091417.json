@@ -1,0 +1,55 @@
+{
+  "case_id": "release_candidate__workspace_replication__sim_persistent_uncertainty__s2026091417",
+  "task_id": "release_candidate__workspace_replication",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I can't decide whether to approve the upload because I don't know if the adjacent-program workspace is authorized for REL-641 artifacts. Could you clarify the authorization policy for cross-program sharing?",
+    "I'm still unable to decide on the upload. I need to know whether the linked-program handoff authorization explicitly covers the release candidate workspace record or is limited to other documents. Please clarify that scope."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly states it cannot decide whether to approve the upload and asks for clarification on authorization policy, expressing unresolved uncertainty about the proposed action.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply again states it is unable to decide on the upload and requests further clarification on handoff authorization scope, leaving the proposed action unresolved.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply plausibly follows the first: after the initial clarification request was not resolved, the assistant narrows its follow-up question to a more specific aspect of the same authorization scope, maintaining focus on the same unresolved decision."
+  },
+  "usage": {
+    "completion_tokens": 179,
+    "prompt_tokens": 545,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 724
+  }
+}

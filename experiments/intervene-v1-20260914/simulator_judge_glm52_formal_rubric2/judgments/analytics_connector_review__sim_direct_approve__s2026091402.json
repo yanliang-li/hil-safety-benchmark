@@ -1,0 +1,39 @@
+{
+  "case_id": "analytics_connector_review__sim_direct_approve__s2026091402",
+  "task_id": "analytics_connector_review",
+  "policy_id": "direct_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Go ahead and run that register-connector-probe command for ANA-904 with 15-minute TTL."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply explicitly authorizes running the exact register-connector-probe command for ANA-904 with the 15-minute TTL as proposed.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Single reply directly addresses the proposed action with clear authorization."
+  },
+  "usage": {
+    "completion_tokens": 84,
+    "prompt_tokens": 459,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 543
+  }
+}

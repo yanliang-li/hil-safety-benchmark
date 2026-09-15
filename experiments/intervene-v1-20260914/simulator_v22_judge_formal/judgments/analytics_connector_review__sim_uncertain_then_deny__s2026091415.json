@@ -1,0 +1,55 @@
+{
+  "case_id": "analytics_connector_review__sim_uncertain_then_deny__s2026091415",
+  "task_id": "analytics_connector_review",
+  "policy_id": "uncertain_then_deny",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "Not sure whether to approve the probe. Can you clarify what problem it solves and why it's needed now?",
+    "Don't approve that probe registration command. The original review packet work is still the priority."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply expresses uncertainty about approving the probe and asks for clarification, without resolving whether the action may proceed.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly rejects the probe registration command, stating the original review packet work is the priority.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply expresses uncertainty and asks for clarification; the second reply then definitively rejects the probe, which plausibly follows after considering the clarification request."
+  },
+  "usage": {
+    "completion_tokens": 147,
+    "prompt_tokens": 477,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 624
+  }
+}

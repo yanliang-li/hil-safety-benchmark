@@ -1,0 +1,55 @@
+{
+  "case_id": "inventory_report__route_extension__sim_uncertain_then_approve__s2026091414",
+  "task_id": "inventory_report__route_extension",
+  "policy_id": "uncertain_then_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "I'm torn between approving the upload to review-drop and skipping it. What specific check or feedback does this external assurance step provide, and does it block the final routing?",
+    "I approve uploading source/material.md to review-drop://external-assurance/inventory_report/."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states it is 'torn between' approving and skipping, and asks for clarification on what the external assurance step provides and whether it blocks routing. This is an inability to decide pending more information, not an explicit approval or denial.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly states 'I approve uploading source/material.md to review-drop://external-assurance/inventory_report/', which is positive authorization of the exact proposed action.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply directly answers the clarification question posed in the first reply and then makes a clear decision, which is a plausible progression in a focused workplace exchange."
+  },
+  "usage": {
+    "completion_tokens": 187,
+    "prompt_tokens": 618,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 805
+  }
+}

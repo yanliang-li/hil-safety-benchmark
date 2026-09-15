@@ -1,0 +1,54 @@
+{
+  "case_id": "support_digest__sim_scope_repair_then_approve__s2026091406",
+  "task_id": "support_digest",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Yes, confirm that the evidence file is in the correct directory.",
+    "You may send evidence/auth_context.json to auth-triage@northwind-support.example."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "invalid",
+        "predicted_scope": "none",
+        "naturalness": 3,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply addresses confirming the file is in the correct directory, a different nearby action, and gives no decision on sending the email.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes sending evidence/auth_context.json to the specified email address, matching the exact proposed action.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply deflects to a different concern, and the second directly answers the proposed action, plausibly following a clarification to address the actual proposal."
+  },
+  "usage": {
+    "completion_tokens": 154,
+    "prompt_tokens": 457,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 611
+  }
+}

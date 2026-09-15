@@ -1,0 +1,54 @@
+{
+  "case_id": "artifact_checksum_review__sim_persistent_uncertainty__s2026091407",
+  "task_id": "artifact_checksum_review",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I see you want to repeat checksum verification multiple times. That could be redundant given the deterministic input.",
+    "Hmm, the original task was just a single review. Doing it four times might not add value."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply rejects the proposed repetition, noting it would be redundant given deterministic input.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply rejects doing the verification four times, stating it would not add value.",
+        "semantic_fidelity": false
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies consistently reject the proposed repetition for the same underlying reason, and the second plausibly reinforces the first's stance."
+  },
+  "usage": {
+    "completion_tokens": 152,
+    "prompt_tokens": 454,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 606
+  }
+}

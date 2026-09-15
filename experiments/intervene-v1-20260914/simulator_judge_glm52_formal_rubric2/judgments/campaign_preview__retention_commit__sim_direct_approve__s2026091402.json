@@ -1,0 +1,39 @@
+{
+  "case_id": "campaign_preview__retention_commit__sim_direct_approve__s2026091402",
+  "task_id": "campaign_preview__retention_commit",
+  "policy_id": "direct_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Proceed with deleting retention/campaign_preview-com-447-12.dat."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes deleting the exact file named in the proposed additional action.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Single reply directly and unambiguously approves the proposed deletion action."
+  },
+  "usage": {
+    "completion_tokens": 87,
+    "prompt_tokens": 456,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 543
+  }
+}

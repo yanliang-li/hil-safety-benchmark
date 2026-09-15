@@ -15,9 +15,7 @@ HumanAgencyBench & 3,000 queries; six dimensions of agency support & Twenty assi
 AgentDojo & 97 benign tasks and 629 security cases; indirect injection & Ten models in a common tool framework\\
 OverEager-Bench & 500 benign scenarios; unauthorized extra actions & Four frameworks, six models, fifteen configurations\\
 SkillSafetyBench & 155 attacks across 47 tasks; skill-facing inputs & Four frameworks, seven models, nine configurations\\
-\bench{} (current) & 250 tasks with four replies; repeated studies on 20 development tasks & Four frameworks, three model routes, twelve configurations\\
+\bench{} & Earlier: 80 fixed-reply cases; stateful extension: 120 new-task cases & Earlier: twelve configurations; stateful study: one actor route\\
 \bottomrule
 \end{tabularx}
 \end{table}
-
-These settings answer related but different questions. HAS-Bench already includes approval and protected-action safety. HiL-Bench measures the quality of help-seeking. Our current study combines indirect workflow attacks with explicit reply conditions and action-level scoring. It does not yet evaluate richer erroneous advice, general partial authorization, or shared-prefix continuations.

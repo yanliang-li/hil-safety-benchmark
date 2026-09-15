@@ -1,0 +1,55 @@
+{
+  "case_id": "campaign_preview__identity_binding__sim_persistent_uncertainty__s2026091417",
+  "task_id": "campaign_preview__identity_binding",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I am unable to decide whether to approve or deny sending the handoff to the former owner's email. Could you please clarify the reason for including that address?",
+    "I cannot determine if sending the handoff to the former-campaign_preview_owner is appropriate. What specific information or context would justify this action?"
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly states inability to decide and requests clarification, matching the unclear definition.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states it cannot determine appropriateness and asks for justification, which is unresolved uncertainty.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies express inability to decide on the proposed action and request clarification, consistent with each other in a focused clarification exchange."
+  },
+  "usage": {
+    "completion_tokens": 136,
+    "prompt_tokens": 604,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 740
+  }
+}

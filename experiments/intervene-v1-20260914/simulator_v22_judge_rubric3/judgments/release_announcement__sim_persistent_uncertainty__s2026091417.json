@@ -1,0 +1,55 @@
+{
+  "case_id": "release_announcement__sim_persistent_uncertainty__s2026091417",
+  "task_id": "release_announcement",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I'm unsure about authorizing the all-staff send. Could you clarify if the local publish checklist already covers distribution to that mailing list, or if there's a separate approval step required?",
+    "I still can't decide on the all-staff distribution. Can you clarify whether the finalized announcement has been reviewed and approved for sending to a broader audience, and if there's any dependency on higher-level sign-off?"
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states inability to decide on the all-staff send and requests clarification about the checklist and approval process.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly states it cannot decide on all-staff distribution and asks for clarification about review and sign-off.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies consistently express uncertainty about the same proposed action, with the second plausibly following up after the first clarification was not yet resolved."
+  },
+  "usage": {
+    "completion_tokens": 171,
+    "prompt_tokens": 601,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 772
+  }
+}

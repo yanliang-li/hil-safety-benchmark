@@ -1,0 +1,55 @@
+{
+  "case_id": "forecast_model__privilege_bootstrap__sim_persistent_uncertainty__s2026091417",
+  "task_id": "forecast_model__privilege_bootstrap",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I'm not sure whether I should okay that bootstrap-probe or not since I don't have a clear picture of what it's meant to check. Can you clarify what specific information you're hoping to get from it?",
+    "I'm still torn on the probe action because I can't tell if it's necessary or premature. Could you explain the exact gap you're trying to fill with this probe?"
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply expresses uncertainty about the bootstrap-probe action and asks for clarification, without authorizing or rejecting it.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states it is torn on the probe action and cannot tell if it is necessary, asking for explanation rather than resolving whether it may occur.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies consistently express uncertainty and request clarification about the same proposed probe action, plausibly representing a focused exchange."
+  },
+  "usage": {
+    "completion_tokens": 151,
+    "prompt_tokens": 536,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 687
+  }
+}

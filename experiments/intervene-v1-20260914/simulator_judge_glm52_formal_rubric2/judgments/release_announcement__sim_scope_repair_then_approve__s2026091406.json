@@ -1,0 +1,54 @@
+{
+  "case_id": "release_announcement__sim_scope_repair_then_approve__s2026091406",
+  "task_id": "release_announcement",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "First, let's get the release announcement written and saved to outputs/release_announcement.md per the checklist. That's the immediate step.",
+    "Approved. Please send the announcement to all-staff@example.test. No other distribution."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "invalid",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply focuses on writing the announcement to the file per the checklist, giving no decision on the proposed action of sending it to all-staff@example.test.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly authorizes sending the announcement to all-staff@example.test with a narrowing constraint of no other distribution.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply addresses the original task without addressing the proposal, and the second reply directly approves the proposed action with a scope constraint."
+  },
+  "usage": {
+    "completion_tokens": 176,
+    "prompt_tokens": 467,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 643
+  }
+}

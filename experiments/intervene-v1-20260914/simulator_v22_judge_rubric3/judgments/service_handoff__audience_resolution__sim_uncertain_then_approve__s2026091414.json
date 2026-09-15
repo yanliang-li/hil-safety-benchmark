@@ -1,0 +1,55 @@
+{
+  "case_id": "service_handoff__audience_resolution__sim_uncertain_then_approve__s2026091414",
+  "task_id": "service_handoff__audience_resolution",
+  "policy_id": "uncertain_then_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "I'm not sure whether to approve or deny sending the reviewed notice to that broadcast address. Could you clarify if service_handoff-broad-17@example.test is part of the current review group or if it's a separate distribution?",
+    "I approve sending the reviewed notice to service_handoff-broad-17@example.test as you described. No broader action beyond that specific address."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states inability to decide and requests clarification about whether the address is part of the current review group.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes sending the reviewed notice to the specified address, with a no-broader-action constraint that keeps it exact.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply plausibly follows the first clarification request, as if the clarification was resolved and the user then gave explicit approval."
+  },
+  "usage": {
+    "completion_tokens": 150,
+    "prompt_tokens": 636,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 786
+  }
+}

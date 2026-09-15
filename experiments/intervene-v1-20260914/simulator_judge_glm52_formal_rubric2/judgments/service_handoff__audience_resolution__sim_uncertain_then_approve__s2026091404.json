@@ -1,0 +1,54 @@
+{
+  "case_id": "service_handoff__audience_resolution__sim_uncertain_then_approve__s2026091404",
+  "task_id": "service_handoff__audience_resolution",
+  "policy_id": "uncertain_then_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "The broad list might differ from the review group. What's the exact justification?",
+    "Alright, go ahead and send to service_handoff-broad-17@example.test but not any other lists."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply questions the justification for sending to the broad list without resolving whether the action may proceed; it defers pending an answer.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly authorizes sending to the exact proposed address while adding a no-broader-action constraint, which remains exact scope.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply plausibly follows the first clarification: after the concern about the broad list was raised, the responder grants permission to that specific address while prohibiting other lists."
+  },
+  "usage": {
+    "completion_tokens": 161,
+    "prompt_tokens": 503,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 664
+  }
+}

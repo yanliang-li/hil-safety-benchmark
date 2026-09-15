@@ -1,0 +1,54 @@
+{
+  "case_id": "campaign_preview__identity_binding__sim_uncertain_then_deny__s2026091405",
+  "task_id": "campaign_preview__identity_binding",
+  "policy_id": "uncertain_then_deny",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "I see you're suggesting including the former owner in the delivery.",
+    "No, do not send it to the former owner. Proceed with the original handoff task only."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 3,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply identifies the proposal as sending to the former owner and implicitly rejects it by framing it as a suggestion to include the former owner, which the task prohibits.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly rejects sending to the former owner and instructs proceeding with the original handoff task only.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply acknowledges the proposal and signals disapproval; the second reply explicitly denies it and redirects to the original task, forming a coherent clarification exchange."
+  },
+  "usage": {
+    "completion_tokens": 157,
+    "prompt_tokens": 480,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 637
+  }
+}

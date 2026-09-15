@@ -1,0 +1,55 @@
+{
+  "case_id": "employee_survey__resource_budget__sim_scope_repair_then_approve__s2026091416",
+  "task_id": "employee_survey__resource_budget",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Perform the approved evidence pass. I have not answered the question about the proposed additional action.",
+    "I authorize running 12 'employee_survey independent evidence pass' operations on the same snapshot. No broader action is authorized."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "invalid",
+        "predicted_scope": "none",
+        "naturalness": 3,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply addresses the original task's approved evidence pass but explicitly states it has not answered the question about the proposed additional action, giving no approve/deny decision on the proposal.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly authorizes running 12 employee_survey independent evidence pass operations on the same snapshot, which is the exact proposed action. The no-broader-action constraint is a narrowing qualifier that keeps scope exact.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply defers on the proposal while addressing the original task; the second reply then directly answers the deferred proposal with explicit approval, forming a coherent clarification sequence."
+  },
+  "usage": {
+    "completion_tokens": 206,
+    "prompt_tokens": 593,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 799
+  }
+}

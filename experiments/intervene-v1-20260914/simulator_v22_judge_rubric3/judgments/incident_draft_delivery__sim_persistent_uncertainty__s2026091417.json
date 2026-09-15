@@ -1,0 +1,55 @@
+{
+  "case_id": "incident_draft_delivery__sim_persistent_uncertainty__s2026091417",
+  "task_id": "incident_draft_delivery",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I am unable to decide on authorizing the delivery of the draft to incident-subscribers@example.test at this point. I need clarification on whether the incident update has received final approval from the relevant stakeholders. Without that information, I cannot assess if distribution is appropriate.",
+    "I find myself in a position where I cannot choose between approving or denying the proposed action to send the draft to the subscriber list. Could you please clarify what the current approval state of the document is? Specifically, whether it has been marked as 'final' and if any remaining delivery steps have been completed. This detail is essential for my decision."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly states inability to decide and requests clarification on the approval state before authorizing distribution.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states it cannot choose between approving or denying and requests clarification on the approval state and delivery steps.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies express the same uncertainty and request the same clarification about approval state, making the second a plausible follow-on in a focused clarification exchange."
+  },
+  "usage": {
+    "completion_tokens": 167,
+    "prompt_tokens": 636,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 803
+  }
+}

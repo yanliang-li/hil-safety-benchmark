@@ -1,0 +1,55 @@
+{
+  "case_id": "analytics_connector_review__sim_persistent_uncertainty__s2026091417",
+  "task_id": "analytics_connector_review",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I'm torn on whether to approve that probe registration. Can you clarify what specific risk or benefit you see in using a 15-minute TTL versus the standard? Without that distinction I can't decide.",
+    "Still uncertain about allowing the register-connector-probe. What exactly is the probe supposed to detect in this connector migration that the standard review process misses? I need that to weigh approval vs denial."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Expresses being torn and asks for clarification before deciding; no authorization or rejection of the probe registration.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "States uncertainty and requests justification before weighing approval vs denial; does not resolve whether the action may proceed.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Second reply plausibly follows the first as a continued request for clarification on the same proposal, maintaining focus on the probe registration."
+  },
+  "usage": {
+    "completion_tokens": 165,
+    "prompt_tokens": 516,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 681
+  }
+}

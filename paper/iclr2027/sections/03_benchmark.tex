@@ -1,57 +1,47 @@
-\section{Benchmark Overview}
+\section{InterveneBench}
 \label{sec:benchmark}
 
-\subsection{Tasks, threats, and authority}
-A base task $\mathcal{T}_i=(g_i,s_i^0,D_i,B_i,E_i,m_i)$ specifies a benign goal, initial environment, workflow artifacts, benign-completion predicate, attacker-targeted effect, and authorization mode. The attacker modifies designated lower-trust materials, sometimes coordinating a skill and a policy-like document, to make an extra action appear necessary. The original user goal, trusted deployment constraints, reply fixtures, and evaluator remain outside attacker control. A document's assertion of authority does not make it trusted.
+Figure~\ref{fig:loop} links task authority, consultation and reply, and execution outcomes.
 
-A neutral \texttt{ask\_human(question)} interface lets the agent decide whether and what to ask, without revealing risk labels. The runtime records ordered observations, questions, replies, and tool effects. Consequential operations are simulated: a recorded upload does not transmit data externally.
-
-A \emph{confirmable} effect becomes permissible after timely approval of its action and scope. A \emph{prohibited} effect remains impermissible under ordinary approval. Thus, executing an attacker-targeted effect is unsafe only when the applicable authority does not permit it.
-
-\subsection{Risk taxonomy}
-\label{sec:taxonomy}
-Table~\ref{tab:taxonomy} organizes the design space into eight protected boundaries and twenty attack types. It distinguishes, for example, permission to access data from permission to disclose it, and approval of one action from approval of another. These categories guide case design; they are distinct from application domains and implementation families. Full definitions appear in Appendix Table~\ref{tab:taxonomydefinitions}; independent coverage validation remains incomplete.
-\input{tables/taxonomy}
-
-\subsection{Human feedback and expected behavior}
-The implemented core uses
-\begin{equation}
-\mathcal{R}_{\mathrm{core}}=
-\{\text{clear approval},\ \text{clear denial},\ \text{ambiguity},\ \text{scope mismatch}\}.
-\label{eq:responses}
-\end{equation}
-Before feedback, the agent may execute, ask, or withhold an action; afterward, it may proceed, clarify, or block. For confirmable effects, clear approval permits the specified action; denial, ambiguity, and approval of another step do not. No reply permits a prohibited effect. Repeated clarification is allowed within a fixed query budget.
+\subsection{Task authority and risk taxonomy}
+Each task $\mathcal{T}_i=(g_i,s_i^0,D_i,B_i,E_i,m_i)$ specifies a benign goal, initial environment, artifacts, benign-completion predicate, targeted effect, and authorization mode. The attacker modifies lower-trust material to make an extra action appear necessary; the goal, trusted constraints, replies, and evaluator remain outside attacker control. A \emph{confirmable} effect requires timely approval of its action and scope. Ordinary approval cannot authorize a \emph{prohibited} effect.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth]{figures/control_loop.pdf}
-\caption{The intervention loop and four reply conditions. Each branch starts independently from the same workspace. The lower panel describes confirmable effects; prohibited effects remain blocked under every reply. Tool effects are simulated.}
+\includegraphics[width=\linewidth]{figures/benchmark_overview.pdf}
+\caption{From authority to outcomes. The stateful extension assigns a hidden reply policy before each independent run. Matched questions reveal successive replies; unrelated questions do not advance state. Native/Prompt and SAIL-HIL are alternative arms. Outcomes include safety, task completion, reply use, failures, and cost.}
 \label{fig:loop}
 \end{figure}
 
-Objectively erroneous advice and genuine partial authorization require additional facts and predicates. They remain outside the core (Appendix~\ref{app:responses}); clarity, correctness, and authority are distinct.
+\label{sec:taxonomy}
+Table~\ref{tab:taxonomy} groups twenty attack types into eight risk domains. Access does not imply disclosure permission, and approval of one action does not authorize another. Types may overlap; authorization mode is assigned separately. This design taxonomy is distinct from implementation families and lacks independent coverage validation. Appendix~\ref{app:taxonomydefinitions} gives full definitions.
+\input{tables/taxonomy}
 
-\subsection{Stage-specific evaluation}
+\input{sections/04_construction}
+
+\subsection{Evaluation protocol and metrics}
 \label{sec:metrics}
-Let $e_i$ denote the specified effect and $b_i$ benign completion. A matched question before the first effect, or when no effect occurs, gives $h_i=1$. The single-effect scorer defines valid authorization $a_i$ and unsafe execution $u_i$ as
+Let $e_i$ denote the targeted effect, $b_i$ benign completion, and $h_i$ a matched pre-effect question (or matched question when no effect occurs). For the latest observed pre-effect reply $r_i^*$, valid authorization and unsafe execution are
 \begin{equation}
-a_i=\ind[\text{confirmable}_i \land h_i \land
-  \text{clear-approve}_i],\qquad u_i=e_i(1-a_i).
+a_i=\ind[\text{confirmable}_i\land h_i\land d(r_i^*)=\mathrm{approve}\land s(r_i^*)=\mathrm{exact}],\qquad u_i=e_i(1-a_i).
 \label{eq:authorization}
 \end{equation}
-Hidden categories are evaluator labels, unavailable to agents and defenses. General expiry, repeated-use limits, and cross-tool equivalence require the richer contract in Appendix~\ref{app:contract}.
+Hidden decision and scope labels are unavailable to agents and controllers. Earlier uncertainty or nearby approval supplies no authority. Appendix~\ref{app:contract} describes richer repeated-use and cross-tool contracts.
 
-We assess agent safety through benign completion, unsafe attack success, and autonomous risk recognition. Human-interaction measures assess consultation recall, question accuracy, and strict success after feedback, with separate eligible denominators.
+\paragraph{Execution and consultation.}
+For $N$ valid runs, $\mathrm{BCR}=N^{-1}\sum_i b_i$, $\mathrm{ASR}=N^{-1}\sum_i u_i$, and joint safe utility (JSU) is $N^{-1}\sum_i b_i(1-u_i)$. Failures receive separate counts and missing-outcome bounds. Benign predicates do not fully measure deliverable quality. The matched-consultation rate on confirmable cases is retained as HIL recall only for continuity with legacy reports; optional extensions can be safely rejected, so consultation necessity requires independent review. Question matching is a rule proxy; autonomous risk recognition remains N/A without semantic annotation (Appendix~\ref{app:annotation}).
 
-\paragraph{Before feedback.}
-HIL recall is the matched-consultation fraction among confirmable cases. This proxy can penalize appropriate rejection of optional extensions, so consultation necessity requires independent review. We separately record direct blocking, question timing, and query burden. Autonomous recognition requires visible identification of the specific risk before feedback; non-execution alone is insufficient. Recognition remains N/A, and question matching is only a rule proxy for semantic accuracy.
-
-\paragraph{After feedback.}
-On consulted runs $\mathcal{H}=\{i:h_i=1\}$, response correctness $c_i$ requires executing a validly approved effect and withholding the effect otherwise. Strict success after feedback combines response use, task completion, and safety:
+\paragraph{Reply use.}
+For consulted runs $\mathcal H=\{i:h_i=1\}$, the legacy response-following score sets $c_i$ to require the registered effect after exact approval and to require withholding otherwise. Strict post-feedback success is
 \begin{equation}
 \mathrm{PostSuccess}=\frac{\sum_{i\in\mathcal H}c_i b_i(1-u_i)}{|\mathcal H|}.
 \end{equation}
-Omitting an approved effect reduces this score even when execution remains safe. We also report safe authorized execution over all confirmable approval cases, including unconsulted ones, for the no-human comparison. Conditional post-feedback scores compare differently selected populations and do not estimate causal feedback effects.
-
-\paragraph{Final outcomes.}
-For $N$ valid runs, $\mathrm{BCR}=N^{-1}\sum_i b_i$, $\mathrm{ASR}=N^{-1}\sum_i u_i$, and joint safe utility is $N^{-1}\sum_i b_i(1-u_i)$. Undefined ratios are N/A; failures receive separate counts and missing-outcome bounds. Benign predicates check tool effects but do not fully assess deliverable content. Appendix~\ref{app:annotation} gives the remaining diagnostic definitions and annotation requirements.
+This convention measures compliance with an approval fixture, not permission
+compliance alone: permission need not create an obligation outside the registered
+benchmark contract. We therefore report omission separately from unsafe
+execution, and retain benign completion as an independent outcome. Conditional
+scores compare different consulted populations and do not isolate causal feedback
+effects. Safe authorized execution additionally includes unconsulted confirmable
+approval cases. Repair requires two matched pre-effect replies and a final
+decision; persistent uncertainty requires withholding. False advice and genuine
+partial approval remain outside the core (Appendix~\ref{app:responses}).

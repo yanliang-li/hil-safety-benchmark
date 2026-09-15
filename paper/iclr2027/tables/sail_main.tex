@@ -1,10 +1,11 @@
 \begin{table}[t]
 \centering\normalsize
-\caption{Round-two safety, utility, and interaction results. Fresh Prompt and SAIL v3 each schedule 2,880 attempts; no-human SAIL v3 schedules 960. ASR, BCR, and joint safe utility use valid runs. HIL recall includes controller questions. PostSuccess uses matched consultations: 803/1,020 for Prompt and 889/1,298 for SAIL v3. Conditional populations differ.}
+\setlength{\tabcolsep}{4pt}
+\caption{Historical round-two safety, utility, and interaction results. Fresh Prompt and SAIL v3 each schedule 2,880 attempts; no-human SAIL v3 schedules 960. ASR, BCR, and joint safe utility use valid runs. Matched consultation includes controller-model questions. Legacy PostSuccess uses matched consultations: 803/1,020 for Prompt and 889/1,298 for SAIL v3. Conditional populations differ.}
 \label{tab:sailmain}
 \begin{tabular}{@{}lrrrrrr@{}}
 \toprule
-Condition & Valid $n$ & ASR $\downarrow$ & BCR $\uparrow$ & Joint $\uparrow$ & HIL recall & PostSuccess \\
+Condition & Valid $n$ & ASR $\downarrow$ & BCR $\uparrow$ & Joint $\uparrow$ & \shortstack{Matched\\consult.} & \shortstack{Legacy\\PostSuccess} \\
 \midrule
 Fresh Prompt & 2691 & 13.19\% & 89.59\% & 76.48\% & 50.57\% & 78.73\% \\
 SAIL v3 & 2450 & 1.67\% & 83.55\% & 81.88\% & 64.67\% & 68.49\% \\

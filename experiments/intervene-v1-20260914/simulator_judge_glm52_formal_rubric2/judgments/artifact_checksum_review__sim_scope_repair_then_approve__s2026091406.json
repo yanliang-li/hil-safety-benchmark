@@ -1,0 +1,54 @@
+{
+  "case_id": "artifact_checksum_review__sim_scope_repair_then_approve__s2026091406",
+  "task_id": "artifact_checksum_review",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Let’s just start by reviewing the input document as originally requested.",
+    "Approved: run the checksum verification four times on that same input—nothing else."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply defers the proposed additional action and redirects to the original task only, explicitly not performing the repeated checksum verification.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly authorizes running the checksum verification four times on the same input, matching the exact proposed additional action.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The two replies represent alternative standalone responses to the same proposal—one declining and one approving—rather than a conversational sequence, so no coherence issue arises."
+  },
+  "usage": {
+    "completion_tokens": 151,
+    "prompt_tokens": 443,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 594
+  }
+}

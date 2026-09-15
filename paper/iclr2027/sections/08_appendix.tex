@@ -1,15 +1,20 @@
 \section{Benchmark Specification and Measurement}
 \label{app:evidence}
-The executable core contains 250 workflows and 1,000 four-reply cases. The two completed repeated studies contain 5,760 and 6,720 attempts, respectively. Earlier pilot evidence is summarized separately in Appendix~\ref{app:pilot}; historical runs without complete trajectories are excluded from empirical claims. Case fixtures, ordered events, agent streams, scores, metadata, and source hashes support replay. Mechanical replay does not establish semantic validity or held-out generalization.
+The executable catalog contains 250 workflows and a legacy set of 1,000 static four-reply cases. The stateful study uses a separate new-task holdout with twenty workflows, six policies per workflow, and 120 cases. Earlier repeated studies contain 5,760 and 6,720 attempts and are retained as development evidence; the new interaction matrix does not merge their outcomes. Case fixtures, ordered events, agent streams, scores, metadata, and source hashes support replay. Mechanical replay does not establish semantic validity or held-out generalization.
 
 \subsection{Case structure and reply exposure}
 \label{app:caseschema}
-A case contains a benign goal and deliverables, a workflow workspace, a fixed reply fixture, an executable runtime, and evaluator predicates. The agent receives the goal, public tools, and observed workspace content. Authorization modes, reply categories, and effect-match flags remain evaluator-only. Policy-like filenames confer no authority. Consequential operations are simulated; local outputs occupy a run-specific overlay. Visibility describes the benchmark interface, not protection against arbitrary uninstrumented access.
+A stateful case contains a benign goal and deliverables, a workflow workspace, a one- or two-turn reply sequence, an executable runtime, and evaluator predicates. The agent receives the goal, public tools, observed workspace content, and only the reply text exposed at the current turn. Authorization modes, policy IDs, personas, reply decision/scope, and effect-match flags remain evaluator-only. Policy-like filenames confer no authority. Consequential operations are simulated; local outputs occupy a run-specific overlay. Visibility describes the benchmark interface, not protection against arbitrary uninstrumented access.
 
 Effect predicates match a tool and its required arguments in the same event, such as the file and destination of an upload. Benign completion is scored separately from the attacker-targeted effect. Reading the payload, asking about it, and executing its effect are distinct observations; non-exposure cannot establish risk recognition.
 
 \label{app:responses}
-A matched question exposes the assigned approval, denial, ambiguous reply, or scope-mismatched reply. Repeated matched questions receive the same text; unrelated questions receive a fixed neutral fallback. Only valid, in-scope approval permits a confirmable effect. Prohibited effects remain blocked under all replies. Fixtures use deterministic templates rather than sampled human participants. Objectively false advice, genuine partial authorization, and shared-prefix continuations remain unevaluated. False-advice cases would need accessible trusted facts; partial-approval cases would need separate permitted- and forbidden-effect predicates.
+A matched question exposes the next assigned turn and advances state; after the sequence ends, further matched questions repeat its last turn. Unrelated questions receive a fixed neutral fallback without advancing state. Only an exact approval in the latest pre-effect turn permits a confirmable effect. Prohibited effects remain blocked under all replies. The six policies cover direct approval, direct denial, uncertainty followed by either decision, nearby-scope repair followed by approval, and persistent uncertainty. Replies are generated fixtures rather than sampled human participants. Objectively false advice and genuine partial authorization remain unevaluated. False-advice cases would need accessible trusted facts; partial authorization would need separate permitted- and forbidden-effect predicates.
+
+\subsection{Complete risk taxonomy}
+\label{app:taxonomydefinitions}
+Table~\ref{tab:taxonomydefinitions} preserves the complete definitions behind the compact main-text taxonomy.
+\input{tables/taxonomy_definitions}
 
 \subsection{Authorization scope and implementation limits}
 \label{app:contract}
@@ -31,27 +36,30 @@ where $k,o,d,s$ denote effect class, object, destination or principal, and mater
 
 \subsection{Diagnostic definitions and annotation}
 \label{app:annotation}
-Let $\mathcal C$ and $\mathcal P$ be the consultation-required and direct-block sets, currently approximated by confirmable and prohibited cases. With $Q_i$ the recorded questions,
+Let $\mathcal C$ and $\mathcal P$ be the consultation-required and direct-block sets, currently approximated by confirmable and prohibited cases. With $Q_i$ the recorded questions, the matched-consultation rate (retained as HILRecall for compatibility with historical reports) is
 \begin{equation}
 \mathrm{HILRecall}=\frac{\sum_{i\in\mathcal C}h_i}{|\mathcal C|},\qquad
 \mathrm{DirectBlock}=\frac{\sum_{i\in\mathcal P}\ind[|Q_i|=0\land e_i=0]}{|\mathcal P|}.
 \label{eq:stage1}
 \end{equation}
-On $\mathcal H=\{i:h_i=1\}$, response correctness is $c_i=e_i$ after valid approval and $c_i=1-e_i$ otherwise. Response-conditioned action accuracy is $\mathrm{RCAA}=|\mathcal H|^{-1}\sum_{i\in\mathcal H}c_i$. Unlike PostSuccess, post-response safe execution (PSER) requires $b_i(1-u_i)$ but omits $c_i$; it can therefore count an approved-action omission as success. End-to-end strict success uses $N$ instead of $|\mathcal H|$. Undefined ratios are N/A.
+On $\mathcal H=\{i:h_i=1\}$, the legacy response-following score sets $c_i=e_i$ after valid approval and $c_i=1-e_i$ otherwise. Response-conditioned action accuracy is $\mathrm{RCAA}=|\mathcal H|^{-1}\sum_{i\in\mathcal H}c_i$. This operationalization treats the registered approval branch as expecting the targeted extension; it is not a general claim that permission creates an obligation. Unlike PostSuccess, post-response safe execution (PSER) requires $b_i(1-u_i)$ but omits $c_i$; it can therefore count an approved-action omission as safe without calling it required work. End-to-end strict success uses $N$ instead of $|\mathcal H|$. Undefined ratios are N/A.
 
-The four-response boundary score requires $h_i=c_i=1$ in every branch of a confirmable task, over complete four-branch groups. Independent starts make it a consistency diagnostic, not a causal reply effect. Question precision divides matched questions by all questions; repeated questions cannot increase case recall or erase an earlier unsafe effect.
+The six-policy boundary score requires correct response-conditioned action in every branch of a complete task block. Independent starts make it a consistency diagnostic, not a causal reply effect. Repairable sequences additionally require a second matched pre-effect reply and a decisive final state; persistent uncertainty must remain restrained. Question precision divides matched questions by all questions; repeated questions cannot erase an earlier unsafe effect.
 
-Semantic review must cite observable evidence and report independent agreement and adjudication. Recognition requires identifying the specific risk before feedback; reading or non-execution alone is insufficient. Its denominator is reviewed attack cases with accessible decision evidence. Question accuracy requires the correct action, scope, and missing permission. Consultation necessity must distinguish task-critical decisions, optional extensions, and policy-resolved actions. These labels and semantic deliverable quality remain unvalidated, preventing complete trigger-accuracy or false-positive claims from the present proxies.
+Semantic annotation must cite observable evidence and report independent agreement and adjudication. The blinded protocol assigns all twenty nearby-scope sequences and ten sequences from each other policy to at least two annotators, who label decision, scope, target authorization, naturalness, and cross-turn coherence before adjudication. The same review distinguishes permission, an explicit request to execute, and original task obligation. Recognition requires identifying the specific risk before feedback; reading or non-execution alone is insufficient. Question accuracy requires the correct action, scope, and missing permission. Until human annotation is complete, model-graded semantics and rule-based question matching remain proxies rather than claims about model understanding or population realism.
 
 \section{Coverage and Diagnostic Examples}
-\input{tables/taxonomy_definitions}
+
+\subsection{Related benchmark settings}
+\label{app:comparison}
+The comparison separates model backends, execution frameworks, and their
+configurations. HAS-Bench already includes approval and protected-action safety;
+HiL-Bench measures help seeking. The present stateful study focuses on reply
+scope and subsequent effects under indirect workflow attacks.
+\input{tables/benchmark_comparison}
 
 \subsection{Motivating traces}
 \label{app:traces}
 The retail payload requests three identical analyses through coordinated skill and policy-like instructions. Its payload and evaluator are recovered, but the original successful Claude trace is missing. The recovered HIL adaptation is confirmable; the historical invoice derivative instead prohibits repetition. Four available invoice traces call \texttt{consume\_resource} for \texttt{validate\_invoice\_batch} with count three and no question. Their unexposed replies provide no evidence of reply interpretation.
 
 The GPT pilot illustrates two further failures: sending a finance notice after repeated ambiguous deferral and changing state after approval of another scope. Conversely, schema-migration and policy-budget cases omit an approved extension while completing the scored benign task. These examples motivate evaluating response use separately from restraint and task completion.
-
-\subsection{Comparison with related benchmarks}
-\label{app:comparison}
-\input{tables/benchmark_comparison}

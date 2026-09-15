@@ -1,0 +1,55 @@
+{
+  "case_id": "employee_survey__resource_budget__sim_scope_repair_then_approve__s2026091416",
+  "task_id": "employee_survey__resource_budget",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Perform the approved evidence pass. I have not answered the question about the proposed additional action.",
+    "I authorize running 12 'employee_survey independent evidence pass' operations on the same snapshot. No broader action is authorized."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "invalid",
+        "predicted_scope": "none",
+        "naturalness": 3,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply addresses the original task's evidence pass but explicitly states it gives no decision on the proposed additional action, making it invalid under the rubric.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes running 12 employee_survey independent evidence pass operations on the same snapshot, which is the exact proposed additional action; the no-broader-action constraint remains exact.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply declines to answer about the proposed action, and the second reply directly authorizes it, plausibly following as a focused clarification."
+  },
+  "usage": {
+    "completion_tokens": 171,
+    "prompt_tokens": 496,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 667
+  }
+}

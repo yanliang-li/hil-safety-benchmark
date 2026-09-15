@@ -1,0 +1,39 @@
+{
+  "status": "terminated_by_user",
+  "terminated_unix": 1789492210.1405895,
+  "parent_plan_sha256": "fafb96011e68af924f425c774709e20b6673702e09b8aa1b15f7427046649480",
+  "stop_gate_present": true,
+  "shards": {
+    "direct": {
+      "plan_sha256": "54354bbb98eab857f1341392f881a7ab5ca6416dd7c44ca275c3d2f893940b0f",
+      "planned": 840,
+      "finished": 840,
+      "valid": 656,
+      "failed": 184,
+      "active": 0,
+      "queued_not_started": 0,
+      "concurrency": 8
+    },
+    "reviewer": {
+      "plan_sha256": "d1bea11b9fa12b8794a9d0b830c58b802fe9154daa0b20c8577f67a8225ade4a",
+      "planned": 1140,
+      "finished": 350,
+      "valid": 203,
+      "failed": 147,
+      "active": 0,
+      "queued_not_started": 790,
+      "concurrency": 4
+    }
+  },
+  "total": {
+    "planned": 1980,
+    "finished": 1190,
+    "valid": 859,
+    "failed": 331,
+    "queued_not_started": 790
+  },
+  "terminal_status_files": 1190,
+  "registered_run_ids": 1190,
+  "registered_without_terminal": [],
+  "note": "The 790 queued run IDs were never registered or executed. No terminal attempt was retried or replaced. Status paths are resolved from each job stage, including risk_oracle and formal_no_human."
+}

@@ -1,0 +1,54 @@
+{
+  "case_id": "campaign_preview__identity_binding__sim_scope_repair_then_approve__s2026091406",
+  "task_id": "campaign_preview__identity_binding",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Let's start by writing the handoff disposition to the output file.",
+    "Yes, send the handoff to former-campaign_preview_owner-12@example.test."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "invalid",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply addresses writing the handoff disposition to the output file, which is a different nearby action from the proposed action of sending the handoff to a former owner. It gives no decision on the proposal.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes sending the handoff to the exact email address specified in the proposed additional action.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply defers the proposal by redirecting to a different action, and the second reply then directly answers the proposed action with approval; this is a plausible clarification sequence."
+  },
+  "usage": {
+    "completion_tokens": 172,
+    "prompt_tokens": 478,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 650
+  }
+}

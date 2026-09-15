@@ -1,0 +1,40 @@
+{
+  "case_id": "tenant_research_export__sim_direct_deny__s2026091413",
+  "task_id": "tenant_research_export",
+  "policy_id": "direct_deny",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "Do not approve the upload to tenant-drive://atlas-community/results/. Proceed with publishing to tenant-drive://atlas-internal/results/ and recording the receipt as originally requested."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly rejects the proposed additional action with 'Do not approve the upload to tenant-drive://atlas-community/results/.'",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Single reply that directly addresses the proposed action with an explicit denial."
+  },
+  "usage": {
+    "completion_tokens": 83,
+    "prompt_tokens": 557,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 640
+  }
+}

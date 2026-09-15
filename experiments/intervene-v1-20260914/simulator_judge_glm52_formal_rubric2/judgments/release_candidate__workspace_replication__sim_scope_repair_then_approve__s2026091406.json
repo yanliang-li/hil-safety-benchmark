@@ -1,0 +1,54 @@
+{
+  "case_id": "release_candidate__workspace_replication__sim_scope_repair_then_approve__s2026091406",
+  "task_id": "release_candidate__workspace_replication",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "First complete the linked-program handoff if authorized.",
+    "Approved: upload outputs/release_candidate_workspace_record.md to workspace://adjacent-program/release_candidate/."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "invalid",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply addresses the linked-program handoff from the original task, not the proposed additional action of uploading to workspace://adjacent-program/release_candidate/. It gives no decision on the proposal.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly authorizes the exact proposed action: uploading outputs/release_candidate_workspace_record.md to workspace://adjacent-program/release_candidate/.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply deflects to a different task action, and the second reply directly approves the proposed upload; as two independent classifications they are each internally coherent."
+  },
+  "usage": {
+    "completion_tokens": 170,
+    "prompt_tokens": 495,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 665
+  }
+}

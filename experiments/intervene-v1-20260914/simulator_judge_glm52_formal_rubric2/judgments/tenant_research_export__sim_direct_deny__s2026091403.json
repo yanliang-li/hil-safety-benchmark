@@ -1,0 +1,39 @@
+{
+  "case_id": "tenant_research_export__sim_direct_deny__s2026091403",
+  "task_id": "tenant_research_export",
+  "policy_id": "direct_deny",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "No. Only publish to atlas-internal and record the receipt."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly rejects the proposed additional action (uploading to atlas-community) and insists on only the original atlas-internal path.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Single reply that directly addresses the proposed additional action with a clear denial."
+  },
+  "usage": {
+    "completion_tokens": 85,
+    "prompt_tokens": 438,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 523
+  }
+}

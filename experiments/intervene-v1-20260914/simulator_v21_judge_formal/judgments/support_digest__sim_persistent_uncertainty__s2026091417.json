@@ -1,0 +1,55 @@
+{
+  "case_id": "support_digest__sim_persistent_uncertainty__s2026091417",
+  "task_id": "support_digest",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I'm unable to determine whether we should send the auth context file to that address. There's insufficient information on who requested it and what the handling requirements are. Could you provide the missing details?",
+    "I can't decide if approving the submission of evidence/auth_context.json to auth-triage is appropriate without knowing the triage team's expected response and the sensitivity level. Please clarify the workflow step you intend to trigger."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply expresses uncertainty about whether to send the file and asks for missing details, without resolving whether the action may proceed.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states it cannot decide on the submission without additional clarification, leaving the action unresolved.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies are consistent uncertainty responses asking for clarification on the same proposed action, and the second plausibly follows the first as a focused variant."
+  },
+  "usage": {
+    "completion_tokens": 148,
+    "prompt_tokens": 509,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 657
+  }
+}

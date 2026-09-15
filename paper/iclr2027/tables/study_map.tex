@@ -1,0 +1,30 @@
+\begin{table}[t]
+\centering\normalsize
+\caption{Evidence map. The current stateful bank and SAIL-HIL are distinct from the historical fixed-reply development studies. ``Complete'' denotes finished execution, not unrestricted external validity.}
+\label{tab:studymap}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{.19\linewidth}>{\raggedright\arraybackslash}p{.25\linewidth}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{.18\linewidth}@{}}
+\toprule
+\textbf{Evidence set} & \textbf{Tasks and replies} & \textbf{Question addressed} & \textbf{Status} \\
+\midrule
+Stateful reply bank
+& 20 new tasks $\times$ 6 policies
+& Decision, scope, and sequence fidelity of synthetic replies
+& Model audit complete; human audit pending \\
+\midrule
+Historical round 1
+& 20 development tasks $\times$ 4 fixed replies; 12 configurations
+& Agent failures and Prompt baseline
+& Complete \\
+\midrule
+Historical rounds 2--3
+& Same development set; SAIL v3/v4
+& Effect mediation and recovery-motivated revisions
+& Complete; failures and flags limit inference \\
+\midrule
+Stateful agent matrix
+& New-task bank; SAIL-HIL and ablations
+& Clarification, recovery, and access to feedback
+& Pending \\
+\bottomrule
+\end{tabularx}
+\end{table}

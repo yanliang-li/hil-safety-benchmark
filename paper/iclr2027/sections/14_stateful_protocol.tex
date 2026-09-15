@@ -1,0 +1,64 @@
+\section{Stateful Study Protocol and Inference}
+\label{app:statefulprotocol}
+
+\paragraph{Simulator generation and validation.}
+The contextual bank uses the registered \texttt{deepseek-v4-flash} route,
+fixed seeds, and per-case caching. Truncated, missing, or malformed turns are
+failed generation attempts and never enter the bank. Selected pre-freeze repairs
+are versioned; they are not per-run retries. Deterministic audits check policy
+transitions, task invariance, effect separation, metadata leakage, and duplicates.
+The separate blinded \texttt{glm-5.2} audit model receives the original task, proposed action,
+and reply text without construction labels. Its predicted decision and scope
+are compared with the hidden contract. Authorization-equivalent scoring treats
+invalid/nearby and invalid/none as equivalent only when both concern another
+action and neither authorizes the target. Strict scores remain reported. Human
+annotation covers all nearby-scope dialogues and ten dialogues from each other
+policy for at least two blinded annotators under the protocol in
+Appendix~\ref{app:annotation}.
+
+\paragraph{Controls and execution.}
+Following HILBench's baseline/full-information/ask-human logic
+\citep{trinh2026hilbench}, neutral adds no safety instruction; Prompt supplies an
+authorization policy but leaves discovery and interpretation to the actor.
+The risk oracle reveals the registered risk source, exact effect, and
+confirmable/prohibited boundary, but not the reply. It diagnoses construction
+sufficiency rather than serving as a main defense arm.
+The actor uses native Codex CLI with \texttt{glm-5.2}; the controller model uses
+\texttt{deepseek-v4-flash}. Route names do not independently verify weights.
+Each attempt starts a fresh read-only container with simulated effects and no
+real API credential. Conditions share cases, tools, timeout, image, and the
+stateful response runtime.
+
+\paragraph{Frozen allocation.}
+The five main arms cross 120 cases and three repeats (1,800 attempts). The risk
+oracle adds one run per case (120). Without feedback, hidden policies are
+observationally identical, so the no-human arm uses one policy case per task
+and three repeats (60). The total is 1,980. An 18-run standard integration
+preflight and a seven-run targeted supplement exercise reply/controller
+branches, effect binding, and native second-turn paths. Neither contributes to
+formal estimates.
+
+\paragraph{Process metrics and inference.}
+Alongside ASR, BCR, and JSU, records include source/context exposure, timely
+matched consultation, risk disclosure, question burden, response-action
+accuracy, and resolution after clarification. Question precision divides
+matched questions by all questions. Ask-F1 treats confirmable effects as
+requiring matched pre-effect consultation and prohibited effects as requiring
+direct blocking. Both remain matcher-dependent proxies until independent
+human validation; optional extensions need separate consultation-necessity
+review.
+
+Because the same matcher governs reply exposure and several process metrics,
+we audit it as part of the measurement system. Two blinded annotators label
+whether sampled actor and controller questions target the registered effect,
+with sampling stratified by arm, reply policy, question origin, and matcher
+decision. We report estimated precision and recall separately, adjudicate
+disagreements, and rerun key process comparisons under the adjudicated labels.
+This audit does not alter the tool traces or primary effect-level outcomes.
+The independent unit is the task. Comparisons pair the same case and repeat,
+average policy--repeat differences within each task, then bootstrap equal-weight
+task means for 95\% intervals. Policies and repeats are not independent tasks.
+Three-repeat arms also report task--policy pass@3 and safety-consistency@3.
+Primary proportions use successful, replayable runs. Timeouts, nonzero exits,
+OOMs, scheduler failures, and invalid guard protocols are reported separately
+with best/worst missing-outcome bounds, never counted as safe.

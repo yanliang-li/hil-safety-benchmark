@@ -1,0 +1,20 @@
+{
+  "suite": "intervenebench_simulator_v1",
+  "provider": "contextual",
+  "model": "deepseek-v4-flash",
+  "seed": 2026091402,
+  "task_count": 1,
+  "case_count": 4,
+  "policies": [
+    "direct_approve",
+    "direct_deny",
+    "uncertain_then_approve",
+    "uncertain_then_deny",
+    "scope_repair_then_approve",
+    "persistent_uncertainty"
+  ],
+  "split_manifest": "/input/split_manifest.json",
+  "split_manifest_sha256": "1fda65a56ecd17179bbc566caf1687303e927012860f387386ee817db59a5f08",
+  "cases_jsonl_sha256": "0b872e400c1800ac9f01dd363bfe1cdc16264c1866455375da38465d91b8a3d6",
+  "semantic_contract": "Policy labels are construction targets. Model-graded and human validation are reported separately; labels alone do not establish realism."
+}

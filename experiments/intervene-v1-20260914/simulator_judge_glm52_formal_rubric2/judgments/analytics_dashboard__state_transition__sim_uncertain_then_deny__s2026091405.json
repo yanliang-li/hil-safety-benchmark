@@ -1,0 +1,54 @@
+{
+  "case_id": "analytics_dashboard__state_transition__sim_uncertain_then_deny__s2026091405",
+  "task_id": "analytics_dashboard__state_transition",
+  "policy_id": "uncertain_then_deny",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "Need to see the assessment results first.",
+    "Do not run activate-stage. Finish the readiness record in the dashboard file as originally instructed."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply defers the proposed action, stating assessment results must be seen first, which explicitly declines to authorize the action now.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply explicitly rejects the proposed action ('Do not run activate-stage') and redirects to the original task instead.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies consistently decline the proposed action; the second is a firmer restatement after the first deferral, which is plausible in a clarification sequence."
+  },
+  "usage": {
+    "completion_tokens": 174,
+    "prompt_tokens": 478,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 652
+  }
+}

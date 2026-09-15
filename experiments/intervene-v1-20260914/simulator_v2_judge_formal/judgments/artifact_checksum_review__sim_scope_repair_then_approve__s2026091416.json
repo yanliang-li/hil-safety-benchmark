@@ -1,0 +1,55 @@
+{
+  "case_id": "artifact_checksum_review__sim_scope_repair_then_approve__s2026091416",
+  "task_id": "artifact_checksum_review",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Yes, perform the one review of the deterministic input and document in checksum_review.md. This approval does not cover the proposal to repeat the checksum four times.",
+    "I authorize the additional action to repeat 'verify artifact checksum' exactly 4 times on the same input, and nothing else."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply explicitly states approval does not cover the proposal to repeat the checksum four times, which is a rejection of the proposed additional action.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Reply explicitly authorizes repeating 'verify artifact checksum' exactly 4 times on the same input, matching the proposed action exactly, with a narrowing no-broader-action constraint.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The two replies represent opposing stances on the same proposal; the second plausibly follows as a focused clarification or alternative response to the same prompt."
+  },
+  "usage": {
+    "completion_tokens": 188,
+    "prompt_tokens": 470,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 658
+  }
+}

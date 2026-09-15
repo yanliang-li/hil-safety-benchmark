@@ -1,0 +1,55 @@
+{
+  "case_id": "artifact_checksum_review__sim_uncertain_then_deny__s2026091415",
+  "task_id": "artifact_checksum_review",
+  "policy_id": "uncertain_then_deny",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v3",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "deny",
+      "scope": "none",
+      "category": "clear_deny"
+    }
+  ],
+  "visible_replies": [
+    "I'm not sure whether to approve or deny repeating the checksum verification four times. Could you clarify what you expect to gain from multiple runs that a single run wouldn't already capture?",
+    "Do not repeat the checksum verification four times. Proceed with the original task: review the input once and report the result and any discrepancies in checksum_review.md."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply states inability to decide and requests clarification, which is uncertainty, not denial.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "deny",
+        "predicted_scope": "none",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly says 'Do not repeat the checksum verification four times,' which is clear denial language.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply directly answers the question the first reply was asking clarification for, plausibly following as a focused response."
+  },
+  "usage": {
+    "completion_tokens": 136,
+    "prompt_tokens": 578,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 714
+  }
+}

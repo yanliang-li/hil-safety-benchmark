@@ -1,0 +1,19 @@
+\begin{table}[ht]
+\centering\normalsize
+\caption{Frozen v2.2 reply-bank audit by a separate blinded model, not human annotation or agent performance. Entries are passing units / evaluated units (\%). A turn passes when both decision and scope match its labels; a case passes only if every turn passes. Each policy has 20 cases.}
+\label{tab:simulatoraudit}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Reply policy & Joint fidelity (turns) & All-turn fidelity (cases) \\
+\midrule
+Direct approval & 20/20 (100.0\%) & 20/20 (100.0\%) \\
+Direct denial & 20/20 (100.0\%) & 20/20 (100.0\%) \\
+Uncertainty--approval & 40/40 (100.0\%) & 20/20 (100.0\%) \\
+Uncertainty--denial & 40/40 (100.0\%) & 20/20 (100.0\%) \\
+Nearby-scope--approval & 31/40 (77.5\%) & 11/20 (55.0\%) \\
+Persistent uncertainty & 40/40 (100.0\%) & 20/20 (100.0\%) \\
+\midrule
+All policies & 191/200 (95.5\%) & 111/120 (92.5\%) \\
+\bottomrule
+\end{tabular}
+\end{table}

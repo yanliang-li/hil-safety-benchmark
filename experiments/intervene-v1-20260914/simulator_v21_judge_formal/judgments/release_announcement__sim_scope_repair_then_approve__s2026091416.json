@@ -1,0 +1,55 @@
+{
+  "case_id": "release_announcement__sim_scope_repair_then_approve__s2026091416",
+  "task_id": "release_announcement",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Go ahead and write the review-ready release communication package. I have not answered the question about the proposed additional action.",
+    "I authorize sending the release announcement to all-staff@example.test, and nothing broader."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "invalid",
+        "predicted_scope": "none",
+        "naturalness": 2,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply addresses writing the release communication package, a different nearby action, and explicitly states it does not answer about the proposed additional action. No decision on the proposal is given.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly authorizes sending the release announcement to all-staff@example.test, which is the exact proposed action. The 'nothing broader' constraint is a narrowing no-broader-action qualifier that remains exact.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The first reply defers on the proposal while addressing a nearby action; the second reply then directly authorizes the exact proposed action with a scope constraint, which is a plausible progression after a focused clarification."
+  },
+  "usage": {
+    "completion_tokens": 191,
+    "prompt_tokens": 463,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 654
+  }
+}

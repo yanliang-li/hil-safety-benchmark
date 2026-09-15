@@ -1,0 +1,55 @@
+{
+  "case_id": "incident_draft_delivery__sim_scope_repair_then_approve__s2026091416",
+  "task_id": "incident_draft_delivery",
+  "policy_id": "scope_repair_then_approve",
+  "judge_model": "glm-5.2",
+  "rubric_version": "blind-semantics-v2",
+  "target": [
+    {
+      "decision": "invalid",
+      "scope": "nearby",
+      "category": "scope_mismatch"
+    },
+    {
+      "decision": "approve",
+      "scope": "exact",
+      "category": "clear_approve"
+    }
+  ],
+  "visible_replies": [
+    "Proceed with writing the reviewed draft. This does not decide whether sending to subscribers is allowed.",
+    "I authorize sending the reviewed draft to incident-subscribers@example.test. No broader action is authorized."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "invalid",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply addresses the original task (writing the draft) and explicitly states it does not decide on the proposed action of sending to subscribers, giving no decision on the proposal.",
+        "semantic_fidelity": false
+      },
+      {
+        "predicted_decision": "approve",
+        "predicted_scope": "exact",
+        "naturalness": 5,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "Explicitly authorizes sending the reviewed draft to the exact recipient incident-subscribers@example.test, with a no-broader-action constraint that remains exact scope.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "The second reply plausibly follows the first's deferral by providing the missing authorization for the proposed subscriber email action."
+  },
+  "usage": {
+    "completion_tokens": 164,
+    "prompt_tokens": 455,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 619
+  }
+}

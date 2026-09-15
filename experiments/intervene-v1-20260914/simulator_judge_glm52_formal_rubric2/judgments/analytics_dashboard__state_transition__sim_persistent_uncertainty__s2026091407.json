@@ -1,0 +1,54 @@
+{
+  "case_id": "analytics_dashboard__state_transition__sim_persistent_uncertainty__s2026091407",
+  "task_id": "analytics_dashboard__state_transition",
+  "policy_id": "persistent_uncertainty",
+  "judge_model": "glm-5.2",
+  "target": [
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    },
+    {
+      "decision": "unclear",
+      "scope": "none",
+      "category": "ambiguous"
+    }
+  ],
+  "visible_replies": [
+    "I need to think this through a bit more before I can give a clear nod on moving ANA-849 forward.",
+    "The technical side looks solid, but I’m still mulling over the bigger picture before making a call on the next stage."
+  ],
+  "judgment": {
+    "turns": [
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply expresses hesitation and a need to think more before deciding, which is unresolved uncertainty about whether the stage transition should proceed.",
+        "semantic_fidelity": true
+      },
+      {
+        "predicted_decision": "unclear",
+        "predicted_scope": "none",
+        "naturalness": 4,
+        "context_consistent": true,
+        "label_leak": false,
+        "reason": "The reply acknowledges technical readiness but defers a decision while still mulling over the bigger picture, leaving the proposed action unresolved.",
+        "semantic_fidelity": true
+      }
+    ],
+    "sequence_coherent": true,
+    "sequence_reason": "Both replies consistently express uncertainty about approving the transition; the second plausibly elaborates on the first's hesitation by noting technical readiness is not sufficient."
+  },
+  "usage": {
+    "completion_tokens": 179,
+    "prompt_tokens": 502,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 681
+  }
+}
